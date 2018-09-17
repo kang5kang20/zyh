@@ -28,7 +28,7 @@
 
 	<context:property-placeholder
 		location="
-		classpath:jdbc.properties" />
+		classpath:jdbc.properties,classpath:redis.properties" />
 
 	<!-- 获取数据源(使用dbcp连接池) -->
 	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -130,5 +130,8 @@
 
 	<!-- 全局异常处理 自定义实现spring的全局异常解析器HandlerExceptionResolver -->
 	<bean id="exceptionResolver" class="com.zyh.custException.CustomExceptionResolver"></bean>
+	
+	<!-- 导入redis配置 -->
+	<import resource="redis-config.xml"/>
 	
 </beans>  

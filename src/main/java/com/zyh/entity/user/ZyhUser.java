@@ -2,6 +2,7 @@ package com.zyh.entity.user;
 
 import java.io.Serializable;
 
+
 public class ZyhUser implements Serializable {
     private String id;
 
@@ -14,6 +15,9 @@ public class ZyhUser implements Serializable {
     private String openid;
 
     private String unionid;
+    
+    //登录方式
+    private String type;
 
     private static final long serialVersionUID = 1L;
 
@@ -65,7 +69,15 @@ public class ZyhUser implements Serializable {
         this.unionid = unionid == null ? null : unionid.trim();
     }
 
-    @Override
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
