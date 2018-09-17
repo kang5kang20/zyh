@@ -28,44 +28,14 @@
 
 	<context:property-placeholder
 		location="
-		classpath:jdbc.properties" />
+		classpath:jdbc.properties,classpath:redis.properties" />
 
 	<!-- 获取数据源(使用dbcp连接池) -->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
 		<property name="driverClassName" value="${driverClassName}" />
 		<property name="url" value="${url}" />
 		<property name="username" value="${name}" />
 		<property name="password" value="${password}" />
-		<!--initialSize: 初始化连接 -->
-		<property name="initialSize" value="5" />
-		<!--maxIdle: 最大空闲连接 -->
-		<property name="maxIdle" value="10" />
-		<!--minIdle: 最小空闲连接 -->
-		<property name="minIdle" value="5" />
-		<!--maxActive: 最大连接数量 -->
-		<property name="maxActive" value="20" />
-		<!--removeAbandoned: 是否自动回收超时连接 <property name="removeAbandoned" value="true"/> -->
-		<!--removeAbandonedTimeout: 超时时间(以秒数为单位) -->
-		<property name="removeAbandonedTimeout" value="180" />
-		<!--maxWait: 超时等待时间以毫秒为单位 6000毫秒/1000等于60秒 -->
-		<property name="maxWait" value="3000" />
-		<!-- 打开检查,用异步线程evict进行检查 -->
-		<property name="testWhileIdle">
-			<value>true</value>
-		</property>
-		<!-- 检查的sql -->
-		<property name="validationQuery">
-			<value>SELECT COUNT(*) FROM DUAL</value>
-		</property>
-		<!-- 设置的Evict线程的时间，单位ms，大于0才会开启evict检查线程 -->
-		<property name="timeBetweenEvictionRunsMillis">
-			<value>30000</value>
-		</property>
-		<!-- 每次检查链接的数量 -->
-		<property name="numTestsPerEvictionRun">
-			<value>20</value>
-		</property>
 	</bean>
 
 	<!-- 使AspectJ注解起作用：自动为匹配的类生成代理对象 -->
@@ -160,5 +130,8 @@
 
 	<!-- 全局异常处理 自定义实现spring的全局异常解析器HandlerExceptionResolver -->
 	<bean id="exceptionResolver" class="com.zyh.custException.CustomExceptionResolver"></bean>
+	
+	<!-- 导入redis配置 -->
+	<import resource="redis-config.xml"/>
 	
 </beans>  
