@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Component;
 
+import com.hp.hpl.sparta.xpath.ThisNodeTest;
+
 /**
  * 用于数据计算精度处理
  * 
@@ -121,5 +123,11 @@ public class DataAccuracyUtil {
 		BigDecimal  value   =   new   BigDecimal(a);  
 		return value.setScale(2, BigDecimal.ROUND_HALF_UP)
 				.doubleValue();
+	}
+	
+	//获取验证码4位
+	public int getVerifyCode(){
+		int code = (int)(Math.random()*9000)+1000;
+		return code;
 	}
 }
