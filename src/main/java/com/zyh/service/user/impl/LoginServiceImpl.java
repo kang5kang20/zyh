@@ -5,18 +5,31 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
+import com.zyh.controller.user.common.UserCom;
+import com.zyh.controller.user.vo.SmsVO;
 import com.zyh.dao.user.ZyhUserMapper;
 import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.user.ZyhUser;
 import com.zyh.entity.user.ZyhUserExample;
 import com.zyh.entity.user.ZyhUserExample.Criteria;
+import com.zyh.redis.RedisUtil;
+import com.zyh.service.sms.ISmsService;
+import com.zyh.service.sms.impl.SmsServiceImpl;
 import com.zyh.service.user.ILoginService;
+import com.zyh.utils.DataAccuracyUtil;
 
 @Service("loginService")
 public class LoginServiceImpl implements ILoginService{
 
 	@Autowired
 	ZyhUserMapper zyhUserMapper;
+	
+	@Autowired
+	private RedisUtil redisUtil;
+	
+	@Autowired
+	private ISmsService smsServiceImpl;
 	
 	@Override
 	public ZyhUser loginAndRegister(ZyhUser zyhUser) throws Exception {
@@ -31,6 +44,9 @@ public class LoginServiceImpl implements ILoginService{
 			}
 		}else if ("dx".equals(type)) {
 			String phone = zyhUser.getPhone();
+			//查询redis是否有
+			
+			
 			criteria.andPhoneEqualTo(phone);
 		}
 		List<ZyhUser> list = zyhUserMapper.selectByExample(zyhUserExample);
@@ -76,5 +92,20 @@ public class LoginServiceImpl implements ILoginService{
 		return zyhUser;
 	}
 	
-	
+	public SmsVO smsService(String phone)throws Exception{
+		SmsVO smsVO = new SmsVO();
+		smsVO.setPhone(phone);
+		//生成4位验证码
+		DataAccuracyUtil dataAccuracyUtil = new DataAccuracyUtil();
+		int verifyCode = dataAccuracyUtil.getVerifyCode();
+		smsVO.setVerifyCode(verifyCode);
+		//调用sms服务
+		SendSmsResponse sendSmsResponse = smsServiceImpl.sendSms(smsVO);
+		if (sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
+			// 请求成功
+		}
+		//将sms返回存入redis
+		redisUtil.set(smsVO.getPhone(), smsVO, UserCom.USER_SMSCACHETIME);
+		return smsVO;
+	}
 }
