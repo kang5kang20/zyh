@@ -733,6 +733,76 @@ public class ZyhUserExample {
             addCriterion("note not between", value1, value2, "note");
             return (Criteria) this;
         }
+
+        public Criteria andIsenableIsNull() {
+            addCriterion("isenable is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableIsNotNull() {
+            addCriterion("isenable is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableEqualTo(String value) {
+            addCriterion("isenable =", value, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableNotEqualTo(String value) {
+            addCriterion("isenable <>", value, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableGreaterThan(String value) {
+            addCriterion("isenable >", value, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableGreaterThanOrEqualTo(String value) {
+            addCriterion("isenable >=", value, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableLessThan(String value) {
+            addCriterion("isenable <", value, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableLessThanOrEqualTo(String value) {
+            addCriterion("isenable <=", value, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableLike(String value) {
+            addCriterion("isenable like", value, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableNotLike(String value) {
+            addCriterion("isenable not like", value, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableIn(List<String> values) {
+            addCriterion("isenable in", values, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableNotIn(List<String> values) {
+            addCriterion("isenable not in", values, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableBetween(String value1, String value2) {
+            addCriterion("isenable between", value1, value2, "isenable");
+            return (Criteria) this;
+        }
+
+        public Criteria andIsenableNotBetween(String value1, String value2) {
+            addCriterion("isenable not between", value1, value2, "isenable");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

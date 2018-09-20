@@ -20,6 +20,8 @@ public class ZyhUser implements Serializable {
     private String headurl;
 
     private String note;
+
+    private String isenable;
     
     private String type;
 
@@ -97,6 +99,16 @@ public class ZyhUser implements Serializable {
         this.note = note == null ? null : note.trim();
     }
 
+    public String getIsenable() {
+        return isenable;
+    }
+
+    public void setIsenable(String isenable) {
+        this.isenable = isenable == null ? null : isenable.trim();
+    }
+
+    
+    
     public String getType() {
 		return type;
 	}
@@ -120,6 +132,7 @@ public class ZyhUser implements Serializable {
         sb.append(", nickname=").append(nickname);
         sb.append(", headurl=").append(headurl);
         sb.append(", note=").append(note);
+        sb.append(", isenable=").append(isenable);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

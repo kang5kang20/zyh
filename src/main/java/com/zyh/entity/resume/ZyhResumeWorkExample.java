@@ -1,17 +1,17 @@
-package com.zyh.entity.user;
+package com.zyh.entity.resume;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class ZyhResumeEducationExample {
+public class ZyhResumeWorkExample {
     protected String orderByClause;
 
     protected boolean distinct;
 
     protected List<Criteria> oredCriteria;
 
-    public ZyhResumeEducationExample() {
+    public ZyhResumeWorkExample() {
         oredCriteria = new ArrayList<Criteria>();
     }
 
@@ -245,73 +245,73 @@ public class ZyhResumeEducationExample {
             return (Criteria) this;
         }
 
-        public Criteria andSchoolIsNull() {
-            addCriterion("school is null");
+        public Criteria andCompanyIsNull() {
+            addCriterion("company is null");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolIsNotNull() {
-            addCriterion("school is not null");
+        public Criteria andCompanyIsNotNull() {
+            addCriterion("company is not null");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolEqualTo(String value) {
-            addCriterion("school =", value, "school");
+        public Criteria andCompanyEqualTo(String value) {
+            addCriterion("company =", value, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolNotEqualTo(String value) {
-            addCriterion("school <>", value, "school");
+        public Criteria andCompanyNotEqualTo(String value) {
+            addCriterion("company <>", value, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolGreaterThan(String value) {
-            addCriterion("school >", value, "school");
+        public Criteria andCompanyGreaterThan(String value) {
+            addCriterion("company >", value, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolGreaterThanOrEqualTo(String value) {
-            addCriterion("school >=", value, "school");
+        public Criteria andCompanyGreaterThanOrEqualTo(String value) {
+            addCriterion("company >=", value, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolLessThan(String value) {
-            addCriterion("school <", value, "school");
+        public Criteria andCompanyLessThan(String value) {
+            addCriterion("company <", value, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolLessThanOrEqualTo(String value) {
-            addCriterion("school <=", value, "school");
+        public Criteria andCompanyLessThanOrEqualTo(String value) {
+            addCriterion("company <=", value, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolLike(String value) {
-            addCriterion("school like", value, "school");
+        public Criteria andCompanyLike(String value) {
+            addCriterion("company like", value, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolNotLike(String value) {
-            addCriterion("school not like", value, "school");
+        public Criteria andCompanyNotLike(String value) {
+            addCriterion("company not like", value, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolIn(List<String> values) {
-            addCriterion("school in", values, "school");
+        public Criteria andCompanyIn(List<String> values) {
+            addCriterion("company in", values, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolNotIn(List<String> values) {
-            addCriterion("school not in", values, "school");
+        public Criteria andCompanyNotIn(List<String> values) {
+            addCriterion("company not in", values, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolBetween(String value1, String value2) {
-            addCriterion("school between", value1, value2, "school");
+        public Criteria andCompanyBetween(String value1, String value2) {
+            addCriterion("company between", value1, value2, "company");
             return (Criteria) this;
         }
 
-        public Criteria andSchoolNotBetween(String value1, String value2) {
-            addCriterion("school not between", value1, value2, "school");
+        public Criteria andCompanyNotBetween(String value1, String value2) {
+            addCriterion("company not between", value1, value2, "company");
             return (Criteria) this;
         }
 
@@ -435,143 +435,213 @@ public class ZyhResumeEducationExample {
             return (Criteria) this;
         }
 
-        public Criteria andCategoryIsNull() {
-            addCriterion("category is null");
+        public Criteria andIndustryIsNull() {
+            addCriterion("industry is null");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryIsNotNull() {
-            addCriterion("category is not null");
+        public Criteria andIndustryIsNotNull() {
+            addCriterion("industry is not null");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryEqualTo(String value) {
-            addCriterion("category =", value, "category");
+        public Criteria andIndustryEqualTo(String value) {
+            addCriterion("industry =", value, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotEqualTo(String value) {
-            addCriterion("category <>", value, "category");
+        public Criteria andIndustryNotEqualTo(String value) {
+            addCriterion("industry <>", value, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryGreaterThan(String value) {
-            addCriterion("category >", value, "category");
+        public Criteria andIndustryGreaterThan(String value) {
+            addCriterion("industry >", value, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryGreaterThanOrEqualTo(String value) {
-            addCriterion("category >=", value, "category");
+        public Criteria andIndustryGreaterThanOrEqualTo(String value) {
+            addCriterion("industry >=", value, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLessThan(String value) {
-            addCriterion("category <", value, "category");
+        public Criteria andIndustryLessThan(String value) {
+            addCriterion("industry <", value, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLessThanOrEqualTo(String value) {
-            addCriterion("category <=", value, "category");
+        public Criteria andIndustryLessThanOrEqualTo(String value) {
+            addCriterion("industry <=", value, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryLike(String value) {
-            addCriterion("category like", value, "category");
+        public Criteria andIndustryLike(String value) {
+            addCriterion("industry like", value, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotLike(String value) {
-            addCriterion("category not like", value, "category");
+        public Criteria andIndustryNotLike(String value) {
+            addCriterion("industry not like", value, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryIn(List<String> values) {
-            addCriterion("category in", values, "category");
+        public Criteria andIndustryIn(List<String> values) {
+            addCriterion("industry in", values, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotIn(List<String> values) {
-            addCriterion("category not in", values, "category");
+        public Criteria andIndustryNotIn(List<String> values) {
+            addCriterion("industry not in", values, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryBetween(String value1, String value2) {
-            addCriterion("category between", value1, value2, "category");
+        public Criteria andIndustryBetween(String value1, String value2) {
+            addCriterion("industry between", value1, value2, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andCategoryNotBetween(String value1, String value2) {
-            addCriterion("category not between", value1, value2, "category");
+        public Criteria andIndustryNotBetween(String value1, String value2) {
+            addCriterion("industry not between", value1, value2, "industry");
             return (Criteria) this;
         }
 
-        public Criteria andMajorIsNull() {
-            addCriterion("major is null");
+        public Criteria andDescribeIsNull() {
+            addCriterion("describe is null");
             return (Criteria) this;
         }
 
-        public Criteria andMajorIsNotNull() {
-            addCriterion("major is not null");
+        public Criteria andDescribeIsNotNull() {
+            addCriterion("describe is not null");
             return (Criteria) this;
         }
 
-        public Criteria andMajorEqualTo(String value) {
-            addCriterion("major =", value, "major");
+        public Criteria andDescribeEqualTo(String value) {
+            addCriterion("describe =", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorNotEqualTo(String value) {
-            addCriterion("major <>", value, "major");
+        public Criteria andDescribeNotEqualTo(String value) {
+            addCriterion("describe <>", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorGreaterThan(String value) {
-            addCriterion("major >", value, "major");
+        public Criteria andDescribeGreaterThan(String value) {
+            addCriterion("describe >", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorGreaterThanOrEqualTo(String value) {
-            addCriterion("major >=", value, "major");
+        public Criteria andDescribeGreaterThanOrEqualTo(String value) {
+            addCriterion("describe >=", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorLessThan(String value) {
-            addCriterion("major <", value, "major");
+        public Criteria andDescribeLessThan(String value) {
+            addCriterion("describe <", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorLessThanOrEqualTo(String value) {
-            addCriterion("major <=", value, "major");
+        public Criteria andDescribeLessThanOrEqualTo(String value) {
+            addCriterion("describe <=", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorLike(String value) {
-            addCriterion("major like", value, "major");
+        public Criteria andDescribeLike(String value) {
+            addCriterion("describe like", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorNotLike(String value) {
-            addCriterion("major not like", value, "major");
+        public Criteria andDescribeNotLike(String value) {
+            addCriterion("describe not like", value, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorIn(List<String> values) {
-            addCriterion("major in", values, "major");
+        public Criteria andDescribeIn(List<String> values) {
+            addCriterion("describe in", values, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorNotIn(List<String> values) {
-            addCriterion("major not in", values, "major");
+        public Criteria andDescribeNotIn(List<String> values) {
+            addCriterion("describe not in", values, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorBetween(String value1, String value2) {
-            addCriterion("major between", value1, value2, "major");
+        public Criteria andDescribeBetween(String value1, String value2) {
+            addCriterion("describe between", value1, value2, "describe");
             return (Criteria) this;
         }
 
-        public Criteria andMajorNotBetween(String value1, String value2) {
-            addCriterion("major not between", value1, value2, "major");
+        public Criteria andDescribeNotBetween(String value1, String value2) {
+            addCriterion("describe not between", value1, value2, "describe");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIsNull() {
+            addCriterion("position is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIsNotNull() {
+            addCriterion("position is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionEqualTo(String value) {
+            addCriterion("position =", value, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionNotEqualTo(String value) {
+            addCriterion("position <>", value, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionGreaterThan(String value) {
+            addCriterion("position >", value, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionGreaterThanOrEqualTo(String value) {
+            addCriterion("position >=", value, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionLessThan(String value) {
+            addCriterion("position <", value, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionLessThanOrEqualTo(String value) {
+            addCriterion("position <=", value, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionLike(String value) {
+            addCriterion("position like", value, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionNotLike(String value) {
+            addCriterion("position not like", value, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionIn(List<String> values) {
+            addCriterion("position in", values, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionNotIn(List<String> values) {
+            addCriterion("position not in", values, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionBetween(String value1, String value2) {
+            addCriterion("position between", value1, value2, "position");
+            return (Criteria) this;
+        }
+
+        public Criteria andPositionNotBetween(String value1, String value2) {
+            addCriterion("position not between", value1, value2, "position");
             return (Criteria) this;
         }
     }

@@ -11,6 +11,7 @@
     <result column="nickname" jdbcType="OTHER" property="nickname" />
     <result column="headurl" jdbcType="OTHER" property="headurl" />
     <result column="note" jdbcType="OTHER" property="note" />
+    <result column="isenable" jdbcType="OTHER" property="isenable" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, username, password, phone, openid, unionid, nickname, headurl, note
+    id, username, password, phone, openid, unionid, nickname, headurl, note, isenable
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.user.ZyhUserExample" resultMap="BaseResultMap">
     select
@@ -106,10 +107,10 @@
   <insert id="insert" parameterType="com.zyh.entity.user.ZyhUser">
     insert into zyh_user (id, username, password, 
       phone, openid, unionid, nickname, 
-      headurl, note)
+      headurl, note, isenable)
     values (#{id,jdbcType=OTHER}, #{username,jdbcType=OTHER}, #{password,jdbcType=OTHER}, 
       #{phone,jdbcType=OTHER}, #{openid,jdbcType=OTHER}, #{unionid,jdbcType=OTHER}, #{nickname,jdbcType=OTHER}, 
-      #{headurl,jdbcType=OTHER}, #{note,jdbcType=OTHER})
+      #{headurl,jdbcType=OTHER}, #{note,jdbcType=OTHER}, #{isenable,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.user.ZyhUser">
     insert into zyh_user
@@ -141,6 +142,9 @@
       <if test="note != null">
         note,
       </if>
+      <if test="isenable != null">
+        isenable,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -169,6 +173,9 @@
       </if>
       <if test="note != null">
         #{note,jdbcType=OTHER},
+      </if>
+      <if test="isenable != null">
+        #{isenable,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -208,6 +215,9 @@
       <if test="record.note != null">
         note = #{record.note,jdbcType=OTHER},
       </if>
+      <if test="record.isenable != null">
+        isenable = #{record.isenable,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -223,7 +233,8 @@
       unionid = #{record.unionid,jdbcType=OTHER},
       nickname = #{record.nickname,jdbcType=OTHER},
       headurl = #{record.headurl,jdbcType=OTHER},
-      note = #{record.note,jdbcType=OTHER}
+      note = #{record.note,jdbcType=OTHER},
+      isenable = #{record.isenable,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -255,6 +266,9 @@
       <if test="note != null">
         note = #{note,jdbcType=OTHER},
       </if>
+      <if test="isenable != null">
+        isenable = #{isenable,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -267,7 +281,8 @@
       unionid = #{unionid,jdbcType=OTHER},
       nickname = #{nickname,jdbcType=OTHER},
       headurl = #{headurl,jdbcType=OTHER},
-      note = #{note,jdbcType=OTHER}
+      note = #{note,jdbcType=OTHER},
+      isenable = #{isenable,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>

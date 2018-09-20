@@ -16,7 +16,6 @@ public class TestLogin {
 			String json = HttpTestUtils.testHttpConnection(url, "POST", request);
 			System.out.println(json);
 		}catch(IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

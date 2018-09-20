@@ -60,6 +60,10 @@ public class LoginServiceImpl implements ILoginService{
 			//查询有记录进行关联
 			ZyhUser returnUser = new ZyhUser();
 			returnUser = list.get(0);
+			if ("1".equals(returnUser.getIsenable())) {
+				//黑名单禁止登陆
+				throw new Exception(UserCom.ERROR_USERDISABLE);
+			}
 			returnUser.setPassword(null);
 			return returnUser;
 		}else{
@@ -90,6 +94,10 @@ public class LoginServiceImpl implements ILoginService{
 		List<ZyhUser> list = zyhUserCusMapper.selectUserByExample(map);
 		if (null!=list&&list.size()>0) {
 			zyhUser = list.get(0);
+			if ("1".equals(zyhUser.getIsenable())) {
+				//黑名单禁止登陆
+				throw new Exception(UserCom.ERROR_USERDISABLE);
+			}
 			zyhUser.setPassword(null);
 		}else{
 			throw new Exception(UserCom.ERROR_NAMEORPDERROR);

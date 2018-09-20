@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.zyh.entity.user.ZyhResumeWork;
-import com.zyh.entity.user.ZyhResumeWorkExample;
+import com.zyh.entity.resume.ZyhResumeWork;
+import com.zyh.entity.resume.ZyhResumeWorkExample;
 
 public interface ZyhResumeWorkMapper {
     long countByExample(ZyhResumeWorkExample example);

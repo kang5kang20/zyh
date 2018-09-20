@@ -1,4 +1,4 @@
-package com.zyh.entity.user;
+package com.zyh.entity.resume;
 
 import java.io.Serializable;
 import java.util.Date;

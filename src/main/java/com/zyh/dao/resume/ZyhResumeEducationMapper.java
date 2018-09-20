@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.zyh.entity.user.ZyhResumeEducation;
-import com.zyh.entity.user.ZyhResumeEducationExample;
+import com.zyh.entity.resume.ZyhResumeEducation;
+import com.zyh.entity.resume.ZyhResumeEducationExample;
 
 public interface ZyhResumeEducationMapper {
     long countByExample(ZyhResumeEducationExample example);
