@@ -1,6 +1,8 @@
 package com.zyh.service.user.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,13 +11,13 @@ import com.aliyuncs.dysmsapi.model.v20170525.SendSmsResponse;
 import com.zyh.controller.user.common.UserCom;
 import com.zyh.controller.user.vo.SmsVO;
 import com.zyh.dao.user.ZyhUserMapper;
+import com.zyh.dao.user.cus.ZyhUserCusMapper;
 import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.user.ZyhUser;
 import com.zyh.entity.user.ZyhUserExample;
 import com.zyh.entity.user.ZyhUserExample.Criteria;
 import com.zyh.redis.RedisUtil;
 import com.zyh.service.sms.ISmsService;
-import com.zyh.service.sms.impl.SmsServiceImpl;
 import com.zyh.service.user.ILoginService;
 import com.zyh.utils.DataAccuracyUtil;
 
@@ -29,6 +31,9 @@ public class LoginServiceImpl implements ILoginService{
 	private RedisUtil redisUtil;
 	
 	@Autowired
+	ZyhUserCusMapper zyhUserCusMapper;
+	
+	@Autowired
 	private ISmsService smsServiceImpl;
 	
 	@Override
@@ -36,7 +41,6 @@ public class LoginServiceImpl implements ILoginService{
 		String type = zyhUser.getType();
 		ZyhUserExample zyhUserExample = new ZyhUserExample();
 		Criteria criteria = zyhUserExample.createCriteria();
-		
 		if ("wx".equals(type)) {
 			String openid = zyhUser.getOpenid();
 			if (null!=openid&&!"".equals(openid)) {
@@ -45,8 +49,10 @@ public class LoginServiceImpl implements ILoginService{
 		}else if ("dx".equals(type)) {
 			String phone = zyhUser.getPhone();
 			//查询redis是否有
-			
-			
+			if (!redisUtil.exists(phone)) {
+				//redis没有说明已经过期了
+				throw new Exception(UserCom.ERROR_CACHETIMEOUT);
+			}
 			criteria.andPhoneEqualTo(phone);
 		}
 		List<ZyhUser> list = zyhUserMapper.selectByExample(zyhUserExample);
@@ -70,24 +76,23 @@ public class LoginServiceImpl implements ILoginService{
 
 	@Override
 	public ZyhUser loginByMM(ZyhUser zyhUser) throws Exception {
-		String phone = zyhUser.getPhone();
+		String username = zyhUser.getUsername();
 		String psword = zyhUser.getPassword();
-		if (null==phone||"".equals(phone)) {
-			throw new Exception("用户手机号为空");
+		if (null==username||"".equals(username)) {
+			throw new Exception(UserCom.ERROR_USERNAMEEMPTY);
 		}
 		if (null==psword||"".equals(psword)) {
-			throw new Exception("用户密码为空");
+			throw new Exception(UserCom.ERROR_PWEMPTY);
 		}
-		ZyhUserExample zyhUserExample = new ZyhUserExample();
-		Criteria criteria = zyhUserExample.createCriteria();
-		criteria.andPasswordEqualTo(psword);
-		criteria.andPhoneEqualTo(phone);
-		List<ZyhUser> list = zyhUserMapper.selectByExample(zyhUserExample);
+		Map<String, Object> map =new HashMap<String, Object>();
+		map.put("username", username);
+		map.put("password", psword);
+		List<ZyhUser> list = zyhUserCusMapper.selectUserByExample(map);
 		if (null!=list&&list.size()>0) {
 			zyhUser = list.get(0);
 			zyhUser.setPassword(null);
 		}else{
-			throw new Exception("errorPassWordOrPhone");
+			throw new Exception(UserCom.ERROR_NAMEORPDERROR);
 		}
 		return zyhUser;
 	}
@@ -102,10 +107,10 @@ public class LoginServiceImpl implements ILoginService{
 		//调用sms服务
 		SendSmsResponse sendSmsResponse = smsServiceImpl.sendSms(smsVO);
 		if (sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
-			// 请求成功
+			//TODO
+			// 请求成功,将sms返回存入redis
+			redisUtil.set(smsVO.getPhone(), smsVO, UserCom.USER_SMSCACHETIME);
 		}
-		//将sms返回存入redis
-		redisUtil.set(smsVO.getPhone(), smsVO, UserCom.USER_SMSCACHETIME);
 		return smsVO;
 	}
 }

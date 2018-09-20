@@ -12,4 +12,16 @@ public class UserCom {
     //阿里秘钥
     public static final String accessKeyId = "你的阿里云keyId";
     public static final String accessKeySecret = "你的阿里云secret";
+    //超过缓存时间
+    public static final String ERROR_CACHETIMEOUT = "cachetimeout";
+  //用户名为空
+    public static final String ERROR_USERNAMEEMPTY = "usernamenull";
+  //密码为空
+    public static final String ERROR_PWEMPTY = "passwordnull";
+    //用户名或密码不正常
+    public static final String ERROR_NAMEORPDERROR = "nameorpderror";
+     //信息缺失
+    public static final String ERROR_INFORERROR = "inforerror";
+    //电话号码为空
+    public static final String ERROR_PHONEEMPTY = "phonenull";
 }
