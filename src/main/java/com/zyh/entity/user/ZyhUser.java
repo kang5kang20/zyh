@@ -2,7 +2,6 @@ package com.zyh.entity.user;
 
 import java.io.Serializable;
 
-
 public class ZyhUser implements Serializable {
     private String id;
 
@@ -15,8 +14,15 @@ public class ZyhUser implements Serializable {
     private String openid;
 
     private String unionid;
+
+    private String nickname;
+
+    private String headurl;
+
+    private String note;
+
+    private String isenable;
     
-    //登录方式
     private String type;
 
     private static final long serialVersionUID = 1L;
@@ -69,6 +75,40 @@ public class ZyhUser implements Serializable {
         this.unionid = unionid == null ? null : unionid.trim();
     }
 
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname == null ? null : nickname.trim();
+    }
+
+    public String getHeadurl() {
+        return headurl;
+    }
+
+    public void setHeadurl(String headurl) {
+        this.headurl = headurl == null ? null : headurl.trim();
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
+    }
+
+    public String getIsenable() {
+        return isenable;
+    }
+
+    public void setIsenable(String isenable) {
+        this.isenable = isenable == null ? null : isenable.trim();
+    }
+
+    
+    
     public String getType() {
 		return type;
 	}
@@ -89,6 +129,10 @@ public class ZyhUser implements Serializable {
         sb.append(", phone=").append(phone);
         sb.append(", openid=").append(openid);
         sb.append(", unionid=").append(unionid);
+        sb.append(", nickname=").append(nickname);
+        sb.append(", headurl=").append(headurl);
+        sb.append(", note=").append(note);
+        sb.append(", isenable=").append(isenable);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
