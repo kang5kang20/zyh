@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zyh.dao.resume.ZyhResumeEducationMapper">
-  <resultMap id="BaseResultMap" type="com.zyh.entity.resume.ZyhResumeEducation">
+<mapper namespace="com.zyh.dao.resume.ZyhResumeIntentionMapper">
+  <resultMap id="BaseResultMap" type="com.zyh.entity.resume.ZyhResumeIntention">
     <id column="id" jdbcType="OTHER" property="id" />
     <result column="userid" jdbcType="OTHER" property="userid" />
-    <result column="school" jdbcType="OTHER" property="school" />
-    <result column="edtime" jdbcType="OTHER" property="edtime" />
-    <result column="category" jdbcType="OTHER" property="category" />
-    <result column="major" jdbcType="OTHER" property="major" />
-    <result column="edstate" jdbcType="OTHER" property="edstate" />
-    <result column="desc" jdbcType="OTHER" property="desc" />
+    <result column="workcity" jdbcType="OTHER" property="workcity" />
+    <result column="position" jdbcType="OTHER" property="position" />
+    <result column="type" jdbcType="OTHER" property="type" />
+    <result column="expectation" jdbcType="OTHER" property="expectation" />
+    <result column="posttime" jdbcType="OTHER" property="posttime" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,15 +69,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userid, school, edtime, category, major, edstate, desc
+    id, userid, workcity, position, type, expectation, posttime
   </sql>
-  <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeEducationExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeIntentionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from zyh_resume_education
+    from zyh_resume_intention
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,29 +88,29 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from zyh_resume_education
+    from zyh_resume_intention
     where id = #{id,jdbcType=OTHER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from zyh_resume_education
+    delete from zyh_resume_intention
     where id = #{id,jdbcType=OTHER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zyh.entity.resume.ZyhResumeEducationExample">
-    delete from zyh_resume_education
+  <delete id="deleteByExample" parameterType="com.zyh.entity.resume.ZyhResumeIntentionExample">
+    delete from zyh_resume_intention
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zyh.entity.resume.ZyhResumeEducation">
-    insert into zyh_resume_education (id, userid, school, 
-      edtime, category, major, 
-      edstate, desc)
-    values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{school,jdbcType=OTHER}, 
-      #{edtime,jdbcType=OTHER}, #{category,jdbcType=OTHER}, #{major,jdbcType=OTHER}, 
-      #{edstate,jdbcType=OTHER}, #{desc,jdbcType=OTHER})
+  <insert id="insert" parameterType="com.zyh.entity.resume.ZyhResumeIntention">
+    insert into zyh_resume_intention (id, userid, workcity, 
+      position, type, expectation, 
+      posttime)
+    values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{workcity,jdbcType=OTHER}, 
+      #{position,jdbcType=OTHER}, #{type,jdbcType=OTHER}, #{expectation,jdbcType=OTHER}, 
+      #{posttime,jdbcType=OTHER})
   </insert>
-  <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeEducation">
-    insert into zyh_resume_education
+  <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeIntention">
+    insert into zyh_resume_intention
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -119,23 +118,20 @@
       <if test="userid != null">
         userid,
       </if>
-      <if test="school != null">
-        school,
+      <if test="workcity != null">
+        workcity,
       </if>
-      <if test="edtime != null">
-        edtime,
+      <if test="position != null">
+        position,
       </if>
-      <if test="category != null">
-        category,
+      <if test="type != null">
+        type,
       </if>
-      <if test="major != null">
-        major,
+      <if test="expectation != null">
+        expectation,
       </if>
-      <if test="edstate != null">
-        edstate,
-      </if>
-      <if test="desc != null">
-        desc,
+      <if test="posttime != null">
+        posttime,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -145,34 +141,31 @@
       <if test="userid != null">
         #{userid,jdbcType=OTHER},
       </if>
-      <if test="school != null">
-        #{school,jdbcType=OTHER},
+      <if test="workcity != null">
+        #{workcity,jdbcType=OTHER},
       </if>
-      <if test="edtime != null">
-        #{edtime,jdbcType=OTHER},
+      <if test="position != null">
+        #{position,jdbcType=OTHER},
       </if>
-      <if test="category != null">
-        #{category,jdbcType=OTHER},
+      <if test="type != null">
+        #{type,jdbcType=OTHER},
       </if>
-      <if test="major != null">
-        #{major,jdbcType=OTHER},
+      <if test="expectation != null">
+        #{expectation,jdbcType=OTHER},
       </if>
-      <if test="edstate != null">
-        #{edstate,jdbcType=OTHER},
-      </if>
-      <if test="desc != null">
-        #{desc,jdbcType=OTHER},
+      <if test="posttime != null">
+        #{posttime,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zyh.entity.resume.ZyhResumeEducationExample" resultType="java.lang.Long">
-    select count(*) from zyh_resume_education
+  <select id="countByExample" parameterType="com.zyh.entity.resume.ZyhResumeIntentionExample" resultType="java.lang.Long">
+    select count(*) from zyh_resume_intention
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update zyh_resume_education
+    update zyh_resume_intention
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=OTHER},
@@ -180,23 +173,20 @@
       <if test="record.userid != null">
         userid = #{record.userid,jdbcType=OTHER},
       </if>
-      <if test="record.school != null">
-        school = #{record.school,jdbcType=OTHER},
+      <if test="record.workcity != null">
+        workcity = #{record.workcity,jdbcType=OTHER},
       </if>
-      <if test="record.edtime != null">
-        edtime = #{record.edtime,jdbcType=OTHER},
+      <if test="record.position != null">
+        position = #{record.position,jdbcType=OTHER},
       </if>
-      <if test="record.category != null">
-        category = #{record.category,jdbcType=OTHER},
+      <if test="record.type != null">
+        type = #{record.type,jdbcType=OTHER},
       </if>
-      <if test="record.major != null">
-        major = #{record.major,jdbcType=OTHER},
+      <if test="record.expectation != null">
+        expectation = #{record.expectation,jdbcType=OTHER},
       </if>
-      <if test="record.edstate != null">
-        edstate = #{record.edstate,jdbcType=OTHER},
-      </if>
-      <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=OTHER},
+      <if test="record.posttime != null">
+        posttime = #{record.posttime,jdbcType=OTHER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -204,55 +194,50 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update zyh_resume_education
+    update zyh_resume_intention
     set id = #{record.id,jdbcType=OTHER},
       userid = #{record.userid,jdbcType=OTHER},
-      school = #{record.school,jdbcType=OTHER},
-      edtime = #{record.edtime,jdbcType=OTHER},
-      category = #{record.category,jdbcType=OTHER},
-      major = #{record.major,jdbcType=OTHER},
-      edstate = #{record.edstate,jdbcType=OTHER},
-      desc = #{record.desc,jdbcType=OTHER}
+      workcity = #{record.workcity,jdbcType=OTHER},
+      position = #{record.position,jdbcType=OTHER},
+      type = #{record.type,jdbcType=OTHER},
+      expectation = #{record.expectation,jdbcType=OTHER},
+      posttime = #{record.posttime,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zyh.entity.resume.ZyhResumeEducation">
-    update zyh_resume_education
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyh.entity.resume.ZyhResumeIntention">
+    update zyh_resume_intention
     <set>
       <if test="userid != null">
         userid = #{userid,jdbcType=OTHER},
       </if>
-      <if test="school != null">
-        school = #{school,jdbcType=OTHER},
+      <if test="workcity != null">
+        workcity = #{workcity,jdbcType=OTHER},
       </if>
-      <if test="edtime != null">
-        edtime = #{edtime,jdbcType=OTHER},
+      <if test="position != null">
+        position = #{position,jdbcType=OTHER},
       </if>
-      <if test="category != null">
-        category = #{category,jdbcType=OTHER},
+      <if test="type != null">
+        type = #{type,jdbcType=OTHER},
       </if>
-      <if test="major != null">
-        major = #{major,jdbcType=OTHER},
+      <if test="expectation != null">
+        expectation = #{expectation,jdbcType=OTHER},
       </if>
-      <if test="edstate != null">
-        edstate = #{edstate,jdbcType=OTHER},
-      </if>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=OTHER},
+      <if test="posttime != null">
+        posttime = #{posttime,jdbcType=OTHER},
       </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zyh.entity.resume.ZyhResumeEducation">
-    update zyh_resume_education
+  <update id="updateByPrimaryKey" parameterType="com.zyh.entity.resume.ZyhResumeIntention">
+    update zyh_resume_intention
     set userid = #{userid,jdbcType=OTHER},
-      school = #{school,jdbcType=OTHER},
-      edtime = #{edtime,jdbcType=OTHER},
-      category = #{category,jdbcType=OTHER},
-      major = #{major,jdbcType=OTHER},
-      edstate = #{edstate,jdbcType=OTHER},
-      desc = #{desc,jdbcType=OTHER}
+      workcity = #{workcity,jdbcType=OTHER},
+      position = #{position,jdbcType=OTHER},
+      type = #{type,jdbcType=OTHER},
+      expectation = #{expectation,jdbcType=OTHER},
+      posttime = #{posttime,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>
