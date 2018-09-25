@@ -34,6 +34,14 @@ public class ZyhResumeBase implements Serializable {
 
     private String email;
 
+    private String birthcity;
+
+    private String evaluation;
+
+    private String idurl;
+
+    private String soldierurl;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -156,6 +164,38 @@ public class ZyhResumeBase implements Serializable {
         this.email = email == null ? null : email.trim();
     }
 
+    public String getBirthcity() {
+        return birthcity;
+    }
+
+    public void setBirthcity(String birthcity) {
+        this.birthcity = birthcity == null ? null : birthcity.trim();
+    }
+
+    public String getEvaluation() {
+        return evaluation;
+    }
+
+    public void setEvaluation(String evaluation) {
+        this.evaluation = evaluation == null ? null : evaluation.trim();
+    }
+
+    public String getIdurl() {
+        return idurl;
+    }
+
+    public void setIdurl(String idurl) {
+        this.idurl = idurl == null ? null : idurl.trim();
+    }
+
+    public String getSoldierurl() {
+        return soldierurl;
+    }
+
+    public void setSoldierurl(String soldierurl) {
+        this.soldierurl = soldierurl == null ? null : soldierurl.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -177,6 +217,10 @@ public class ZyhResumeBase implements Serializable {
         sb.append(", cellphone=").append(cellphone);
         sb.append(", phone=").append(phone);
         sb.append(", email=").append(email);
+        sb.append(", birthcity=").append(birthcity);
+        sb.append(", evaluation=").append(evaluation);
+        sb.append(", idurl=").append(idurl);
+        sb.append(", soldierurl=").append(soldierurl);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

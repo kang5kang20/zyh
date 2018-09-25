@@ -1,6 +1,8 @@
 package com.zyh.controller.user.vo;
 
-public class SmsVO {
+import java.io.Serializable;
+
+public class SmsVO implements Serializable{
 	
 	private String phone;
 	

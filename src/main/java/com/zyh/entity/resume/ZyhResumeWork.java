@@ -1,7 +1,6 @@
 package com.zyh.entity.resume;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class ZyhResumeWork implements Serializable {
     private String id;
@@ -10,15 +9,15 @@ public class ZyhResumeWork implements Serializable {
 
     private String company;
 
-    private Date beginday;
-
-    private Date endday;
+    private String worktime;
 
     private String industry;
 
     private String describe;
 
     private String position;
+
+    private String evaluation;
 
     private static final long serialVersionUID = 1L;
 
@@ -46,20 +45,12 @@ public class ZyhResumeWork implements Serializable {
         this.company = company == null ? null : company.trim();
     }
 
-    public Date getBeginday() {
-        return beginday;
+    public String getWorktime() {
+        return worktime;
     }
 
-    public void setBeginday(Date beginday) {
-        this.beginday = beginday;
-    }
-
-    public Date getEndday() {
-        return endday;
-    }
-
-    public void setEndday(Date endday) {
-        this.endday = endday;
+    public void setWorktime(String worktime) {
+        this.worktime = worktime == null ? null : worktime.trim();
     }
 
     public String getIndustry() {
@@ -86,6 +77,14 @@ public class ZyhResumeWork implements Serializable {
         this.position = position == null ? null : position.trim();
     }
 
+    public String getEvaluation() {
+        return evaluation;
+    }
+
+    public void setEvaluation(String evaluation) {
+        this.evaluation = evaluation == null ? null : evaluation.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -95,11 +94,11 @@ public class ZyhResumeWork implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", userid=").append(userid);
         sb.append(", company=").append(company);
-        sb.append(", beginday=").append(beginday);
-        sb.append(", endday=").append(endday);
+        sb.append(", worktime=").append(worktime);
         sb.append(", industry=").append(industry);
         sb.append(", describe=").append(describe);
         sb.append(", position=").append(position);
+        sb.append(", evaluation=").append(evaluation);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

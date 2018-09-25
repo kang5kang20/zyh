@@ -1,7 +1,6 @@
 package com.zyh.entity.resume;
 
 import java.io.Serializable;
-import java.util.Date;
 
 public class ZyhResumeEducation implements Serializable {
     private String id;
@@ -10,13 +9,15 @@ public class ZyhResumeEducation implements Serializable {
 
     private String school;
 
-    private Date beginday;
-
-    private Date endday;
+    private String edtime;
 
     private String category;
 
     private String major;
+
+    private String edstate;
+
+    private String desc;
 
     private static final long serialVersionUID = 1L;
 
@@ -44,20 +45,12 @@ public class ZyhResumeEducation implements Serializable {
         this.school = school == null ? null : school.trim();
     }
 
-    public Date getBeginday() {
-        return beginday;
+    public String getEdtime() {
+        return edtime;
     }
 
-    public void setBeginday(Date beginday) {
-        this.beginday = beginday;
-    }
-
-    public Date getEndday() {
-        return endday;
-    }
-
-    public void setEndday(Date endday) {
-        this.endday = endday;
+    public void setEdtime(String edtime) {
+        this.edtime = edtime == null ? null : edtime.trim();
     }
 
     public String getCategory() {
@@ -76,6 +69,22 @@ public class ZyhResumeEducation implements Serializable {
         this.major = major == null ? null : major.trim();
     }
 
+    public String getEdstate() {
+        return edstate;
+    }
+
+    public void setEdstate(String edstate) {
+        this.edstate = edstate == null ? null : edstate.trim();
+    }
+
+    public String getDesc() {
+        return desc;
+    }
+
+    public void setDesc(String desc) {
+        this.desc = desc == null ? null : desc.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -85,10 +94,11 @@ public class ZyhResumeEducation implements Serializable {
         sb.append(", id=").append(id);
         sb.append(", userid=").append(userid);
         sb.append(", school=").append(school);
-        sb.append(", beginday=").append(beginday);
-        sb.append(", endday=").append(endday);
+        sb.append(", edtime=").append(edtime);
         sb.append(", category=").append(category);
         sb.append(", major=").append(major);
+        sb.append(", edstate=").append(edstate);
+        sb.append(", desc=").append(desc);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

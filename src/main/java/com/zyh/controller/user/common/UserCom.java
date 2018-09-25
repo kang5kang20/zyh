@@ -26,4 +26,8 @@ public class UserCom {
     public static final String ERROR_PHONEEMPTY = "phonenull";
     //黑名单
     public static final String ERROR_USERDISABLE = "userdisable";
+    //userid为空
+    public static final String ERROR_USERIDNULL = "useridnull";
+    //id不能为空
+    public static final String ERROR_IDNULL = "idnull";
 }

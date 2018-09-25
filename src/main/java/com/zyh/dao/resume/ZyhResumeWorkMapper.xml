@@ -5,11 +5,11 @@
     <id column="id" jdbcType="OTHER" property="id" />
     <result column="userid" jdbcType="OTHER" property="userid" />
     <result column="company" jdbcType="OTHER" property="company" />
-    <result column="beginday" jdbcType="OTHER" property="beginday" />
-    <result column="endday" jdbcType="OTHER" property="endday" />
+    <result column="worktime" jdbcType="OTHER" property="worktime" />
     <result column="industry" jdbcType="OTHER" property="industry" />
     <result column="describe" jdbcType="OTHER" property="describe" />
     <result column="position" jdbcType="OTHER" property="position" />
+    <result column="evaluation" jdbcType="OTHER" property="evaluation" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userid, company, beginday, endday, industry, describe, position
+    id, userid, company, worktime, industry, describe, position, evaluation
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeWorkExample" resultMap="BaseResultMap">
     select
@@ -104,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.zyh.entity.resume.ZyhResumeWork">
     insert into zyh_resume_work (id, userid, company, 
-      beginday, endday, industry, 
-      describe, position)
+      worktime, industry, describe, 
+      position, evaluation)
     values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{company,jdbcType=OTHER}, 
-      #{beginday,jdbcType=OTHER}, #{endday,jdbcType=OTHER}, #{industry,jdbcType=OTHER}, 
-      #{describe,jdbcType=OTHER}, #{position,jdbcType=OTHER})
+      #{worktime,jdbcType=OTHER}, #{industry,jdbcType=OTHER}, #{describe,jdbcType=OTHER}, 
+      #{position,jdbcType=OTHER}, #{evaluation,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeWork">
     insert into zyh_resume_work
@@ -122,11 +122,8 @@
       <if test="company != null">
         company,
       </if>
-      <if test="beginday != null">
-        beginday,
-      </if>
-      <if test="endday != null">
-        endday,
+      <if test="worktime != null">
+        worktime,
       </if>
       <if test="industry != null">
         industry,
@@ -136,6 +133,9 @@
       </if>
       <if test="position != null">
         position,
+      </if>
+      <if test="evaluation != null">
+        evaluation,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -148,11 +148,8 @@
       <if test="company != null">
         #{company,jdbcType=OTHER},
       </if>
-      <if test="beginday != null">
-        #{beginday,jdbcType=OTHER},
-      </if>
-      <if test="endday != null">
-        #{endday,jdbcType=OTHER},
+      <if test="worktime != null">
+        #{worktime,jdbcType=OTHER},
       </if>
       <if test="industry != null">
         #{industry,jdbcType=OTHER},
@@ -162,6 +159,9 @@
       </if>
       <if test="position != null">
         #{position,jdbcType=OTHER},
+      </if>
+      <if test="evaluation != null">
+        #{evaluation,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -183,11 +183,8 @@
       <if test="record.company != null">
         company = #{record.company,jdbcType=OTHER},
       </if>
-      <if test="record.beginday != null">
-        beginday = #{record.beginday,jdbcType=OTHER},
-      </if>
-      <if test="record.endday != null">
-        endday = #{record.endday,jdbcType=OTHER},
+      <if test="record.worktime != null">
+        worktime = #{record.worktime,jdbcType=OTHER},
       </if>
       <if test="record.industry != null">
         industry = #{record.industry,jdbcType=OTHER},
@@ -197,6 +194,9 @@
       </if>
       <if test="record.position != null">
         position = #{record.position,jdbcType=OTHER},
+      </if>
+      <if test="record.evaluation != null">
+        evaluation = #{record.evaluation,jdbcType=OTHER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -208,11 +208,11 @@
     set id = #{record.id,jdbcType=OTHER},
       userid = #{record.userid,jdbcType=OTHER},
       company = #{record.company,jdbcType=OTHER},
-      beginday = #{record.beginday,jdbcType=OTHER},
-      endday = #{record.endday,jdbcType=OTHER},
+      worktime = #{record.worktime,jdbcType=OTHER},
       industry = #{record.industry,jdbcType=OTHER},
       describe = #{record.describe,jdbcType=OTHER},
-      position = #{record.position,jdbcType=OTHER}
+      position = #{record.position,jdbcType=OTHER},
+      evaluation = #{record.evaluation,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -226,11 +226,8 @@
       <if test="company != null">
         company = #{company,jdbcType=OTHER},
       </if>
-      <if test="beginday != null">
-        beginday = #{beginday,jdbcType=OTHER},
-      </if>
-      <if test="endday != null">
-        endday = #{endday,jdbcType=OTHER},
+      <if test="worktime != null">
+        worktime = #{worktime,jdbcType=OTHER},
       </if>
       <if test="industry != null">
         industry = #{industry,jdbcType=OTHER},
@@ -241,6 +238,9 @@
       <if test="position != null">
         position = #{position,jdbcType=OTHER},
       </if>
+      <if test="evaluation != null">
+        evaluation = #{evaluation,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -248,11 +248,11 @@
     update zyh_resume_work
     set userid = #{userid,jdbcType=OTHER},
       company = #{company,jdbcType=OTHER},
-      beginday = #{beginday,jdbcType=OTHER},
-      endday = #{endday,jdbcType=OTHER},
+      worktime = #{worktime,jdbcType=OTHER},
       industry = #{industry,jdbcType=OTHER},
       describe = #{describe,jdbcType=OTHER},
-      position = #{position,jdbcType=OTHER}
+      position = #{position,jdbcType=OTHER},
+      evaluation = #{evaluation,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>
