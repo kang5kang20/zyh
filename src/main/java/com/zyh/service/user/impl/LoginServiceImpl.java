@@ -113,12 +113,13 @@ public class LoginServiceImpl implements ILoginService{
 		int verifyCode = dataAccuracyUtil.getVerifyCode();
 		smsVO.setVerifyCode(verifyCode);
 		//调用sms服务
-		SendSmsResponse sendSmsResponse = smsServiceImpl.sendSms(smsVO);
-		if (sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
-			//TODO
-			// 请求成功,将sms返回存入redis
-			redisUtil.set(smsVO.getPhone(), smsVO, UserCom.USER_SMSCACHETIME);
-		}
+//		SendSmsResponse sendSmsResponse = smsServiceImpl.sendSms(smsVO);
+//		if (sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
+//			//TODO
+//			// 请求成功,将sms返回存入redis
+//			redisUtil.set(smsVO.getPhone(), smsVO, UserCom.USER_SMSCACHETIME);
+//		}
+		redisUtil.set(smsVO.getPhone(), smsVO, UserCom.USER_SMSCACHETIME);
 		return smsVO;
 	}
 }

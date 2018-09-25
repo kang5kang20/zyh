@@ -17,6 +17,10 @@
     <result column="cellphone" jdbcType="OTHER" property="cellphone" />
     <result column="phone" jdbcType="OTHER" property="phone" />
     <result column="email" jdbcType="OTHER" property="email" />
+    <result column="birthcity" jdbcType="OTHER" property="birthcity" />
+    <result column="evaluation" jdbcType="OTHER" property="evaluation" />
+    <result column="idurl" jdbcType="OTHER" property="idurl" />
+    <result column="soldierurl" jdbcType="OTHER" property="soldierurl" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,7 +82,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, userid, name, sex, birthday, soldierdate, workdate, bdzy, bdzw, soldierno, zzmm, 
-    idno, cellphone, phone, email
+    idno, cellphone, phone, email, birthcity, evaluation, idurl, soldierurl
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeBaseExample" resultMap="BaseResultMap">
     select
@@ -114,13 +118,15 @@
     insert into zyh_resume_base (id, userid, name, sex, 
       birthday, soldierdate, workdate, 
       bdzy, bdzw, soldierno, zzmm, 
-      idno, cellphone, phone, email
-      )
+      idno, cellphone, phone, email, 
+      birthcity, evaluation, idurl, 
+      soldierurl)
     values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{name,jdbcType=OTHER}, #{sex,jdbcType=OTHER}, 
       #{birthday,jdbcType=OTHER}, #{soldierdate,jdbcType=OTHER}, #{workdate,jdbcType=OTHER}, 
       #{bdzy,jdbcType=OTHER}, #{bdzw,jdbcType=OTHER}, #{soldierno,jdbcType=OTHER}, #{zzmm,jdbcType=OTHER}, 
-      #{idno,jdbcType=OTHER}, #{cellphone,jdbcType=OTHER}, #{phone,jdbcType=OTHER}, #{email,jdbcType=OTHER}
-      )
+      #{idno,jdbcType=OTHER}, #{cellphone,jdbcType=OTHER}, #{phone,jdbcType=OTHER}, #{email,jdbcType=OTHER}, 
+      #{birthcity,jdbcType=OTHER}, #{evaluation,jdbcType=OTHER}, #{idurl,jdbcType=OTHER}, 
+      #{soldierurl,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeBase">
     insert into zyh_resume_base
@@ -170,6 +176,18 @@
       <if test="email != null">
         email,
       </if>
+      <if test="birthcity != null">
+        birthcity,
+      </if>
+      <if test="evaluation != null">
+        evaluation,
+      </if>
+      <if test="idurl != null">
+        idurl,
+      </if>
+      <if test="soldierurl != null">
+        soldierurl,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -216,6 +234,18 @@
       </if>
       <if test="email != null">
         #{email,jdbcType=OTHER},
+      </if>
+      <if test="birthcity != null">
+        #{birthcity,jdbcType=OTHER},
+      </if>
+      <if test="evaluation != null">
+        #{evaluation,jdbcType=OTHER},
+      </if>
+      <if test="idurl != null">
+        #{idurl,jdbcType=OTHER},
+      </if>
+      <if test="soldierurl != null">
+        #{soldierurl,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -273,6 +303,18 @@
       <if test="record.email != null">
         email = #{record.email,jdbcType=OTHER},
       </if>
+      <if test="record.birthcity != null">
+        birthcity = #{record.birthcity,jdbcType=OTHER},
+      </if>
+      <if test="record.evaluation != null">
+        evaluation = #{record.evaluation,jdbcType=OTHER},
+      </if>
+      <if test="record.idurl != null">
+        idurl = #{record.idurl,jdbcType=OTHER},
+      </if>
+      <if test="record.soldierurl != null">
+        soldierurl = #{record.soldierurl,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -294,7 +336,11 @@
       idno = #{record.idno,jdbcType=OTHER},
       cellphone = #{record.cellphone,jdbcType=OTHER},
       phone = #{record.phone,jdbcType=OTHER},
-      email = #{record.email,jdbcType=OTHER}
+      email = #{record.email,jdbcType=OTHER},
+      birthcity = #{record.birthcity,jdbcType=OTHER},
+      evaluation = #{record.evaluation,jdbcType=OTHER},
+      idurl = #{record.idurl,jdbcType=OTHER},
+      soldierurl = #{record.soldierurl,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -344,6 +390,18 @@
       <if test="email != null">
         email = #{email,jdbcType=OTHER},
       </if>
+      <if test="birthcity != null">
+        birthcity = #{birthcity,jdbcType=OTHER},
+      </if>
+      <if test="evaluation != null">
+        evaluation = #{evaluation,jdbcType=OTHER},
+      </if>
+      <if test="idurl != null">
+        idurl = #{idurl,jdbcType=OTHER},
+      </if>
+      <if test="soldierurl != null">
+        soldierurl = #{soldierurl,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -362,7 +420,11 @@
       idno = #{idno,jdbcType=OTHER},
       cellphone = #{cellphone,jdbcType=OTHER},
       phone = #{phone,jdbcType=OTHER},
-      email = #{email,jdbcType=OTHER}
+      email = #{email,jdbcType=OTHER},
+      birthcity = #{birthcity,jdbcType=OTHER},
+      evaluation = #{evaluation,jdbcType=OTHER},
+      idurl = #{idurl,jdbcType=OTHER},
+      soldierurl = #{soldierurl,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>

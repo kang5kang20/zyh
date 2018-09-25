@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zyh.dao.resume.ZyhResumeEducationMapper">
-  <resultMap id="BaseResultMap" type="com.zyh.entity.resume.ZyhResumeEducation">
+<mapper namespace="com.zyh.dao.resume.ZyhResumeSpecialityMapper">
+  <resultMap id="BaseResultMap" type="com.zyh.entity.resume.ZyhResumeSpeciality">
     <id column="id" jdbcType="OTHER" property="id" />
     <result column="userid" jdbcType="OTHER" property="userid" />
-    <result column="school" jdbcType="OTHER" property="school" />
-    <result column="edtime" jdbcType="OTHER" property="edtime" />
-    <result column="category" jdbcType="OTHER" property="category" />
-    <result column="major" jdbcType="OTHER" property="major" />
-    <result column="edstate" jdbcType="OTHER" property="edstate" />
+    <result column="certificate" jdbcType="OTHER" property="certificate" />
+    <result column="gettime" jdbcType="OTHER" property="gettime" />
     <result column="desc" jdbcType="OTHER" property="desc" />
   </resultMap>
   <sql id="Example_Where_Clause">
@@ -70,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userid, school, edtime, category, major, edstate, desc
+    id, userid, certificate, gettime, desc
   </sql>
-  <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeEducationExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeSpecialityExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from zyh_resume_education
+    from zyh_resume_speciality
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -89,29 +86,27 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from zyh_resume_education
+    from zyh_resume_speciality
     where id = #{id,jdbcType=OTHER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from zyh_resume_education
+    delete from zyh_resume_speciality
     where id = #{id,jdbcType=OTHER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zyh.entity.resume.ZyhResumeEducationExample">
-    delete from zyh_resume_education
+  <delete id="deleteByExample" parameterType="com.zyh.entity.resume.ZyhResumeSpecialityExample">
+    delete from zyh_resume_speciality
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zyh.entity.resume.ZyhResumeEducation">
-    insert into zyh_resume_education (id, userid, school, 
-      edtime, category, major, 
-      edstate, desc)
-    values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{school,jdbcType=OTHER}, 
-      #{edtime,jdbcType=OTHER}, #{category,jdbcType=OTHER}, #{major,jdbcType=OTHER}, 
-      #{edstate,jdbcType=OTHER}, #{desc,jdbcType=OTHER})
+  <insert id="insert" parameterType="com.zyh.entity.resume.ZyhResumeSpeciality">
+    insert into zyh_resume_speciality (id, userid, certificate, 
+      gettime, desc)
+    values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{certificate,jdbcType=OTHER}, 
+      #{gettime,jdbcType=OTHER}, #{desc,jdbcType=OTHER})
   </insert>
-  <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeEducation">
-    insert into zyh_resume_education
+  <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeSpeciality">
+    insert into zyh_resume_speciality
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -119,20 +114,11 @@
       <if test="userid != null">
         userid,
       </if>
-      <if test="school != null">
-        school,
+      <if test="certificate != null">
+        certificate,
       </if>
-      <if test="edtime != null">
-        edtime,
-      </if>
-      <if test="category != null">
-        category,
-      </if>
-      <if test="major != null">
-        major,
-      </if>
-      <if test="edstate != null">
-        edstate,
+      <if test="gettime != null">
+        gettime,
       </if>
       <if test="desc != null">
         desc,
@@ -145,34 +131,25 @@
       <if test="userid != null">
         #{userid,jdbcType=OTHER},
       </if>
-      <if test="school != null">
-        #{school,jdbcType=OTHER},
+      <if test="certificate != null">
+        #{certificate,jdbcType=OTHER},
       </if>
-      <if test="edtime != null">
-        #{edtime,jdbcType=OTHER},
-      </if>
-      <if test="category != null">
-        #{category,jdbcType=OTHER},
-      </if>
-      <if test="major != null">
-        #{major,jdbcType=OTHER},
-      </if>
-      <if test="edstate != null">
-        #{edstate,jdbcType=OTHER},
+      <if test="gettime != null">
+        #{gettime,jdbcType=OTHER},
       </if>
       <if test="desc != null">
         #{desc,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zyh.entity.resume.ZyhResumeEducationExample" resultType="java.lang.Long">
-    select count(*) from zyh_resume_education
+  <select id="countByExample" parameterType="com.zyh.entity.resume.ZyhResumeSpecialityExample" resultType="java.lang.Long">
+    select count(*) from zyh_resume_speciality
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update zyh_resume_education
+    update zyh_resume_speciality
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=OTHER},
@@ -180,20 +157,11 @@
       <if test="record.userid != null">
         userid = #{record.userid,jdbcType=OTHER},
       </if>
-      <if test="record.school != null">
-        school = #{record.school,jdbcType=OTHER},
+      <if test="record.certificate != null">
+        certificate = #{record.certificate,jdbcType=OTHER},
       </if>
-      <if test="record.edtime != null">
-        edtime = #{record.edtime,jdbcType=OTHER},
-      </if>
-      <if test="record.category != null">
-        category = #{record.category,jdbcType=OTHER},
-      </if>
-      <if test="record.major != null">
-        major = #{record.major,jdbcType=OTHER},
-      </if>
-      <if test="record.edstate != null">
-        edstate = #{record.edstate,jdbcType=OTHER},
+      <if test="record.gettime != null">
+        gettime = #{record.gettime,jdbcType=OTHER},
       </if>
       <if test="record.desc != null">
         desc = #{record.desc,jdbcType=OTHER},
@@ -204,39 +172,27 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update zyh_resume_education
+    update zyh_resume_speciality
     set id = #{record.id,jdbcType=OTHER},
       userid = #{record.userid,jdbcType=OTHER},
-      school = #{record.school,jdbcType=OTHER},
-      edtime = #{record.edtime,jdbcType=OTHER},
-      category = #{record.category,jdbcType=OTHER},
-      major = #{record.major,jdbcType=OTHER},
-      edstate = #{record.edstate,jdbcType=OTHER},
+      certificate = #{record.certificate,jdbcType=OTHER},
+      gettime = #{record.gettime,jdbcType=OTHER},
       desc = #{record.desc,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zyh.entity.resume.ZyhResumeEducation">
-    update zyh_resume_education
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyh.entity.resume.ZyhResumeSpeciality">
+    update zyh_resume_speciality
     <set>
       <if test="userid != null">
         userid = #{userid,jdbcType=OTHER},
       </if>
-      <if test="school != null">
-        school = #{school,jdbcType=OTHER},
+      <if test="certificate != null">
+        certificate = #{certificate,jdbcType=OTHER},
       </if>
-      <if test="edtime != null">
-        edtime = #{edtime,jdbcType=OTHER},
-      </if>
-      <if test="category != null">
-        category = #{category,jdbcType=OTHER},
-      </if>
-      <if test="major != null">
-        major = #{major,jdbcType=OTHER},
-      </if>
-      <if test="edstate != null">
-        edstate = #{edstate,jdbcType=OTHER},
+      <if test="gettime != null">
+        gettime = #{gettime,jdbcType=OTHER},
       </if>
       <if test="desc != null">
         desc = #{desc,jdbcType=OTHER},
@@ -244,14 +200,11 @@
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zyh.entity.resume.ZyhResumeEducation">
-    update zyh_resume_education
+  <update id="updateByPrimaryKey" parameterType="com.zyh.entity.resume.ZyhResumeSpeciality">
+    update zyh_resume_speciality
     set userid = #{userid,jdbcType=OTHER},
-      school = #{school,jdbcType=OTHER},
-      edtime = #{edtime,jdbcType=OTHER},
-      category = #{category,jdbcType=OTHER},
-      major = #{major,jdbcType=OTHER},
-      edstate = #{edstate,jdbcType=OTHER},
+      certificate = #{certificate,jdbcType=OTHER},
+      gettime = #{gettime,jdbcType=OTHER},
       desc = #{desc,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>

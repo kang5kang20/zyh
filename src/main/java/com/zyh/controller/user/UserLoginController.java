@@ -12,8 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.user.common.UserCom;
+import com.zyh.controller.user.vo.SmsVO;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.user.ZyhUser;
+import com.zyh.redis.RedisUtil;
 import com.zyh.service.user.ILoginService;
 
 @RestController
@@ -21,6 +23,9 @@ import com.zyh.service.user.ILoginService;
 public class UserLoginController {
 
 	private Logger log = Logger.getLogger("error");
+	
+	@Autowired
+	private RedisUtil redisUtil;
 	
 	@Autowired
 	private ILoginService loginService;

@@ -1,11 +1,9 @@
 package com.zyh.dao.resume;
 
-import java.util.List;
-
-import org.apache.ibatis.annotations.Param;
-
 import com.zyh.entity.resume.ZyhResumeEducation;
 import com.zyh.entity.resume.ZyhResumeEducationExample;
+import java.util.List;
+import org.apache.ibatis.annotations.Param;
 
 public interface ZyhResumeEducationMapper {
     long countByExample(ZyhResumeEducationExample example);
