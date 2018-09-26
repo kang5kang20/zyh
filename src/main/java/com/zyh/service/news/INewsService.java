@@ -13,7 +13,7 @@ public interface INewsService {
 	
 	public void deleteNews(String newsid) throws Exception;
 	
-	public ZyhNews findNewsById(String newsid) throws Exception;
+	public ZyhNews queryNewsById(String newsid) throws Exception;
 	
 	public List<ZyhNews> findNewsList(ZyhNewsExample example) throws Exception;
 	

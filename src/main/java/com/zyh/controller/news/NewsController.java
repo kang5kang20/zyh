@@ -1,5 +1,6 @@
 package com.zyh.controller.news;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -10,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.news.ZyhNews;
@@ -19,6 +21,7 @@ import com.zyh.service.news.INewsService;
 
 
 @RestController
+@RequestMapping("/news")
 public class NewsController {
 	
 	private Logger log = Logger.getLogger("error");
@@ -38,6 +41,7 @@ public class NewsController {
 		try {
 			ZyhNews news = om.readValue(json, ZyhNews.class);
 			if (null != news) {
+				news.setPubtime(new Date());
 				newsService.addNews(news);
 				responeToWeb.setMsg("新增成功");
 				responeToWeb.setSuccess(true);
@@ -65,7 +69,7 @@ public class NewsController {
 		ObjectMapper om = new ObjectMapper();
 		try {
 			ZyhNews news = om.readValue(json, ZyhNews.class);
-			if (null != news) {
+			if (null != news && null!=news.getId() && !"".equals(news.getId())) {
 				newsService.updateNews(news);
 				responeToWeb.setMsg("修改成功");
 				responeToWeb.setSuccess(true);
@@ -88,8 +92,9 @@ public class NewsController {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			String id = om.readValue(json, String.class);
-			if (null != id) {
+			JsonNode node = om.readTree(json);
+			String id =  node.get("id").asText();
+			if (null != id && !"".equals(id)) {
 				newsService.deleteNews(id);
 				responeToWeb.setMsg("删除成功");
 				responeToWeb.setSuccess(true);
@@ -112,13 +117,19 @@ public class NewsController {
 		ObjectMapper om = new ObjectMapper();
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			String newsid = om.readValue(json, String.class);
-			if (null != newsid ) {
-				ZyhNews news = newsService.findNewsById(newsid);
-				map.put("result", news);
-				responeToWeb.setMsg("查询成功");
-				responeToWeb.setSuccess(true);
-				responeToWeb.setValue(map);
+			JsonNode node = om.readTree(json);
+			String newsid =  node.get("newsid").asText();
+			if (null != newsid && !"".equals(newsid)) {
+				ZyhNews news = newsService.queryNewsById(newsid);
+				if(null == news ){
+					responeToWeb.setMsg("查询失败,信息缺失");
+					responeToWeb.setSuccess(false);
+				}else{
+					map.put("result", news);
+					responeToWeb.setMsg("查询成功");
+					responeToWeb.setSuccess(true);
+					responeToWeb.setValue(map);
+				}
 			} else {
 				responeToWeb.setMsg("查询失败,信息缺失");
 				responeToWeb.setSuccess(false);
@@ -139,12 +150,20 @@ public class NewsController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			//标题查询
-			String title = om.readValue(json, String.class);
+			String title="";
+			if(null!=json && !"".equals(json)){
+				JsonNode node = om.readTree(json);
+				if(null!=node.get("title") && !"".equals(node.get("title"))){
+					title =  node.get("title").asText();
+				}
+			}
 			ZyhNewsExample zyhNewsExample = new ZyhNewsExample();
 			zyhNewsExample.setOrderByClause("pubtime desc");
-			if(null!=title || "" !=title){
-				Criteria criteria = zyhNewsExample.createCriteria();
-				criteria.andTitleLike(title);
+			//上架才允许查
+			Criteria criteria = zyhNewsExample.createCriteria();
+			criteria.andIfgroundEqualTo("1");
+			if(null!=title && "" !=title){
+				criteria.andTitleLike("%"+title+"%");
 			}
 			List<ZyhNews> newslist = newsService.findNewsList(zyhNewsExample);
 			map.put("result", newslist);
@@ -160,7 +179,7 @@ public class NewsController {
 	}
 	
 	@RequestMapping("/findNewsListToHome.act")
-	public ResponeToWeb findNewsListToHome(@RequestBody String json) {
+	public ResponeToWeb findNewsListToHome() {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
@@ -168,6 +187,7 @@ public class NewsController {
 			zyhNewsExample.setOrderByClause("pubtime desc");
 			Criteria criteria = zyhNewsExample.createCriteria();
 			criteria.andIfhomeEqualTo("1");
+			criteria.andIfgroundEqualTo("1");
 			List<ZyhNews> newslist = newsService.findNewsList(zyhNewsExample);
 			map.put("result", newslist);
 			responeToWeb.setMsg("查询成功");

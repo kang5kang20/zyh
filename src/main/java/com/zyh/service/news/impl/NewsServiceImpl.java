@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zyh.dao.news.ZyhNewsMapper;
+import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.news.ZyhNewsExample;
 import com.zyh.service.news.INewsService;
@@ -18,6 +19,10 @@ public class NewsServiceImpl implements INewsService {
 
 	@Override
 	public void addNews(ZyhNews zyhNews) throws Exception {
+		if (null ==zyhNews.getId()||"".equals(zyhNews.getId())) {
+			String id = UUidUtil.getUUid();
+			zyhNews.setId(id);
+		}
 		zyhNewsMapper.insertSelective(zyhNews);
 	}
 
@@ -32,9 +37,12 @@ public class NewsServiceImpl implements INewsService {
 	}
 
 	@Override
-	public ZyhNews findNewsById(String newsid) throws Exception {
+	public ZyhNews queryNewsById(String newsid) throws Exception {
 		//记录点击次数
 		ZyhNews news = zyhNewsMapper.selectByPrimaryKey(newsid);
+		if(null == news || "0".equals(news.getIfground())){
+			return null;
+		}
 		news.setReadcount(news.getReadcount()+1);
 		zyhNewsMapper.updateByPrimaryKeySelective(news);
 		return news;

@@ -142,7 +142,7 @@ public class UserCollectController {
 			if(null!=searchvo && null != searchvo.getArttype()
 					&& !"".equals(searchvo.getArttype())){
 				if("1".equals(searchvo.getArttype())){
-					ZyhNews news = newsService.findNewsById(searchvo.getArticleid());
+					ZyhNews news = newsService.queryNewsById(searchvo.getArticleid());
 					retlist.add(news);
 				}else if("2".equals(searchvo.getArttype())){
 					ZyhPolicy policy = policyService.findPolicyById(searchvo.getArticleid());
