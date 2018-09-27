@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zyh.dao.usercollect.ZyhUserCollectMapper;
+import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.usercollect.ZyhUserCollect;
 import com.zyh.entity.usercollect.ZyhUserCollectExample;
 import com.zyh.service.usercollect.IUserCollectService;
@@ -21,6 +22,10 @@ public class UserCollectServiceImpl implements IUserCollectService {
 	 */
 	@Override
 	public void addUserCollect(ZyhUserCollect usercollect) throws Exception {
+		if (null ==usercollect.getId()||"".equals(usercollect.getId())) {
+			String id = UUidUtil.getUUid();
+			usercollect.setId(id);
+		}
 		zyhUserCollectMapper.insertSelective(usercollect);
 	}
 	
