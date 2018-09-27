@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zyh.dao.policy.ZyhPolicyMapper;
+import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.policy.ZyhPolicy;
 import com.zyh.entity.policy.ZyhPolicyExample;
 import com.zyh.service.policy.IPolicyService;
@@ -17,9 +18,12 @@ public class PolicyServiceImpl implements IPolicyService {
 
 
 	@Override
-	public ZyhPolicy findPolicyById(String policyid) throws Exception {
+	public ZyhPolicy queryPolicyById(String policyid) throws Exception {
 		//增加阅读次数
 		ZyhPolicy policy = zyhPolicyMapper.selectByPrimaryKey(policyid);
+		if(null == policy || "0".equals(policy.getIfground())){
+			return null;
+		}
 		policy.setReadcount(policy.getReadcount()+1);
 		zyhPolicyMapper.updateByPrimaryKeySelective(policy);
 		return policy;
@@ -33,6 +37,10 @@ public class PolicyServiceImpl implements IPolicyService {
 
 	@Override
 	public void addPolicy(ZyhPolicy policy) throws Exception {
+		if (null ==policy.getId()||"".equals(policy.getId())) {
+			String id = UUidUtil.getUUid();
+			policy.setId(id);
+		}
 		zyhPolicyMapper.insertSelective(policy);
 		
 	}

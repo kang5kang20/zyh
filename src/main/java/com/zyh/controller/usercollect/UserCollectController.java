@@ -11,12 +11,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.usercollect.vo.UserCollectSearchVO;
-import com.zyh.dao.news.ZyhNewsMapper;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.news.ZyhNews;
-import com.zyh.entity.news.ZyhNewsExample;
 import com.zyh.entity.policy.ZyhPolicy;
 import com.zyh.entity.usercollect.ZyhUserCollect;
 import com.zyh.entity.usercollect.ZyhUserCollectExample;
@@ -26,6 +25,7 @@ import com.zyh.service.policy.IPolicyService;
 import com.zyh.service.usercollect.IUserCollectService;
 
 @RestController
+@RequestMapping("/usercollect")
 public class UserCollectController {
 	
 	private Logger log = Logger.getLogger("error");
@@ -77,7 +77,8 @@ public class UserCollectController {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			String usercollectid = om.readValue(json, String.class);
+			JsonNode node = om.readTree(json);
+			String usercollectid =  node.get("usercollectid").asText();
 			if (null != usercollectid && !"".equals(usercollectid)) {
 				userCollectService.deleteUserCollect(usercollectid);
 				responeToWeb.setMsg("取消收藏成功");
@@ -108,7 +109,8 @@ public class UserCollectController {
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
 			//标题查询
-			String userid = om.readValue(json, String.class);
+			JsonNode node = om.readTree(json);
+			String userid =  node.get("userid").asText();
 			ZyhUserCollectExample zyhUserCollectExample = new ZyhUserCollectExample();
 			zyhUserCollectExample.setOrderByClause("arttype,pubtime desc");
 			Criteria criteria = zyhUserCollectExample.createCriteria();
@@ -145,7 +147,7 @@ public class UserCollectController {
 					ZyhNews news = newsService.queryNewsById(searchvo.getArticleid());
 					retlist.add(news);
 				}else if("2".equals(searchvo.getArttype())){
-					ZyhPolicy policy = policyService.findPolicyById(searchvo.getArticleid());
+					ZyhPolicy policy = policyService.queryPolicyById(searchvo.getArticleid());
 					retlist.add(policy);
 				}else{
 					responeToWeb.setMsg("查询失败,信息缺失");

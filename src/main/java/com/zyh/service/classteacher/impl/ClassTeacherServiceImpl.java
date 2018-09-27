@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zyh.dao.classteacher.ZyhClassTeacherMapper;
+import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.classteacher.ZyhClassTeacher;
 import com.zyh.entity.classteacher.ZyhClassTeacherExample;
 import com.zyh.service.classteacher.IClassTeacherService;
@@ -18,6 +19,10 @@ public class ClassTeacherServiceImpl implements IClassTeacherService {
 
 	@Override
 	public void addClassTeacher(ZyhClassTeacher classTeacher) throws Exception {
+		if (null ==classTeacher.getId()||"".equals(classTeacher.getId())) {
+			String id = UUidUtil.getUUid();
+			classTeacher.setId(id);
+		}
 		zyhClassTeacherMapper.insertSelective(classTeacher);
 	}
 

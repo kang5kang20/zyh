@@ -7,7 +7,7 @@ import com.zyh.entity.policy.ZyhPolicyExample;
 
 public interface IPolicyService {
 	
-	public ZyhPolicy findPolicyById(String policyid) throws Exception;
+	public ZyhPolicy queryPolicyById(String policyid) throws Exception;
 	
 	public List<ZyhPolicy> findPolicyList(ZyhPolicyExample example) throws Exception;
 	
