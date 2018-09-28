@@ -1,0 +1,110 @@
+package com.zyh.controller.user;
+
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zyh.controller.user.common.UserCom;
+import com.zyh.controller.user.vo.UserPostQueryVO;
+import com.zyh.entity.common.ResponeToWeb;
+import com.zyh.entity.user.ZyhUserPosition;
+import com.zyh.entity.user.ZyhUserPositionExample;
+import com.zyh.entity.user.ZyhUserPositionExample.Criteria;
+import com.zyh.service.user.IUserPostService;
+import com.zyh.service.user.impl.UserPostServiceImpl;
+
+@RestController
+@RequestMapping("/Post")
+public class UserPostController {
+
+	private Logger log = Logger.getLogger("error");
+
+	@Autowired
+	private IUserPostService userPostService;
+
+	@RequestMapping("/addPost.act")
+	public ResponeToWeb userPost(@RequestBody String json) {
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			ZyhUserPosition zyhUserPosition = om.readValue(json, ZyhUserPosition.class);
+			if (null == zyhUserPosition.getUserid() || "".equals(zyhUserPosition.getUserid())) {
+				responeToWeb.setSuccess(false);
+				responeToWeb.setMsg(UserCom.ERROR_USERIDNULL);
+				return responeToWeb;
+			}
+			if (null == zyhUserPosition.getPositionid() || "".equals(zyhUserPosition.getPositionid())) {
+				responeToWeb.setSuccess(false);
+				responeToWeb.setMsg(UserCom.ERROR_POSITIONIDNULL);
+				return responeToWeb;
+			}
+			zyhUserPosition.setState("0");
+			Date date = new Date();
+			zyhUserPosition.setOptime(date);
+			userPostService.addUserPost(zyhUserPosition);
+			responeToWeb.setMsg("添加成功");
+			responeToWeb.setSuccess(true);
+		} catch (Exception e) {
+			responeToWeb.setMsg("简历投递失败:" + e.getMessage());
+			responeToWeb.setSuccess(false);
+			log.error("简历投递失败:" + e.getMessage());
+		}
+		return responeToWeb;
+	}
+
+	@RequestMapping("queryPost")
+	public ResponeToWeb queryByExam(@RequestBody String json) {
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		boolean flag = false;
+		try {
+			UserPostQueryVO userPostQueryVO = om.readValue(json, UserPostQueryVO.class);
+			ZyhUserPositionExample zyhUserPositionExample = new ZyhUserPositionExample();
+			Criteria criteria = zyhUserPositionExample.createCriteria();
+			if (null != userPostQueryVO.getId() && !"".equals(userPostQueryVO.getId())) {
+				criteria.andIdEqualTo(userPostQueryVO.getId());
+				flag = true;
+			}
+			if (null != userPostQueryVO.getUserid() && !"".equals(userPostQueryVO.getUserid())) {
+				criteria.andUseridEqualTo(userPostQueryVO.getUserid());
+				flag = true;
+			}
+			if (null != userPostQueryVO.getCompanyid() && !"".equals(userPostQueryVO.getCompanyid())) {
+				criteria.andCompanyidEqualTo(userPostQueryVO.getCompanyid());
+				flag = true;
+			}
+			if (null != userPostQueryVO.getPositionid() && !"".equals(userPostQueryVO.getPositionid())) {
+				criteria.andPositionidEqualTo(userPostQueryVO.getPositionid());
+				flag = true;
+			}
+			if (flag) {
+				zyhUserPositionExample.setOrderByClause(" order by optime desc");
+				List<ZyhUserPosition> list = userPostService.queryPostByExm(zyhUserPositionExample);
+				responeToWeb.setMsg("查询成功");
+				map.put("result", list);
+				responeToWeb.setSuccess(true);
+				responeToWeb.setValue(map);
+			} else {
+				responeToWeb.setMsg(UserCom.ERROR_PARAMERNULL);
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error("查询失败:" + e.getMessage());
+			responeToWeb.setMsg("查询失败"+e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	
+}

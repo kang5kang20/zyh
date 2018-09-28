@@ -593,6 +593,126 @@ public class ZyhResumeIntentionExample {
             addCriterion("posttime not between", value1, value2, "posttime");
             return (Criteria) this;
         }
+
+        public Criteria andMinmoneyIsNull() {
+            addCriterion("minmoney is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyIsNotNull() {
+            addCriterion("minmoney is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyEqualTo(Float value) {
+            addCriterion("minmoney =", value, "minmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyNotEqualTo(Float value) {
+            addCriterion("minmoney <>", value, "minmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyGreaterThan(Float value) {
+            addCriterion("minmoney >", value, "minmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyGreaterThanOrEqualTo(Float value) {
+            addCriterion("minmoney >=", value, "minmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyLessThan(Float value) {
+            addCriterion("minmoney <", value, "minmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyLessThanOrEqualTo(Float value) {
+            addCriterion("minmoney <=", value, "minmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyIn(List<Float> values) {
+            addCriterion("minmoney in", values, "minmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyNotIn(List<Float> values) {
+            addCriterion("minmoney not in", values, "minmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyBetween(Float value1, Float value2) {
+            addCriterion("minmoney between", value1, value2, "minmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMinmoneyNotBetween(Float value1, Float value2) {
+            addCriterion("minmoney not between", value1, value2, "minmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyIsNull() {
+            addCriterion("maxmoney is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyIsNotNull() {
+            addCriterion("maxmoney is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyEqualTo(Float value) {
+            addCriterion("maxmoney =", value, "maxmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyNotEqualTo(Float value) {
+            addCriterion("maxmoney <>", value, "maxmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyGreaterThan(Float value) {
+            addCriterion("maxmoney >", value, "maxmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyGreaterThanOrEqualTo(Float value) {
+            addCriterion("maxmoney >=", value, "maxmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyLessThan(Float value) {
+            addCriterion("maxmoney <", value, "maxmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyLessThanOrEqualTo(Float value) {
+            addCriterion("maxmoney <=", value, "maxmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyIn(List<Float> values) {
+            addCriterion("maxmoney in", values, "maxmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyNotIn(List<Float> values) {
+            addCriterion("maxmoney not in", values, "maxmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyBetween(Float value1, Float value2) {
+            addCriterion("maxmoney between", value1, value2, "maxmoney");
+            return (Criteria) this;
+        }
+
+        public Criteria andMaxmoneyNotBetween(Float value1, Float value2) {
+            addCriterion("maxmoney not between", value1, value2, "maxmoney");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

@@ -19,14 +19,18 @@ import com.zyh.entity.resume.ZyhResumeBase;
 import com.zyh.entity.resume.ZyhResumeBaseExample;
 import com.zyh.entity.resume.ZyhResumeEducation;
 import com.zyh.entity.resume.ZyhResumeEducationExample;
+import com.zyh.entity.resume.ZyhResumeIntention;
+import com.zyh.entity.resume.ZyhResumeIntentionExample;
 import com.zyh.entity.resume.ZyhResumeSpeciality;
 import com.zyh.entity.resume.ZyhResumeSpecialityExample;
 import com.zyh.entity.resume.ZyhResumeWork;
 import com.zyh.entity.resume.ZyhResumeWorkExample;
 import com.zyh.service.resume.IResumeBaseService;
 import com.zyh.service.resume.IResumeEducationService;
+import com.zyh.service.resume.IResumeIntentionService;
 import com.zyh.service.resume.IResumeSpecialityService;
 import com.zyh.service.resume.IResumeWorkService;
+import com.zyh.service.resume.impl.ResumeIntentionServiceImpl;
 
 @RestController
 @RequestMapping("/resume")
@@ -45,6 +49,9 @@ public class ResumeController {
 	
 	@Autowired
 	private IResumeSpecialityService resumeSpecialityService;
+	
+	@Autowired
+	private IResumeIntentionService resumeIntentionService;
 	
 	/**
 	 * 添加简历基本信息
@@ -547,6 +554,9 @@ public class ResumeController {
 			ZyhResumeSpecialityExample zyhResumeSpecialityExample = new ZyhResumeSpecialityExample();
 			zyhResumeSpecialityExample.createCriteria().andUseridEqualTo(userid);
 			resumeVO.setZyhResumeSpecialities(resumeSpecialityService.selectResumeSpecialityByExample(zyhResumeSpecialityExample));
+			ZyhResumeIntentionExample zyhResumeIntentionExample = new ZyhResumeIntentionExample();
+			zyhResumeBaseExample.createCriteria().andUseridEqualTo(userid);
+			resumeVO.setZyhResumeIntentions(resumeIntentionService.selectResumeIntentionByExample(zyhResumeIntentionExample));
 			map.put("result", resumeVO);
 			responeToWeb.setMsg("查询成功");
 			responeToWeb.setSuccess(true);
@@ -557,4 +567,124 @@ public class ResumeController {
 		}
 		return responeToWeb;
 	}
+	
+	/**
+	 * 添加简历基本信息
+	 * @param json
+	 * @return
+	 */
+	@RequestMapping("/addIntention.act")
+	public ResponeToWeb addResumeIntention(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			ZyhResumeIntention zyhResumeIntention = om.readValue(json, ZyhResumeIntention.class);
+			if (null!=zyhResumeIntention.getUserid()&&!"".equals(zyhResumeIntention.getUserid())) {
+				resumeIntentionService.addResumeIntention(zyhResumeIntention);
+				responeToWeb.setMsg("新增成功");
+				responeToWeb.setSuccess(true);
+			}else{
+				responeToWeb.setMsg(UserCom.ERROR_USERIDNULL);
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	/**
+	 * 修改简历工作信息
+	 * @param json
+	 * @return
+	 */
+	@RequestMapping("/updateIntention.act")
+	public ResponeToWeb updateResumeIntention(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			ZyhResumeIntention zyhResumeIntention= om.readValue(json, ZyhResumeIntention.class);
+			if (null!=zyhResumeIntention.getId()&&!"".equals(zyhResumeIntention.getId())) {
+				resumeIntentionService.updateResumeIntentionById(zyhResumeIntention);
+				responeToWeb.setMsg("修改成功");
+				responeToWeb.setSuccess(true);
+			}else{
+				responeToWeb.setMsg(UserCom.ERROR_IDNULL);
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	/**
+	 * 删除简历基本信息
+	 * @param json
+	 * @return
+	 */
+	@RequestMapping("/delIntention.act")
+	public ResponeToWeb deleteResumeIntention(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			JsonNode node = om.readTree(json);
+			String id =  node.get("id").asText();
+			if (null!=id&&!"".equals(id)) {
+				resumeIntentionService.delResumeIntentionById(id);
+				responeToWeb.setMsg("删除成功");
+				responeToWeb.setSuccess(true);
+			}else{
+				responeToWeb.setMsg(UserCom.ERROR_IDNULL);
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	/**
+	 * 通过userid查询简历基本信息
+	 * 
+	 * @param userid
+	 * @return
+	 */
+	@RequestMapping("/queryIntention.act")
+	public ResponeToWeb queryResumeIntentionyByUserId(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			JsonNode node = om.readTree(json);
+			String userid =  node.get("userid").asText();
+			if (null!=userid&&!"".equals(userid)) {
+				ZyhResumeIntentionExample zyhResumeIntentionExample = new ZyhResumeIntentionExample();
+				zyhResumeIntentionExample.createCriteria().andUseridEqualTo(userid);
+			    List<ZyhResumeIntention> list = resumeIntentionService.selectResumeIntentionByExample(zyhResumeIntentionExample);
+			    map.put("result", list);
+			    responeToWeb.setMsg("查询成功");
+				responeToWeb.setSuccess(true);
+				responeToWeb.setValue(map);
+			}else{
+				responeToWeb.setMsg(UserCom.ERROR_USERIDNULL);
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
 }
