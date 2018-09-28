@@ -3,6 +3,7 @@ package com.zyh.service.resume.impl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.zyh.dao.resume.ZyhResumeSpecialityMapper;
 import com.zyh.dao.util.UUidUtil;
@@ -10,6 +11,7 @@ import com.zyh.entity.resume.ZyhResumeSpeciality;
 import com.zyh.entity.resume.ZyhResumeSpecialityExample;
 import com.zyh.service.resume.IResumeSpecialityService;
 
+@Service("resumeSpecialityService")
 public class ResumeSpecialityServiceImpl implements IResumeSpecialityService {
 
 	@Autowired

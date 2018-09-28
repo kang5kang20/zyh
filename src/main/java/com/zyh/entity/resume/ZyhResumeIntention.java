@@ -17,6 +17,10 @@ public class ZyhResumeIntention implements Serializable {
 
     private String posttime;
 
+    private Float minmoney;
+
+    private Float maxmoney;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -75,6 +79,22 @@ public class ZyhResumeIntention implements Serializable {
         this.posttime = posttime == null ? null : posttime.trim();
     }
 
+    public Float getMinmoney() {
+        return minmoney;
+    }
+
+    public void setMinmoney(Float minmoney) {
+        this.minmoney = minmoney;
+    }
+
+    public Float getMaxmoney() {
+        return maxmoney;
+    }
+
+    public void setMaxmoney(Float maxmoney) {
+        this.maxmoney = maxmoney;
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -88,6 +108,8 @@ public class ZyhResumeIntention implements Serializable {
         sb.append(", type=").append(type);
         sb.append(", expectation=").append(expectation);
         sb.append(", posttime=").append(posttime);
+        sb.append(", minmoney=").append(minmoney);
+        sb.append(", maxmoney=").append(maxmoney);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

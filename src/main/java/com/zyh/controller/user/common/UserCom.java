@@ -30,4 +30,9 @@ public class UserCom {
     public static final String ERROR_USERIDNULL = "useridnull";
     //id不能为空
     public static final String ERROR_IDNULL = "idnull";
+    //positionID不能为空
+    public static final String ERROR_POSITIONIDNULL = "positionidnull";
+  //PARAMERNULL不能为空
+    public static final String ERROR_PARAMERNULL = "paramernull";
+    
 }

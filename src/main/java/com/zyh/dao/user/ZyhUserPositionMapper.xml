@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.zyh.dao.resume.ZyhResumeIntentionMapper">
-  <resultMap id="BaseResultMap" type="com.zyh.entity.resume.ZyhResumeIntention">
+<mapper namespace="com.zyh.dao.user.ZyhUserPositionMapper">
+  <resultMap id="BaseResultMap" type="com.zyh.entity.user.ZyhUserPosition">
     <id column="id" jdbcType="OTHER" property="id" />
     <result column="userid" jdbcType="OTHER" property="userid" />
-    <result column="workcity" jdbcType="OTHER" property="workcity" />
-    <result column="position" jdbcType="OTHER" property="position" />
+    <result column="positionid" jdbcType="OTHER" property="positionid" />
     <result column="type" jdbcType="OTHER" property="type" />
-    <result column="expectation" jdbcType="OTHER" property="expectation" />
-    <result column="posttime" jdbcType="OTHER" property="posttime" />
-    <result column="minmoney" jdbcType="OTHER" property="minmoney" />
-    <result column="maxmoney" jdbcType="OTHER" property="maxmoney" />
+    <result column="optime" jdbcType="OTHER" property="optime" />
+    <result column="positionname" jdbcType="OTHER" property="positionname" />
+    <result column="companyid" jdbcType="OTHER" property="companyid" />
+    <result column="companyname" jdbcType="OTHER" property="companyname" />
+    <result column="username" jdbcType="OTHER" property="username" />
+    <result column="state" jdbcType="OTHER" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,15 +72,16 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userid, workcity, position, type, expectation, posttime, minmoney, maxmoney
+    id, userid, positionid, type, optime, positionname, companyid, companyname, username, 
+    state
   </sql>
-  <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeIntentionExample" resultMap="BaseResultMap">
+  <select id="selectByExample" parameterType="com.zyh.entity.user.ZyhUserPositionExample" resultMap="BaseResultMap">
     select
     <if test="distinct">
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from zyh_resume_intention
+    from zyh_user_position
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
@@ -90,31 +92,31 @@
   <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from zyh_resume_intention
+    from zyh_user_position
     where id = #{id,jdbcType=OTHER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from zyh_resume_intention
+    delete from zyh_user_position
     where id = #{id,jdbcType=OTHER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.zyh.entity.resume.ZyhResumeIntentionExample">
-    delete from zyh_resume_intention
+  <delete id="deleteByExample" parameterType="com.zyh.entity.user.ZyhUserPositionExample">
+    delete from zyh_user_position
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.zyh.entity.resume.ZyhResumeIntention">
-    insert into zyh_resume_intention (id, userid, workcity, 
-      position, type, expectation, 
-      posttime, minmoney, maxmoney
-      )
-    values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{workcity,jdbcType=OTHER}, 
-      #{position,jdbcType=OTHER}, #{type,jdbcType=OTHER}, #{expectation,jdbcType=OTHER}, 
-      #{posttime,jdbcType=OTHER}, #{minmoney,jdbcType=OTHER}, #{maxmoney,jdbcType=OTHER}
-      )
+  <insert id="insert" parameterType="com.zyh.entity.user.ZyhUserPosition">
+    insert into zyh_user_position (id, userid, positionid, 
+      type, optime, positionname, 
+      companyid, companyname, username, 
+      state)
+    values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{positionid,jdbcType=OTHER}, 
+      #{type,jdbcType=OTHER}, #{optime,jdbcType=OTHER}, #{positionname,jdbcType=OTHER}, 
+      #{companyid,jdbcType=OTHER}, #{companyname,jdbcType=OTHER}, #{username,jdbcType=OTHER}, 
+      #{state,jdbcType=OTHER})
   </insert>
-  <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeIntention">
-    insert into zyh_resume_intention
+  <insert id="insertSelective" parameterType="com.zyh.entity.user.ZyhUserPosition">
+    insert into zyh_user_position
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">
         id,
@@ -122,26 +124,29 @@
       <if test="userid != null">
         userid,
       </if>
-      <if test="workcity != null">
-        workcity,
-      </if>
-      <if test="position != null">
-        position,
+      <if test="positionid != null">
+        positionid,
       </if>
       <if test="type != null">
         type,
       </if>
-      <if test="expectation != null">
-        expectation,
+      <if test="optime != null">
+        optime,
       </if>
-      <if test="posttime != null">
-        posttime,
+      <if test="positionname != null">
+        positionname,
       </if>
-      <if test="minmoney != null">
-        minmoney,
+      <if test="companyid != null">
+        companyid,
       </if>
-      <if test="maxmoney != null">
-        maxmoney,
+      <if test="companyname != null">
+        companyname,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="state != null">
+        state,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -151,37 +156,40 @@
       <if test="userid != null">
         #{userid,jdbcType=OTHER},
       </if>
-      <if test="workcity != null">
-        #{workcity,jdbcType=OTHER},
-      </if>
-      <if test="position != null">
-        #{position,jdbcType=OTHER},
+      <if test="positionid != null">
+        #{positionid,jdbcType=OTHER},
       </if>
       <if test="type != null">
         #{type,jdbcType=OTHER},
       </if>
-      <if test="expectation != null">
-        #{expectation,jdbcType=OTHER},
+      <if test="optime != null">
+        #{optime,jdbcType=OTHER},
       </if>
-      <if test="posttime != null">
-        #{posttime,jdbcType=OTHER},
+      <if test="positionname != null">
+        #{positionname,jdbcType=OTHER},
       </if>
-      <if test="minmoney != null">
-        #{minmoney,jdbcType=OTHER},
+      <if test="companyid != null">
+        #{companyid,jdbcType=OTHER},
       </if>
-      <if test="maxmoney != null">
-        #{maxmoney,jdbcType=OTHER},
+      <if test="companyname != null">
+        #{companyname,jdbcType=OTHER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=OTHER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.zyh.entity.resume.ZyhResumeIntentionExample" resultType="java.lang.Long">
-    select count(*) from zyh_resume_intention
+  <select id="countByExample" parameterType="com.zyh.entity.user.ZyhUserPositionExample" resultType="java.lang.Long">
+    select count(*) from zyh_user_position
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map">
-    update zyh_resume_intention
+    update zyh_user_position
     <set>
       <if test="record.id != null">
         id = #{record.id,jdbcType=OTHER},
@@ -189,26 +197,29 @@
       <if test="record.userid != null">
         userid = #{record.userid,jdbcType=OTHER},
       </if>
-      <if test="record.workcity != null">
-        workcity = #{record.workcity,jdbcType=OTHER},
-      </if>
-      <if test="record.position != null">
-        position = #{record.position,jdbcType=OTHER},
+      <if test="record.positionid != null">
+        positionid = #{record.positionid,jdbcType=OTHER},
       </if>
       <if test="record.type != null">
         type = #{record.type,jdbcType=OTHER},
       </if>
-      <if test="record.expectation != null">
-        expectation = #{record.expectation,jdbcType=OTHER},
+      <if test="record.optime != null">
+        optime = #{record.optime,jdbcType=OTHER},
       </if>
-      <if test="record.posttime != null">
-        posttime = #{record.posttime,jdbcType=OTHER},
+      <if test="record.positionname != null">
+        positionname = #{record.positionname,jdbcType=OTHER},
       </if>
-      <if test="record.minmoney != null">
-        minmoney = #{record.minmoney,jdbcType=OTHER},
+      <if test="record.companyid != null">
+        companyid = #{record.companyid,jdbcType=OTHER},
       </if>
-      <if test="record.maxmoney != null">
-        maxmoney = #{record.maxmoney,jdbcType=OTHER},
+      <if test="record.companyname != null">
+        companyname = #{record.companyname,jdbcType=OTHER},
+      </if>
+      <if test="record.username != null">
+        username = #{record.username,jdbcType=OTHER},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=OTHER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -216,60 +227,65 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map">
-    update zyh_resume_intention
+    update zyh_user_position
     set id = #{record.id,jdbcType=OTHER},
       userid = #{record.userid,jdbcType=OTHER},
-      workcity = #{record.workcity,jdbcType=OTHER},
-      position = #{record.position,jdbcType=OTHER},
+      positionid = #{record.positionid,jdbcType=OTHER},
       type = #{record.type,jdbcType=OTHER},
-      expectation = #{record.expectation,jdbcType=OTHER},
-      posttime = #{record.posttime,jdbcType=OTHER},
-      minmoney = #{record.minmoney,jdbcType=OTHER},
-      maxmoney = #{record.maxmoney,jdbcType=OTHER}
+      optime = #{record.optime,jdbcType=OTHER},
+      positionname = #{record.positionname,jdbcType=OTHER},
+      companyid = #{record.companyid,jdbcType=OTHER},
+      companyname = #{record.companyname,jdbcType=OTHER},
+      username = #{record.username,jdbcType=OTHER},
+      state = #{record.state,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.zyh.entity.resume.ZyhResumeIntention">
-    update zyh_resume_intention
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyh.entity.user.ZyhUserPosition">
+    update zyh_user_position
     <set>
       <if test="userid != null">
         userid = #{userid,jdbcType=OTHER},
       </if>
-      <if test="workcity != null">
-        workcity = #{workcity,jdbcType=OTHER},
-      </if>
-      <if test="position != null">
-        position = #{position,jdbcType=OTHER},
+      <if test="positionid != null">
+        positionid = #{positionid,jdbcType=OTHER},
       </if>
       <if test="type != null">
         type = #{type,jdbcType=OTHER},
       </if>
-      <if test="expectation != null">
-        expectation = #{expectation,jdbcType=OTHER},
+      <if test="optime != null">
+        optime = #{optime,jdbcType=OTHER},
       </if>
-      <if test="posttime != null">
-        posttime = #{posttime,jdbcType=OTHER},
+      <if test="positionname != null">
+        positionname = #{positionname,jdbcType=OTHER},
       </if>
-      <if test="minmoney != null">
-        minmoney = #{minmoney,jdbcType=OTHER},
+      <if test="companyid != null">
+        companyid = #{companyid,jdbcType=OTHER},
       </if>
-      <if test="maxmoney != null">
-        maxmoney = #{maxmoney,jdbcType=OTHER},
+      <if test="companyname != null">
+        companyname = #{companyname,jdbcType=OTHER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=OTHER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=OTHER},
       </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.zyh.entity.resume.ZyhResumeIntention">
-    update zyh_resume_intention
+  <update id="updateByPrimaryKey" parameterType="com.zyh.entity.user.ZyhUserPosition">
+    update zyh_user_position
     set userid = #{userid,jdbcType=OTHER},
-      workcity = #{workcity,jdbcType=OTHER},
-      position = #{position,jdbcType=OTHER},
+      positionid = #{positionid,jdbcType=OTHER},
       type = #{type,jdbcType=OTHER},
-      expectation = #{expectation,jdbcType=OTHER},
-      posttime = #{posttime,jdbcType=OTHER},
-      minmoney = #{minmoney,jdbcType=OTHER},
-      maxmoney = #{maxmoney,jdbcType=OTHER}
+      optime = #{optime,jdbcType=OTHER},
+      positionname = #{positionname,jdbcType=OTHER},
+      companyid = #{companyid,jdbcType=OTHER},
+      companyname = #{companyname,jdbcType=OTHER},
+      username = #{username,jdbcType=OTHER},
+      state = #{state,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>
