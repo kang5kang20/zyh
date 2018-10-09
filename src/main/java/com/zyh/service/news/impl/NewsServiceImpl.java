@@ -63,5 +63,10 @@ public class NewsServiceImpl implements INewsService {
 			int pageNum, int pageSize) throws Exception {
 		return zyhNewsMapper.selectByPageNumSize(example, pageNum, pageSize);
 	}
+
+	@Override
+	public ZyhNews queryNewsForSave(String newsid) throws Exception {
+		return zyhNewsMapper.selectByPrimaryKey(newsid);
+	}
 	
 }

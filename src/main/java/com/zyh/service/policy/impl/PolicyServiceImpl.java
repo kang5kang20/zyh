@@ -62,5 +62,10 @@ public class PolicyServiceImpl implements IPolicyService {
 			int pageNum, int pageSize) throws Exception {
 		return zyhPolicyMapper.selectByPageNumSize(example, pageNum, pageSize);
 	}
+
+	@Override
+	public ZyhPolicy queryPolicyForSave(String policyid) throws Exception {
+		return zyhPolicyMapper.selectByPrimaryKey(policyid);
+	}
 	
 }

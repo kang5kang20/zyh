@@ -19,7 +19,10 @@ import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.news.ZyhNewsExample;
 import com.zyh.entity.news.ZyhNewsExample.Criteria;
 import com.zyh.entity.policy.ZyhPolicy;
+import com.zyh.entity.usercollect.ZyhUserCollect;
+import com.zyh.entity.usercollect.ZyhUserCollectExample;
 import com.zyh.service.news.INewsService;
+import com.zyh.service.usercollect.IUserCollectService;
 
 
 @RestController
@@ -30,6 +33,9 @@ public class NewsController {
 	
 	@Autowired
 	private INewsService newsService;  
+	
+	@Autowired
+	private IUserCollectService userCollectService;
 	
 	/**
 	 * 
@@ -113,21 +119,37 @@ public class NewsController {
 		return responeToWeb;
 	}
 	
+	/**
+	 * 如果传入userid，返回用户是否收藏
+	 * @param json
+	 * @return
+	 */
 	@RequestMapping("/findNewsById.act")
 	public ResponeToWeb findNewsById(@RequestBody String json) {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			JsonNode node = om.readTree(json);
-			String newsid =  node.get("newsid").asText();
-			if (null != newsid && !"".equals(newsid)) {
-				ZyhNews news = newsService.queryNewsById(newsid);
+			NewsQueryVO queryvo = om.readValue(json, NewsQueryVO.class);
+			if (null != queryvo.getNewsid() && !"".equals(queryvo.getNewsid())) {
+				ZyhNews news = newsService.queryNewsById(queryvo.getNewsid());
 				if(null == news ){
 					responeToWeb.setMsg("查询失败,信息缺失");
 					responeToWeb.setSuccess(false);
 				}else{
 					map.put("result", news);
+					if(null != queryvo.getUserid() && !"".equals(queryvo.getUserid())){
+						ZyhUserCollectExample example = new ZyhUserCollectExample();
+						com.zyh.entity.usercollect.ZyhUserCollectExample.Criteria criteria = example.createCriteria();
+						criteria.andArticleidEqualTo(queryvo.getNewsid());
+						criteria.andUseridEqualTo(queryvo.getUserid());
+						List<ZyhUserCollect> collected = userCollectService.findUserCollectList(example);
+						if(null!=collected && collected.size()>0){
+							map.put("ifcollect", "1");
+						}else{
+							map.put("ifcollect", "0");
+						}
+					}
 					responeToWeb.setMsg("查询成功");
 					responeToWeb.setSuccess(true);
 					responeToWeb.setValue(map);

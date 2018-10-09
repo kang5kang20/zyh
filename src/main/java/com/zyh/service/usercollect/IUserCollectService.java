@@ -18,4 +18,6 @@ public interface IUserCollectService {
 	public void deleteUserCollect(String usercollectid) throws Exception;
 	
 	public List<ZyhUserCollect> findUserCollectList(ZyhUserCollectExample example) throws Exception;
+	
+	public void deleteUserCollectByExample(ZyhUserCollectExample example) throws Exception;
 }
