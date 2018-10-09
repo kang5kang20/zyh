@@ -16,4 +16,7 @@ public interface IClassTeacherService {
 	public ZyhClassTeacher findTeacherById(String teacherid) throws Exception;
 	
 	public List<ZyhClassTeacher> findTeacherList(ZyhClassTeacherExample example) throws Exception;
+	
+	public List<ZyhClassTeacher> findTeacherByPage(ZyhClassTeacherExample example,
+			int pageNum, int pageSize) throws Exception;
 }

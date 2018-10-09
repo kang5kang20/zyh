@@ -13,10 +13,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zyh.controller.news.vo.NewsQueryVO;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.news.ZyhNewsExample;
 import com.zyh.entity.news.ZyhNewsExample.Criteria;
+import com.zyh.entity.policy.ZyhPolicy;
 import com.zyh.service.news.INewsService;
 
 
@@ -189,6 +191,41 @@ public class NewsController {
 			criteria.andIfhomeEqualTo("1");
 			criteria.andIfgroundEqualTo("1");
 			List<ZyhNews> newslist = newsService.findNewsList(zyhNewsExample);
+			map.put("result", newslist);
+			responeToWeb.setMsg("查询成功");
+			responeToWeb.setSuccess(true);
+			responeToWeb.setValue(map);
+		} catch (Exception e) {
+			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg("查询失败");
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	
+	
+	@RequestMapping("/findNewsByPage.do")
+	public ResponeToWeb findNewsByPage(@RequestBody String json) {
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			NewsQueryVO queryvo = om.readValue(json, NewsQueryVO.class);
+			ZyhNewsExample zyhNewsExample = new ZyhNewsExample();
+			Criteria criteria = zyhNewsExample.createCriteria();
+			if(null!=queryvo.getTitle() && "" !=queryvo.getTitle()){
+				criteria.andTitleLike("%"+queryvo.getTitle()+"%");
+			}
+			if(null!=queryvo.getIfground() && "" !=queryvo.getIfground()){
+				criteria.andIfgroundEqualTo(queryvo.getIfground());
+			}
+			if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
+				criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
+			}
+			List<ZyhNews> newslist = 
+					newsService.findNewsListByPage(zyhNewsExample, 
+							queryvo.getPageNum(), queryvo.getPageSize());
 			map.put("result", newslist);
 			responeToWeb.setMsg("查询成功");
 			responeToWeb.setSuccess(true);

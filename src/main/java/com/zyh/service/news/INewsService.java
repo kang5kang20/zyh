@@ -5,6 +5,7 @@ import java.util.List;
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.news.ZyhNewsExample;
 
+
 public interface INewsService {
 	
 	public void addNews(ZyhNews zyhNews) throws Exception;
@@ -19,4 +20,6 @@ public interface INewsService {
 	
 	public List<ZyhNews> findNewsListToHome(ZyhNewsExample example) throws Exception;
 	
+	public List<ZyhNews> findNewsListByPage(ZyhNewsExample example,
+			int pageNum, int pageSize) throws Exception;
 }
