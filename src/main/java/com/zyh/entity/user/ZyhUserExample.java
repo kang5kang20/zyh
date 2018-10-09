@@ -803,6 +803,76 @@ public class ZyhUserExample {
             addCriterion("isenable not between", value1, value2, "isenable");
             return (Criteria) this;
         }
+
+        public Criteria andUsertypeIsNull() {
+            addCriterion("usertype is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeIsNotNull() {
+            addCriterion("usertype is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeEqualTo(String value) {
+            addCriterion("usertype =", value, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeNotEqualTo(String value) {
+            addCriterion("usertype <>", value, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeGreaterThan(String value) {
+            addCriterion("usertype >", value, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeGreaterThanOrEqualTo(String value) {
+            addCriterion("usertype >=", value, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeLessThan(String value) {
+            addCriterion("usertype <", value, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeLessThanOrEqualTo(String value) {
+            addCriterion("usertype <=", value, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeLike(String value) {
+            addCriterion("usertype like", value, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeNotLike(String value) {
+            addCriterion("usertype not like", value, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeIn(List<String> values) {
+            addCriterion("usertype in", values, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeNotIn(List<String> values) {
+            addCriterion("usertype not in", values, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeBetween(String value1, String value2) {
+            addCriterion("usertype between", value1, value2, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andUsertypeNotBetween(String value1, String value2) {
+            addCriterion("usertype not between", value1, value2, "usertype");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
