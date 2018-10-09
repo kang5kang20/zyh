@@ -26,6 +26,8 @@ public class ZyhUser implements Serializable {
     private String usertype;
 
     private static final long serialVersionUID = 1L;
+    
+    private String type;
 
     public String getId() {
         return id;
@@ -115,7 +117,16 @@ public class ZyhUser implements Serializable {
         this.usertype = usertype == null ? null : usertype.trim();
     }
 
-    @Override
+    
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(getClass().getSimpleName());
