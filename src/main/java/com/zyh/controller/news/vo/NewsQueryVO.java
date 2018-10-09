@@ -10,6 +10,10 @@ public class NewsQueryVO extends PageInfo{
 	private String ifground;
 	
 	private String createuser;
+	
+	private String userid;
+	
+	private String newsid;
 
 	public String getTitle() {
 		return title;
@@ -34,6 +38,20 @@ public class NewsQueryVO extends PageInfo{
 	public void setCreateuser(String createuser) {
 		this.createuser = createuser;
 	}
-	
-	
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getNewsid() {
+		return newsid;
+	}
+
+	public void setNewsid(String newsid) {
+		this.newsid = newsid;
+	}
 }

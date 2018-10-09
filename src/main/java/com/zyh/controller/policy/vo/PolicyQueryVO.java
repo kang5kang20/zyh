@@ -10,6 +10,10 @@ public class PolicyQueryVO extends PageInfo{
 	
 	private String createuser;
 	
+	private String userid;
+	
+	private String policyid;
+	
 	public String getTitle() {
 		return title;
 	}
@@ -32,6 +36,22 @@ public class PolicyQueryVO extends PageInfo{
 
 	public void setCreateuser(String createuser) {
 		this.createuser = createuser;
+	}
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	public String getPolicyid() {
+		return policyid;
+	}
+
+	public void setPolicyid(String policyid) {
+		this.policyid = policyid;
 	}
 	
 	

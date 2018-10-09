@@ -22,4 +22,6 @@ public interface INewsService {
 	
 	public List<ZyhNews> findNewsListByPage(ZyhNewsExample example,
 			int pageNum, int pageSize) throws Exception;
+	
+	public ZyhNews queryNewsForSave(String newsid) throws Exception;
 }

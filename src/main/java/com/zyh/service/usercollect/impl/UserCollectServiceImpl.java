@@ -42,5 +42,11 @@ public class UserCollectServiceImpl implements IUserCollectService {
 	public List<ZyhUserCollect> findUserCollectList(ZyhUserCollectExample example) throws Exception {
 		return zyhUserCollectMapper.selectByExample(example);
 	}
+
+	@Override
+	public void deleteUserCollectByExample(ZyhUserCollectExample example)
+			throws Exception {
+		zyhUserCollectMapper.deleteByExample(example);
+	}
 	
 }	
