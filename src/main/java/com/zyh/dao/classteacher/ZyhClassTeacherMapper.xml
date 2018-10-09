@@ -225,4 +225,14 @@
       readcount = #{readcount,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
+  
+  <select id="selectByPageNumSize"  resultMap="BaseResultMap">
+	   select
+	    <include refid="Base_Column_List" />
+	    from zyh_class_teacher
+	    <if test="_parameter != null">
+	      <include refid="Update_By_Example_Where_Clause" />
+	    </if>
+	    order by createtime desc
+  </select>
 </mapper>

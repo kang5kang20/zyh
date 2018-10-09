@@ -73,4 +73,10 @@ public class ClassCourseServiceImpl implements IClassCourseService {
 		return zyhClassCourseMapper.selectByExample(example);
 	}
 
+	@Override
+	public List<ZyhClassCourse> findCourseByPage(ZyhClassCourseExample example,
+			int pageNum, int pageSize) throws Exception {
+		return zyhClassCourseMapper.selectByPageNumSize(example, pageNum, pageSize);
+	}
+
 }

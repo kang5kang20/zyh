@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zyh.controller.policy.vo.PolicyQueryVO;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.policy.ZyhPolicy;
 import com.zyh.entity.policy.ZyhPolicyExample;
@@ -176,4 +177,37 @@ public class PolicyController {
 		return responeToWeb;
 	}
 	
+	
+	@RequestMapping("/findPolicyByPage.do")
+	public ResponeToWeb findPolicyByPage(@RequestBody String json) {
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			PolicyQueryVO queryvo = om.readValue(json, PolicyQueryVO.class);
+			ZyhPolicyExample zyhPolicyExample = new ZyhPolicyExample();
+			Criteria criteria = zyhPolicyExample.createCriteria();
+			if(null!=queryvo.getTitle() && "" !=queryvo.getTitle()){
+				criteria.andTitleLike("%"+queryvo.getTitle()+"%");
+			}
+			if(null!=queryvo.getIfground() && "" !=queryvo.getIfground()){
+				criteria.andIfgroundEqualTo(queryvo.getIfground());
+			}
+			if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
+				criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
+			}
+			List<ZyhPolicy> policylist = 
+					policyService.findPolicyListByPage(zyhPolicyExample, 
+							queryvo.getPageNum(), queryvo.getPageSize());
+			map.put("result", policylist);
+			responeToWeb.setMsg("查询成功");
+			responeToWeb.setSuccess(true);
+			responeToWeb.setValue(map);
+		} catch (Exception e) {
+			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg("查询失败");
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
 }

@@ -16,4 +16,7 @@ public interface IPolicyService {
 	public void updatePolicy(ZyhPolicy policy) throws Exception;
 	
 	public void deletePolicy(String policyid) throws Exception;
+	
+	public List<ZyhPolicy> findPolicyListByPage(ZyhPolicyExample example,
+			int pageNum, int pageSize) throws Exception;
 }

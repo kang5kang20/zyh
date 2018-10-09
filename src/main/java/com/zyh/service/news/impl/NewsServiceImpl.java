@@ -57,6 +57,11 @@ public class NewsServiceImpl implements INewsService {
 	public List<ZyhNews> findNewsListToHome(ZyhNewsExample example) throws Exception {
 		return zyhNewsMapper.selectByExample(example);
 	}
-	
 
+	@Override
+	public List<ZyhNews> findNewsListByPage(ZyhNewsExample example,
+			int pageNum, int pageSize) throws Exception {
+		return zyhNewsMapper.selectByPageNumSize(example, pageNum, pageSize);
+	}
+	
 }

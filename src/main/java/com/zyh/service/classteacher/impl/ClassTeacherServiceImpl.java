@@ -47,5 +47,12 @@ public class ClassTeacherServiceImpl implements IClassTeacherService {
 			throws Exception {
 		return zyhClassTeacherMapper.selectByExample(example);
 	}
+
+	@Override
+	public List<ZyhClassTeacher> findTeacherByPage(
+			ZyhClassTeacherExample example, int pageNum, int pageSize)
+			throws Exception {
+		return zyhClassTeacherMapper.selectByPageNumSize(example, pageNum, pageSize);
+	}
 	
 }

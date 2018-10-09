@@ -16,4 +16,7 @@ public interface IClassCourseService {
 	public ZyhClassCourse findCourseById(String courseid) throws Exception;
 	
 	public List<ZyhClassCourse> findCourseList(ZyhClassCourseExample example) throws Exception;
+	
+	public List<ZyhClassCourse> findCourseByPage(ZyhClassCourseExample example,
+			int pageNum, int pageSize) throws Exception;
 }

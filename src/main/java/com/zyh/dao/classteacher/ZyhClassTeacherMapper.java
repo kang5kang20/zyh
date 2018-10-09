@@ -1,9 +1,11 @@
 package com.zyh.dao.classteacher;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.zyh.entity.classteacher.ZyhClassTeacher;
 import com.zyh.entity.classteacher.ZyhClassTeacherExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ZyhClassTeacherMapper {
     long countByExample(ZyhClassTeacherExample example);
@@ -27,4 +29,9 @@ public interface ZyhClassTeacherMapper {
     int updateByPrimaryKeySelective(ZyhClassTeacher record);
 
     int updateByPrimaryKey(ZyhClassTeacher record);
+    
+    List<ZyhClassTeacher> selectByPageNumSize(
+            @Param("example") ZyhClassTeacherExample example,
+            @Param("pageNumKey") int pageNum, 
+            @Param("pageSizeKey") int pageSize);
 }

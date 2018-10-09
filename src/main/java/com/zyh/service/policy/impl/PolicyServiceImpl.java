@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zyh.controller.policy.vo.PolicyQueryVO;
 import com.zyh.dao.policy.ZyhPolicyMapper;
 import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.policy.ZyhPolicy;
@@ -54,6 +55,12 @@ public class PolicyServiceImpl implements IPolicyService {
 	@Override
 	public void deletePolicy(String policyid) throws Exception {
 		zyhPolicyMapper.deleteByPrimaryKey(policyid);
+	}
+
+	@Override
+	public List<ZyhPolicy> findPolicyListByPage(ZyhPolicyExample example,
+			int pageNum, int pageSize) throws Exception {
+		return zyhPolicyMapper.selectByPageNumSize(example, pageNum, pageSize);
 	}
 	
 }

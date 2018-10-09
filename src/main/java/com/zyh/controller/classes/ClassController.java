@@ -1,7 +1,9 @@
 package com.zyh.controller.classes;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,10 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zyh.controller.classes.vo.CourseQueryVO;
+import com.zyh.controller.classes.vo.TeacherQueryVO;
 import com.zyh.entity.classcourse.ZyhClassCourse;
 import com.zyh.entity.classcourse.ZyhClassCourseExample;
 import com.zyh.entity.classcourse.ZyhClassCourseExample.Criteria;
 import com.zyh.entity.classteacher.ZyhClassTeacher;
+import com.zyh.entity.classteacher.ZyhClassTeacherExample;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.service.classcourse.IClassCourseService;
 import com.zyh.service.classteacher.IClassTeacherService;
@@ -206,4 +211,74 @@ public class ClassController {
 		return responeToWeb;
 	}
 	
+	/**
+	 * 老师分页查询
+	 * @param json
+	 * @return
+	 */
+	@RequestMapping("/findTeacherByPage.do")
+	public ResponeToWeb findTeacherByPage(@RequestBody String json) {
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			TeacherQueryVO queryvo = om.readValue(json, TeacherQueryVO.class);
+			ZyhClassTeacherExample example = new ZyhClassTeacherExample();
+			com.zyh.entity.classteacher.ZyhClassTeacherExample.Criteria criteria = example.createCriteria();
+			if(null!=queryvo.getName() && "" !=queryvo.getName()){
+				criteria.andNameLike("%"+queryvo.getName()+"%");
+			}
+			if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
+				criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
+			}
+			List<ZyhClassTeacher> teacherlist = 
+					classTeacherService.findTeacherByPage(example, 
+							queryvo.getPageNum(), queryvo.getPageSize());
+			map.put("result", teacherlist);
+			responeToWeb.setMsg("查询成功");
+			responeToWeb.setSuccess(true);
+			responeToWeb.setValue(map);
+		} catch (Exception e) {
+			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg("查询失败");
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+
+	/**
+	 * 课程分页查询
+	 * @param json
+	 * @return
+	 */
+	@RequestMapping("/findCourseByPage.do")
+	public ResponeToWeb findCourseByPage(@RequestBody String json) {
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			CourseQueryVO queryvo = om.readValue(json, CourseQueryVO.class);
+			ZyhClassCourseExample example = new ZyhClassCourseExample();
+			Criteria criteria = example.createCriteria();
+			if(null!=queryvo.getTitle() && "" !=queryvo.getTitle()){
+				criteria.andTitleLike("%"+queryvo.getTitle()+"%");
+			}
+			if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
+				criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
+			}
+			List<ZyhClassCourse> courselist = 
+					classCourseService.findCourseByPage(example, 
+							queryvo.getPageNum(), queryvo.getPageSize());
+			map.put("result", courselist);
+			responeToWeb.setMsg("查询成功");
+			responeToWeb.setSuccess(true);
+			responeToWeb.setValue(map);
+		} catch (Exception e) {
+			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg("查询失败");
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
 }
