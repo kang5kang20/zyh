@@ -22,10 +22,12 @@ public class ZyhUser implements Serializable {
     private String note;
 
     private String isenable;
-    
-    private String type;
+
+    private String usertype;
 
     private static final long serialVersionUID = 1L;
+    
+    private String type;
 
     public String getId() {
         return id;
@@ -107,7 +109,14 @@ public class ZyhUser implements Serializable {
         this.isenable = isenable == null ? null : isenable.trim();
     }
 
-    
+    public String getUsertype() {
+        return usertype;
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype == null ? null : usertype.trim();
+    }
+
     
     public String getType() {
 		return type;
@@ -133,6 +142,7 @@ public class ZyhUser implements Serializable {
         sb.append(", headurl=").append(headurl);
         sb.append(", note=").append(note);
         sb.append(", isenable=").append(isenable);
+        sb.append(", usertype=").append(usertype);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
