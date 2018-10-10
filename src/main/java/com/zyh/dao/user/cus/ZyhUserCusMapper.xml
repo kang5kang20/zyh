@@ -3,7 +3,7 @@
 <mapper namespace="com.zyh.dao.user.cus.ZyhUserCusMapper">
 	<select id="selectUserByExample" resultType="com.zyh.entity.user.ZyhUser"
 		parameterType="map">
-		SELECT * from zyh_user t where (t.username = #{username} or
+		select * from zyh_user t where (t.username = #{username} or
 		t.phone = #{username}) and t.password =
 		#{password}
 	</select>
