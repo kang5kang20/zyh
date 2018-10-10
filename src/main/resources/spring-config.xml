@@ -101,27 +101,27 @@
                     </list>
                 </property>
             </bean>
-            -->
+             -->
         </mvc:message-converters>
     </mvc:annotation-driven>
 
 	<!-- 拦截器 -->
+	<!--  
 	<mvc:interceptors>
-		<!--<mvc:interceptor>
+		<mvc:interceptor>
 			<mvc:mapping path="/**/*.do" />
 			<mvc:exclude-mapping path="/**/login.do" />
 			<mvc:exclude-mapping path="/**/getcode.do" />
 			<mvc:exclude-mapping path="/**/userlogin.do" />
 			<mvc:exclude-mapping path="/transaction/*" />
 			<bean class="com.platform.interceptor.LoginInterceptor" />
-		</mvc:interceptor> -->
-		<!-- 
+		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*.do" />
 			<bean class="com.zyh.interceptor.HandlerInterceptorCust" />
 		</mvc:interceptor>
-		 -->
 	</mvc:interceptors>
+	-->
 	<!--定位静态资源 -->
 	<mvc:resources location="/WEB-INF/static/" mapping="/static/**" />
 
