@@ -56,7 +56,7 @@ public class ClassCourseServiceImpl implements IClassCourseService {
 	}
 
 	@Override
-	public ZyhClassCourse findCourseById(String courseid) throws Exception {
+	public ZyhClassCourse queryCourseById(String courseid) throws Exception {
 		//记录点击次数
 		ZyhClassCourse course = zyhClassCourseMapper.selectByPrimaryKey(courseid);
 		if(null == course || "0".equals(course.getIfground())){
@@ -77,6 +77,11 @@ public class ClassCourseServiceImpl implements IClassCourseService {
 	public List<ZyhClassCourse> findCourseByPage(ZyhClassCourseExample example,
 			int pageNum, int pageSize) throws Exception {
 		return zyhClassCourseMapper.selectByPageNumSize(example, pageNum, pageSize);
+	}
+
+	@Override
+	public ZyhClassCourse queryCourseForSave(String courseid) throws Exception {
+		return zyhClassCourseMapper.selectByPrimaryKey(courseid);
 	}
 
 }

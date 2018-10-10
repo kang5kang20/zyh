@@ -38,7 +38,7 @@ public class ClassTeacherServiceImpl implements IClassTeacherService {
 	}
 
 	@Override
-	public ZyhClassTeacher findTeacherById(String teacherid) throws Exception {
+	public ZyhClassTeacher queryTeacherById(String teacherid) throws Exception {
 		return zyhClassTeacherMapper.selectByPrimaryKey(teacherid);
 	}
 

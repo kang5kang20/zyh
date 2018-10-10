@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.usercollect.vo.UserCollectSearchVO;
+import com.zyh.entity.classcourse.ZyhClassCourse;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.policy.ZyhPolicy;
 import com.zyh.entity.usercollect.ZyhUserCollect;
 import com.zyh.entity.usercollect.ZyhUserCollectExample;
 import com.zyh.entity.usercollect.ZyhUserCollectExample.Criteria;
+import com.zyh.service.classcourse.IClassCourseService;
 import com.zyh.service.news.INewsService;
 import com.zyh.service.policy.IPolicyService;
 import com.zyh.service.usercollect.IUserCollectService;
@@ -39,6 +41,9 @@ public class UserCollectController {
 	@Autowired
 	private IPolicyService policyService;
 	
+	@Autowired
+	private IClassCourseService classCourseService;
+	
 	/**
 	 * 收藏文章
 	 * @param json
@@ -50,7 +55,62 @@ public class UserCollectController {
 		ObjectMapper om = new ObjectMapper();
 		try {
 			ZyhUserCollect usercollect = om.readValue(json, ZyhUserCollect.class);
-			if (null != usercollect) {
+			if (null != usercollect && null!=usercollect.getArticleid() &&
+					!"".equals(usercollect.getArticleid()) &&
+					null!=usercollect.getUserid() && !"".equals(usercollect.getUserid()) 
+					&& null!=usercollect.getArttype() && !"".equals(usercollect.getArttype())) {
+				//根据用户和文章的id进行查询，不允许重复收藏
+				ZyhUserCollectExample example = new ZyhUserCollectExample();
+				Criteria criteria = example.createCriteria();
+				criteria.andArticleidEqualTo(usercollect.getArticleid());
+				criteria.andUseridEqualTo(usercollect.getUserid());
+				criteria.andArttypeEqualTo(usercollect.getArttype());
+				List<ZyhUserCollect> collected = userCollectService.findUserCollectList(example);
+				if(null!=collected && collected.size()>0){
+					responeToWeb.setMsg("收藏失败,重复收藏");
+					responeToWeb.setSuccess(false);
+					return responeToWeb;
+				}
+				//收藏新闻文章、政策解读文章
+				//收藏课程
+				if("1".equals(usercollect.getArttype())){
+					ZyhNews news = newsService.queryNewsForSave(usercollect.getArticleid());
+					if(null!=news){
+						usercollect.setImgurl((null==news.getImgurl()||"".equals(news.getImgurl()))?"":news.getImgurl());
+						usercollect.setTitle(news.getTitle());
+						usercollect.setPubtime(news.getPubtime());
+					}else{
+						responeToWeb.setMsg("收藏失败,信息缺失");
+						responeToWeb.setSuccess(false);
+						return responeToWeb;
+					}
+				}else if("2".equals(usercollect.getArttype())){
+					ZyhPolicy policy = policyService.queryPolicyForSave(usercollect.getArticleid());
+					if(null!=policy){
+						usercollect.setImgurl((null==policy.getImgurl()||"".equals(policy.getImgurl()))?"":policy.getImgurl());
+						usercollect.setTitle(policy.getTitle());
+						usercollect.setPubtime(policy.getPubtime());
+					}else{
+						responeToWeb.setMsg("收藏失败,信息缺失");
+						responeToWeb.setSuccess(false);
+						return responeToWeb;
+					}
+				}else if("3".equals(usercollect.getArttype())){
+					ZyhClassCourse course = classCourseService.queryCourseForSave(usercollect.getArticleid());
+					if(null!=course){
+						usercollect.setImgurl((null==course.getImgurl()||"".equals(course.getImgurl()))?"":course.getImgurl());
+						usercollect.setTitle(course.getTitle());
+						usercollect.setPubtime(course.getCreatetime());
+					}else{
+						responeToWeb.setMsg("收藏失败,信息缺失");
+						responeToWeb.setSuccess(false);
+						return responeToWeb;
+					}
+				}else{
+					responeToWeb.setMsg("收藏失败,信息缺失");
+					responeToWeb.setSuccess(false);
+					return responeToWeb;
+				}
 				userCollectService.addUserCollect(usercollect);
 				responeToWeb.setMsg("收藏成功");
 				responeToWeb.setSuccess(true);
@@ -68,7 +128,7 @@ public class UserCollectController {
 	}
 	
 	/**
-	 * 
+	 * 取消收藏，可以传入收藏id或者userid加上新闻等id
 	 * @param json
 	 * @return
 	 */
@@ -77,10 +137,20 @@ public class UserCollectController {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			JsonNode node = om.readTree(json);
-			String usercollectid =  node.get("usercollectid").asText();
-			if (null != usercollectid && !"".equals(usercollectid)) {
-				userCollectService.deleteUserCollect(usercollectid);
+			UserCollectSearchVO searchvo = om.readValue(json, UserCollectSearchVO.class);
+			if (null != searchvo.getUserCollectid() && !"".equals(searchvo.getUserCollectid())) {
+				userCollectService.deleteUserCollect(searchvo.getUserCollectid());
+				responeToWeb.setMsg("取消收藏成功");
+				responeToWeb.setSuccess(true);
+				responeToWeb.setValue(null);
+			} else if(null != searchvo.getUserid() && 
+					!"".equals(searchvo.getUserid()) && null != searchvo.getArticleid() && 
+							!"".equals(searchvo.getArticleid())){
+				ZyhUserCollectExample example = new ZyhUserCollectExample();
+				Criteria criteria = example.createCriteria();
+				criteria.andUseridEqualTo(searchvo.getUserid());
+				criteria.andArticleidEqualTo(searchvo.getArticleid());
+				userCollectService.deleteUserCollectByExample(example);
 				responeToWeb.setMsg("取消收藏成功");
 				responeToWeb.setSuccess(true);
 				responeToWeb.setValue(null);
@@ -111,10 +181,56 @@ public class UserCollectController {
 			//标题查询
 			JsonNode node = om.readTree(json);
 			String userid =  node.get("userid").asText();
+			if(null==userid || "".equals(userid)){
+				responeToWeb.setMsg("查询失败,信息缺失");
+				responeToWeb.setSuccess(false);
+				return responeToWeb;
+			}
 			ZyhUserCollectExample zyhUserCollectExample = new ZyhUserCollectExample();
 			zyhUserCollectExample.setOrderByClause("arttype,pubtime desc");
 			Criteria criteria = zyhUserCollectExample.createCriteria();
 			criteria.andUseridEqualTo(userid);
+			//收藏类似是3是收藏的课程不是文章
+			criteria.andArttypeNotEqualTo("3");
+			List<ZyhUserCollect> collectlist = userCollectService.findUserCollectList(zyhUserCollectExample);
+			map.put("result", collectlist);
+			responeToWeb.setMsg("查询成功");
+			responeToWeb.setSuccess(true);
+			responeToWeb.setValue(map);
+		} catch (Exception e) {
+			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg("查询失败");
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	
+	/**
+	 * 查询用户收藏的文章
+	 * @param json
+	 * @return
+	 */
+	@RequestMapping("/findCollectCourseList.do")
+	public ResponeToWeb findCollectCourseList(@RequestBody String json) {
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			//标题查询
+			JsonNode node = om.readTree(json);
+			String userid =  node.get("userid").asText();
+			if(null==userid || "".equals(userid)){
+				responeToWeb.setMsg("查询失败,信息缺失");
+				responeToWeb.setSuccess(false);
+				return responeToWeb;
+			}
+			ZyhUserCollectExample zyhUserCollectExample = new ZyhUserCollectExample();
+			zyhUserCollectExample.setOrderByClause("arttype,pubtime desc");
+			Criteria criteria = zyhUserCollectExample.createCriteria();
+			criteria.andUseridEqualTo(userid);
+			//收藏类似是3是收藏的课程不是文章
+			criteria.andArttypeEqualTo("3");
 			List<ZyhUserCollect> collectlist = userCollectService.findUserCollectList(zyhUserCollectExample);
 			map.put("result", collectlist);
 			responeToWeb.setMsg("查询成功");

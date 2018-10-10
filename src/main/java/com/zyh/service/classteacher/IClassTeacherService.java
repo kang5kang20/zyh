@@ -13,7 +13,7 @@ public interface IClassTeacherService {
 	
 	public void deleteClassTeacher(String teacherid) throws Exception;
 	
-	public ZyhClassTeacher findTeacherById(String teacherid) throws Exception;
+	public ZyhClassTeacher queryTeacherById(String teacherid) throws Exception;
 	
 	public List<ZyhClassTeacher> findTeacherList(ZyhClassTeacherExample example) throws Exception;
 	
