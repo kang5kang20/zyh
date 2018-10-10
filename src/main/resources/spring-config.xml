@@ -115,10 +115,12 @@
 			<mvc:exclude-mapping path="/transaction/*" />
 			<bean class="com.platform.interceptor.LoginInterceptor" />
 		</mvc:interceptor> -->
+		<!-- 
 		<mvc:interceptor>
 			<mvc:mapping path="/**/*.do" />
 			<bean class="com.zyh.interceptor.HandlerInterceptorCust" />
 		</mvc:interceptor>
+		 -->
 	</mvc:interceptors>
 	<!--定位静态资源 -->
 	<mvc:resources location="/WEB-INF/static/" mapping="/static/**" />
