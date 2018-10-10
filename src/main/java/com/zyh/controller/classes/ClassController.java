@@ -240,10 +240,11 @@ public class ClassController {
 			if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
 				criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
 			}
-			List<ZyhClassTeacher> teacherlist = 
+			Map retmap = 
 					classTeacherService.findTeacherByPage(example, 
 							queryvo.getPageNum(), queryvo.getPageSize());
-			map.put("result", teacherlist);
+			map.put("result", retmap.get("retlist"));
+			map.put("pageResult", retmap.get("page"));
 			responeToWeb.setMsg("查询成功");
 			responeToWeb.setSuccess(true);
 			responeToWeb.setValue(map);
@@ -276,10 +277,11 @@ public class ClassController {
 			if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
 				criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
 			}
-			List<ZyhClassCourse> courselist = 
+			Map retmap = 
 					classCourseService.findCourseByPage(example, 
 							queryvo.getPageNum(), queryvo.getPageSize());
-			map.put("result", courselist);
+			map.put("result", retmap.get("retlist"));
+			map.put("pageResult", retmap.get("page"));
 			responeToWeb.setMsg("查询成功");
 			responeToWeb.setSuccess(true);
 			responeToWeb.setValue(map);

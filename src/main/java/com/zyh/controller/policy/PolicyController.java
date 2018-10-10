@@ -218,10 +218,11 @@ public class PolicyController {
 			if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
 				criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
 			}
-			List<ZyhPolicy> policylist = 
+			Map retmap = 
 					policyService.findPolicyListByPage(zyhPolicyExample, 
 							queryvo.getPageNum(), queryvo.getPageSize());
-			map.put("result", policylist);
+			map.put("result", retmap.get("retlist"));
+			map.put("pageResult", retmap.get("page"));
 			responeToWeb.setMsg("查询成功");
 			responeToWeb.setSuccess(true);
 			responeToWeb.setValue(map);

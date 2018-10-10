@@ -1,6 +1,7 @@
 package com.zyh.service.policy;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.policy.ZyhPolicy;
@@ -18,7 +19,7 @@ public interface IPolicyService {
 	
 	public void deletePolicy(String policyid) throws Exception;
 	
-	public List<ZyhPolicy> findPolicyListByPage(ZyhPolicyExample example,
+	public Map findPolicyListByPage(ZyhPolicyExample example,
 			int pageNum, int pageSize) throws Exception;
 	
 	public ZyhPolicy queryPolicyForSave(String policyid) throws Exception;

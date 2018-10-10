@@ -1,6 +1,8 @@
 package com.zyh.service.classteacher.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -9,6 +11,7 @@ import com.zyh.dao.classteacher.ZyhClassTeacherMapper;
 import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.classteacher.ZyhClassTeacher;
 import com.zyh.entity.classteacher.ZyhClassTeacherExample;
+import com.zyh.entity.common.Page;
 import com.zyh.service.classteacher.IClassTeacherService;
 
 @Service("classTeacherService")
@@ -49,10 +52,16 @@ public class ClassTeacherServiceImpl implements IClassTeacherService {
 	}
 
 	@Override
-	public List<ZyhClassTeacher> findTeacherByPage(
+	public Map findTeacherByPage(
 			ZyhClassTeacherExample example, int pageNum, int pageSize)
 			throws Exception {
-		return zyhClassTeacherMapper.selectByPageNumSize(example, pageNum, pageSize);
+		Map map = new HashMap();
+		map.put("retlist", zyhClassTeacherMapper.selectByPageNumSize(example, pageNum, pageSize));
+		Page page = new Page();
+		page.setPageNum(pageNum);
+		page.setTotalRowCount(zyhClassTeacherMapper.countByExample(example));
+		map.put("page", page);
+		return map;
 	}
 	
 }
