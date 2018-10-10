@@ -1,6 +1,7 @@
 package com.zyh.service.classcourse;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zyh.entity.classcourse.ZyhClassCourse;
 import com.zyh.entity.classcourse.ZyhClassCourseExample;
@@ -18,7 +19,7 @@ public interface IClassCourseService {
 	
 	public List<ZyhClassCourse> findCourseList(ZyhClassCourseExample example) throws Exception;
 	
-	public List<ZyhClassCourse> findCourseByPage(ZyhClassCourseExample example,
+	public Map findCourseByPage(ZyhClassCourseExample example,
 			int pageNum, int pageSize) throws Exception;
 	
 	public ZyhClassCourse queryCourseForSave(String courseid) throws Exception;

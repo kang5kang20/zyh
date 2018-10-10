@@ -1,12 +1,15 @@
 package com.zyh.service.news.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zyh.dao.news.ZyhNewsMapper;
 import com.zyh.dao.util.UUidUtil;
+import com.zyh.entity.common.Page;
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.news.ZyhNewsExample;
 import com.zyh.service.news.INewsService;
@@ -59,9 +62,15 @@ public class NewsServiceImpl implements INewsService {
 	}
 
 	@Override
-	public List<ZyhNews> findNewsListByPage(ZyhNewsExample example,
+	public Map findNewsListByPage(ZyhNewsExample example,
 			int pageNum, int pageSize) throws Exception {
-		return zyhNewsMapper.selectByPageNumSize(example, pageNum, pageSize);
+		Map map = new HashMap();
+		map.put("retlist", zyhNewsMapper.selectByPageNumSize(example, pageNum, pageSize));
+		Page page = new Page();
+		page.setPageNum(pageNum);
+		page.setTotalRowCount(zyhNewsMapper.countByExample(example));
+		map.put("page", page);
+		return map;
 	}
 
 	@Override

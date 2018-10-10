@@ -1,6 +1,8 @@
 package com.zyh.service.classcourse.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,6 +13,7 @@ import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.classcourse.ZyhClassCourse;
 import com.zyh.entity.classcourse.ZyhClassCourseExample;
 import com.zyh.entity.classteacher.ZyhClassTeacher;
+import com.zyh.entity.common.Page;
 import com.zyh.service.classcourse.IClassCourseService;
 
 @Service("classCourseService")
@@ -74,9 +77,15 @@ public class ClassCourseServiceImpl implements IClassCourseService {
 	}
 
 	@Override
-	public List<ZyhClassCourse> findCourseByPage(ZyhClassCourseExample example,
+	public Map findCourseByPage(ZyhClassCourseExample example,
 			int pageNum, int pageSize) throws Exception {
-		return zyhClassCourseMapper.selectByPageNumSize(example, pageNum, pageSize);
+		Map map = new HashMap();
+		map.put("retlist", zyhClassCourseMapper.selectByPageNumSize(example, pageNum, pageSize));
+		Page page = new Page();
+		page.setPageNum(pageNum);
+		page.setTotalRowCount(zyhClassCourseMapper.countByExample(example));
+		map.put("page", page);
+		return map;
 	}
 
 	@Override

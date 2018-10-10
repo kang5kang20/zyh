@@ -1,6 +1,7 @@
 package com.zyh.service.news;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.news.ZyhNewsExample;
@@ -20,8 +21,9 @@ public interface INewsService {
 	
 	public List<ZyhNews> findNewsListToHome(ZyhNewsExample example) throws Exception;
 	
-	public List<ZyhNews> findNewsListByPage(ZyhNewsExample example,
+	public Map findNewsListByPage(ZyhNewsExample example,
 			int pageNum, int pageSize) throws Exception;
 	
 	public ZyhNews queryNewsForSave(String newsid) throws Exception;
+	
 }

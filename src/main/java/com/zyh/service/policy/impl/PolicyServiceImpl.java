@@ -1,6 +1,8 @@
 package com.zyh.service.policy.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.zyh.controller.policy.vo.PolicyQueryVO;
 import com.zyh.dao.policy.ZyhPolicyMapper;
 import com.zyh.dao.util.UUidUtil;
+import com.zyh.entity.common.Page;
 import com.zyh.entity.policy.ZyhPolicy;
 import com.zyh.entity.policy.ZyhPolicyExample;
 import com.zyh.service.policy.IPolicyService;
@@ -58,9 +61,15 @@ public class PolicyServiceImpl implements IPolicyService {
 	}
 
 	@Override
-	public List<ZyhPolicy> findPolicyListByPage(ZyhPolicyExample example,
+	public Map findPolicyListByPage(ZyhPolicyExample example,
 			int pageNum, int pageSize) throws Exception {
-		return zyhPolicyMapper.selectByPageNumSize(example, pageNum, pageSize);
+		Map map = new HashMap();
+		map.put("retlist", zyhPolicyMapper.selectByPageNumSize(example, pageNum, pageSize));
+		Page page = new Page();
+		page.setPageNum(pageNum);
+		page.setTotalRowCount(zyhPolicyMapper.countByExample(example));
+		map.put("page", page);
+		return map;
 	}
 
 	@Override

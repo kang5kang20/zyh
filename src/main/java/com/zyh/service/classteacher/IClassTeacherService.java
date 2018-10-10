@@ -1,6 +1,7 @@
 package com.zyh.service.classteacher;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zyh.entity.classteacher.ZyhClassTeacher;
 import com.zyh.entity.classteacher.ZyhClassTeacherExample;
@@ -17,6 +18,6 @@ public interface IClassTeacherService {
 	
 	public List<ZyhClassTeacher> findTeacherList(ZyhClassTeacherExample example) throws Exception;
 	
-	public List<ZyhClassTeacher> findTeacherByPage(ZyhClassTeacherExample example,
+	public Map findTeacherByPage(ZyhClassTeacherExample example,
 			int pageNum, int pageSize) throws Exception;
 }

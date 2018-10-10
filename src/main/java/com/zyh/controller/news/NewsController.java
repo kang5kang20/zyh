@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.news.vo.NewsQueryVO;
+import com.zyh.entity.common.Page;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.news.ZyhNewsExample;
@@ -245,10 +246,11 @@ public class NewsController {
 			if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
 				criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
 			}
-			List<ZyhNews> newslist = 
+			Map retmap = 
 					newsService.findNewsListByPage(zyhNewsExample, 
 							queryvo.getPageNum(), queryvo.getPageSize());
-			map.put("result", newslist);
+			map.put("result", retmap.get("retlist"));
+			map.put("pageResult", retmap.get("page"));
 			responeToWeb.setMsg("查询成功");
 			responeToWeb.setSuccess(true);
 			responeToWeb.setValue(map);
