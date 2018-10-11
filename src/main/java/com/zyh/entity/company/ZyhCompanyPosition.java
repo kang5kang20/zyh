@@ -20,9 +20,9 @@ public class ZyhCompanyPosition implements Serializable {
 
     private String moneyarea;
 
-    private String desc;
+    private String desct;
 
-    private String require;
+    private String required;
 
     private Date optime;
 
@@ -96,20 +96,20 @@ public class ZyhCompanyPosition implements Serializable {
         this.moneyarea = moneyarea == null ? null : moneyarea.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDesct() {
+        return desct;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDesct(String desct) {
+        this.desct = desct == null ? null : desct.trim();
     }
 
-    public String getRequire() {
-        return require;
+    public String getRequired() {
+        return required;
     }
 
-    public void setRequire(String require) {
-        this.require = require == null ? null : require.trim();
+    public void setRequired(String required) {
+        this.required = required == null ? null : required.trim();
     }
 
     public Date getOptime() {
@@ -150,8 +150,8 @@ public class ZyhCompanyPosition implements Serializable {
         sb.append(", fixyear=").append(fixyear);
         sb.append(", maxage=").append(maxage);
         sb.append(", moneyarea=").append(moneyarea);
-        sb.append(", desc=").append(desc);
-        sb.append(", require=").append(require);
+        sb.append(", desct=").append(desct);
+        sb.append(", required=").append(required);
         sb.append(", optime=").append(optime);
         sb.append(", minmoney=").append(minmoney);
         sb.append(", maxmoney=").append(maxmoney);

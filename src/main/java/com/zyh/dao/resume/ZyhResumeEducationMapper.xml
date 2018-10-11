@@ -9,7 +9,7 @@
     <result column="category" jdbcType="OTHER" property="category" />
     <result column="major" jdbcType="OTHER" property="major" />
     <result column="edstate" jdbcType="OTHER" property="edstate" />
-    <result column="desc" jdbcType="OTHER" property="desc" />
+    <result column="desct" jdbcType="OTHER" property="desct" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userid, school, edtime, category, major, edstate, desc
+    id, userid, school, edtime, category, major, edstate, desct
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeEducationExample" resultMap="BaseResultMap">
     select
@@ -105,10 +105,10 @@
   <insert id="insert" parameterType="com.zyh.entity.resume.ZyhResumeEducation">
     insert into zyh_resume_education (id, userid, school, 
       edtime, category, major, 
-      edstate, desc)
+      edstate, desct)
     values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{school,jdbcType=OTHER}, 
       #{edtime,jdbcType=OTHER}, #{category,jdbcType=OTHER}, #{major,jdbcType=OTHER}, 
-      #{edstate,jdbcType=OTHER}, #{desc,jdbcType=OTHER})
+      #{edstate,jdbcType=OTHER}, #{desct,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeEducation">
     insert into zyh_resume_education
@@ -134,8 +134,8 @@
       <if test="edstate != null">
         edstate,
       </if>
-      <if test="desc != null">
-        desc,
+      <if test="desct != null">
+        desct,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -160,8 +160,8 @@
       <if test="edstate != null">
         #{edstate,jdbcType=OTHER},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=OTHER},
+      <if test="desct != null">
+        #{desct,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -195,8 +195,8 @@
       <if test="record.edstate != null">
         edstate = #{record.edstate,jdbcType=OTHER},
       </if>
-      <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=OTHER},
+      <if test="record.desct != null">
+        desct = #{record.desct,jdbcType=OTHER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -212,7 +212,7 @@
       category = #{record.category,jdbcType=OTHER},
       major = #{record.major,jdbcType=OTHER},
       edstate = #{record.edstate,jdbcType=OTHER},
-      desc = #{record.desc,jdbcType=OTHER}
+      desct = #{record.desct,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -238,8 +238,8 @@
       <if test="edstate != null">
         edstate = #{edstate,jdbcType=OTHER},
       </if>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=OTHER},
+      <if test="desct != null">
+        desct = #{desct,jdbcType=OTHER},
       </if>
     </set>
     where id = #{id,jdbcType=OTHER}
@@ -252,7 +252,7 @@
       category = #{category,jdbcType=OTHER},
       major = #{major,jdbcType=OTHER},
       edstate = #{edstate,jdbcType=OTHER},
-      desc = #{desc,jdbcType=OTHER}
+      desct = #{desct,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>

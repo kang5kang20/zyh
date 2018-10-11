@@ -1,11 +1,15 @@
 package com.zyh.service.company.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zyh.dao.company.ZyhCompanyPositionMapper;
+import com.zyh.dao.util.UUidUtil;
+import com.zyh.entity.common.Page;
 import com.zyh.entity.company.ZyhCompanyPosition;
 import com.zyh.entity.company.ZyhCompanyPositionExample;
 import com.zyh.service.company.ICompanyPositionService;
@@ -19,6 +23,9 @@ public class CompanyPositionServiceImpl implements ICompanyPositionService{
 
 	@Override
 	public void addCompanyPosition(ZyhCompanyPosition zyhCompanyPosition) throws Exception {
+		if (null==zyhCompanyPosition.getId()||"".equals(zyhCompanyPosition.getId())) {
+			zyhCompanyPosition.setId(UUidUtil.getUUid());
+		}
 		zyhCompanyPositionMapper.insertSelective(zyhCompanyPosition);
 	}
 
@@ -49,5 +56,19 @@ public class CompanyPositionServiceImpl implements ICompanyPositionService{
 	public void delCompanyPositionByExample(ZyhCompanyPositionExample zyhCompanyPositionExample) throws Exception {
 		zyhCompanyPositionMapper.deleteByExample(zyhCompanyPositionExample);
 	}
+
+	@Override
+	public Map<String, Object> selectCompanyPositionByPage(ZyhCompanyPositionExample zyhCompanyPositionExample,
+			int pageNum, int pageSize) throws Exception {
+		Map<String, Object> map  = new HashMap<>();
+		List<ZyhCompanyPosition> list = zyhCompanyPositionMapper.selectByPage(zyhCompanyPositionExample, pageNum, pageSize);
+		map.put("result", list);
+		Page page = new Page();
+		page.setPageNum(pageNum);
+			page.setTotalRowCount(zyhCompanyPositionMapper.countByExample(zyhCompanyPositionExample));
+		map.put("pageResult",page);
+		return map;
+	}
+	
 	
 }

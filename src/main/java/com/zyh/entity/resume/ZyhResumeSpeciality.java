@@ -11,7 +11,7 @@ public class ZyhResumeSpeciality implements Serializable {
 
     private String gettime;
 
-    private String desc;
+    private String desct;
 
     private static final long serialVersionUID = 1L;
 
@@ -47,12 +47,12 @@ public class ZyhResumeSpeciality implements Serializable {
         this.gettime = gettime == null ? null : gettime.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDesct() {
+        return desct;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDesct(String desct) {
+        this.desct = desct == null ? null : desct.trim();
     }
 
     @Override
@@ -65,7 +65,7 @@ public class ZyhResumeSpeciality implements Serializable {
         sb.append(", userid=").append(userid);
         sb.append(", certificate=").append(certificate);
         sb.append(", gettime=").append(gettime);
-        sb.append(", desc=").append(desc);
+        sb.append(", desct=").append(desct);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

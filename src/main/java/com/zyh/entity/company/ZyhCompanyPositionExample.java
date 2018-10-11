@@ -665,143 +665,143 @@ public class ZyhCompanyPositionExample {
             return (Criteria) this;
         }
 
-        public Criteria andDescIsNull() {
-            addCriterion("desc is null");
+        public Criteria andDesctIsNull() {
+            addCriterion("desct is null");
             return (Criteria) this;
         }
 
-        public Criteria andDescIsNotNull() {
-            addCriterion("desc is not null");
+        public Criteria andDesctIsNotNull() {
+            addCriterion("desct is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDescEqualTo(String value) {
-            addCriterion("desc =", value, "desc");
+        public Criteria andDesctEqualTo(String value) {
+            addCriterion("desct =", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotEqualTo(String value) {
-            addCriterion("desc <>", value, "desc");
+        public Criteria andDesctNotEqualTo(String value) {
+            addCriterion("desct <>", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescGreaterThan(String value) {
-            addCriterion("desc >", value, "desc");
+        public Criteria andDesctGreaterThan(String value) {
+            addCriterion("desct >", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescGreaterThanOrEqualTo(String value) {
-            addCriterion("desc >=", value, "desc");
+        public Criteria andDesctGreaterThanOrEqualTo(String value) {
+            addCriterion("desct >=", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescLessThan(String value) {
-            addCriterion("desc <", value, "desc");
+        public Criteria andDesctLessThan(String value) {
+            addCriterion("desct <", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescLessThanOrEqualTo(String value) {
-            addCriterion("desc <=", value, "desc");
+        public Criteria andDesctLessThanOrEqualTo(String value) {
+            addCriterion("desct <=", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescLike(String value) {
-            addCriterion("desc like", value, "desc");
+        public Criteria andDesctLike(String value) {
+            addCriterion("desct like", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotLike(String value) {
-            addCriterion("desc not like", value, "desc");
+        public Criteria andDesctNotLike(String value) {
+            addCriterion("desct not like", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescIn(List<String> values) {
-            addCriterion("desc in", values, "desc");
+        public Criteria andDesctIn(List<String> values) {
+            addCriterion("desct in", values, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotIn(List<String> values) {
-            addCriterion("desc not in", values, "desc");
+        public Criteria andDesctNotIn(List<String> values) {
+            addCriterion("desct not in", values, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescBetween(String value1, String value2) {
-            addCriterion("desc between", value1, value2, "desc");
+        public Criteria andDesctBetween(String value1, String value2) {
+            addCriterion("desct between", value1, value2, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotBetween(String value1, String value2) {
-            addCriterion("desc not between", value1, value2, "desc");
+        public Criteria andDesctNotBetween(String value1, String value2) {
+            addCriterion("desct not between", value1, value2, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andRequireIsNull() {
-            addCriterion("require is null");
+        public Criteria andRequiredIsNull() {
+            addCriterion("required is null");
             return (Criteria) this;
         }
 
-        public Criteria andRequireIsNotNull() {
-            addCriterion("require is not null");
+        public Criteria andRequiredIsNotNull() {
+            addCriterion("required is not null");
             return (Criteria) this;
         }
 
-        public Criteria andRequireEqualTo(String value) {
-            addCriterion("require =", value, "require");
+        public Criteria andRequiredEqualTo(String value) {
+            addCriterion("required =", value, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireNotEqualTo(String value) {
-            addCriterion("require <>", value, "require");
+        public Criteria andRequiredNotEqualTo(String value) {
+            addCriterion("required <>", value, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireGreaterThan(String value) {
-            addCriterion("require >", value, "require");
+        public Criteria andRequiredGreaterThan(String value) {
+            addCriterion("required >", value, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireGreaterThanOrEqualTo(String value) {
-            addCriterion("require >=", value, "require");
+        public Criteria andRequiredGreaterThanOrEqualTo(String value) {
+            addCriterion("required >=", value, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireLessThan(String value) {
-            addCriterion("require <", value, "require");
+        public Criteria andRequiredLessThan(String value) {
+            addCriterion("required <", value, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireLessThanOrEqualTo(String value) {
-            addCriterion("require <=", value, "require");
+        public Criteria andRequiredLessThanOrEqualTo(String value) {
+            addCriterion("required <=", value, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireLike(String value) {
-            addCriterion("require like", value, "require");
+        public Criteria andRequiredLike(String value) {
+            addCriterion("required like", value, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireNotLike(String value) {
-            addCriterion("require not like", value, "require");
+        public Criteria andRequiredNotLike(String value) {
+            addCriterion("required not like", value, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireIn(List<String> values) {
-            addCriterion("require in", values, "require");
+        public Criteria andRequiredIn(List<String> values) {
+            addCriterion("required in", values, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireNotIn(List<String> values) {
-            addCriterion("require not in", values, "require");
+        public Criteria andRequiredNotIn(List<String> values) {
+            addCriterion("required not in", values, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireBetween(String value1, String value2) {
-            addCriterion("require between", value1, value2, "require");
+        public Criteria andRequiredBetween(String value1, String value2) {
+            addCriterion("required between", value1, value2, "required");
             return (Criteria) this;
         }
 
-        public Criteria andRequireNotBetween(String value1, String value2) {
-            addCriterion("require not between", value1, value2, "require");
+        public Criteria andRequiredNotBetween(String value1, String value2) {
+            addCriterion("required not between", value1, value2, "required");
             return (Criteria) this;
         }
 
