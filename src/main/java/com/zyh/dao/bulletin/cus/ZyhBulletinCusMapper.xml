@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyh.dao.bulletin.cus.ZyhBulletinCusMapper">
+  <resultMap id="BaseResultMap" type="com.zyh.entity.bulletin.ZyhBulletin">
+    <id column="id" jdbcType="OTHER" property="id" />
+    <result column="pubtime" jdbcType="OTHER" property="pubtime" />
+    <result column="imgurl" jdbcType="OTHER" property="imgurl" />
+    <result column="content" jdbcType="OTHER" property="content" />
+    <result column="title" jdbcType="OTHER" property="title" />
+    <result column="ifhome" jdbcType="OTHER" property="ifhome" />
+    <result column="createuser" jdbcType="OTHER" property="createuser" />
+    <result column="readcount" jdbcType="OTHER" property="readcount" />
+    <result column="ifsend" jdbcType="OTHER" property="ifsend" />
+  </resultMap>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, pubtime, imgurl, content, title, ifhome, createuser, readcount, ifsend
+  </sql>
+  
+    <select id="selectByPageNumSize"  resultMap="BaseResultMap">
+	   select
+	    <include refid="Base_Column_List" />
+	    from zyh_bulletin
+	    <if test="_parameter != null">
+	      <include refid="Update_By_Example_Where_Clause" />
+	    </if>
+	    order by pubtime desc
+  </select>
+</mapper>
