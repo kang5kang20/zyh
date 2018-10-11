@@ -7,7 +7,7 @@
     <result column="logo" jdbcType="OTHER" property="logo" />
     <result column="address" jdbcType="OTHER" property="address" />
     <result column="web" jdbcType="OTHER" property="web" />
-    <result column="desc" jdbcType="OTHER" property="desc" />
+    <result column="desct" jdbcType="OTHER" property="desct" />
     <result column="image" jdbcType="OTHER" property="image" />
     <result column="label" jdbcType="OTHER" property="label" />
     <result column="city" jdbcType="OTHER" property="city" />
@@ -74,7 +74,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, logo, address, web, desc, image, label, city, province, area, street
+    id, name, logo, address, web, desct, image, label, city, province, area, street
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.company.ZyhCompanyExample" resultMap="BaseResultMap">
     select
@@ -108,11 +108,11 @@
   </delete>
   <insert id="insert" parameterType="com.zyh.entity.company.ZyhCompany">
     insert into zyh_company (id, name, logo, address, 
-      web, desc, image, label, 
+      web, desct, image, label, 
       city, province, area, street
       )
     values (#{id,jdbcType=OTHER}, #{name,jdbcType=OTHER}, #{logo,jdbcType=OTHER}, #{address,jdbcType=OTHER}, 
-      #{web,jdbcType=OTHER}, #{desc,jdbcType=OTHER}, #{image,jdbcType=OTHER}, #{label,jdbcType=OTHER}, 
+      #{web,jdbcType=OTHER}, #{desct,jdbcType=OTHER}, #{image,jdbcType=OTHER}, #{label,jdbcType=OTHER}, 
       #{city,jdbcType=OTHER}, #{province,jdbcType=OTHER}, #{area,jdbcType=OTHER}, #{street,jdbcType=OTHER}
       )
   </insert>
@@ -134,8 +134,8 @@
       <if test="web != null">
         web,
       </if>
-      <if test="desc != null">
-        desc,
+      <if test="desct != null">
+        desct,
       </if>
       <if test="image != null">
         image,
@@ -172,8 +172,8 @@
       <if test="web != null">
         #{web,jdbcType=OTHER},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=OTHER},
+      <if test="desct != null">
+        #{desct,jdbcType=OTHER},
       </if>
       <if test="image != null">
         #{image,jdbcType=OTHER},
@@ -219,8 +219,8 @@
       <if test="record.web != null">
         web = #{record.web,jdbcType=OTHER},
       </if>
-      <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=OTHER},
+      <if test="record.desct != null">
+        desct = #{record.desct,jdbcType=OTHER},
       </if>
       <if test="record.image != null">
         image = #{record.image,jdbcType=OTHER},
@@ -252,7 +252,7 @@
       logo = #{record.logo,jdbcType=OTHER},
       address = #{record.address,jdbcType=OTHER},
       web = #{record.web,jdbcType=OTHER},
-      desc = #{record.desc,jdbcType=OTHER},
+      desct = #{record.desct,jdbcType=OTHER},
       image = #{record.image,jdbcType=OTHER},
       label = #{record.label,jdbcType=OTHER},
       city = #{record.city,jdbcType=OTHER},
@@ -278,8 +278,8 @@
       <if test="web != null">
         web = #{web,jdbcType=OTHER},
       </if>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=OTHER},
+      <if test="desct != null">
+        desct = #{desct,jdbcType=OTHER},
       </if>
       <if test="image != null">
         image = #{image,jdbcType=OTHER},
@@ -308,7 +308,7 @@
       logo = #{logo,jdbcType=OTHER},
       address = #{address,jdbcType=OTHER},
       web = #{web,jdbcType=OTHER},
-      desc = #{desc,jdbcType=OTHER},
+      desct = #{desct,jdbcType=OTHER},
       image = #{image,jdbcType=OTHER},
       label = #{label,jdbcType=OTHER},
       city = #{city,jdbcType=OTHER},

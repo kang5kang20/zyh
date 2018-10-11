@@ -20,6 +20,7 @@ import com.zyh.redis.RedisUtil;
 import com.zyh.service.sms.ISmsService;
 import com.zyh.service.user.ILoginService;
 import com.zyh.utils.DataAccuracyUtil;
+import com.zyh.utils.MD5Util;
 
 @Service("loginService")
 public class LoginServiceImpl implements ILoginService{
@@ -90,7 +91,7 @@ public class LoginServiceImpl implements ILoginService{
 		}
 		Map<String, Object> map =new HashMap<String, Object>();
 		map.put("username", username);
-		map.put("password", psword);
+		map.put("password", MD5Util.EncoderByMd5(psword));
 		List<ZyhUser> list = zyhUserCusMapper.selectUserByExample(map);
 		if (null!=list&&list.size()>0) {
 			zyhUser = list.get(0);

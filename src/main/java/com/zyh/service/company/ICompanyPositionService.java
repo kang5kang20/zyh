@@ -1,6 +1,7 @@
 package com.zyh.service.company;
 
 import java.util.List;
+import java.util.Map;
 
 import com.zyh.entity.company.ZyhCompanyPosition;
 import com.zyh.entity.company.ZyhCompanyPositionExample;
@@ -18,4 +19,6 @@ public interface ICompanyPositionService {
 	public void delCompanyPositionById(String id)throws Exception;
 	
 	public void delCompanyPositionByExample(ZyhCompanyPositionExample zyhCompanyPositionExample)throws Exception;
+	
+	public Map<String, Object> selectCompanyPositionByPage(ZyhCompanyPositionExample zyhCompanyPositionExample,int pageNum,int pageSize)throws Exception;
 }

@@ -6,25 +6,30 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface ZyhCompanyPositionMapper {
-    long countByExample(ZyhCompanyPositionExample example);
+	long countByExample(ZyhCompanyPositionExample example);
 
-    int deleteByExample(ZyhCompanyPositionExample example);
+	int deleteByExample(ZyhCompanyPositionExample example);
 
-    int deleteByPrimaryKey(String id);
+	int deleteByPrimaryKey(String id);
 
-    int insert(ZyhCompanyPosition record);
+	int insert(ZyhCompanyPosition record);
 
-    int insertSelective(ZyhCompanyPosition record);
+	int insertSelective(ZyhCompanyPosition record);
 
-    List<ZyhCompanyPosition> selectByExample(ZyhCompanyPositionExample example);
+	List<ZyhCompanyPosition> selectByExample(ZyhCompanyPositionExample example);
 
-    ZyhCompanyPosition selectByPrimaryKey(String id);
+	ZyhCompanyPosition selectByPrimaryKey(String id);
 
-    int updateByExampleSelective(@Param("record") ZyhCompanyPosition record, @Param("example") ZyhCompanyPositionExample example);
+	int updateByExampleSelective(@Param("record") ZyhCompanyPosition record,
+			@Param("example") ZyhCompanyPositionExample example);
 
-    int updateByExample(@Param("record") ZyhCompanyPosition record, @Param("example") ZyhCompanyPositionExample example);
+	int updateByExample(@Param("record") ZyhCompanyPosition record,
+			@Param("example") ZyhCompanyPositionExample example);
 
-    int updateByPrimaryKeySelective(ZyhCompanyPosition record);
+	int updateByPrimaryKeySelective(ZyhCompanyPosition record);
 
-    int updateByPrimaryKey(ZyhCompanyPosition record);
+	int updateByPrimaryKey(ZyhCompanyPosition record);
+
+	List<ZyhCompanyPosition> selectByPage(@Param("example") ZyhCompanyPositionExample example,
+			@Param("pageNumKey") int pageNum, @Param("pageSizeKey") int pageSize) throws Exception;
 }

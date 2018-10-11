@@ -17,7 +17,7 @@ public class ZyhResumeEducation implements Serializable {
 
     private String edstate;
 
-    private String desc;
+    private String desct;
 
     private static final long serialVersionUID = 1L;
 
@@ -77,12 +77,12 @@ public class ZyhResumeEducation implements Serializable {
         this.edstate = edstate == null ? null : edstate.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDesct() {
+        return desct;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDesct(String desct) {
+        this.desct = desct == null ? null : desct.trim();
     }
 
     @Override
@@ -98,7 +98,7 @@ public class ZyhResumeEducation implements Serializable {
         sb.append(", category=").append(category);
         sb.append(", major=").append(major);
         sb.append(", edstate=").append(edstate);
-        sb.append(", desc=").append(desc);
+        sb.append(", desct=").append(desct);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

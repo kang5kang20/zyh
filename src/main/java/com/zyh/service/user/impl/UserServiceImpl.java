@@ -9,6 +9,7 @@ import com.zyh.dao.user.ZyhUserMapper;
 import com.zyh.entity.user.ZyhUser;
 import com.zyh.entity.user.ZyhUserExample;
 import com.zyh.service.user.IUserService;
+import com.zyh.utils.MD5Util;
 
 @Service("userService")
 public class UserServiceImpl implements IUserService{
@@ -17,6 +18,10 @@ public class UserServiceImpl implements IUserService{
 	ZyhUserMapper zyhUserMapper;
 
 	public void addUser(ZyhUser user) throws Exception {
+		if (null!=user.getPassword()&&"".equals(user.getPassword())) {
+			String psMd5 = MD5Util.EncoderByMd5(user.getPassword());
+			user.setPassword(psMd5);
+		}
 		zyhUserMapper.insertSelective(user);
 	}
 

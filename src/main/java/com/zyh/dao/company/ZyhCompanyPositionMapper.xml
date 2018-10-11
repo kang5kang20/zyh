@@ -10,8 +10,8 @@
     <result column="fixyear" jdbcType="OTHER" property="fixyear" />
     <result column="maxage" jdbcType="OTHER" property="maxage" />
     <result column="moneyarea" jdbcType="OTHER" property="moneyarea" />
-    <result column="desc" jdbcType="OTHER" property="desc" />
-    <result column="require" jdbcType="OTHER" property="require" />
+    <result column="desct" jdbcType="OTHER" property="desct" />
+    <result column="required" jdbcType="OTHER" property="required" />
     <result column="optime" jdbcType="OTHER" property="optime" />
     <result column="minmoney" jdbcType="OTHER" property="minmoney" />
     <result column="maxmoney" jdbcType="OTHER" property="maxmoney" />
@@ -75,8 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, companyid, compnayname, positionname, workcity, fixyear, maxage, moneyarea, desc, 
-    require, optime, minmoney, maxmoney
+    id, companyid, compnayname, positionname, workcity, fixyear, maxage, moneyarea, desct, 
+    required, optime, minmoney, maxmoney
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.company.ZyhCompanyPositionExample" resultMap="BaseResultMap">
     select
@@ -111,13 +111,13 @@
   <insert id="insert" parameterType="com.zyh.entity.company.ZyhCompanyPosition">
     insert into zyh_company_position (id, companyid, compnayname, 
       positionname, workcity, fixyear, 
-      maxage, moneyarea, desc, 
-      require, optime, minmoney, 
+      maxage, moneyarea, desct, 
+      required, optime, minmoney, 
       maxmoney)
     values (#{id,jdbcType=OTHER}, #{companyid,jdbcType=OTHER}, #{compnayname,jdbcType=OTHER}, 
       #{positionname,jdbcType=OTHER}, #{workcity,jdbcType=OTHER}, #{fixyear,jdbcType=OTHER}, 
-      #{maxage,jdbcType=OTHER}, #{moneyarea,jdbcType=OTHER}, #{desc,jdbcType=OTHER}, 
-      #{require,jdbcType=OTHER}, #{optime,jdbcType=OTHER}, #{minmoney,jdbcType=OTHER}, 
+      #{maxage,jdbcType=OTHER}, #{moneyarea,jdbcType=OTHER}, #{desct,jdbcType=OTHER}, 
+      #{required,jdbcType=OTHER}, #{optime,jdbcType=OTHER}, #{minmoney,jdbcType=OTHER}, 
       #{maxmoney,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.company.ZyhCompanyPosition">
@@ -147,11 +147,11 @@
       <if test="moneyarea != null">
         moneyarea,
       </if>
-      <if test="desc != null">
-        desc,
+      <if test="desct != null">
+        desct,
       </if>
-      <if test="require != null">
-        require,
+      <if test="required != null">
+        required,
       </if>
       <if test="optime != null">
         optime,
@@ -188,11 +188,11 @@
       <if test="moneyarea != null">
         #{moneyarea,jdbcType=OTHER},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=OTHER},
+      <if test="desct != null">
+        #{desct,jdbcType=OTHER},
       </if>
-      <if test="require != null">
-        #{require,jdbcType=OTHER},
+      <if test="required != null">
+        #{required,jdbcType=OTHER},
       </if>
       <if test="optime != null">
         #{optime,jdbcType=OTHER},
@@ -238,11 +238,11 @@
       <if test="record.moneyarea != null">
         moneyarea = #{record.moneyarea,jdbcType=OTHER},
       </if>
-      <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=OTHER},
+      <if test="record.desct != null">
+        desct = #{record.desct,jdbcType=OTHER},
       </if>
-      <if test="record.require != null">
-        require = #{record.require,jdbcType=OTHER},
+      <if test="record.required != null">
+        required = #{record.required,jdbcType=OTHER},
       </if>
       <if test="record.optime != null">
         optime = #{record.optime,jdbcType=OTHER},
@@ -268,8 +268,8 @@
       fixyear = #{record.fixyear,jdbcType=OTHER},
       maxage = #{record.maxage,jdbcType=OTHER},
       moneyarea = #{record.moneyarea,jdbcType=OTHER},
-      desc = #{record.desc,jdbcType=OTHER},
-      require = #{record.require,jdbcType=OTHER},
+      desct = #{record.desct,jdbcType=OTHER},
+      required = #{record.required,jdbcType=OTHER},
       optime = #{record.optime,jdbcType=OTHER},
       minmoney = #{record.minmoney,jdbcType=OTHER},
       maxmoney = #{record.maxmoney,jdbcType=OTHER}
@@ -301,11 +301,11 @@
       <if test="moneyarea != null">
         moneyarea = #{moneyarea,jdbcType=OTHER},
       </if>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=OTHER},
+      <if test="desct != null">
+        desct = #{desct,jdbcType=OTHER},
       </if>
-      <if test="require != null">
-        require = #{require,jdbcType=OTHER},
+      <if test="required != null">
+        required = #{required,jdbcType=OTHER},
       </if>
       <if test="optime != null">
         optime = #{optime,jdbcType=OTHER},
@@ -328,11 +328,21 @@
       fixyear = #{fixyear,jdbcType=OTHER},
       maxage = #{maxage,jdbcType=OTHER},
       moneyarea = #{moneyarea,jdbcType=OTHER},
-      desc = #{desc,jdbcType=OTHER},
-      require = #{require,jdbcType=OTHER},
+      desct = #{desct,jdbcType=OTHER},
+      required = #{required,jdbcType=OTHER},
       optime = #{optime,jdbcType=OTHER},
       minmoney = #{minmoney,jdbcType=OTHER},
       maxmoney = #{maxmoney,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
+  
+  <select id="selectByPage"  resultMap="BaseResultMap">
+	   select
+	    <include refid="Base_Column_List" />
+	    from zyh_company_position
+	    <if test="_parameter != null">
+	      <include refid="Update_By_Example_Where_Clause" />
+	    </if>
+	    order by optime desc
+  </select>
 </mapper>

@@ -454,73 +454,73 @@ public class ZyhCompanyExample {
             return (Criteria) this;
         }
 
-        public Criteria andDescIsNull() {
-            addCriterion("desc is null");
+        public Criteria andDesctIsNull() {
+            addCriterion("desct is null");
             return (Criteria) this;
         }
 
-        public Criteria andDescIsNotNull() {
-            addCriterion("desc is not null");
+        public Criteria andDesctIsNotNull() {
+            addCriterion("desct is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDescEqualTo(String value) {
-            addCriterion("desc =", value, "desc");
+        public Criteria andDesctEqualTo(String value) {
+            addCriterion("desct =", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotEqualTo(String value) {
-            addCriterion("desc <>", value, "desc");
+        public Criteria andDesctNotEqualTo(String value) {
+            addCriterion("desct <>", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescGreaterThan(String value) {
-            addCriterion("desc >", value, "desc");
+        public Criteria andDesctGreaterThan(String value) {
+            addCriterion("desct >", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescGreaterThanOrEqualTo(String value) {
-            addCriterion("desc >=", value, "desc");
+        public Criteria andDesctGreaterThanOrEqualTo(String value) {
+            addCriterion("desct >=", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescLessThan(String value) {
-            addCriterion("desc <", value, "desc");
+        public Criteria andDesctLessThan(String value) {
+            addCriterion("desct <", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescLessThanOrEqualTo(String value) {
-            addCriterion("desc <=", value, "desc");
+        public Criteria andDesctLessThanOrEqualTo(String value) {
+            addCriterion("desct <=", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescLike(String value) {
-            addCriterion("desc like", value, "desc");
+        public Criteria andDesctLike(String value) {
+            addCriterion("desct like", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotLike(String value) {
-            addCriterion("desc not like", value, "desc");
+        public Criteria andDesctNotLike(String value) {
+            addCriterion("desct not like", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescIn(List<String> values) {
-            addCriterion("desc in", values, "desc");
+        public Criteria andDesctIn(List<String> values) {
+            addCriterion("desct in", values, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotIn(List<String> values) {
-            addCriterion("desc not in", values, "desc");
+        public Criteria andDesctNotIn(List<String> values) {
+            addCriterion("desct not in", values, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescBetween(String value1, String value2) {
-            addCriterion("desc between", value1, value2, "desc");
+        public Criteria andDesctBetween(String value1, String value2) {
+            addCriterion("desct between", value1, value2, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescNotBetween(String value1, String value2) {
-            addCriterion("desc not between", value1, value2, "desc");
+        public Criteria andDesctNotBetween(String value1, String value2) {
+            addCriterion("desct not between", value1, value2, "desct");
             return (Criteria) this;
         }
 

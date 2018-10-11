@@ -6,7 +6,7 @@
     <result column="userid" jdbcType="OTHER" property="userid" />
     <result column="certificate" jdbcType="OTHER" property="certificate" />
     <result column="gettime" jdbcType="OTHER" property="gettime" />
-    <result column="desc" jdbcType="OTHER" property="desc" />
+    <result column="desct" jdbcType="OTHER" property="desct" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -67,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userid, certificate, gettime, desc
+    id, userid, certificate, gettime, desct
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeSpecialityExample" resultMap="BaseResultMap">
     select
@@ -101,9 +101,9 @@
   </delete>
   <insert id="insert" parameterType="com.zyh.entity.resume.ZyhResumeSpeciality">
     insert into zyh_resume_speciality (id, userid, certificate, 
-      gettime, desc)
+      gettime, desct)
     values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{certificate,jdbcType=OTHER}, 
-      #{gettime,jdbcType=OTHER}, #{desc,jdbcType=OTHER})
+      #{gettime,jdbcType=OTHER}, #{desct,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeSpeciality">
     insert into zyh_resume_speciality
@@ -120,8 +120,8 @@
       <if test="gettime != null">
         gettime,
       </if>
-      <if test="desc != null">
-        desc,
+      <if test="desct != null">
+        desct,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -137,8 +137,8 @@
       <if test="gettime != null">
         #{gettime,jdbcType=OTHER},
       </if>
-      <if test="desc != null">
-        #{desc,jdbcType=OTHER},
+      <if test="desct != null">
+        #{desct,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -163,8 +163,8 @@
       <if test="record.gettime != null">
         gettime = #{record.gettime,jdbcType=OTHER},
       </if>
-      <if test="record.desc != null">
-        desc = #{record.desc,jdbcType=OTHER},
+      <if test="record.desct != null">
+        desct = #{record.desct,jdbcType=OTHER},
       </if>
     </set>
     <if test="_parameter != null">
@@ -177,7 +177,7 @@
       userid = #{record.userid,jdbcType=OTHER},
       certificate = #{record.certificate,jdbcType=OTHER},
       gettime = #{record.gettime,jdbcType=OTHER},
-      desc = #{record.desc,jdbcType=OTHER}
+      desct = #{record.desct,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -194,8 +194,8 @@
       <if test="gettime != null">
         gettime = #{gettime,jdbcType=OTHER},
       </if>
-      <if test="desc != null">
-        desc = #{desc,jdbcType=OTHER},
+      <if test="desct != null">
+        desct = #{desct,jdbcType=OTHER},
       </if>
     </set>
     where id = #{id,jdbcType=OTHER}
@@ -205,7 +205,7 @@
     set userid = #{userid,jdbcType=OTHER},
       certificate = #{certificate,jdbcType=OTHER},
       gettime = #{gettime,jdbcType=OTHER},
-      desc = #{desc,jdbcType=OTHER}
+      desct = #{desct,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>

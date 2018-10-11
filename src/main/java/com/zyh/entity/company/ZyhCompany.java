@@ -13,7 +13,7 @@ public class ZyhCompany implements Serializable {
 
     private String web;
 
-    private String desc;
+    private String desct;
 
     private String image;
 
@@ -69,12 +69,12 @@ public class ZyhCompany implements Serializable {
         this.web = web == null ? null : web.trim();
     }
 
-    public String getDesc() {
-        return desc;
+    public String getDesct() {
+        return desct;
     }
 
-    public void setDesc(String desc) {
-        this.desc = desc == null ? null : desc.trim();
+    public void setDesct(String desct) {
+        this.desct = desct == null ? null : desct.trim();
     }
 
     public String getImage() {
@@ -136,7 +136,7 @@ public class ZyhCompany implements Serializable {
         sb.append(", logo=").append(logo);
         sb.append(", address=").append(address);
         sb.append(", web=").append(web);
-        sb.append(", desc=").append(desc);
+        sb.append(", desct=").append(desct);
         sb.append(", image=").append(image);
         sb.append(", label=").append(label);
         sb.append(", city=").append(city);
