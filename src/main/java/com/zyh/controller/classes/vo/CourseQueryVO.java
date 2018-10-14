@@ -10,6 +10,8 @@ public class CourseQueryVO extends PageInfo{
 	private String userid;
 	
 	private String courseid;
+	
+	private String ifground;
 
 	public String getTitle() {
 		return title;
@@ -42,5 +44,14 @@ public class CourseQueryVO extends PageInfo{
 	public void setCourseid(String courseid) {
 		this.courseid = courseid;
 	}
+
+	public String getIfground() {
+		return ifground;
+	}
+
+	public void setIfground(String ifground) {
+		this.ifground = ifground;
+	}
+	
 	
 }

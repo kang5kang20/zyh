@@ -14,12 +14,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.policy.vo.PolicyQueryVO;
+import com.zyh.entity.classteacher.ZyhClassTeacher;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.policy.ZyhPolicy;
 import com.zyh.entity.policy.ZyhPolicyExample;
 import com.zyh.entity.policy.ZyhPolicyExample.Criteria;
 import com.zyh.entity.usercollect.ZyhUserCollect;
 import com.zyh.entity.usercollect.ZyhUserCollectExample;
+import com.zyh.service.classteacher.IClassTeacherService;
 import com.zyh.service.policy.IPolicyService;
 import com.zyh.service.usercollect.IUserCollectService;
 
@@ -34,6 +36,9 @@ public class PolicyController {
 	
 	@Autowired
 	private IUserCollectService userCollectService; 
+	
+	@Autowired
+	private IClassTeacherService classTeacherService;  
 	
 	/**
 	 * 如果传入userid，返回用户是否收藏
@@ -65,6 +70,18 @@ public class PolicyController {
 						}else{
 							map.put("ifcollect", "0");
 						}
+					}
+					//如果有视频，查询老师信息
+					if(null!=policy.getVideourl() && !"".equals(policy.getVideourl()) &&
+							null!=policy.getTeacherid() && !"".equals(policy.getTeacherid())){
+						//查询老师信息
+						ZyhClassTeacher teacher = classTeacherService.queryTeacherById(policy.getTeacherid());
+//						if(null == teacher ){
+//							responeToWeb.setMsg("查询失败,信息缺失");
+//							responeToWeb.setSuccess(false);
+//							return responeToWeb;
+//						}
+						map.put("teacher", teacher);
 					}
 					responeToWeb.setMsg("查询成功");
 					responeToWeb.setSuccess(true);
@@ -129,6 +146,12 @@ public class PolicyController {
 		try {
 			ZyhPolicy policy = om.readValue(json, ZyhPolicy.class);
 			if (null != policy) {
+				if(null!=policy.getVideourl() && !"".equals(policy.getVideourl()) &&
+						(null==policy.getTeacherid()|| "".equals(policy.getTeacherid()))){
+					responeToWeb.setMsg("新增失败,老师信息缺失");
+					responeToWeb.setSuccess(false);
+					return responeToWeb;
+				}
 				policy.setPubtime(new Date());
 				policyService.addPolicy(policy);
 				responeToWeb.setMsg("新增成功");

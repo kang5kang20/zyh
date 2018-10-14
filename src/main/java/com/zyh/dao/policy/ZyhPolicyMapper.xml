@@ -11,6 +11,8 @@
     <result column="createuser" jdbcType="OTHER" property="createuser" />
     <result column="ifground" jdbcType="OTHER" property="ifground" />
     <result column="readcount" jdbcType="OTHER" property="readcount" />
+    <result column="introduce" jdbcType="OTHER" property="introduce" />
+    <result column="teacherid" jdbcType="OTHER" property="teacherid" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +73,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, title, content, pubtime, imgurl, videourl, createuser, ifground, readcount
+    id, title, content, pubtime, imgurl, videourl, createuser, ifground, readcount, introduce, 
+    teacherid
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.policy.ZyhPolicyExample" resultMap="BaseResultMap">
     select
@@ -106,12 +109,12 @@
   <insert id="insert" parameterType="com.zyh.entity.policy.ZyhPolicy">
     insert into zyh_policy (id, title, content, 
       pubtime, imgurl, videourl, 
-      createuser, ifground, readcount
-      )
+      createuser, ifground, readcount, 
+      introduce, teacherid)
     values (#{id,jdbcType=OTHER}, #{title,jdbcType=OTHER}, #{content,jdbcType=OTHER}, 
       #{pubtime,jdbcType=OTHER}, #{imgurl,jdbcType=OTHER}, #{videourl,jdbcType=OTHER}, 
-      #{createuser,jdbcType=OTHER}, #{ifground,jdbcType=OTHER}, #{readcount,jdbcType=OTHER}
-      )
+      #{createuser,jdbcType=OTHER}, #{ifground,jdbcType=OTHER}, #{readcount,jdbcType=OTHER}, 
+      #{introduce,jdbcType=OTHER}, #{teacherid,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.policy.ZyhPolicy">
     insert into zyh_policy
@@ -143,6 +146,12 @@
       <if test="readcount != null">
         readcount,
       </if>
+      <if test="introduce != null">
+        introduce,
+      </if>
+      <if test="teacherid != null">
+        teacherid,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -171,6 +180,12 @@
       </if>
       <if test="readcount != null">
         #{readcount,jdbcType=OTHER},
+      </if>
+      <if test="introduce != null">
+        #{introduce,jdbcType=OTHER},
+      </if>
+      <if test="teacherid != null">
+        #{teacherid,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -210,6 +225,12 @@
       <if test="record.readcount != null">
         readcount = #{record.readcount,jdbcType=OTHER},
       </if>
+      <if test="record.introduce != null">
+        introduce = #{record.introduce,jdbcType=OTHER},
+      </if>
+      <if test="record.teacherid != null">
+        teacherid = #{record.teacherid,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -225,7 +246,9 @@
       videourl = #{record.videourl,jdbcType=OTHER},
       createuser = #{record.createuser,jdbcType=OTHER},
       ifground = #{record.ifground,jdbcType=OTHER},
-      readcount = #{record.readcount,jdbcType=OTHER}
+      readcount = #{record.readcount,jdbcType=OTHER},
+      introduce = #{record.introduce,jdbcType=OTHER},
+      teacherid = #{record.teacherid,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -257,6 +280,12 @@
       <if test="readcount != null">
         readcount = #{readcount,jdbcType=OTHER},
       </if>
+      <if test="introduce != null">
+        introduce = #{introduce,jdbcType=OTHER},
+      </if>
+      <if test="teacherid != null">
+        teacherid = #{teacherid,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -269,11 +298,12 @@
       videourl = #{videourl,jdbcType=OTHER},
       createuser = #{createuser,jdbcType=OTHER},
       ifground = #{ifground,jdbcType=OTHER},
-      readcount = #{readcount,jdbcType=OTHER}
+      readcount = #{readcount,jdbcType=OTHER},
+      introduce = #{introduce,jdbcType=OTHER},
+      teacherid = #{teacherid,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
-	
-	<select id="selectByPageNumSize"  resultMap="BaseResultMap">
+  	<select id="selectByPageNumSize"  resultMap="BaseResultMap">
 	   select
 	    <include refid="Base_Column_List" />
 	    from zyh_policy
