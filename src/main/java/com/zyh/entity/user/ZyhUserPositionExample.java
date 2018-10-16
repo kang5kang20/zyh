@@ -794,6 +794,76 @@ public class ZyhUserPositionExample {
             addCriterion("state not between", value1, value2, "state");
             return (Criteria) this;
         }
+
+        public Criteria andPosttypeIsNull() {
+            addCriterion("posttype is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeIsNotNull() {
+            addCriterion("posttype is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeEqualTo(String value) {
+            addCriterion("posttype =", value, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeNotEqualTo(String value) {
+            addCriterion("posttype <>", value, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeGreaterThan(String value) {
+            addCriterion("posttype >", value, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeGreaterThanOrEqualTo(String value) {
+            addCriterion("posttype >=", value, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeLessThan(String value) {
+            addCriterion("posttype <", value, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeLessThanOrEqualTo(String value) {
+            addCriterion("posttype <=", value, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeLike(String value) {
+            addCriterion("posttype like", value, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeNotLike(String value) {
+            addCriterion("posttype not like", value, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeIn(List<String> values) {
+            addCriterion("posttype in", values, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeNotIn(List<String> values) {
+            addCriterion("posttype not in", values, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeBetween(String value1, String value2) {
+            addCriterion("posttype between", value1, value2, "posttype");
+            return (Criteria) this;
+        }
+
+        public Criteria andPosttypeNotBetween(String value1, String value2) {
+            addCriterion("posttype not between", value1, value2, "posttype");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

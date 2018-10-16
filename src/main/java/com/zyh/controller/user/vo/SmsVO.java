@@ -10,6 +10,8 @@ public class SmsVO implements Serializable{
 	
 	private int verifyCode;
 	
+	private String modelId;
+	
 	public String getPhone() {
 		return phone;
 	}
@@ -33,5 +35,14 @@ public class SmsVO implements Serializable{
 	public void setCode(String code) {
 		this.code = code;
 	}
+
+	public String getModelId() {
+		return modelId;
+	}
+
+	public void setModelId(String modelId) {
+		this.modelId = modelId;
+	}
+	
 	
 }

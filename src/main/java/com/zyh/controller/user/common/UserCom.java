@@ -10,8 +10,9 @@ public class UserCom {
     //产品域名,开发者无需替换
     public  static final String domain = "dysmsapi.aliyuncs.com";
     //阿里秘钥
-    public static final String accessKeyId = "你的阿里云keyId";
-    public static final String accessKeySecret = "你的阿里云secret";
+    public static final String accessKeyId = "LTAIuYFNoWwARpLU";
+    public static final String accessKeySecret = "J1trjrkhmbacOYGtiqtFfAipeouDuu";
+    public static final String endPoint = "oss-cn-beijing.aliyuncs.com";
     //超过缓存时间
     public static final String ERROR_CACHETIMEOUT = "cachetimeout";
   //用户名为空
@@ -34,5 +35,6 @@ public class UserCom {
     public static final String ERROR_POSITIONIDNULL = "positionidnull";
   //PARAMERNULL不能为空
     public static final String ERROR_PARAMERNULL = "paramernull";
-    
+    //用户注册模板
+    public static final String SMS_MODEL_ZC = "SMS_147720192";
 }

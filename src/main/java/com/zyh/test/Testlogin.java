@@ -5,6 +5,7 @@ import java.io.IOException;
 import org.junit.Test;
 
 import com.zyh.utils.HttpTestUtils;
+import com.zyh.utils.MD5Util;
 
 public class Testlogin {
 
@@ -15,6 +16,18 @@ public class Testlogin {
 		String request = "{\"username\":\"zyhadmin\",\"password\":\"zyhadmin\",\"type\":\"mm\"}";
 //		String url = "http://47.92.5.86:8080/zyh/user/login.act";
 		String url = "http://127.0.0.1:8080/zyh/user/login.act";
+		try {
+			String json = HttpTestUtils.testHttpConnection(url, "POST", request);
+			System.out.println(json);
+		}catch(IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		String request = "{\"phone\":\"15215178931\"}";
+		String url = "http://127.0.0.1:8080/zyh/user/sms.act";
 		try {
 			String json = HttpTestUtils.testHttpConnection(url, "POST", request);
 			System.out.println(json);
