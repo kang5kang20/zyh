@@ -22,7 +22,7 @@ import com.zyh.service.user.IUserPostService;
 import com.zyh.service.user.impl.UserPostServiceImpl;
 
 @RestController
-@RequestMapping("/Post")
+@RequestMapping("/post")
 public class UserPostController {
 
 	private Logger log = Logger.getLogger("error");

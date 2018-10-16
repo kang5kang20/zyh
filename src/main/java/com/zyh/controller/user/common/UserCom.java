@@ -33,6 +33,8 @@ public class UserCom {
     public static final String ERROR_IDNULL = "idnull";
     //positionID不能为空
     public static final String ERROR_POSITIONIDNULL = "positionidnull";
+  //positionID不能为空
+    public static final String ERROR_POSITIONED = "isposted";
   //PARAMERNULL不能为空
     public static final String ERROR_PARAMERNULL = "paramernull";
     //用户注册模板
