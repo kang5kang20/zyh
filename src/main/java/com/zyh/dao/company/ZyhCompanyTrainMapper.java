@@ -10,13 +10,21 @@ public interface ZyhCompanyTrainMapper {
 
     int deleteByExample(ZyhCompanyTrainExample example);
 
+    int deleteByPrimaryKey(String id);
+
     int insert(ZyhCompanyTrain record);
 
     int insertSelective(ZyhCompanyTrain record);
 
     List<ZyhCompanyTrain> selectByExample(ZyhCompanyTrainExample example);
 
+    ZyhCompanyTrain selectByPrimaryKey(String id);
+
     int updateByExampleSelective(@Param("record") ZyhCompanyTrain record, @Param("example") ZyhCompanyTrainExample example);
 
     int updateByExample(@Param("record") ZyhCompanyTrain record, @Param("example") ZyhCompanyTrainExample example);
+
+    int updateByPrimaryKeySelective(ZyhCompanyTrain record);
+
+    int updateByPrimaryKey(ZyhCompanyTrain record);
 }

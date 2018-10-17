@@ -9,5 +9,5 @@ public interface ILoginService {
 	
 	public ZyhUser loginByMM(ZyhUser zyhUser)throws Exception;
 	
-	public SmsVO smsService(String phone) throws Exception;
+	public SmsVO smsService(String phone,String type) throws Exception;
 }

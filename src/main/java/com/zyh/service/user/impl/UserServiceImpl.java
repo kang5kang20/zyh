@@ -1,13 +1,20 @@
 package com.zyh.service.user.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zyh.controller.user.common.UserCom;
+import com.zyh.controller.user.vo.SmsVO;
 import com.zyh.dao.user.ZyhUserMapper;
+import com.zyh.entity.common.Page;
 import com.zyh.entity.user.ZyhUser;
 import com.zyh.entity.user.ZyhUserExample;
+import com.zyh.entity.user.ZyhUserExample.Criteria;
+import com.zyh.redis.RedisUtil;
 import com.zyh.service.user.IUserService;
 import com.zyh.utils.MD5Util;
 
@@ -16,6 +23,9 @@ public class UserServiceImpl implements IUserService{
 	
 	@Autowired
 	ZyhUserMapper zyhUserMapper;
+	
+	@Autowired
+	private RedisUtil redisUtil;
 
 	public void addUser(ZyhUser user) throws Exception {
 		if (null!=user.getPassword()&&"".equals(user.getPassword())) {
@@ -33,6 +43,47 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public List<ZyhUser> findUser(ZyhUserExample zyhUserExample) throws Exception {
 		return zyhUserMapper.selectByExample(zyhUserExample);
+	}
+
+	@Override
+	public Map<String, Object> findUserByPage(ZyhUserExample zyhUserExample, int pageNum, int pageSize)
+			throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		List<ZyhUser> list = zyhUserMapper.selectUserByPage(zyhUserExample, pageNum, pageSize);
+		map.put("result", list);
+		Page page = new Page();
+		page.setPageNum(pageNum);
+		page.setTotalRowCount(zyhUserMapper.countByExample(zyhUserExample));
+		map.put("pageResult", page);
+		return map;
+	}
+
+	/**
+	 * 通过短信验证用户信息
+	 */
+	@Override
+	public boolean checkUserBySMS(ZyhUser zyhUser) throws Exception {
+		String phone = zyhUser.getPhone();
+		String vericode =zyhUser.getVericode();
+		String username = zyhUser.getUsername();
+		String key = phone+"xg";
+		if (!redisUtil.exists(key)) {
+			//redis没有说明已经过期了
+			throw new Exception(UserCom.ERROR_CACHETIMEOUT);
+		}
+		SmsVO smsVO =(SmsVO) redisUtil.get(key);
+		if (null==smsVO||!zyhUser.getVericode().equals(smsVO.getVerifyCode())) {
+			throw new Exception(UserCom.ERROR_VERICODEERROR);
+		}
+		//查询用户是否存在
+		ZyhUserExample zyhUserExample = new ZyhUserExample();
+		Criteria criteria = zyhUserExample.createCriteria();
+		criteria.andUsernameEqualTo(username);
+		List<ZyhUser> list = zyhUserMapper.selectByExample(zyhUserExample);
+		if (null==list||list.size()<=0) {
+			throw new Exception(UserCom.ERROR_USERNAMENON);
+		}
+		return true;
 	}
 	
 	

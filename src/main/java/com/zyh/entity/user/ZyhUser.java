@@ -1,6 +1,7 @@
 package com.zyh.entity.user;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ZyhUser implements Serializable {
     private String id;
@@ -25,9 +26,15 @@ public class ZyhUser implements Serializable {
 
     private String usertype;
 
-    private static final long serialVersionUID = 1L;
+    private Date createtime;
+
+    private Date logtime;
     
     private String type;
+    
+    private String vericode;
+
+    private static final long serialVersionUID = 1L;
 
     public String getId() {
         return id;
@@ -117,8 +124,33 @@ public class ZyhUser implements Serializable {
         this.usertype = usertype == null ? null : usertype.trim();
     }
 
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
+    public Date getLogtime() {
+        return logtime;
+    }
+
+    public void setLogtime(Date logtime) {
+        this.logtime = logtime;
+    }
+
     
-    public String getType() {
+    
+    public String getVericode() {
+		return vericode;
+	}
+
+	public void setVericode(String vericode) {
+		this.vericode = vericode;
+	}
+
+	public String getType() {
 		return type;
 	}
 
@@ -143,6 +175,8 @@ public class ZyhUser implements Serializable {
         sb.append(", note=").append(note);
         sb.append(", isenable=").append(isenable);
         sb.append(", usertype=").append(usertype);
+        sb.append(", createtime=").append(createtime);
+        sb.append(", logtime=").append(logtime);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
