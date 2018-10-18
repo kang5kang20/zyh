@@ -153,6 +153,6 @@ public class UserLoginController {
 			responeToWeb.setMsg("失败:"+e.getMessage());
 			responeToWeb.setSuccess(false);
 		}
-		return null;
+		return responeToWeb;
 	}
 }
