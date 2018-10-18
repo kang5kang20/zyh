@@ -29,6 +29,8 @@ public class ZyhCompanyPosition implements Serializable {
     private Float minmoney;
 
     private Float maxmoney;
+    
+    private String state;
 
     private static final long serialVersionUID = 1L;
 
@@ -116,7 +118,15 @@ public class ZyhCompanyPosition implements Serializable {
         return optime;
     }
 
-    public void setOptime(Date optime) {
+    public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public void setOptime(Date optime) {
         this.optime = optime;
     }
 

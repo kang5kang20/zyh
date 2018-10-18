@@ -20,8 +20,10 @@ import com.zyh.entity.company.ZyhCompany;
 import com.zyh.entity.company.ZyhCompanyPosition;
 import com.zyh.entity.company.ZyhCompanyPositionExample;
 import com.zyh.entity.company.ZyhCompanyPositionExample.Criteria;
+import com.zyh.entity.company.ZyhCompanyTrain;
 import com.zyh.service.company.ICompanyPositionService;
 import com.zyh.service.company.ICompanyService;
+import com.zyh.service.company.ICompanyTrainService;
 
 @RestController
 @RequestMapping("/company")
@@ -34,6 +36,9 @@ public class CompanyController {
 	
 	@Autowired
 	private ICompanyPositionService companyPositionService;
+	
+	@Autowired
+	private ICompanyTrainService companyTrainService;
 	
 	@RequestMapping("/addCompany.act")
 	public ResponeToWeb addCompany(@RequestBody String json){
@@ -203,6 +208,69 @@ public class CompanyController {
 			responeToWeb.setValue(map);
 		} catch (Exception e) {
 			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/addTrain.act")
+	public ResponeToWeb addTrain(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			ZyhCompanyTrain zyhCompanyTrain = om.readValue(json, ZyhCompanyTrain.class);
+			companyTrainService.addCompanyTrain(zyhCompanyTrain);
+			responeToWeb.setMsg("添加成功");
+			responeToWeb.setSuccess(true);
+		} catch (Exception e) {
+			log.error("添加失败：" + e.getMessage());
+			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/updateTrain.act")
+	public ResponeToWeb updateTrain(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			ZyhCompanyTrain zyhCompanyTrain = om.readValue(json, ZyhCompanyTrain.class);
+			if (null!=zyhCompanyTrain.getId()&&!"".equals(zyhCompanyTrain.getId())) {
+				companyTrainService.updateCompanyTrainById(zyhCompanyTrain);
+				responeToWeb.setMsg("修改成功");
+				responeToWeb.setSuccess(true);
+			}else{
+				responeToWeb.setMsg(UserCom.ERROR_IDNULL);
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error("修改失败：" + e.getMessage());
+			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/delTrain.act")
+	public ResponeToWeb delTrain(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			String id = om.readTree("id").asText();
+			if (null!=id&&!"".equals(id)){
+				companyTrainService.delCompanyTrainById(id);
+				responeToWeb.setMsg("删除成功");
+				responeToWeb.setSuccess(true);
+			}else{
+				responeToWeb.setMsg(UserCom.ERROR_IDNULL);
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error("删除失败：" + e.getMessage());
 			responeToWeb.setMsg(e.getMessage());
 			responeToWeb.setSuccess(false);
 		}

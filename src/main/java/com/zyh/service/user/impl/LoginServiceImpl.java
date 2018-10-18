@@ -1,5 +1,6 @@
 package com.zyh.service.user.impl;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -49,10 +50,15 @@ public class LoginServiceImpl implements ILoginService{
 			}
 		}else if ("dx".equals(type)) {
 			String phone = zyhUser.getPhone();
+			String key = phone+"zc";
 			//查询redis是否有
-			if (!redisUtil.exists(phone)) {
+			if (!redisUtil.exists(key)) {
 				//redis没有说明已经过期了
 				throw new Exception(UserCom.ERROR_CACHETIMEOUT);
+			}
+			SmsVO smsVO =(SmsVO) redisUtil.get(key);
+			if (null==smsVO||!zyhUser.getVericode().equals(smsVO.getVerifyCode())) {
+				throw new Exception(UserCom.ERROR_VERICODEERROR);
 			}
 			criteria.andPhoneEqualTo(phone);
 		}
@@ -73,6 +79,8 @@ public class LoginServiceImpl implements ILoginService{
 				String id = UUidUtil.getUUid();
 				zyhUser.setId(id);
 			}
+			Date date = new Date();
+			zyhUser.setCreatetime(date);
 			zyhUserMapper.insertSelective(zyhUser);
 			zyhUser.setPassword(null);
 			return zyhUser;
@@ -106,21 +114,36 @@ public class LoginServiceImpl implements ILoginService{
 		return zyhUser;
 	}
 	
-	public SmsVO smsService(String phone)throws Exception{
+	public SmsVO smsService(String phone,String type)throws Exception{
 		SmsVO smsVO = new SmsVO();
 		smsVO.setPhone(phone);
 		//生成4位验证码
 		DataAccuracyUtil dataAccuracyUtil = new DataAccuracyUtil();
 		int verifyCode = dataAccuracyUtil.getVerifyCode();
 		smsVO.setVerifyCode(verifyCode);
+		if ("zc".equals(type)) {
+			//注册模块
+			smsVO.setModelId(UserCom.SMS_MODEL_ZC);
+		}
+		if ("xg".equals(type)) {
+			//修改密码
+			smsVO.setModelId(UserCom.SMS_MODEL_XG);
+			//验证手机号是否存在
+			ZyhUserExample zyhUserExample = new ZyhUserExample();
+			Criteria criteria = zyhUserExample.createCriteria();
+			criteria.andPhoneEqualTo(phone);
+			List<ZyhUser> list = zyhUserMapper.selectByExample(zyhUserExample);
+			if (null==list||list.size()<=0) {
+				throw new Exception(UserCom.ERROR_NOPHONE);
+			}
+		}
+		String key = phone+type;
 		//调用sms服务
-//		SendSmsResponse sendSmsResponse = smsServiceImpl.sendSms(smsVO);
-//		if (sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
-//			//TODO
-//			// 请求成功,将sms返回存入redis
-//			redisUtil.set(smsVO.getPhone(), smsVO, UserCom.USER_SMSCACHETIME);
-//		}
-		redisUtil.set(smsVO.getPhone(), smsVO, UserCom.USER_SMSCACHETIME);
+		SendSmsResponse sendSmsResponse = smsServiceImpl.sendSms(smsVO);
+		if (sendSmsResponse.getCode() != null && sendSmsResponse.getCode().equals("OK")) {
+			// 请求成功,将sms返回存入redis
+			redisUtil.set(key, smsVO, UserCom.USER_SMSCACHETIME);
+		}
 		return smsVO;
 	}
 }

@@ -1,9 +1,11 @@
 package com.zyh.dao.user;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.zyh.entity.user.ZyhUser;
 import com.zyh.entity.user.ZyhUserExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ZyhUserMapper {
     long countByExample(ZyhUserExample example);
@@ -27,4 +29,7 @@ public interface ZyhUserMapper {
     int updateByPrimaryKeySelective(ZyhUser record);
 
     int updateByPrimaryKey(ZyhUser record);
+    
+    List<ZyhUser> selectUserByPage(@Param("example") ZyhUserExample example,
+			@Param("pageNumKey") int pageNum, @Param("pageSizeKey") int pageSize)throws Exception;
 }

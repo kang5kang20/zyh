@@ -15,6 +15,7 @@
     <result column="optime" jdbcType="OTHER" property="optime" />
     <result column="minmoney" jdbcType="OTHER" property="minmoney" />
     <result column="maxmoney" jdbcType="OTHER" property="maxmoney" />
+    <result column="state" jdbcType="OTHER" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,7 +77,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, companyid, compnayname, positionname, workcity, fixyear, maxage, moneyarea, desct, 
-    required, optime, minmoney, maxmoney
+    required, optime, minmoney, maxmoney, state
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.company.ZyhCompanyPositionExample" resultMap="BaseResultMap">
     select
@@ -113,12 +114,12 @@
       positionname, workcity, fixyear, 
       maxage, moneyarea, desct, 
       required, optime, minmoney, 
-      maxmoney)
+      maxmoney, state)
     values (#{id,jdbcType=OTHER}, #{companyid,jdbcType=OTHER}, #{compnayname,jdbcType=OTHER}, 
       #{positionname,jdbcType=OTHER}, #{workcity,jdbcType=OTHER}, #{fixyear,jdbcType=OTHER}, 
       #{maxage,jdbcType=OTHER}, #{moneyarea,jdbcType=OTHER}, #{desct,jdbcType=OTHER}, 
       #{required,jdbcType=OTHER}, #{optime,jdbcType=OTHER}, #{minmoney,jdbcType=OTHER}, 
-      #{maxmoney,jdbcType=OTHER})
+      #{maxmoney,jdbcType=OTHER}, #{state,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.company.ZyhCompanyPosition">
     insert into zyh_company_position
@@ -162,6 +163,9 @@
       <if test="maxmoney != null">
         maxmoney,
       </if>
+      <if test="state != null">
+        state,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -202,6 +206,9 @@
       </if>
       <if test="maxmoney != null">
         #{maxmoney,jdbcType=OTHER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -253,6 +260,9 @@
       <if test="record.maxmoney != null">
         maxmoney = #{record.maxmoney,jdbcType=OTHER},
       </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -272,7 +282,8 @@
       required = #{record.required,jdbcType=OTHER},
       optime = #{record.optime,jdbcType=OTHER},
       minmoney = #{record.minmoney,jdbcType=OTHER},
-      maxmoney = #{record.maxmoney,jdbcType=OTHER}
+      maxmoney = #{record.maxmoney,jdbcType=OTHER},
+      state = #{record.state,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -316,6 +327,9 @@
       <if test="maxmoney != null">
         maxmoney = #{maxmoney,jdbcType=OTHER},
       </if>
+      <if test="state != null">
+        state = #{state,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -332,7 +346,8 @@
       required = #{required,jdbcType=OTHER},
       optime = #{optime,jdbcType=OTHER},
       minmoney = #{minmoney,jdbcType=OTHER},
-      maxmoney = #{maxmoney,jdbcType=OTHER}
+      maxmoney = #{maxmoney,jdbcType=OTHER},
+      state = #{state,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
   

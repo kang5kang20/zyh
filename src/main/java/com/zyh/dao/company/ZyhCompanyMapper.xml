@@ -14,6 +14,8 @@
     <result column="province" jdbcType="OTHER" property="province" />
     <result column="area" jdbcType="OTHER" property="area" />
     <result column="street" jdbcType="OTHER" property="street" />
+    <result column="trainlabel" jdbcType="OTHER" property="trainlabel" />
+    <result column="state" jdbcType="OTHER" property="state" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,7 +76,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, logo, address, web, desct, image, label, city, province, area, street
+    id, name, logo, address, web, desct, image, label, city, province, area, street, 
+    trainlabel, state
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.company.ZyhCompanyExample" resultMap="BaseResultMap">
     select
@@ -109,12 +112,12 @@
   <insert id="insert" parameterType="com.zyh.entity.company.ZyhCompany">
     insert into zyh_company (id, name, logo, address, 
       web, desct, image, label, 
-      city, province, area, street
-      )
+      city, province, area, street, 
+      trainlabel, state)
     values (#{id,jdbcType=OTHER}, #{name,jdbcType=OTHER}, #{logo,jdbcType=OTHER}, #{address,jdbcType=OTHER}, 
       #{web,jdbcType=OTHER}, #{desct,jdbcType=OTHER}, #{image,jdbcType=OTHER}, #{label,jdbcType=OTHER}, 
-      #{city,jdbcType=OTHER}, #{province,jdbcType=OTHER}, #{area,jdbcType=OTHER}, #{street,jdbcType=OTHER}
-      )
+      #{city,jdbcType=OTHER}, #{province,jdbcType=OTHER}, #{area,jdbcType=OTHER}, #{street,jdbcType=OTHER}, 
+      #{trainlabel,jdbcType=OTHER}, #{state,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.company.ZyhCompany">
     insert into zyh_company
@@ -155,6 +158,12 @@
       <if test="street != null">
         street,
       </if>
+      <if test="trainlabel != null">
+        trainlabel,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -192,6 +201,12 @@
       </if>
       <if test="street != null">
         #{street,jdbcType=OTHER},
+      </if>
+      <if test="trainlabel != null">
+        #{trainlabel,jdbcType=OTHER},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -240,6 +255,12 @@
       <if test="record.street != null">
         street = #{record.street,jdbcType=OTHER},
       </if>
+      <if test="record.trainlabel != null">
+        trainlabel = #{record.trainlabel,jdbcType=OTHER},
+      </if>
+      <if test="record.state != null">
+        state = #{record.state,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -258,7 +279,9 @@
       city = #{record.city,jdbcType=OTHER},
       province = #{record.province,jdbcType=OTHER},
       area = #{record.area,jdbcType=OTHER},
-      street = #{record.street,jdbcType=OTHER}
+      street = #{record.street,jdbcType=OTHER},
+      trainlabel = #{record.trainlabel,jdbcType=OTHER},
+      state = #{record.state,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -299,6 +322,12 @@
       <if test="street != null">
         street = #{street,jdbcType=OTHER},
       </if>
+      <if test="trainlabel != null">
+        trainlabel = #{trainlabel,jdbcType=OTHER},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -314,7 +343,9 @@
       city = #{city,jdbcType=OTHER},
       province = #{province,jdbcType=OTHER},
       area = #{area,jdbcType=OTHER},
-      street = #{street,jdbcType=OTHER}
+      street = #{street,jdbcType=OTHER},
+      trainlabel = #{trainlabel,jdbcType=OTHER},
+      state = #{state,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>

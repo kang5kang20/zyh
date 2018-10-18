@@ -24,6 +24,8 @@ public class ZyhUserPosition implements Serializable {
 
     private String state;
 
+    private String posttype;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -106,6 +108,14 @@ public class ZyhUserPosition implements Serializable {
         this.state = state == null ? null : state.trim();
     }
 
+    public String getPosttype() {
+        return posttype;
+    }
+
+    public void setPosttype(String posttype) {
+        this.posttype = posttype == null ? null : posttype.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -122,6 +132,7 @@ public class ZyhUserPosition implements Serializable {
         sb.append(", companyname=").append(companyname);
         sb.append(", username=").append(username);
         sb.append(", state=").append(state);
+        sb.append(", posttype=").append(posttype);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

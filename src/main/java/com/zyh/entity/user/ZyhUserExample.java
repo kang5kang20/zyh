@@ -1,6 +1,7 @@
 package com.zyh.entity.user;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ZyhUserExample {
@@ -871,6 +872,126 @@ public class ZyhUserExample {
 
         public Criteria andUsertypeNotBetween(String value1, String value2) {
             addCriterion("usertype not between", value1, value2, "usertype");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNull() {
+            addCriterion("createtime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIsNotNull() {
+            addCriterion("createtime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeEqualTo(Date value) {
+            addCriterion("createtime =", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotEqualTo(Date value) {
+            addCriterion("createtime <>", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThan(Date value) {
+            addCriterion("createtime >", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("createtime >=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThan(Date value) {
+            addCriterion("createtime <", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeLessThanOrEqualTo(Date value) {
+            addCriterion("createtime <=", value, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeIn(List<Date> values) {
+            addCriterion("createtime in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotIn(List<Date> values) {
+            addCriterion("createtime not in", values, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeBetween(Date value1, Date value2) {
+            addCriterion("createtime between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andCreatetimeNotBetween(Date value1, Date value2) {
+            addCriterion("createtime not between", value1, value2, "createtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeIsNull() {
+            addCriterion("logtime is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeIsNotNull() {
+            addCriterion("logtime is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeEqualTo(Date value) {
+            addCriterion("logtime =", value, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeNotEqualTo(Date value) {
+            addCriterion("logtime <>", value, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeGreaterThan(Date value) {
+            addCriterion("logtime >", value, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeGreaterThanOrEqualTo(Date value) {
+            addCriterion("logtime >=", value, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeLessThan(Date value) {
+            addCriterion("logtime <", value, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeLessThanOrEqualTo(Date value) {
+            addCriterion("logtime <=", value, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeIn(List<Date> values) {
+            addCriterion("logtime in", values, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeNotIn(List<Date> values) {
+            addCriterion("logtime not in", values, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeBetween(Date value1, Date value2) {
+            addCriterion("logtime between", value1, value2, "logtime");
+            return (Criteria) this;
+        }
+
+        public Criteria andLogtimeNotBetween(Date value1, Date value2) {
+            addCriterion("logtime not between", value1, value2, "logtime");
             return (Criteria) this;
         }
     }
