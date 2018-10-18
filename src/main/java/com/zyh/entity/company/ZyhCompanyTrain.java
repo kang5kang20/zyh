@@ -1,6 +1,7 @@
 package com.zyh.entity.company;
 
 import java.io.Serializable;
+import java.util.Date;
 
 public class ZyhCompanyTrain implements Serializable {
     private String id;
@@ -16,8 +17,28 @@ public class ZyhCompanyTrain implements Serializable {
     private String companyid;
 
     private String weburl;
+    
+    private String state;
 
-    private static final long serialVersionUID = 1L;
+    private Date createtime;
+
+    public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
+	}
+
+	public Date getCreatetime() {
+		return createtime;
+	}
+
+	public void setCreatetime(Date createtime) {
+		this.createtime = createtime;
+	}
+
+	private static final long serialVersionUID = 1L;
 
     public String getId() {
         return id;

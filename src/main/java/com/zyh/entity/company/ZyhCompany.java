@@ -29,6 +29,8 @@ public class ZyhCompany implements Serializable {
 
     private String trainlabel;
 
+    private String state;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -135,6 +137,14 @@ public class ZyhCompany implements Serializable {
         this.trainlabel = trainlabel == null ? null : trainlabel.trim();
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -154,6 +164,7 @@ public class ZyhCompany implements Serializable {
         sb.append(", area=").append(area);
         sb.append(", street=").append(street);
         sb.append(", trainlabel=").append(trainlabel);
+        sb.append(", state=").append(state);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
