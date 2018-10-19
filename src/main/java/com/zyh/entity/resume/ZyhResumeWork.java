@@ -13,7 +13,7 @@ public class ZyhResumeWork implements Serializable {
 
     private String industry;
 
-    private String describe;
+    private String desct;
 
     private String position;
 
@@ -61,12 +61,12 @@ public class ZyhResumeWork implements Serializable {
         this.industry = industry == null ? null : industry.trim();
     }
 
-    public String getDescribe() {
-        return describe;
+    public String getDesct() {
+        return desct;
     }
 
-    public void setDescribe(String describe) {
-        this.describe = describe == null ? null : describe.trim();
+    public void setDesct(String desct) {
+        this.desct = desct == null ? null : desct.trim();
     }
 
     public String getPosition() {
@@ -96,7 +96,7 @@ public class ZyhResumeWork implements Serializable {
         sb.append(", company=").append(company);
         sb.append(", worktime=").append(worktime);
         sb.append(", industry=").append(industry);
-        sb.append(", describe=").append(describe);
+        sb.append(", desct=").append(desct);
         sb.append(", position=").append(position);
         sb.append(", evaluation=").append(evaluation);
         sb.append(", serialVersionUID=").append(serialVersionUID);
