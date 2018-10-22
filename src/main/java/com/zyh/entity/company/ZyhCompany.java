@@ -2,7 +2,7 @@ package com.zyh.entity.company;
 
 import java.io.Serializable;
 
-public class ZyhCompany implements Serializable {
+public class ZyhCompany  implements Serializable {
     private String id;
 
     private String name;

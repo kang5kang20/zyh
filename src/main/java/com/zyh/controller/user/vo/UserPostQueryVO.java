@@ -1,6 +1,8 @@
 package com.zyh.controller.user.vo;
 
-public class UserPostQueryVO {
+import com.github.pagehelper.PageInfo;
+
+public class UserPostQueryVO extends PageInfo{
 	
 	private String id;
 	
@@ -9,6 +11,8 @@ public class UserPostQueryVO {
 	private String positionid;
 	
 	private String companyid;
+	
+	private String posttype;
 
 	public String getId() {
 		return id;
@@ -40,6 +44,14 @@ public class UserPostQueryVO {
 
 	public void setCompanyid(String companyid) {
 		this.companyid = companyid;
+	}
+
+	public String getPosttype() {
+		return posttype;
+	}
+
+	public void setPosttype(String posttype) {
+		this.posttype = posttype;
 	}
 	
 	

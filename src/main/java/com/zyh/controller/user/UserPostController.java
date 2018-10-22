@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.user.common.UserCom;
 import com.zyh.controller.user.vo.UserPostQueryVO;
+import com.zyh.controller.user.vo.UserQueryVO;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.user.ZyhUserPosition;
 import com.zyh.entity.user.ZyhUserPositionExample;
@@ -47,6 +48,11 @@ public class UserPostController {
 				responeToWeb.setMsg(UserCom.ERROR_POSITIONIDNULL);
 				return responeToWeb;
 			}
+			if (null == zyhUserPosition.getPosttype() || "".equals(zyhUserPosition.getPosttype())) {
+				responeToWeb.setSuccess(false);
+				responeToWeb.setMsg(UserCom.ERROR_POSITIONTYPENULL);
+				return responeToWeb;
+			}
 			zyhUserPosition.setState("0");
 			Date date = new Date();
 			zyhUserPosition.setOptime(date);
@@ -61,7 +67,7 @@ public class UserPostController {
 		return responeToWeb;
 	}
 
-	@RequestMapping("queryPost")
+	@RequestMapping("/queryPost.act")
 	public ResponeToWeb queryByExam(@RequestBody String json) {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
@@ -87,6 +93,10 @@ public class UserPostController {
 				criteria.andPositionidEqualTo(userPostQueryVO.getPositionid());
 				flag = true;
 			}
+			if (null != userPostQueryVO.getPosttype() && !"".equals(userPostQueryVO.getPosttype())) {
+				criteria.andPosttypeEqualTo(userPostQueryVO.getPosttype());
+				flag = true;
+			}
 			if (flag) {
 				zyhUserPositionExample.setOrderByClause(" order by optime desc");
 				List<ZyhUserPosition> list = userPostService.queryPostByExm(zyhUserPositionExample);
@@ -106,5 +116,39 @@ public class UserPostController {
 		return responeToWeb;
 	}
 	
-	
+	@RequestMapping("/queryPostByPage.act")
+	public ResponeToWeb queryPostByPage(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			UserPostQueryVO userPostQueryVO = om.readValue(json, UserPostQueryVO.class);
+			ZyhUserPositionExample zyhUserPositionExample = new ZyhUserPositionExample();
+			Criteria criteria = zyhUserPositionExample.createCriteria();
+			if (null != userPostQueryVO.getId() && !"".equals(userPostQueryVO.getId())) {
+				criteria.andIdEqualTo(userPostQueryVO.getId());
+			}
+			if (null != userPostQueryVO.getUserid() && !"".equals(userPostQueryVO.getUserid())) {
+				criteria.andUseridEqualTo(userPostQueryVO.getUserid());
+			}
+			if (null != userPostQueryVO.getCompanyid() && !"".equals(userPostQueryVO.getCompanyid())) {
+				criteria.andCompanyidEqualTo(userPostQueryVO.getCompanyid());
+			}
+			if (null != userPostQueryVO.getPositionid() && !"".equals(userPostQueryVO.getPositionid())) {
+				criteria.andPositionidEqualTo(userPostQueryVO.getPositionid());
+			}
+			if (null != userPostQueryVO.getPosttype() && !"".equals(userPostQueryVO.getPosttype())) {
+				criteria.andPosttypeEqualTo(userPostQueryVO.getPosttype());
+			}
+			map = userPostService.queryPostByPage(zyhUserPositionExample, userPostQueryVO.getPageNum(), userPostQueryVO.getPageSize());
+			responeToWeb.setSuccess(true);
+			responeToWeb.setMsg("查询成功");
+			responeToWeb.setValue(map);
+		} catch (Exception e) {
+			log.error("查询失败:" + e.getMessage());
+			responeToWeb.setMsg("查询失败"+e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
 }

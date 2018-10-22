@@ -1,5 +1,6 @@
 package com.zyh.dao.user;
 
+import com.zyh.entity.company.ZyhCompanyTrainExample;
 import com.zyh.entity.user.ZyhUserPosition;
 import com.zyh.entity.user.ZyhUserPositionExample;
 import java.util.List;
@@ -27,4 +28,7 @@ public interface ZyhUserPositionMapper {
     int updateByPrimaryKeySelective(ZyhUserPosition record);
 
     int updateByPrimaryKey(ZyhUserPosition record);
+    
+    List<ZyhUserPosition> selectUserPostByPage(@Param("example") ZyhUserPositionExample example,
+			@Param("pageNumKey") int pageNum, @Param("pageSizeKey") int pageSize)throws Exception;
 }

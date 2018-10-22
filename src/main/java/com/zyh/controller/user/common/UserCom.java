@@ -44,6 +44,8 @@ public class UserCom {
     public static final String ERROR_IDNULL = "idnull";
     //positionID不能为空
     public static final String ERROR_POSITIONIDNULL = "positionidnull";
+    //positionType不能为空
+    public static final String ERROR_POSITIONTYPENULL = "positiontypenull";
   //positionID不能为空
     public static final String ERROR_POSITIONED = "isposted";
   //PARAMERNULL不能为空

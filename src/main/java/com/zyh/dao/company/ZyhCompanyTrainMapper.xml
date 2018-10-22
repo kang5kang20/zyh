@@ -270,4 +270,14 @@
       createtime = #{createtime,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
+  
+  <select id="selectTrainByPage"  resultMap="BaseResultMap">
+	   select
+	    <include refid="Base_Column_List" />
+	    from zyh_company_train
+	    <if test="_parameter != null">
+	      <include refid="Update_By_Example_Where_Clause" />
+	    </if>
+	    order by createtime desc
+  </select>
 </mapper>

@@ -1,6 +1,8 @@
 package com.zyh.service.user.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.zyh.controller.user.common.UserCom;
 import com.zyh.dao.user.ZyhUserPositionMapper;
 import com.zyh.dao.util.UUidUtil;
+import com.zyh.entity.common.Page;
 import com.zyh.entity.user.ZyhUserPosition;
 import com.zyh.entity.user.ZyhUserPositionExample;
 import com.zyh.entity.user.ZyhUserPositionExample.Criteria;
@@ -45,6 +48,19 @@ public class UserPostServiceImpl implements IUserPostService{
 	@Override
 	public List<ZyhUserPosition> queryPostByExm(ZyhUserPositionExample zyhUserPositionExample) throws Exception {
 		return zyhUserPositionMapper.selectByExample(zyhUserPositionExample);
+	}
+
+	@Override
+	public Map<String, Object> queryPostByPage(ZyhUserPositionExample zyhUserPositionExample, int pageNum, int pageSize)
+			throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		List<ZyhUserPosition> list = zyhUserPositionMapper.selectUserPostByPage(zyhUserPositionExample, pageNum, pageSize);
+		map.put("result", list);
+		Page page = new Page();
+		page.setPageNum(pageNum);
+		page.setTotalRowCount(zyhUserPositionMapper.countByExample(zyhUserPositionExample));
+		map.put("pageResult", page);
+		return map;
 	}
 	
 	

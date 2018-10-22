@@ -303,4 +303,14 @@
       posttype = #{posttype,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
+  
+  <select id="selectUserPostByPage"  resultMap="BaseResultMap">
+	   select
+	    <include refid="Base_Column_List" />
+	    from zyh_user_position
+	    <if test="_parameter != null">
+	      <include refid="Update_By_Example_Where_Clause" />
+	    </if>
+	    order by optime desc
+  </select>
 </mapper>
