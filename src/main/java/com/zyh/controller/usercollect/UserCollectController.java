@@ -15,6 +15,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.usercollect.vo.UserCollectSearchVO;
 import com.zyh.entity.classcourse.ZyhClassCourse;
+import com.zyh.entity.classteacher.ZyhClassTeacher;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.policy.ZyhPolicy;
@@ -22,6 +23,7 @@ import com.zyh.entity.usercollect.ZyhUserCollect;
 import com.zyh.entity.usercollect.ZyhUserCollectExample;
 import com.zyh.entity.usercollect.ZyhUserCollectExample.Criteria;
 import com.zyh.service.classcourse.IClassCourseService;
+import com.zyh.service.classteacher.IClassTeacherService;
 import com.zyh.service.news.INewsService;
 import com.zyh.service.policy.IPolicyService;
 import com.zyh.service.usercollect.IUserCollectService;
@@ -43,6 +45,9 @@ public class UserCollectController {
 	
 	@Autowired
 	private IClassCourseService classCourseService;
+	
+	@Autowired
+	private IClassTeacherService classTeacherService ;
 	
 	/**
 	 * 收藏文章
@@ -190,8 +195,8 @@ public class UserCollectController {
 			zyhUserCollectExample.setOrderByClause("arttype,pubtime desc");
 			Criteria criteria = zyhUserCollectExample.createCriteria();
 			criteria.andUseridEqualTo(userid);
-			//收藏类似是3是收藏的课程不是文章
-			criteria.andArttypeNotEqualTo("3");
+			//收藏类似是23是收藏的课程不是文章
+			criteria.andArttypeEqualTo("1");
 			List<ZyhUserCollect> collectlist = userCollectService.findUserCollectList(zyhUserCollectExample);
 			map.put("result", collectlist);
 			responeToWeb.setMsg("查询成功");
@@ -207,7 +212,7 @@ public class UserCollectController {
 	
 	
 	/**
-	 * 查询用户收藏的文章
+	 * 查询用户收藏的课程
 	 * @param json
 	 * @return
 	 */
@@ -230,7 +235,7 @@ public class UserCollectController {
 			Criteria criteria = zyhUserCollectExample.createCriteria();
 			criteria.andUseridEqualTo(userid);
 			//收藏类似是3是收藏的课程不是文章
-			criteria.andArttypeEqualTo("3");
+			criteria.andArttypeNotEqualTo("1");
 			List<ZyhUserCollect> collectlist = userCollectService.findUserCollectList(zyhUserCollectExample);
 			map.put("result", collectlist);
 			responeToWeb.setMsg("查询成功");
@@ -245,7 +250,7 @@ public class UserCollectController {
 	}
 	
 	/**
-	 * 查询用户收藏的文章
+	 * 查询用户收藏的课程
 	 * @param json
 	 * @return
 	 */
@@ -254,24 +259,34 @@ public class UserCollectController {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		Map<String, Object> map = new HashMap<String, Object>();
-		List retlist = new ArrayList();
 		try {
 			UserCollectSearchVO searchvo = om.readValue(json, UserCollectSearchVO.class);
 			if(null!=searchvo && null != searchvo.getArttype()
 					&& !"".equals(searchvo.getArttype())){
-				if("1".equals(searchvo.getArttype())){
-					ZyhNews news = newsService.queryNewsById(searchvo.getArticleid());
-					retlist.add(news);
-				}else if("2".equals(searchvo.getArttype())){
+				String teacherid="";
+				if("2".equals(searchvo.getArttype())){
 					ZyhPolicy policy = policyService.queryPolicyById(searchvo.getArticleid());
-					retlist.add(policy);
+					map.put("result", policy);
+					if(null!=policy && null!=policy.getTeacherid() && !"".equals(policy.getTeacherid())){
+						teacherid = policy.getTeacherid();
+					}
+				}else if("3".equals(searchvo.getArttype())){
+					ZyhClassCourse course = classCourseService.queryCourseById(searchvo.getArticleid());
+					map.put("result", course);
+					if(null!=course && null!=course.getTeacherid()&& !"".equals(course.getTeacherid())){
+						teacherid = course.getTeacherid();
+					}
 				}else{
 					responeToWeb.setMsg("查询失败,信息缺失");
 					responeToWeb.setSuccess(false);
 					return responeToWeb;
 				}
-				retlist.add(searchvo);
-				map.put("result", retlist);
+				if(null!=teacherid && !"".equals(teacherid)){
+					//查询老师信息
+					ZyhClassTeacher teacher = classTeacherService.queryTeacherById(teacherid);
+					map.put("teacher", teacher);
+				}
+				map.put("searchvo", searchvo);
 				responeToWeb.setMsg("查询成功");
 				responeToWeb.setSuccess(true);
 				responeToWeb.setValue(map);
