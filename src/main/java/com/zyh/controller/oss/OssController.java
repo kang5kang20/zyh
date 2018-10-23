@@ -151,7 +151,6 @@ public class OssController extends HttpServlet{
 	            map.put("result", ossVO);
 	            responeToWeb.setSuccess(true);
 	            responeToWeb.setValue(map);
-	            
 			} catch (Exception e) {
 				log.error(e.getMessage());
 				responeToWeb.setSuccess(false);

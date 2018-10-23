@@ -1414,6 +1414,146 @@ public class ZyhResumeBaseExample {
             addCriterion("soldierurl not between", value1, value2, "soldierurl");
             return (Criteria) this;
         }
+
+        public Criteria andStateIsNull() {
+            addCriterion("state is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIsNotNull() {
+            addCriterion("state is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateEqualTo(String value) {
+            addCriterion("state =", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotEqualTo(String value) {
+            addCriterion("state <>", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateGreaterThan(String value) {
+            addCriterion("state >", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateGreaterThanOrEqualTo(String value) {
+            addCriterion("state >=", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLessThan(String value) {
+            addCriterion("state <", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLessThanOrEqualTo(String value) {
+            addCriterion("state <=", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateLike(String value) {
+            addCriterion("state like", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotLike(String value) {
+            addCriterion("state not like", value, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateIn(List<String> values) {
+            addCriterion("state in", values, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotIn(List<String> values) {
+            addCriterion("state not in", values, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateBetween(String value1, String value2) {
+            addCriterion("state between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andStateNotBetween(String value1, String value2) {
+            addCriterion("state not between", value1, value2, "state");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateIsNull() {
+            addCriterion("workstate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateIsNotNull() {
+            addCriterion("workstate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateEqualTo(String value) {
+            addCriterion("workstate =", value, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateNotEqualTo(String value) {
+            addCriterion("workstate <>", value, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateGreaterThan(String value) {
+            addCriterion("workstate >", value, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateGreaterThanOrEqualTo(String value) {
+            addCriterion("workstate >=", value, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateLessThan(String value) {
+            addCriterion("workstate <", value, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateLessThanOrEqualTo(String value) {
+            addCriterion("workstate <=", value, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateLike(String value) {
+            addCriterion("workstate like", value, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateNotLike(String value) {
+            addCriterion("workstate not like", value, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateIn(List<String> values) {
+            addCriterion("workstate in", values, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateNotIn(List<String> values) {
+            addCriterion("workstate not in", values, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateBetween(String value1, String value2) {
+            addCriterion("workstate between", value1, value2, "workstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkstateNotBetween(String value1, String value2) {
+            addCriterion("workstate not between", value1, value2, "workstate");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

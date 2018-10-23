@@ -42,6 +42,10 @@ public class ZyhResumeBase implements Serializable {
 
     private String soldierurl;
 
+    private String state;
+
+    private String workstate;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -196,6 +200,22 @@ public class ZyhResumeBase implements Serializable {
         this.soldierurl = soldierurl == null ? null : soldierurl.trim();
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
+    }
+
+    public String getWorkstate() {
+        return workstate;
+    }
+
+    public void setWorkstate(String workstate) {
+        this.workstate = workstate == null ? null : workstate.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -221,6 +241,8 @@ public class ZyhResumeBase implements Serializable {
         sb.append(", evaluation=").append(evaluation);
         sb.append(", idurl=").append(idurl);
         sb.append(", soldierurl=").append(soldierurl);
+        sb.append(", state=").append(state);
+        sb.append(", workstate=").append(workstate);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
