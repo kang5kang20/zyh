@@ -91,7 +91,7 @@ public class CompanyController {
 		ObjectMapper om = new ObjectMapper();
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			String id = om.readTree("id").asText();
+			String id = om.readTree(json).get("id").asText();
 			if (null != id && !"".equals(id)) {
 				companyService.delCompanyById(id);
 				responeToWeb.setMsg("删除成功");
@@ -156,7 +156,7 @@ public class CompanyController {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			String id = om.readTree("id").asText();
+			String id = om.readTree(json).get("id").asText();
 			if (null != id && !"".equals(id)) {
 				companyPositionService.delCompanyPositionById(id);
 				responeToWeb.setMsg("删除成功");
@@ -267,7 +267,7 @@ public class CompanyController {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			String id = om.readTree("id").asText();
+			String id = om.readTree(json).get("id").asText();
 			if (null != id && !"".equals(id)) {
 				companyTrainService.delCompanyTrainById(id);
 				responeToWeb.setMsg("删除成功");
