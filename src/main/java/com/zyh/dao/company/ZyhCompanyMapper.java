@@ -1,9 +1,11 @@
 package com.zyh.dao.company;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.zyh.entity.company.ZyhCompany;
 import com.zyh.entity.company.ZyhCompanyExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ZyhCompanyMapper {
     long countByExample(ZyhCompanyExample example);
@@ -27,4 +29,7 @@ public interface ZyhCompanyMapper {
     int updateByPrimaryKeySelective(ZyhCompany record);
 
     int updateByPrimaryKey(ZyhCompany record);
+    
+    List<ZyhCompany> selectCompanyByPage(@Param("example") ZyhCompanyExample example,
+			@Param("pageNumKey") int pageNum, @Param("pageSizeKey") int pageSize)throws Exception;
 }

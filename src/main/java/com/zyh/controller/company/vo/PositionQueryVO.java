@@ -17,6 +17,8 @@ public class PositionQueryVO extends PageInfo{
 	private float minmoney;
 	
 	private float maxmoney;
+	
+	private String posttype;
 
 	public String getId() {
 		return id;
@@ -74,4 +76,13 @@ public class PositionQueryVO extends PageInfo{
 		return maxmoney;
 	}
 
+	public String getPosttype() {
+		return posttype;
+	}
+
+	public void setPosttype(String posttype) {
+		this.posttype = posttype;
+	}
+
+	
 }

@@ -7,7 +7,7 @@
     <result column="company" jdbcType="OTHER" property="company" />
     <result column="worktime" jdbcType="OTHER" property="worktime" />
     <result column="industry" jdbcType="OTHER" property="industry" />
-    <result column="describe" jdbcType="OTHER" property="describe" />
+    <result column="desct" jdbcType="OTHER" property="desct" />
     <result column="position" jdbcType="OTHER" property="position" />
     <result column="evaluation" jdbcType="OTHER" property="evaluation" />
   </resultMap>
@@ -70,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userid, company, worktime, industry, describe, position, evaluation
+    id, userid, company, worktime, industry, desct, position, evaluation
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeWorkExample" resultMap="BaseResultMap">
     select
@@ -104,10 +104,10 @@
   </delete>
   <insert id="insert" parameterType="com.zyh.entity.resume.ZyhResumeWork">
     insert into zyh_resume_work (id, userid, company, 
-      worktime, industry, describe, 
+      worktime, industry, desct, 
       position, evaluation)
     values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{company,jdbcType=OTHER}, 
-      #{worktime,jdbcType=OTHER}, #{industry,jdbcType=OTHER}, #{describe,jdbcType=OTHER}, 
+      #{worktime,jdbcType=OTHER}, #{industry,jdbcType=OTHER}, #{desct,jdbcType=OTHER}, 
       #{position,jdbcType=OTHER}, #{evaluation,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeWork">
@@ -128,8 +128,8 @@
       <if test="industry != null">
         industry,
       </if>
-      <if test="describe != null">
-        describe,
+      <if test="desct != null">
+        desct,
       </if>
       <if test="position != null">
         position,
@@ -154,8 +154,8 @@
       <if test="industry != null">
         #{industry,jdbcType=OTHER},
       </if>
-      <if test="describe != null">
-        #{describe,jdbcType=OTHER},
+      <if test="desct != null">
+        #{desct,jdbcType=OTHER},
       </if>
       <if test="position != null">
         #{position,jdbcType=OTHER},
@@ -189,8 +189,8 @@
       <if test="record.industry != null">
         industry = #{record.industry,jdbcType=OTHER},
       </if>
-      <if test="record.describe != null">
-        describe = #{record.describe,jdbcType=OTHER},
+      <if test="record.desct != null">
+        desct = #{record.desct,jdbcType=OTHER},
       </if>
       <if test="record.position != null">
         position = #{record.position,jdbcType=OTHER},
@@ -210,7 +210,7 @@
       company = #{record.company,jdbcType=OTHER},
       worktime = #{record.worktime,jdbcType=OTHER},
       industry = #{record.industry,jdbcType=OTHER},
-      describe = #{record.describe,jdbcType=OTHER},
+      desct = #{record.desct,jdbcType=OTHER},
       position = #{record.position,jdbcType=OTHER},
       evaluation = #{record.evaluation,jdbcType=OTHER}
     <if test="_parameter != null">
@@ -232,8 +232,8 @@
       <if test="industry != null">
         industry = #{industry,jdbcType=OTHER},
       </if>
-      <if test="describe != null">
-        describe = #{describe,jdbcType=OTHER},
+      <if test="desct != null">
+        desct = #{desct,jdbcType=OTHER},
       </if>
       <if test="position != null">
         position = #{position,jdbcType=OTHER},
@@ -250,7 +250,7 @@
       company = #{company,jdbcType=OTHER},
       worktime = #{worktime,jdbcType=OTHER},
       industry = #{industry,jdbcType=OTHER},
-      describe = #{describe,jdbcType=OTHER},
+      desct = #{desct,jdbcType=OTHER},
       position = #{position,jdbcType=OTHER},
       evaluation = #{evaluation,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}

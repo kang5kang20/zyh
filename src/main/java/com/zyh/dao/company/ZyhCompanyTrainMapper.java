@@ -1,9 +1,11 @@
 package com.zyh.dao.company;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.zyh.entity.company.ZyhCompanyTrain;
 import com.zyh.entity.company.ZyhCompanyTrainExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ZyhCompanyTrainMapper {
     long countByExample(ZyhCompanyTrainExample example);
@@ -27,4 +29,7 @@ public interface ZyhCompanyTrainMapper {
     int updateByPrimaryKeySelective(ZyhCompanyTrain record);
 
     int updateByPrimaryKey(ZyhCompanyTrain record);
+    
+    List<ZyhCompanyTrain> selectTrainByPage(@Param("example") ZyhCompanyTrainExample example,
+			@Param("pageNumKey") int pageNum, @Param("pageSizeKey") int pageSize)throws Exception;
 }

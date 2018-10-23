@@ -536,8 +536,8 @@ public class ResumeController {
 		ObjectMapper om = new ObjectMapper();
 		Map<String, Object> map = new HashMap<>();
 		try {
-			JsonNode jsonNode = om.readTree("userid");
-			String userid = jsonNode.asText();
+			JsonNode jsonNode = om.readTree(json);
+			String userid = jsonNode.get("userid").asText();
 			ZyhResumeBaseExample zyhResumeBaseExample = new ZyhResumeBaseExample();
 			zyhResumeBaseExample.createCriteria().andUseridEqualTo(userid);
 			List<ZyhResumeBase> resumeBases = resumeBaseService.selectResumeBaseByExample(zyhResumeBaseExample);

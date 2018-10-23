@@ -31,6 +31,10 @@ public class ZyhCompany implements Serializable {
 
     private String state;
 
+    private String contacts;
+
+    private String contphone;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -145,6 +149,22 @@ public class ZyhCompany implements Serializable {
         this.state = state == null ? null : state.trim();
     }
 
+    public String getContacts() {
+        return contacts;
+    }
+
+    public void setContacts(String contacts) {
+        this.contacts = contacts == null ? null : contacts.trim();
+    }
+
+    public String getContphone() {
+        return contphone;
+    }
+
+    public void setContphone(String contphone) {
+        this.contphone = contphone == null ? null : contphone.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -165,6 +185,8 @@ public class ZyhCompany implements Serializable {
         sb.append(", street=").append(street);
         sb.append(", trainlabel=").append(trainlabel);
         sb.append(", state=").append(state);
+        sb.append(", contacts=").append(contacts);
+        sb.append(", contphone=").append(contphone);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

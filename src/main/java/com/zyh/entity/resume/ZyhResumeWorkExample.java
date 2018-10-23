@@ -454,73 +454,73 @@ public class ZyhResumeWorkExample {
             return (Criteria) this;
         }
 
-        public Criteria andDescribeIsNull() {
-            addCriterion("describe is null");
+        public Criteria andDesctIsNull() {
+            addCriterion("desct is null");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeIsNotNull() {
-            addCriterion("describe is not null");
+        public Criteria andDesctIsNotNull() {
+            addCriterion("desct is not null");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeEqualTo(String value) {
-            addCriterion("describe =", value, "describe");
+        public Criteria andDesctEqualTo(String value) {
+            addCriterion("desct =", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeNotEqualTo(String value) {
-            addCriterion("describe <>", value, "describe");
+        public Criteria andDesctNotEqualTo(String value) {
+            addCriterion("desct <>", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeGreaterThan(String value) {
-            addCriterion("describe >", value, "describe");
+        public Criteria andDesctGreaterThan(String value) {
+            addCriterion("desct >", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeGreaterThanOrEqualTo(String value) {
-            addCriterion("describe >=", value, "describe");
+        public Criteria andDesctGreaterThanOrEqualTo(String value) {
+            addCriterion("desct >=", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeLessThan(String value) {
-            addCriterion("describe <", value, "describe");
+        public Criteria andDesctLessThan(String value) {
+            addCriterion("desct <", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeLessThanOrEqualTo(String value) {
-            addCriterion("describe <=", value, "describe");
+        public Criteria andDesctLessThanOrEqualTo(String value) {
+            addCriterion("desct <=", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeLike(String value) {
-            addCriterion("describe like", value, "describe");
+        public Criteria andDesctLike(String value) {
+            addCriterion("desct like", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeNotLike(String value) {
-            addCriterion("describe not like", value, "describe");
+        public Criteria andDesctNotLike(String value) {
+            addCriterion("desct not like", value, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeIn(List<String> values) {
-            addCriterion("describe in", values, "describe");
+        public Criteria andDesctIn(List<String> values) {
+            addCriterion("desct in", values, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeNotIn(List<String> values) {
-            addCriterion("describe not in", values, "describe");
+        public Criteria andDesctNotIn(List<String> values) {
+            addCriterion("desct not in", values, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeBetween(String value1, String value2) {
-            addCriterion("describe between", value1, value2, "describe");
+        public Criteria andDesctBetween(String value1, String value2) {
+            addCriterion("desct between", value1, value2, "desct");
             return (Criteria) this;
         }
 
-        public Criteria andDescribeNotBetween(String value1, String value2) {
-            addCriterion("describe not between", value1, value2, "describe");
+        public Criteria andDesctNotBetween(String value1, String value2) {
+            addCriterion("desct not between", value1, value2, "desct");
             return (Criteria) this;
         }
 

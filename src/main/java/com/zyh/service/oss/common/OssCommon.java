@@ -8,8 +8,10 @@ public class OssCommon {
 	public static final String ERROR_UPLOADFAIL = "uploadfail";//上传失败
 	
 	public static final String ENDPOINT = "oss-cn-beijing.aliyuncs.com";
-	public static final String ACCESSKEYID = "LTAIIq0qgObLFZmq";
-	public static final String  ACCESSKEYSECRET = "qv7ARack1RZDGWzhC1cIAjBmKMb4Fs";
-	public static final String  BUCKETNAME = "fordplan";
-	public static final String  FILEDIR = "testimg";
+//	public static final String ACCESSKEYID_TEST = "LTAIIq0qgObLFZmq";
+	public static final String ACCESSKEYID = "LTAIuYFNoWwARpLU";
+//	public static final String  ACCESSKEYSECRET_TEST = "qv7ARack1RZDGWzhC1cIAjBmKMb4Fs";
+	public static final String  ACCESSKEYSECRET = "J1trjrkhmbacOYGtiqtFfAipeouDuu";
+	public static final String  BUCKETNAME = "zhy20181003";
+	public static final String  FILEDIR = "img";
 }

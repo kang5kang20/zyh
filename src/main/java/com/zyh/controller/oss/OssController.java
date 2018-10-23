@@ -15,20 +15,25 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.common.utils.BinaryUtil;
 import com.aliyun.oss.model.MatchMode;
 import com.aliyun.oss.model.PolicyConditions;
+import com.zyh.controller.oss.vo.OssVO;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.service.oss.IOssService;
+import com.zyh.service.oss.common.OssCommon;
 
 import net.sf.json.JSONObject;
 
-@Connector
+//@Connector
+@RestController
 @RequestMapping("/oss")
 @WebServlet(asyncSupported = true)
 public class OssController extends HttpServlet{
@@ -112,4 +117,45 @@ public class OssController extends HttpServlet{
 		doGet(request, response);
     }
 	
+	
+	@RequestMapping("/getOss.act")
+	public ResponeToWeb getOssConfig(@RequestBody String json,HttpServletRequest request, HttpServletResponse response){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		Map<String, Object> map = new HashMap<>();
+		 String endpoint = OssCommon.ENDPOINT;
+	        String accessId = OssCommon.ACCESSKEYID;
+	        String accessKey =OssCommon.ACCESSKEYSECRET;
+	        String bucket = OssCommon.BUCKETNAME;
+	        String dir = OssCommon.FILEDIR;
+	        String host = "http://" + bucket + "." + endpoint;
+	        OSSClient client = new OSSClient(endpoint, accessId, accessKey);
+	        try {
+	        	long expireTime = 30;
+	        	long expireEndTime = System.currentTimeMillis() + expireTime * 1000;
+	            Date expiration = new Date(expireEndTime);
+	            PolicyConditions policyConds = new PolicyConditions();
+	            policyConds.addConditionItem(PolicyConditions.COND_CONTENT_LENGTH_RANGE, 0, 1048576000);
+	            policyConds.addConditionItem(MatchMode.StartWith, PolicyConditions.COND_KEY, dir);
+
+	            String postPolicy = client.generatePostPolicy(expiration, policyConds);
+	            byte[] binaryData = postPolicy.getBytes("utf-8");
+	            String encodedPolicy = BinaryUtil.toBase64String(binaryData);
+	            String postSignature = client.calculatePostSignature(postPolicy);
+	            OssVO ossVO = new OssVO();
+	            ossVO.setAccessid(accessId);
+	            ossVO.setPolicy(encodedPolicy);
+	            ossVO.setSignature(postSignature);
+	            ossVO.setDir(dir);
+	            ossVO.setHost(host);
+	            ossVO.setExpire(String.valueOf(expireEndTime / 1000));
+	            map.put("result", ossVO);
+	            responeToWeb.setSuccess(true);
+	            responeToWeb.setValue(map);
+			} catch (Exception e) {
+				log.error(e.getMessage());
+				responeToWeb.setSuccess(false);
+				responeToWeb.setMsg(e.getMessage());
+			}
+		return responeToWeb;
+	}
 }

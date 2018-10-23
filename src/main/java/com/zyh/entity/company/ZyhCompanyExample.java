@@ -1083,6 +1083,146 @@ public class ZyhCompanyExample {
             addCriterion("state not between", value1, value2, "state");
             return (Criteria) this;
         }
+
+        public Criteria andContactsIsNull() {
+            addCriterion("contacts is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsIsNotNull() {
+            addCriterion("contacts is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsEqualTo(String value) {
+            addCriterion("contacts =", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsNotEqualTo(String value) {
+            addCriterion("contacts <>", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsGreaterThan(String value) {
+            addCriterion("contacts >", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsGreaterThanOrEqualTo(String value) {
+            addCriterion("contacts >=", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsLessThan(String value) {
+            addCriterion("contacts <", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsLessThanOrEqualTo(String value) {
+            addCriterion("contacts <=", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsLike(String value) {
+            addCriterion("contacts like", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsNotLike(String value) {
+            addCriterion("contacts not like", value, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsIn(List<String> values) {
+            addCriterion("contacts in", values, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsNotIn(List<String> values) {
+            addCriterion("contacts not in", values, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsBetween(String value1, String value2) {
+            addCriterion("contacts between", value1, value2, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContactsNotBetween(String value1, String value2) {
+            addCriterion("contacts not between", value1, value2, "contacts");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneIsNull() {
+            addCriterion("contphone is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneIsNotNull() {
+            addCriterion("contphone is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneEqualTo(String value) {
+            addCriterion("contphone =", value, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneNotEqualTo(String value) {
+            addCriterion("contphone <>", value, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneGreaterThan(String value) {
+            addCriterion("contphone >", value, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneGreaterThanOrEqualTo(String value) {
+            addCriterion("contphone >=", value, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneLessThan(String value) {
+            addCriterion("contphone <", value, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneLessThanOrEqualTo(String value) {
+            addCriterion("contphone <=", value, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneLike(String value) {
+            addCriterion("contphone like", value, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneNotLike(String value) {
+            addCriterion("contphone not like", value, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneIn(List<String> values) {
+            addCriterion("contphone in", values, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneNotIn(List<String> values) {
+            addCriterion("contphone not in", values, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneBetween(String value1, String value2) {
+            addCriterion("contphone between", value1, value2, "contphone");
+            return (Criteria) this;
+        }
+
+        public Criteria andContphoneNotBetween(String value1, String value2) {
+            addCriterion("contphone not between", value1, value2, "contphone");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
