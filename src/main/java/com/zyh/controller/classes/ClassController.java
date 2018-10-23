@@ -382,41 +382,4 @@ public class ClassController {
 		}
 		return responeToWeb;
 	}
-	
-	
-	/**
-	 * 名师课堂查询列表
-	 * @param json
-	 * @return
-	 */
-	@RequestMapping("/findTeacherList.act")
-	public ResponeToWeb findTeacherList(@RequestBody String json) {
-		ResponeToWeb responeToWeb = new ResponeToWeb();
-		ObjectMapper om = new ObjectMapper();
-		Map<String, Object> map = new HashMap<String, Object>();
-		try {
-			TeacherQueryVO queryvo = om.readValue(json, TeacherQueryVO.class);
-			ZyhClassTeacherExample example = new ZyhClassTeacherExample();
-			example.setOrderByClause("createtime desc");
-			//上架才允许查
-			com.zyh.entity.classteacher.ZyhClassTeacherExample.Criteria criteria = 
-					example.createCriteria();
-			if(null!=queryvo.getName()&& "" !=queryvo.getName() ){
-				criteria.andNameLike("%"+queryvo.getName() +"%");
-			}
-			if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
-				criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
-			}
-			List<ZyhClassTeacher> teacherlist = classTeacherService.findTeacherList(example);
-			map.put("result", teacherlist);
-			responeToWeb.setMsg("查询成功");
-			responeToWeb.setSuccess(true);
-			responeToWeb.setValue(map);
-		} catch (Exception e) {
-			log.error("查询失败：" + e.getMessage());
-			responeToWeb.setMsg("查询失败");
-			responeToWeb.setSuccess(false);
-		}
-		return responeToWeb;
-	}
 }
