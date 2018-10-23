@@ -14,7 +14,6 @@ import com.zyh.entity.user.ZyhUser;
 import com.zyh.redis.RedisUtil;
 import com.zyh.service.ITestService;
 import com.zyh.service.user.IUserService;
-import com.zyh.service.user.impl.UserServiceImpl;
 
 /**
  * TODO
@@ -31,6 +30,9 @@ public class TestController {
 	
 	@Autowired
 	IUserService userService; 
+	
+	@Autowired
+	RedisUtil redisUtil;
 	
 	@RequestMapping("/test.do")
 	public String Test(String id,HttpServletRequest request) {
@@ -60,7 +62,6 @@ public class TestController {
 	@RequestMapping("/testRedis.do")
 	public String testRedis(){
 		String result = "没有赋值的时候";
-		RedisUtil redisUtil  = new RedisUtil();
 		String key = "kk";
 		String value = "15215178931";
 		try {
