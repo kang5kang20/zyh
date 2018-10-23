@@ -320,6 +320,15 @@ public class CompanyController {
 			if (null != zyhCompany.getName() && !"".equals(zyhCompany.getName())) {
 				criteria.andNameLike("%" + zyhCompany.getName() + "%");
 			}
+			if (null !=zyhCompany.getType()&&!"".equals(zyhCompany.getType())) {
+				if ("0".equals(zyhCompany.getType())) {
+					//招聘企业
+					criteria.andLabelIsNotNull();
+				}else if ("1".equals(zyhCompany.getType())) {
+					//培训企业
+					criteria.andTrainlabelIsNotNull();
+				}
+			}
 			List<ZyhCompany> list = companyService.selectCompanyByExample(zyhCompanyExample);
 			map.put("result", list);
 			responeToWeb.setMsg("查询成功");
@@ -347,6 +356,15 @@ public class CompanyController {
 			}
 			if (null != zyhCompany.getName() && !"".equals(zyhCompany.getName())) {
 				criteria.andNameLike("%" + zyhCompany.getName() + "%");
+			}
+			if (null !=zyhCompany.getType()&&!"".equals(zyhCompany.getType())) {
+				if ("0".equals(zyhCompany.getType())) {
+					//招聘企业
+					criteria.andLabelIsNotNull();
+				}else if ("1".equals(zyhCompany.getType())) {
+					//培训企业
+					criteria.andTrainlabelIsNotNull();
+				}
 			}
 			map = companyService.selectCompanyByExamPage(zyhCompanyExample, zyhCompany.getPageNum(),
 					zyhCompany.getPages());
