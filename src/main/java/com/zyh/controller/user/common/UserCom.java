@@ -54,4 +54,9 @@ public class UserCom {
     public static final String SMS_MODEL_ZC = "SMS_147720192";
     //用户修改密码模板
     public static final String SMS_MODEL_XG = "SMS_147720191";
+    
+    //position不为空
+    public static final String ERROR_POSITIONNOTNULL = "positionnotnull";
+  //position不为空
+    public static final String ERROR_TRAINNOTNULL = "trainnotnull";
 }

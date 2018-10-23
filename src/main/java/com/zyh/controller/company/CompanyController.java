@@ -93,6 +93,27 @@ public class CompanyController {
 		try {
 			String id = om.readTree(json).get("id").asText();
 			if (null != id && !"".equals(id)) {
+				//查询公司下面 是否有职位或培训
+				ZyhCompanyPositionExample zyhCompanyPositionExample = new ZyhCompanyPositionExample();
+				Criteria criteria = zyhCompanyPositionExample.createCriteria();
+				criteria.andCompanyidEqualTo(id);
+				List<ZyhCompanyPosition> list = companyPositionService.selectCompanyPositionByExample(zyhCompanyPositionExample);
+				if (null!=list&&list.size()>0) {
+					log.error("删除失败：公司提供职位不为空" );
+					responeToWeb.setMsg(UserCom.ERROR_POSITIONNOTNULL);
+					responeToWeb.setSuccess(false);
+					return responeToWeb;
+				}
+				ZyhCompanyTrainExample zyhCompanyTrainExample = new ZyhCompanyTrainExample();
+				com.zyh.entity.company.ZyhCompanyTrainExample.Criteria criteria2 = zyhCompanyTrainExample.createCriteria();
+				criteria2.andCompanyidEqualTo(id);
+				List<ZyhCompanyTrain> list2 = companyTrainService.selectCompanyTrainByExample(zyhCompanyTrainExample);
+				if (null!=list2&&list2.size()>0) {
+					log.error("删除失败：公司提供培训不为空" );
+					responeToWeb.setMsg(UserCom.ERROR_TRAINNOTNULL);
+					responeToWeb.setSuccess(false);
+					return responeToWeb;
+				}
 				companyService.delCompanyById(id);
 				responeToWeb.setMsg("删除成功");
 				responeToWeb.setSuccess(true);
