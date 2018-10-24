@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.prism.Image;
+import com.zyh.controller.company.vo.CompanyPositionVO;
 import com.zyh.controller.company.vo.CompanyQueryVO;
 import com.zyh.controller.company.vo.PositionQueryVO;
 import com.zyh.controller.company.vo.TrainQueryVO;
@@ -324,9 +327,11 @@ public class CompanyController {
 				if ("0".equals(zyhCompany.getType())) {
 					//招聘企业
 					criteria.andLabelIsNotNull();
+					criteria.andLabelNotEqualTo("");
 				}else if ("1".equals(zyhCompany.getType())) {
 					//培训企业
 					criteria.andTrainlabelIsNotNull();
+					criteria.andTrainlabelNotEqualTo("");
 				}
 			}
 			List<ZyhCompany> list = companyService.selectCompanyByExample(zyhCompanyExample);
@@ -361,9 +366,11 @@ public class CompanyController {
 				if ("0".equals(zyhCompany.getType())) {
 					//招聘企业
 					criteria.andLabelIsNotNull();
+					criteria.andLabelNotEqualTo("");
 				}else if ("1".equals(zyhCompany.getType())) {
 					//培训企业
 					criteria.andTrainlabelIsNotNull();
+					criteria.andTrainlabelNotEqualTo("");
 				}
 			}
 			map = companyService.selectCompanyByExamPage(zyhCompanyExample, zyhCompany.getPageNum(),
@@ -412,4 +419,27 @@ public class CompanyController {
 		return responeToWeb;
 	}
 	
+	@RequestMapping("/queryPositionInfo.act")
+	public ResponeToWeb queryPositionInfoById(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<>();
+		try {
+			String positionid = om.readTree(json).get("id").asText();
+			if (null!=positionid&&!"".equals(positionid)) {
+				CompanyPositionVO companyPositionVO = companyPositionService.selectCompanyPositionInfo(positionid);
+				responeToWeb.setSuccess(true);
+				map.put("result", companyPositionVO);
+				responeToWeb.setValue(map);
+			}else{
+				responeToWeb.setMsg(UserCom.ERROR_IDNULL);
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg("查询失败"+e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
 }

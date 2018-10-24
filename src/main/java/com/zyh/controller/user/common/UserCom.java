@@ -59,4 +59,5 @@ public class UserCom {
     public static final String ERROR_POSITIONNOTNULL = "positionnotnull";
   //position不为空
     public static final String ERROR_TRAINNOTNULL = "trainnotnull";
+    
 }

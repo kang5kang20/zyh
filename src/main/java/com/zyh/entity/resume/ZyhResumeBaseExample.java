@@ -1554,6 +1554,286 @@ public class ZyhResumeBaseExample {
             addCriterion("workstate not between", value1, value2, "workstate");
             return (Criteria) this;
         }
+
+        public Criteria andIdbackurlIsNull() {
+            addCriterion("idbackurl is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlIsNotNull() {
+            addCriterion("idbackurl is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlEqualTo(String value) {
+            addCriterion("idbackurl =", value, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlNotEqualTo(String value) {
+            addCriterion("idbackurl <>", value, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlGreaterThan(String value) {
+            addCriterion("idbackurl >", value, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlGreaterThanOrEqualTo(String value) {
+            addCriterion("idbackurl >=", value, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlLessThan(String value) {
+            addCriterion("idbackurl <", value, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlLessThanOrEqualTo(String value) {
+            addCriterion("idbackurl <=", value, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlLike(String value) {
+            addCriterion("idbackurl like", value, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlNotLike(String value) {
+            addCriterion("idbackurl not like", value, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlIn(List<String> values) {
+            addCriterion("idbackurl in", values, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlNotIn(List<String> values) {
+            addCriterion("idbackurl not in", values, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlBetween(String value1, String value2) {
+            addCriterion("idbackurl between", value1, value2, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdbackurlNotBetween(String value1, String value2) {
+            addCriterion("idbackurl not between", value1, value2, "idbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlIsNull() {
+            addCriterion("soldierbackurl is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlIsNotNull() {
+            addCriterion("soldierbackurl is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlEqualTo(String value) {
+            addCriterion("soldierbackurl =", value, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlNotEqualTo(String value) {
+            addCriterion("soldierbackurl <>", value, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlGreaterThan(String value) {
+            addCriterion("soldierbackurl >", value, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlGreaterThanOrEqualTo(String value) {
+            addCriterion("soldierbackurl >=", value, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlLessThan(String value) {
+            addCriterion("soldierbackurl <", value, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlLessThanOrEqualTo(String value) {
+            addCriterion("soldierbackurl <=", value, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlLike(String value) {
+            addCriterion("soldierbackurl like", value, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlNotLike(String value) {
+            addCriterion("soldierbackurl not like", value, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlIn(List<String> values) {
+            addCriterion("soldierbackurl in", values, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlNotIn(List<String> values) {
+            addCriterion("soldierbackurl not in", values, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlBetween(String value1, String value2) {
+            addCriterion("soldierbackurl between", value1, value2, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldierbackurlNotBetween(String value1, String value2) {
+            addCriterion("soldierbackurl not between", value1, value2, "soldierbackurl");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateIsNull() {
+            addCriterion("idcheckstate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateIsNotNull() {
+            addCriterion("idcheckstate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateEqualTo(String value) {
+            addCriterion("idcheckstate =", value, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateNotEqualTo(String value) {
+            addCriterion("idcheckstate <>", value, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateGreaterThan(String value) {
+            addCriterion("idcheckstate >", value, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateGreaterThanOrEqualTo(String value) {
+            addCriterion("idcheckstate >=", value, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateLessThan(String value) {
+            addCriterion("idcheckstate <", value, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateLessThanOrEqualTo(String value) {
+            addCriterion("idcheckstate <=", value, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateLike(String value) {
+            addCriterion("idcheckstate like", value, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateNotLike(String value) {
+            addCriterion("idcheckstate not like", value, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateIn(List<String> values) {
+            addCriterion("idcheckstate in", values, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateNotIn(List<String> values) {
+            addCriterion("idcheckstate not in", values, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateBetween(String value1, String value2) {
+            addCriterion("idcheckstate between", value1, value2, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andIdcheckstateNotBetween(String value1, String value2) {
+            addCriterion("idcheckstate not between", value1, value2, "idcheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateIsNull() {
+            addCriterion("soldiercheckstate is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateIsNotNull() {
+            addCriterion("soldiercheckstate is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateEqualTo(String value) {
+            addCriterion("soldiercheckstate =", value, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateNotEqualTo(String value) {
+            addCriterion("soldiercheckstate <>", value, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateGreaterThan(String value) {
+            addCriterion("soldiercheckstate >", value, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateGreaterThanOrEqualTo(String value) {
+            addCriterion("soldiercheckstate >=", value, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateLessThan(String value) {
+            addCriterion("soldiercheckstate <", value, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateLessThanOrEqualTo(String value) {
+            addCriterion("soldiercheckstate <=", value, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateLike(String value) {
+            addCriterion("soldiercheckstate like", value, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateNotLike(String value) {
+            addCriterion("soldiercheckstate not like", value, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateIn(List<String> values) {
+            addCriterion("soldiercheckstate in", values, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateNotIn(List<String> values) {
+            addCriterion("soldiercheckstate not in", values, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateBetween(String value1, String value2) {
+            addCriterion("soldiercheckstate between", value1, value2, "soldiercheckstate");
+            return (Criteria) this;
+        }
+
+        public Criteria andSoldiercheckstateNotBetween(String value1, String value2) {
+            addCriterion("soldiercheckstate not between", value1, value2, "soldiercheckstate");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

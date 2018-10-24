@@ -23,6 +23,10 @@
     <result column="soldierurl" jdbcType="OTHER" property="soldierurl" />
     <result column="state" jdbcType="OTHER" property="state" />
     <result column="workstate" jdbcType="OTHER" property="workstate" />
+    <result column="idbackurl" jdbcType="OTHER" property="idbackurl" />
+    <result column="soldierbackurl" jdbcType="OTHER" property="soldierbackurl" />
+    <result column="idcheckstate" jdbcType="OTHER" property="idcheckstate" />
+    <result column="soldiercheckstate" jdbcType="OTHER" property="soldiercheckstate" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -84,7 +88,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, userid, name, sex, birthday, soldierdate, workdate, bdzy, bdzw, soldierno, zzmm, 
-    idno, cellphone, phone, email, birthcity, evaluation, idurl, soldierurl, state, workstate
+    idno, cellphone, phone, email, birthcity, evaluation, idurl, soldierurl, state, workstate, 
+    idbackurl, soldierbackurl, idcheckstate, soldiercheckstate
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.resume.ZyhResumeBaseExample" resultMap="BaseResultMap">
     select
@@ -122,15 +127,17 @@
       bdzy, bdzw, soldierno, zzmm, 
       idno, cellphone, phone, email, 
       birthcity, evaluation, idurl, 
-      soldierurl, state, workstate
-      )
+      soldierurl, state, workstate, 
+      idbackurl, soldierbackurl, idcheckstate, 
+      soldiercheckstate)
     values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{name,jdbcType=OTHER}, #{sex,jdbcType=OTHER}, 
       #{birthday,jdbcType=OTHER}, #{soldierdate,jdbcType=OTHER}, #{workdate,jdbcType=OTHER}, 
       #{bdzy,jdbcType=OTHER}, #{bdzw,jdbcType=OTHER}, #{soldierno,jdbcType=OTHER}, #{zzmm,jdbcType=OTHER}, 
       #{idno,jdbcType=OTHER}, #{cellphone,jdbcType=OTHER}, #{phone,jdbcType=OTHER}, #{email,jdbcType=OTHER}, 
       #{birthcity,jdbcType=OTHER}, #{evaluation,jdbcType=OTHER}, #{idurl,jdbcType=OTHER}, 
-      #{soldierurl,jdbcType=OTHER}, #{state,jdbcType=OTHER}, #{workstate,jdbcType=OTHER}
-      )
+      #{soldierurl,jdbcType=OTHER}, #{state,jdbcType=OTHER}, #{workstate,jdbcType=OTHER}, 
+      #{idbackurl,jdbcType=OTHER}, #{soldierbackurl,jdbcType=OTHER}, #{idcheckstate,jdbcType=OTHER}, 
+      #{soldiercheckstate,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.resume.ZyhResumeBase">
     insert into zyh_resume_base
@@ -198,6 +205,18 @@
       <if test="workstate != null">
         workstate,
       </if>
+      <if test="idbackurl != null">
+        idbackurl,
+      </if>
+      <if test="soldierbackurl != null">
+        soldierbackurl,
+      </if>
+      <if test="idcheckstate != null">
+        idcheckstate,
+      </if>
+      <if test="soldiercheckstate != null">
+        soldiercheckstate,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -262,6 +281,18 @@
       </if>
       <if test="workstate != null">
         #{workstate,jdbcType=OTHER},
+      </if>
+      <if test="idbackurl != null">
+        #{idbackurl,jdbcType=OTHER},
+      </if>
+      <if test="soldierbackurl != null">
+        #{soldierbackurl,jdbcType=OTHER},
+      </if>
+      <if test="idcheckstate != null">
+        #{idcheckstate,jdbcType=OTHER},
+      </if>
+      <if test="soldiercheckstate != null">
+        #{soldiercheckstate,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -337,6 +368,18 @@
       <if test="record.workstate != null">
         workstate = #{record.workstate,jdbcType=OTHER},
       </if>
+      <if test="record.idbackurl != null">
+        idbackurl = #{record.idbackurl,jdbcType=OTHER},
+      </if>
+      <if test="record.soldierbackurl != null">
+        soldierbackurl = #{record.soldierbackurl,jdbcType=OTHER},
+      </if>
+      <if test="record.idcheckstate != null">
+        idcheckstate = #{record.idcheckstate,jdbcType=OTHER},
+      </if>
+      <if test="record.soldiercheckstate != null">
+        soldiercheckstate = #{record.soldiercheckstate,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -364,7 +407,11 @@
       idurl = #{record.idurl,jdbcType=OTHER},
       soldierurl = #{record.soldierurl,jdbcType=OTHER},
       state = #{record.state,jdbcType=OTHER},
-      workstate = #{record.workstate,jdbcType=OTHER}
+      workstate = #{record.workstate,jdbcType=OTHER},
+      idbackurl = #{record.idbackurl,jdbcType=OTHER},
+      soldierbackurl = #{record.soldierbackurl,jdbcType=OTHER},
+      idcheckstate = #{record.idcheckstate,jdbcType=OTHER},
+      soldiercheckstate = #{record.soldiercheckstate,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -432,6 +479,18 @@
       <if test="workstate != null">
         workstate = #{workstate,jdbcType=OTHER},
       </if>
+      <if test="idbackurl != null">
+        idbackurl = #{idbackurl,jdbcType=OTHER},
+      </if>
+      <if test="soldierbackurl != null">
+        soldierbackurl = #{soldierbackurl,jdbcType=OTHER},
+      </if>
+      <if test="idcheckstate != null">
+        idcheckstate = #{idcheckstate,jdbcType=OTHER},
+      </if>
+      <if test="soldiercheckstate != null">
+        soldiercheckstate = #{soldiercheckstate,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -456,7 +515,11 @@
       idurl = #{idurl,jdbcType=OTHER},
       soldierurl = #{soldierurl,jdbcType=OTHER},
       state = #{state,jdbcType=OTHER},
-      workstate = #{workstate,jdbcType=OTHER}
+      workstate = #{workstate,jdbcType=OTHER},
+      idbackurl = #{idbackurl,jdbcType=OTHER},
+      soldierbackurl = #{soldierbackurl,jdbcType=OTHER},
+      idcheckstate = #{idcheckstate,jdbcType=OTHER},
+      soldiercheckstate = #{soldiercheckstate,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>
