@@ -120,7 +120,7 @@ public class LoginServiceImpl implements ILoginService{
 		//生成4位验证码
 		DataAccuracyUtil dataAccuracyUtil = new DataAccuracyUtil();
 		int verifyCode = dataAccuracyUtil.getVerifyCode();
-		smsVO.setVerifyCode(verifyCode);
+		smsVO.setVerifyCode(verifyCode+"");
 		if ("zc".equals(type)) {
 			//注册模块
 			smsVO.setModelId(UserCom.SMS_MODEL_ZC);

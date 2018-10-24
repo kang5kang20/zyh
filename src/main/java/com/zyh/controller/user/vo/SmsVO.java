@@ -8,7 +8,7 @@ public class SmsVO implements Serializable{
 	
 	private String code;
 	
-	private int verifyCode;
+	private String verifyCode;
 	
 	private String modelId;
 	
@@ -16,13 +16,16 @@ public class SmsVO implements Serializable{
 		return phone;
 	}
 
-	public int getVerifyCode() {
+
+	public String getVerifyCode() {
 		return verifyCode;
 	}
 
-	public void setVerifyCode(int verifyCode) {
+
+	public void setVerifyCode(String verifyCode) {
 		this.verifyCode = verifyCode;
 	}
+
 
 	public void setPhone(String phone) {
 		this.phone = phone;
