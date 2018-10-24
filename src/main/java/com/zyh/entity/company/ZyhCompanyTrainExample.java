@@ -794,6 +794,76 @@ public class ZyhCompanyTrainExample {
             addCriterion("companyname not between", value1, value2, "companyname");
             return (Criteria) this;
         }
+
+        public Criteria andTrainaddressIsNull() {
+            addCriterion("trainaddress is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressIsNotNull() {
+            addCriterion("trainaddress is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressEqualTo(String value) {
+            addCriterion("trainaddress =", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressNotEqualTo(String value) {
+            addCriterion("trainaddress <>", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressGreaterThan(String value) {
+            addCriterion("trainaddress >", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressGreaterThanOrEqualTo(String value) {
+            addCriterion("trainaddress >=", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressLessThan(String value) {
+            addCriterion("trainaddress <", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressLessThanOrEqualTo(String value) {
+            addCriterion("trainaddress <=", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressLike(String value) {
+            addCriterion("trainaddress like", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressNotLike(String value) {
+            addCriterion("trainaddress not like", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressIn(List<String> values) {
+            addCriterion("trainaddress in", values, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressNotIn(List<String> values) {
+            addCriterion("trainaddress not in", values, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressBetween(String value1, String value2) {
+            addCriterion("trainaddress between", value1, value2, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressNotBetween(String value1, String value2) {
+            addCriterion("trainaddress not between", value1, value2, "trainaddress");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

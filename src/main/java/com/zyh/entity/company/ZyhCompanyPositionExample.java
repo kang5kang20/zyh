@@ -1054,6 +1054,76 @@ public class ZyhCompanyPositionExample {
             addCriterion("state not between", value1, value2, "state");
             return (Criteria) this;
         }
+
+        public Criteria andWorkaddressIsNull() {
+            addCriterion("workaddress is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressIsNotNull() {
+            addCriterion("workaddress is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressEqualTo(String value) {
+            addCriterion("workaddress =", value, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressNotEqualTo(String value) {
+            addCriterion("workaddress <>", value, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressGreaterThan(String value) {
+            addCriterion("workaddress >", value, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressGreaterThanOrEqualTo(String value) {
+            addCriterion("workaddress >=", value, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressLessThan(String value) {
+            addCriterion("workaddress <", value, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressLessThanOrEqualTo(String value) {
+            addCriterion("workaddress <=", value, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressLike(String value) {
+            addCriterion("workaddress like", value, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressNotLike(String value) {
+            addCriterion("workaddress not like", value, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressIn(List<String> values) {
+            addCriterion("workaddress in", values, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressNotIn(List<String> values) {
+            addCriterion("workaddress not in", values, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressBetween(String value1, String value2) {
+            addCriterion("workaddress between", value1, value2, "workaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkaddressNotBetween(String value1, String value2) {
+            addCriterion("workaddress not between", value1, value2, "workaddress");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

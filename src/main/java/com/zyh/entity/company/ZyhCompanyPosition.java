@@ -29,8 +29,10 @@ public class ZyhCompanyPosition implements Serializable {
     private Float minmoney;
 
     private Float maxmoney;
-    
+
     private String state;
+
+    private String workaddress;
 
     private static final long serialVersionUID = 1L;
 
@@ -118,15 +120,7 @@ public class ZyhCompanyPosition implements Serializable {
         return optime;
     }
 
-    public String getState() {
-		return state;
-	}
-
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public void setOptime(Date optime) {
+    public void setOptime(Date optime) {
         this.optime = optime;
     }
 
@@ -144,6 +138,22 @@ public class ZyhCompanyPosition implements Serializable {
 
     public void setMaxmoney(Float maxmoney) {
         this.maxmoney = maxmoney;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
+    }
+
+    public String getWorkaddress() {
+        return workaddress;
+    }
+
+    public void setWorkaddress(String workaddress) {
+        this.workaddress = workaddress == null ? null : workaddress.trim();
     }
 
     @Override
@@ -165,6 +175,8 @@ public class ZyhCompanyPosition implements Serializable {
         sb.append(", optime=").append(optime);
         sb.append(", minmoney=").append(minmoney);
         sb.append(", maxmoney=").append(maxmoney);
+        sb.append(", state=").append(state);
+        sb.append(", workaddress=").append(workaddress);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
