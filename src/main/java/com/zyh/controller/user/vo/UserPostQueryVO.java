@@ -13,6 +13,10 @@ public class UserPostQueryVO extends PageInfo{
 	private String companyid;
 	
 	private String posttype;
+	
+	private String companyname;
+	
+	private String positionname;
 
 	public String getId() {
 		return id;
@@ -52,6 +56,22 @@ public class UserPostQueryVO extends PageInfo{
 
 	public void setPosttype(String posttype) {
 		this.posttype = posttype;
+	}
+
+	public String getCompanyname() {
+		return companyname;
+	}
+
+	public void setCompanyname(String companyname) {
+		this.companyname = companyname;
+	}
+
+	public String getPositionname() {
+		return positionname;
+	}
+
+	public void setPositionname(String positionname) {
+		this.positionname = positionname;
 	}
 	
 	
