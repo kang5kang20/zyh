@@ -11,6 +11,7 @@
     <result column="weburl" jdbcType="OTHER" property="weburl" />
     <result column="state" jdbcType="OTHER" property="state" />
     <result column="createtime" jdbcType="OTHER" property="createtime" />
+    <result column="companyname" jdbcType="OTHER" property="companyname" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -71,7 +72,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, name, label, labeltxt, classdesc, companyid, weburl, state, createtime
+    id, name, label, labeltxt, classdesc, companyid, weburl, state, createtime, companyname
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.company.ZyhCompanyTrainExample" resultMap="BaseResultMap">
     select
@@ -106,10 +107,12 @@
   <insert id="insert" parameterType="com.zyh.entity.company.ZyhCompanyTrain">
     insert into zyh_company_train (id, name, label, labeltxt, 
       classdesc, companyid, weburl, 
-      state, createtime)
+      state, createtime, companyname
+      )
     values (#{id,jdbcType=OTHER}, #{name,jdbcType=OTHER}, #{label,jdbcType=OTHER}, #{labeltxt,jdbcType=OTHER}, 
       #{classdesc,jdbcType=OTHER}, #{companyid,jdbcType=OTHER}, #{weburl,jdbcType=OTHER}, 
-      #{state,jdbcType=OTHER}, #{createtime,jdbcType=OTHER})
+      #{state,jdbcType=OTHER}, #{createtime,jdbcType=OTHER}, #{companyname,jdbcType=OTHER}
+      )
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.company.ZyhCompanyTrain">
     insert into zyh_company_train
@@ -141,6 +144,9 @@
       <if test="createtime != null">
         createtime,
       </if>
+      <if test="companyname != null">
+        companyname,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -169,6 +175,9 @@
       </if>
       <if test="createtime != null">
         #{createtime,jdbcType=OTHER},
+      </if>
+      <if test="companyname != null">
+        #{companyname,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -208,6 +217,9 @@
       <if test="record.createtime != null">
         createtime = #{record.createtime,jdbcType=OTHER},
       </if>
+      <if test="record.companyname != null">
+        companyname = #{record.companyname,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -223,7 +235,8 @@
       companyid = #{record.companyid,jdbcType=OTHER},
       weburl = #{record.weburl,jdbcType=OTHER},
       state = #{record.state,jdbcType=OTHER},
-      createtime = #{record.createtime,jdbcType=OTHER}
+      createtime = #{record.createtime,jdbcType=OTHER},
+      companyname = #{record.companyname,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -255,6 +268,9 @@
       <if test="createtime != null">
         createtime = #{createtime,jdbcType=OTHER},
       </if>
+      <if test="companyname != null">
+        companyname = #{companyname,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -267,7 +283,8 @@
       companyid = #{companyid,jdbcType=OTHER},
       weburl = #{weburl,jdbcType=OTHER},
       state = #{state,jdbcType=OTHER},
-      createtime = #{createtime,jdbcType=OTHER}
+      createtime = #{createtime,jdbcType=OTHER},
+      companyname = #{companyname,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
   

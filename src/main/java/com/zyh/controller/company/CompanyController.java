@@ -207,8 +207,8 @@ public class CompanyController {
 			if (null != positionQueryVO.getId() && !"".equals(positionQueryVO.getId())) {
 				criteria.andIdEqualTo(positionQueryVO.getId());
 			} else {
-				if (null != positionQueryVO.getCompanyId() && !"".equals(positionQueryVO.getCompanyId())) {
-					criteria.andCompanyidEqualTo(positionQueryVO.getCompanyId());
+				if (null != positionQueryVO.getCompanyid() && !"".equals(positionQueryVO.getCompanyid())) {
+					criteria.andCompanyidEqualTo(positionQueryVO.getCompanyid());
 				}
 				if (null != positionQueryVO.getCompanyName() && !"".equals(positionQueryVO.getCompanyName())) {
 					criteria.andCompnaynameLike("%" + positionQueryVO.getCompanyName() + "%");
@@ -380,7 +380,7 @@ public class CompanyController {
 	}
 
 	@RequestMapping("/queryTrainByPage.act")
-	public ResponeToWeb queryCompanyTrain(@RequestBody String json) {
+	public ResponeToWeb queryCompanyTrainByPage(@RequestBody String json) {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		Map<String, Object> map = new HashMap<>();
@@ -411,4 +411,5 @@ public class CompanyController {
 		}
 		return responeToWeb;
 	}
+	
 }

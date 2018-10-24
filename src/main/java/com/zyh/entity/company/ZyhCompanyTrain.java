@@ -17,28 +17,14 @@ public class ZyhCompanyTrain implements Serializable {
     private String companyid;
 
     private String weburl;
-    
+
     private String state;
 
     private Date createtime;
 
-    public String getState() {
-		return state;
-	}
+    private String companyname;
 
-	public void setState(String state) {
-		this.state = state;
-	}
-
-	public Date getCreatetime() {
-		return createtime;
-	}
-
-	public void setCreatetime(Date createtime) {
-		this.createtime = createtime;
-	}
-
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     public String getId() {
         return id;
@@ -96,6 +82,30 @@ public class ZyhCompanyTrain implements Serializable {
         this.weburl = weburl == null ? null : weburl.trim();
     }
 
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state == null ? null : state.trim();
+    }
+
+    public Date getCreatetime() {
+        return createtime;
+    }
+
+    public void setCreatetime(Date createtime) {
+        this.createtime = createtime;
+    }
+
+    public String getCompanyname() {
+        return companyname;
+    }
+
+    public void setCompanyname(String companyname) {
+        this.companyname = companyname == null ? null : companyname.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -109,6 +119,9 @@ public class ZyhCompanyTrain implements Serializable {
         sb.append(", classdesc=").append(classdesc);
         sb.append(", companyid=").append(companyid);
         sb.append(", weburl=").append(weburl);
+        sb.append(", state=").append(state);
+        sb.append(", createtime=").append(createtime);
+        sb.append(", companyname=").append(companyname);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

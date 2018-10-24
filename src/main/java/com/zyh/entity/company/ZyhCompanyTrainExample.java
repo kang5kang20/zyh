@@ -724,6 +724,76 @@ public class ZyhCompanyTrainExample {
             addCriterion("createtime not between", value1, value2, "createtime");
             return (Criteria) this;
         }
+
+        public Criteria andCompanynameIsNull() {
+            addCriterion("companyname is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameIsNotNull() {
+            addCriterion("companyname is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameEqualTo(String value) {
+            addCriterion("companyname =", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameNotEqualTo(String value) {
+            addCriterion("companyname <>", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameGreaterThan(String value) {
+            addCriterion("companyname >", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameGreaterThanOrEqualTo(String value) {
+            addCriterion("companyname >=", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameLessThan(String value) {
+            addCriterion("companyname <", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameLessThanOrEqualTo(String value) {
+            addCriterion("companyname <=", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameLike(String value) {
+            addCriterion("companyname like", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameNotLike(String value) {
+            addCriterion("companyname not like", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameIn(List<String> values) {
+            addCriterion("companyname in", values, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameNotIn(List<String> values) {
+            addCriterion("companyname not in", values, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameBetween(String value1, String value2) {
+            addCriterion("companyname between", value1, value2, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameNotBetween(String value1, String value2) {
+            addCriterion("companyname not between", value1, value2, "companyname");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

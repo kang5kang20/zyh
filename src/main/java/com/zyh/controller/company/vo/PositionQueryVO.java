@@ -6,7 +6,7 @@ public class PositionQueryVO extends PageInfo{
 	
 	private String id;
 	
-	private String companyId;
+	private String companyid;
 	
 	private String postionName;
 	
@@ -36,12 +36,13 @@ public class PositionQueryVO extends PageInfo{
 		this.id = id;
 	}
 
-	public String getCompanyId() {
-		return companyId;
+
+	public String getCompanyid() {
+		return companyid;
 	}
 
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
+	public void setCompanyid(String companyid) {
+		this.companyid = companyid;
 	}
 
 	public String getPostionName() {
