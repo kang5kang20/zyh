@@ -98,7 +98,7 @@ public class UserPostController {
 				flag = true;
 			}
 			if (flag) {
-				zyhUserPositionExample.setOrderByClause(" order by optime desc");
+				zyhUserPositionExample.setOrderByClause("optime desc");
 				List<ZyhUserPosition> list = userPostService.queryPostByExm(zyhUserPositionExample);
 				responeToWeb.setMsg("查询成功");
 				map.put("result", list);
