@@ -52,6 +52,6 @@
 	    <if test="_parameter != null">
 	      <include refid="Update_By_Example_Where_Clause" />
 	    </if>
-	    order by pubtime desc
+	    order by ifhome desc, pubtime desc
   </select>
 </mapper>
