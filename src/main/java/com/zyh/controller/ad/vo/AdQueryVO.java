@@ -8,6 +8,8 @@ public class AdQueryVO extends PageInfo{
 	private String title;
 	
 	private String createuser;
+	
+	private String ifground;
 
 	public String getAdid() {
 		return adid;
@@ -32,6 +34,11 @@ public class AdQueryVO extends PageInfo{
 	public void setCreateuser(String createuser) {
 		this.createuser = createuser;
 	}
-	
-	
+
+	public String getIfground() {
+		return ifground;
+	}
+	public void setIfground(String ifground) {
+		this.ifground = ifground;
+	}
 }
