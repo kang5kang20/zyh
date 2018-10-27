@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyh.dao.company.cus.ZyhCompanyPositionCusMapper">
+	<select id="getCompnayPositById" resultType="com.zyh.controller.company.vo.CompanyPositionVO">
+		SELECT t1.*,t2.label companylabel FROM zyh_company_position t1 LEFT JOIN
+		zyh_company t2 on t1.companyid = t2.id where t1.id =#{positionid};
+	</select>
+</mapper>

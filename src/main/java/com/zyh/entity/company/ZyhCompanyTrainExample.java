@@ -724,6 +724,146 @@ public class ZyhCompanyTrainExample {
             addCriterion("createtime not between", value1, value2, "createtime");
             return (Criteria) this;
         }
+
+        public Criteria andCompanynameIsNull() {
+            addCriterion("companyname is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameIsNotNull() {
+            addCriterion("companyname is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameEqualTo(String value) {
+            addCriterion("companyname =", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameNotEqualTo(String value) {
+            addCriterion("companyname <>", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameGreaterThan(String value) {
+            addCriterion("companyname >", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameGreaterThanOrEqualTo(String value) {
+            addCriterion("companyname >=", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameLessThan(String value) {
+            addCriterion("companyname <", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameLessThanOrEqualTo(String value) {
+            addCriterion("companyname <=", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameLike(String value) {
+            addCriterion("companyname like", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameNotLike(String value) {
+            addCriterion("companyname not like", value, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameIn(List<String> values) {
+            addCriterion("companyname in", values, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameNotIn(List<String> values) {
+            addCriterion("companyname not in", values, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameBetween(String value1, String value2) {
+            addCriterion("companyname between", value1, value2, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andCompanynameNotBetween(String value1, String value2) {
+            addCriterion("companyname not between", value1, value2, "companyname");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressIsNull() {
+            addCriterion("trainaddress is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressIsNotNull() {
+            addCriterion("trainaddress is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressEqualTo(String value) {
+            addCriterion("trainaddress =", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressNotEqualTo(String value) {
+            addCriterion("trainaddress <>", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressGreaterThan(String value) {
+            addCriterion("trainaddress >", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressGreaterThanOrEqualTo(String value) {
+            addCriterion("trainaddress >=", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressLessThan(String value) {
+            addCriterion("trainaddress <", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressLessThanOrEqualTo(String value) {
+            addCriterion("trainaddress <=", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressLike(String value) {
+            addCriterion("trainaddress like", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressNotLike(String value) {
+            addCriterion("trainaddress not like", value, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressIn(List<String> values) {
+            addCriterion("trainaddress in", values, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressNotIn(List<String> values) {
+            addCriterion("trainaddress not in", values, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressBetween(String value1, String value2) {
+            addCriterion("trainaddress between", value1, value2, "trainaddress");
+            return (Criteria) this;
+        }
+
+        public Criteria andTrainaddressNotBetween(String value1, String value2) {
+            addCriterion("trainaddress not between", value1, value2, "trainaddress");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

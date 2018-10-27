@@ -46,6 +46,14 @@ public class ZyhResumeBase implements Serializable {
 
     private String workstate;
 
+    private String idbackurl;
+
+    private String soldierbackurl;
+
+    private String idcheckstate;
+
+    private String soldiercheckstate;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -216,6 +224,38 @@ public class ZyhResumeBase implements Serializable {
         this.workstate = workstate == null ? null : workstate.trim();
     }
 
+    public String getIdbackurl() {
+        return idbackurl;
+    }
+
+    public void setIdbackurl(String idbackurl) {
+        this.idbackurl = idbackurl == null ? null : idbackurl.trim();
+    }
+
+    public String getSoldierbackurl() {
+        return soldierbackurl;
+    }
+
+    public void setSoldierbackurl(String soldierbackurl) {
+        this.soldierbackurl = soldierbackurl == null ? null : soldierbackurl.trim();
+    }
+
+    public String getIdcheckstate() {
+        return idcheckstate;
+    }
+
+    public void setIdcheckstate(String idcheckstate) {
+        this.idcheckstate = idcheckstate == null ? null : idcheckstate.trim();
+    }
+
+    public String getSoldiercheckstate() {
+        return soldiercheckstate;
+    }
+
+    public void setSoldiercheckstate(String soldiercheckstate) {
+        this.soldiercheckstate = soldiercheckstate == null ? null : soldiercheckstate.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -243,6 +283,10 @@ public class ZyhResumeBase implements Serializable {
         sb.append(", soldierurl=").append(soldierurl);
         sb.append(", state=").append(state);
         sb.append(", workstate=").append(workstate);
+        sb.append(", idbackurl=").append(idbackurl);
+        sb.append(", soldierbackurl=").append(soldierbackurl);
+        sb.append(", idcheckstate=").append(idcheckstate);
+        sb.append(", soldiercheckstate=").append(soldiercheckstate);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

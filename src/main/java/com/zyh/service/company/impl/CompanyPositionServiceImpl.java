@@ -7,7 +7,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zyh.controller.company.vo.CompanyPositionVO;
 import com.zyh.dao.company.ZyhCompanyPositionMapper;
+import com.zyh.dao.company.cus.ZyhCompanyPositionCusMapper;
 import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.common.Page;
 import com.zyh.entity.company.ZyhCompanyPosition;
@@ -20,6 +22,9 @@ public class CompanyPositionServiceImpl implements ICompanyPositionService{
 	
 	@Autowired
 	private ZyhCompanyPositionMapper zyhCompanyPositionMapper;
+	
+	@Autowired
+	private ZyhCompanyPositionCusMapper zyhCompanyPositionCusMapper;
 
 	@Override
 	public void addCompanyPosition(ZyhCompanyPosition zyhCompanyPosition) throws Exception {
@@ -68,6 +73,11 @@ public class CompanyPositionServiceImpl implements ICompanyPositionService{
 			page.setTotalRowCount(zyhCompanyPositionMapper.countByExample(zyhCompanyPositionExample));
 		map.put("pageResult",page);
 		return map;
+	}
+
+	@Override
+	public CompanyPositionVO selectCompanyPositionInfo(String positionid) throws Exception {
+		return zyhCompanyPositionCusMapper.getCompnayPositById(positionid);
 	}
 	
 	

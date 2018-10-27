@@ -12,7 +12,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sun.prism.Image;
+import com.zyh.controller.company.vo.CompanyPositionVO;
 import com.zyh.controller.company.vo.CompanyQueryVO;
 import com.zyh.controller.company.vo.PositionQueryVO;
 import com.zyh.controller.company.vo.TrainQueryVO;
@@ -91,8 +94,29 @@ public class CompanyController {
 		ObjectMapper om = new ObjectMapper();
 		Map<String, Object> map = new HashMap<String, Object>();
 		try {
-			String id = om.readTree("id").asText();
+			String id = om.readTree(json).get("id").asText();
 			if (null != id && !"".equals(id)) {
+				//查询公司下面 是否有职位或培训
+				ZyhCompanyPositionExample zyhCompanyPositionExample = new ZyhCompanyPositionExample();
+				Criteria criteria = zyhCompanyPositionExample.createCriteria();
+				criteria.andCompanyidEqualTo(id);
+				List<ZyhCompanyPosition> list = companyPositionService.selectCompanyPositionByExample(zyhCompanyPositionExample);
+				if (null!=list&&list.size()>0) {
+					log.error("删除失败：公司提供职位不为空" );
+					responeToWeb.setMsg(UserCom.ERROR_POSITIONNOTNULL);
+					responeToWeb.setSuccess(false);
+					return responeToWeb;
+				}
+				ZyhCompanyTrainExample zyhCompanyTrainExample = new ZyhCompanyTrainExample();
+				com.zyh.entity.company.ZyhCompanyTrainExample.Criteria criteria2 = zyhCompanyTrainExample.createCriteria();
+				criteria2.andCompanyidEqualTo(id);
+				List<ZyhCompanyTrain> list2 = companyTrainService.selectCompanyTrainByExample(zyhCompanyTrainExample);
+				if (null!=list2&&list2.size()>0) {
+					log.error("删除失败：公司提供培训不为空" );
+					responeToWeb.setMsg(UserCom.ERROR_TRAINNOTNULL);
+					responeToWeb.setSuccess(false);
+					return responeToWeb;
+				}
 				companyService.delCompanyById(id);
 				responeToWeb.setMsg("删除成功");
 				responeToWeb.setSuccess(true);
@@ -156,7 +180,7 @@ public class CompanyController {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			String id = om.readTree("id").asText();
+			String id = om.readTree(json).get("id").asText();
 			if (null != id && !"".equals(id)) {
 				companyPositionService.delCompanyPositionById(id);
 				responeToWeb.setMsg("删除成功");
@@ -186,8 +210,8 @@ public class CompanyController {
 			if (null != positionQueryVO.getId() && !"".equals(positionQueryVO.getId())) {
 				criteria.andIdEqualTo(positionQueryVO.getId());
 			} else {
-				if (null != positionQueryVO.getCompanyId() && !"".equals(positionQueryVO.getCompanyId())) {
-					criteria.andCompanyidEqualTo(positionQueryVO.getCompanyId());
+				if (null != positionQueryVO.getCompanyid() && !"".equals(positionQueryVO.getCompanyid())) {
+					criteria.andCompanyidEqualTo(positionQueryVO.getCompanyid());
 				}
 				if (null != positionQueryVO.getCompanyName() && !"".equals(positionQueryVO.getCompanyName())) {
 					criteria.andCompnaynameLike("%" + positionQueryVO.getCompanyName() + "%");
@@ -267,7 +291,7 @@ public class CompanyController {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
-			String id = om.readTree("id").asText();
+			String id = om.readTree(json).get("id").asText();
 			if (null != id && !"".equals(id)) {
 				companyTrainService.delCompanyTrainById(id);
 				responeToWeb.setMsg("删除成功");
@@ -299,6 +323,17 @@ public class CompanyController {
 			if (null != zyhCompany.getName() && !"".equals(zyhCompany.getName())) {
 				criteria.andNameLike("%" + zyhCompany.getName() + "%");
 			}
+			if (null !=zyhCompany.getType()&&!"".equals(zyhCompany.getType())) {
+				if ("0".equals(zyhCompany.getType())) {
+					//招聘企业
+					criteria.andLabelIsNotNull();
+					criteria.andLabelNotEqualTo("");
+				}else if ("1".equals(zyhCompany.getType())) {
+					//培训企业
+					criteria.andTrainlabelIsNotNull();
+					criteria.andTrainlabelNotEqualTo("");
+				}
+			}
 			List<ZyhCompany> list = companyService.selectCompanyByExample(zyhCompanyExample);
 			map.put("result", list);
 			responeToWeb.setMsg("查询成功");
@@ -327,6 +362,17 @@ public class CompanyController {
 			if (null != zyhCompany.getName() && !"".equals(zyhCompany.getName())) {
 				criteria.andNameLike("%" + zyhCompany.getName() + "%");
 			}
+			if (null !=zyhCompany.getType()&&!"".equals(zyhCompany.getType())) {
+				if ("0".equals(zyhCompany.getType())) {
+					//招聘企业
+					criteria.andLabelIsNotNull();
+					criteria.andLabelNotEqualTo("");
+				}else if ("1".equals(zyhCompany.getType())) {
+					//培训企业
+					criteria.andTrainlabelIsNotNull();
+					criteria.andTrainlabelNotEqualTo("");
+				}
+			}
 			map = companyService.selectCompanyByExamPage(zyhCompanyExample, zyhCompany.getPageNum(),
 					zyhCompany.getPages());
 			responeToWeb.setMsg("查询成功");
@@ -341,7 +387,7 @@ public class CompanyController {
 	}
 
 	@RequestMapping("/queryTrainByPage.act")
-	public ResponeToWeb queryCompanyTrain(@RequestBody String json) {
+	public ResponeToWeb queryCompanyTrainByPage(@RequestBody String json) {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		Map<String, Object> map = new HashMap<>();
@@ -368,6 +414,30 @@ public class CompanyController {
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/queryPositionInfo.act")
+	public ResponeToWeb queryPositionInfoById(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<>();
+		try {
+			String positionid = om.readTree(json).get("id").asText();
+			if (null!=positionid&&!"".equals(positionid)) {
+				CompanyPositionVO companyPositionVO = companyPositionService.selectCompanyPositionInfo(positionid);
+				responeToWeb.setSuccess(true);
+				map.put("result", companyPositionVO);
+				responeToWeb.setValue(map);
+			}else{
+				responeToWeb.setMsg(UserCom.ERROR_IDNULL);
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg("查询失败"+e.getMessage());
 			responeToWeb.setSuccess(false);
 		}
 		return responeToWeb;

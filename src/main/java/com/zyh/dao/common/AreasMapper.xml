@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zyh.dao.common.AreasMapper">
+  <resultMap id="BaseResultMap" type="com.zyh.entity.common.Areas">
+    <id column="id" jdbcType="OTHER" property="id" />
+    <result column="areaid" jdbcType="OTHER" property="areaid" />
+    <result column="area" jdbcType="OTHER" property="area" />
+    <result column="cityid" jdbcType="OTHER" property="cityid" />
+    <result column="cityname" jdbcType="OTHER" property="cityname" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
+    id, areaid, area, cityid, cityname
+  </sql>
+  <select id="selectByExample" parameterType="com.zyh.entity.common.AreasExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from areas
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from areas
+    where id = #{id,jdbcType=OTHER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from areas
+    where id = #{id,jdbcType=OTHER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.zyh.entity.common.AreasExample">
+    delete from areas
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.zyh.entity.common.Areas">
+    insert into areas (id, areaid, area, cityid, 
+      cityname)
+    values (#{id,jdbcType=OTHER}, #{areaid,jdbcType=OTHER}, #{area,jdbcType=OTHER}, #{cityid,jdbcType=OTHER}, 
+      #{cityname,jdbcType=OTHER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.zyh.entity.common.Areas">
+    insert into areas
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="areaid != null">
+        areaid,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="cityid != null">
+        cityid,
+      </if>
+      <if test="cityname != null">
+        cityname,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=OTHER},
+      </if>
+      <if test="areaid != null">
+        #{areaid,jdbcType=OTHER},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=OTHER},
+      </if>
+      <if test="cityid != null">
+        #{cityid,jdbcType=OTHER},
+      </if>
+      <if test="cityname != null">
+        #{cityname,jdbcType=OTHER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.zyh.entity.common.AreasExample" resultType="java.lang.Long">
+    select count(*) from areas
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update areas
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=OTHER},
+      </if>
+      <if test="record.areaid != null">
+        areaid = #{record.areaid,jdbcType=OTHER},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=OTHER},
+      </if>
+      <if test="record.cityid != null">
+        cityid = #{record.cityid,jdbcType=OTHER},
+      </if>
+      <if test="record.cityname != null">
+        cityname = #{record.cityname,jdbcType=OTHER},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map">
+    update areas
+    set id = #{record.id,jdbcType=OTHER},
+      areaid = #{record.areaid,jdbcType=OTHER},
+      area = #{record.area,jdbcType=OTHER},
+      cityid = #{record.cityid,jdbcType=OTHER},
+      cityname = #{record.cityname,jdbcType=OTHER}
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.zyh.entity.common.Areas">
+    update areas
+    <set>
+      <if test="areaid != null">
+        areaid = #{areaid,jdbcType=OTHER},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=OTHER},
+      </if>
+      <if test="cityid != null">
+        cityid = #{cityid,jdbcType=OTHER},
+      </if>
+      <if test="cityname != null">
+        cityname = #{cityname,jdbcType=OTHER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=OTHER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.zyh.entity.common.Areas">
+    update areas
+    set areaid = #{areaid,jdbcType=OTHER},
+      area = #{area,jdbcType=OTHER},
+      cityid = #{cityid,jdbcType=OTHER},
+      cityname = #{cityname,jdbcType=OTHER}
+    where id = #{id,jdbcType=OTHER}
+  </update>
+</mapper>

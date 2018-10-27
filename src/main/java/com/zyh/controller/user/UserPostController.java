@@ -98,7 +98,7 @@ public class UserPostController {
 				flag = true;
 			}
 			if (flag) {
-				zyhUserPositionExample.setOrderByClause(" order by optime desc");
+				zyhUserPositionExample.setOrderByClause("optime desc");
 				List<ZyhUserPosition> list = userPostService.queryPostByExm(zyhUserPositionExample);
 				responeToWeb.setMsg("查询成功");
 				map.put("result", list);
@@ -139,6 +139,12 @@ public class UserPostController {
 			}
 			if (null != userPostQueryVO.getPosttype() && !"".equals(userPostQueryVO.getPosttype())) {
 				criteria.andPosttypeEqualTo(userPostQueryVO.getPosttype());
+			}
+			if (null!=userPostQueryVO.getCompanyname()&&!"".equals(userPostQueryVO.getCompanyname())) {
+				criteria.andCompanynameLike("%"+userPostQueryVO.getCompanyname()+"&");
+			}
+			if (null!=userPostQueryVO.getPositionname()&&!"".equals(userPostQueryVO.getPositionname())) {
+				criteria.andPositionnameLike("%"+userPostQueryVO.getPositionname()+"&");
 			}
 			map = userPostService.queryPostByPage(zyhUserPositionExample, userPostQueryVO.getPageNum(), userPostQueryVO.getPageSize());
 			responeToWeb.setSuccess(true);

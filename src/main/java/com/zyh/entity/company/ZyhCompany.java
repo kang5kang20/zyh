@@ -34,6 +34,8 @@ public class ZyhCompany implements Serializable {
     private String contacts;
 
     private String contphone;
+    
+    private String type;
 
     private static final long serialVersionUID = 1L;
 
@@ -157,7 +159,15 @@ public class ZyhCompany implements Serializable {
         this.contacts = contacts == null ? null : contacts.trim();
     }
 
-    public String getContphone() {
+    public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getContphone() {
         return contphone;
     }
 
