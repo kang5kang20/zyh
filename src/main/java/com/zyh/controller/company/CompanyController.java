@@ -6,21 +6,17 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.collections.FastArrayList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sun.prism.Image;
 import com.zyh.controller.company.vo.CompanyPositionVO;
 import com.zyh.controller.company.vo.CompanyQueryVO;
 import com.zyh.controller.company.vo.PositionQueryVO;
 import com.zyh.controller.company.vo.TrainQueryVO;
-import com.zyh.controller.news.vo.NewsQueryVO;
 import com.zyh.controller.user.common.UserCom;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.company.ZyhCompany;
@@ -30,7 +26,6 @@ import com.zyh.entity.company.ZyhCompanyPositionExample;
 import com.zyh.entity.company.ZyhCompanyPositionExample.Criteria;
 import com.zyh.entity.company.ZyhCompanyTrain;
 import com.zyh.entity.company.ZyhCompanyTrainExample;
-import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.user.ZyhUserPosition;
 import com.zyh.entity.user.ZyhUserPositionExample;
 import com.zyh.entity.usercollect.ZyhUserCollect;
@@ -39,7 +34,6 @@ import com.zyh.service.company.ICompanyPositionService;
 import com.zyh.service.company.ICompanyService;
 import com.zyh.service.company.ICompanyTrainService;
 import com.zyh.service.user.IUserPostService;
-import com.zyh.service.user.impl.UserPostServiceImpl;
 import com.zyh.service.usercollect.IUserCollectService;
 
 @RestController
