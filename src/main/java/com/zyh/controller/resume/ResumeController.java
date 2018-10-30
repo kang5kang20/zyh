@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.zyh.controller.resume.vo.ResumeBaseQueryVO;
 import com.zyh.controller.resume.vo.ResumeVO;
 import com.zyh.controller.user.common.UserCom;
 import com.zyh.entity.common.ResponeToWeb;
@@ -687,4 +688,19 @@ public class ResumeController {
 		return responeToWeb;
 	}
 	
+	@RequestMapping("/queryResumeBaseByPage")
+	public ResponeToWeb queryResumeBaseByPage(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			ResumeBaseQueryVO resumeBaseQueryVO = om.readValue(json, ResumeBaseQueryVO.class);
+			
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
 }
