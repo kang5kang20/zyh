@@ -20,6 +20,8 @@ public class UserCom {
     public static final String ERROR_VERICODENULL = "vericodenull";
     //手机号不存在
     public static final String ERROR_NOPHONE = "phonenonexist";
+    //手机号不存在
+    public static final String ERROR_PHONEEXIST = "phoneexist";
   //用户名为空
     public static final String ERROR_USERNAMEEMPTY = "usernamenull";
     //用户名为空
@@ -54,7 +56,8 @@ public class UserCom {
     public static final String SMS_MODEL_ZC = "SMS_147720192";
     //用户修改密码模板
     public static final String SMS_MODEL_XG = "SMS_147720191";
-    
+    //绑定手机号
+    public static final String SMS_MODEL_BD = "SMS_149421536";
     //position不为空
     public static final String ERROR_POSITIONNOTNULL = "positionnotnull";
   //用户没投该职位

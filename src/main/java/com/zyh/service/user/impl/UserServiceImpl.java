@@ -64,9 +64,8 @@ public class UserServiceImpl implements IUserService{
 	@Override
 	public boolean checkUserBySMS(ZyhUser zyhUser) throws Exception {
 		String phone = zyhUser.getPhone();
-		String vericode =zyhUser.getVericode();
 		String username = zyhUser.getUsername();
-		String key = phone+"xg";
+		String key = phone+zyhUser.getType();
 		if (!redisUtil.exists(key)) {
 			//redis没有说明已经过期了
 			throw new Exception(UserCom.ERROR_CACHETIMEOUT);

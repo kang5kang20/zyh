@@ -159,6 +159,11 @@ public class UserLoginController {
 				responeToWeb.setSuccess(false);
 				return responeToWeb;
 			}
+			if (null==zyhUser.getType()||"".equals(zyhUser.getType())) {
+				responeToWeb.setMsg(UserCom.ERROR_TYPEEMPTY);
+				responeToWeb.setSuccess(false);
+				return responeToWeb;
+			}
 			if (userService.checkUserBySMS(zyhUser)) {
 				responeToWeb.setMsg("ok");
 				responeToWeb.setSuccess(true);
