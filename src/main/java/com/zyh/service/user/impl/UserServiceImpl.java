@@ -36,8 +36,8 @@ public class UserServiceImpl implements IUserService{
 	}
 
 	@Override
-	public void updateUser(ZyhUser user,ZyhUserExample zyhUserExample) throws Exception {
-		zyhUserMapper.updateByExampleSelective(user, zyhUserExample);
+	public int updateUser(ZyhUser user,ZyhUserExample zyhUserExample) throws Exception {
+		return zyhUserMapper.updateByExampleSelective(user, zyhUserExample);
 	}
 
 	@Override
@@ -84,6 +84,13 @@ public class UserServiceImpl implements IUserService{
 			throw new Exception(UserCom.ERROR_USERNAMENON);
 		}
 		return true;
+	}
+
+	@Override
+	public int changePassword(ZyhUserExample zyhUserExample, String password) throws Exception {
+		ZyhUser zyhUser = new ZyhUser();
+		zyhUser.setPassword(password);
+		return zyhUserMapper.updateByExampleSelective(zyhUser, zyhUserExample);
 	}
 	
 	

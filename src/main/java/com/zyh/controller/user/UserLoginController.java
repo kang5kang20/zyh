@@ -1,9 +1,11 @@
 package com.zyh.controller.user;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
+import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +24,7 @@ import com.zyh.redis.RedisUtil;
 import com.zyh.service.user.ILoginService;
 import com.zyh.service.user.IUserService;
 import com.zyh.service.user.impl.UserServiceImpl;
+import com.zyh.utils.MD5Util;
 
 @RestController
 @RequestMapping("/user")
@@ -159,6 +162,108 @@ public class UserLoginController {
 			if (userService.checkUserBySMS(zyhUser)) {
 				responeToWeb.setMsg("ok");
 				responeToWeb.setSuccess(true);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg("失败:" + e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/changep.act")
+	public ResponeToWeb changep(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
+			if (userService.checkUserBySMS(zyhUser)) {
+				responeToWeb.setMsg("验证成功");
+				responeToWeb.setSuccess(true);
+			}else{
+				responeToWeb.setMsg("验证失败");
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg("失败:" + e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/changepassword.act")
+	public ResponeToWeb changepassword(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
+			ZyhUserExample zyhUserExample = new ZyhUserExample();
+			if (null==zyhUser.getPassword()||"".equals(zyhUser.getPassword())) {
+				throw new Exception(UserCom.ERROR_PWEMPTY);
+			}
+			String password = MD5Util.EncoderByMd5(zyhUser.getPassword());
+			if (null==zyhUser.getId()||"".equals(zyhUser.getId())) {
+				boolean flag = false;
+				if (null!=zyhUser.getUsername()&&!"".equals(zyhUser.getUsername())) {
+					Criteria criteria = zyhUserExample.createCriteria();
+					criteria.andUsernameEqualTo(zyhUser.getUsername());
+					flag = true;
+				}else if (null!=zyhUser.getPhone()&&!"".equals(zyhUser.getPhone())) {
+					Criteria criteria = zyhUserExample.createCriteria();
+					criteria.andPhoneEqualTo(zyhUser.getPhone());
+					flag = true;
+				}
+				if (!flag) {
+					throw new Exception(UserCom.ERROR_USERNOTEXIST);
+				}
+				if (userService.changePassword(zyhUserExample,password)>0) {
+					responeToWeb.setMsg("更新成功!");
+			    	responeToWeb.setSuccess(true);
+				}else{
+			    	responeToWeb.setMsg(UserCom.ERROR_USERNOTEXIST);
+			    	responeToWeb.setSuccess(false);
+			    }
+			}else {
+				Criteria criteria = zyhUserExample.createCriteria();
+				criteria.andIdEqualTo(zyhUser.getId());
+			    if(userService.changePassword(zyhUserExample,password)>0){
+			    	responeToWeb.setMsg("更新成功!");
+			    	responeToWeb.setSuccess(true);
+			    }else{
+			    	responeToWeb.setMsg(UserCom.ERROR_USERNOTEXIST);
+			    	responeToWeb.setSuccess(false);
+			    }
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg("失败:" + e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/updateUser.act")
+	public ResponeToWeb updateUser(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
+			zyhUser.setPassword(null);
+			if (null!=zyhUser.getId()&&!"".equals(zyhUser.getId())) {
+				ZyhUserExample zyhUserExample = new ZyhUserExample();
+				Criteria criteria = zyhUserExample.createCriteria();
+				criteria.andIdEqualTo(zyhUser.getId());
+				if(userService.updateUser(zyhUser, zyhUserExample)>0){
+			    	responeToWeb.setMsg("更新成功!");
+			    	responeToWeb.setSuccess(true);
+			    }else{
+			    	responeToWeb.setMsg(UserCom.ERROR_USERNOTEXIST);
+			    	responeToWeb.setSuccess(false);
+			    }
+			}else{
+				responeToWeb.setMsg(UserCom.ERROR_USERIDNULL);
+		    	responeToWeb.setSuccess(false);
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());

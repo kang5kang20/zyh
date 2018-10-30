@@ -57,7 +57,12 @@ public class UserCom {
     
     //position不为空
     public static final String ERROR_POSITIONNOTNULL = "positionnotnull";
+  //用户没投该职位
+    public static final String ERROR_USERNOPOSITION = "usernotposition";
   //position不为空
     public static final String ERROR_TRAINNOTNULL = "trainnotnull";
+    
+  //usernotfind
+    public static final String ERROR_USERNOTEXIST = "usernitexist";
     
 }
