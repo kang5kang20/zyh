@@ -1,12 +1,15 @@
 package com.zyh.service.resume.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zyh.dao.resume.ZyhResumeBaseMapper;
 import com.zyh.dao.util.UUidUtil;
+import com.zyh.entity.common.Page;
 import com.zyh.entity.resume.ZyhResumeBase;
 import com.zyh.entity.resume.ZyhResumeBaseExample;
 import com.zyh.service.resume.IResumeBaseService;
@@ -50,6 +53,19 @@ public class ResumeBaseServiceImpl implements IResumeBaseService{
 	@Override
 	public void delResumeBaseByExample(ZyhResumeBaseExample zyhResumeBaseExample) throws Exception {
 		zyhResumeBaseMapper.deleteByExample(zyhResumeBaseExample);
+	}
+
+	@Override
+	public Map<String, Object> findResumeBaseByPage(ZyhResumeBaseExample zyhResumeBaseExample, int pageNum,
+			int pageSize) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		List<ZyhResumeBase> list = zyhResumeBaseMapper.selectResumeBasePage(zyhResumeBaseExample, pageNum, pageSize);
+		map.put("result", list);
+		Page page = new Page();
+		page.setPageNum(pageNum);
+		page.setTotalRowCount(zyhResumeBaseMapper.countByExample(zyhResumeBaseExample));
+		map.put("pageResult", page);
+		return map;
 	}
 	
 	
