@@ -20,6 +20,7 @@ import com.zyh.controller.company.vo.CompanyPositionVO;
 import com.zyh.controller.company.vo.CompanyQueryVO;
 import com.zyh.controller.company.vo.PositionQueryVO;
 import com.zyh.controller.company.vo.TrainQueryVO;
+import com.zyh.controller.news.vo.NewsQueryVO;
 import com.zyh.controller.user.common.UserCom;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.company.ZyhCompany;
@@ -29,13 +30,17 @@ import com.zyh.entity.company.ZyhCompanyPositionExample;
 import com.zyh.entity.company.ZyhCompanyPositionExample.Criteria;
 import com.zyh.entity.company.ZyhCompanyTrain;
 import com.zyh.entity.company.ZyhCompanyTrainExample;
+import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.user.ZyhUserPosition;
 import com.zyh.entity.user.ZyhUserPositionExample;
+import com.zyh.entity.usercollect.ZyhUserCollect;
+import com.zyh.entity.usercollect.ZyhUserCollectExample;
 import com.zyh.service.company.ICompanyPositionService;
 import com.zyh.service.company.ICompanyService;
 import com.zyh.service.company.ICompanyTrainService;
 import com.zyh.service.user.IUserPostService;
 import com.zyh.service.user.impl.UserPostServiceImpl;
+import com.zyh.service.usercollect.IUserCollectService;
 
 @RestController
 @RequestMapping("/company")
@@ -54,6 +59,9 @@ public class CompanyController {
 	
 	@Autowired
 	private IUserPostService userPostServiceImpl;
+	
+	@Autowired
+	private IUserCollectService userCollectService;
 
 	@RequestMapping("/addCompany.act")
 	public ResponeToWeb addCompany(@RequestBody String json) {
@@ -460,6 +468,48 @@ public class CompanyController {
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			responeToWeb.setMsg("查询失败"+e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/findCompanyById.act")
+	public ResponeToWeb findCompanyById(@RequestBody String json) {
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			CompanyQueryVO queryvo = om.readValue(json, CompanyQueryVO.class);
+			if (null != queryvo.getId() && !"".equals(queryvo.getId())) {
+				ZyhCompany company = companyService.selectByPrimaryKey(queryvo.getId());
+				if(null == company ){
+					responeToWeb.setMsg("查询失败,信息缺失");
+					responeToWeb.setSuccess(false);
+				}else{
+					map.put("result", company);
+					if(null != queryvo.getUserid() && !"".equals(queryvo.getUserid())){
+						ZyhUserCollectExample example = new ZyhUserCollectExample();
+						com.zyh.entity.usercollect.ZyhUserCollectExample.Criteria criteria = example.createCriteria();
+						criteria.andArticleidEqualTo(queryvo.getId());
+						criteria.andUseridEqualTo(queryvo.getUserid());
+						List<ZyhUserCollect> collected = userCollectService.findUserCollectList(example);
+						if(null!=collected && collected.size()>0){
+							map.put("ifcollect", "1");
+						}else{
+							map.put("ifcollect", "0");
+						}
+					}
+					responeToWeb.setMsg("查询成功");
+					responeToWeb.setSuccess(true);
+					responeToWeb.setValue(map);
+				}
+			} else {
+				responeToWeb.setMsg("查询失败,信息缺失");
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg("查询失败");
 			responeToWeb.setSuccess(false);
 		}
 		return responeToWeb;
