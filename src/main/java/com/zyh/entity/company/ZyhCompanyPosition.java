@@ -34,6 +34,12 @@ public class ZyhCompanyPosition implements Serializable {
 
     private String workaddress;
 
+    private String workarea;
+
+    private String workprovince;
+
+    private String education;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -156,6 +162,30 @@ public class ZyhCompanyPosition implements Serializable {
         this.workaddress = workaddress == null ? null : workaddress.trim();
     }
 
+    public String getWorkarea() {
+        return workarea;
+    }
+
+    public void setWorkarea(String workarea) {
+        this.workarea = workarea == null ? null : workarea.trim();
+    }
+
+    public String getWorkprovince() {
+        return workprovince;
+    }
+
+    public void setWorkprovince(String workprovince) {
+        this.workprovince = workprovince == null ? null : workprovince.trim();
+    }
+
+    public String getEducation() {
+        return education;
+    }
+
+    public void setEducation(String education) {
+        this.education = education == null ? null : education.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -177,6 +207,9 @@ public class ZyhCompanyPosition implements Serializable {
         sb.append(", maxmoney=").append(maxmoney);
         sb.append(", state=").append(state);
         sb.append(", workaddress=").append(workaddress);
+        sb.append(", workarea=").append(workarea);
+        sb.append(", workprovince=").append(workprovince);
+        sb.append(", education=").append(education);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

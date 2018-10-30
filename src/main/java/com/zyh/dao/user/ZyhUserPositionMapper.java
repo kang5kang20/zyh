@@ -1,10 +1,12 @@
 package com.zyh.dao.user;
 
-import com.zyh.entity.company.ZyhCompanyTrainExample;
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.zyh.controller.user.vo.UserPostVO;
 import com.zyh.entity.user.ZyhUserPosition;
 import com.zyh.entity.user.ZyhUserPositionExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ZyhUserPositionMapper {
     long countByExample(ZyhUserPositionExample example);
@@ -31,4 +33,13 @@ public interface ZyhUserPositionMapper {
     
     List<ZyhUserPosition> selectUserPostByPage(@Param("example") ZyhUserPositionExample example,
 			@Param("pageNumKey") int pageNum, @Param("pageSizeKey") int pageSize)throws Exception;
+    
+    
+    List<UserPostVO> selectUserPostPositionByPage(@Param("example") ZyhUserPositionExample example,
+			@Param("pageNumKey") int pageNum, @Param("pageSizeKey") int pageSize)throws Exception;
+    
+    List<UserPostVO> selectUserPostTrainByPage(@Param("example") ZyhUserPositionExample example,
+			@Param("pageNumKey") int pageNum, @Param("pageSizeKey") int pageSize)throws Exception;
+    
+    
 }
