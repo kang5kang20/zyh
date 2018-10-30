@@ -710,7 +710,7 @@ public class ResumeController {
 		return responeToWeb;
 	}
 
-	@RequestMapping("/queryResumeBaseByPage")
+	@RequestMapping("/queryResumeBaseByPage.act")
 	public ResponeToWeb queryResumeBaseByPage(@RequestBody String json) {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
