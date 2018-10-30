@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.collections.FastArrayList;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,9 +29,13 @@ import com.zyh.entity.company.ZyhCompanyPositionExample;
 import com.zyh.entity.company.ZyhCompanyPositionExample.Criteria;
 import com.zyh.entity.company.ZyhCompanyTrain;
 import com.zyh.entity.company.ZyhCompanyTrainExample;
+import com.zyh.entity.user.ZyhUserPosition;
+import com.zyh.entity.user.ZyhUserPositionExample;
 import com.zyh.service.company.ICompanyPositionService;
 import com.zyh.service.company.ICompanyService;
 import com.zyh.service.company.ICompanyTrainService;
+import com.zyh.service.user.IUserPostService;
+import com.zyh.service.user.impl.UserPostServiceImpl;
 
 @RestController
 @RequestMapping("/company")
@@ -46,6 +51,9 @@ public class CompanyController {
 
 	@Autowired
 	private ICompanyTrainService companyTrainService;
+	
+	@Autowired
+	private IUserPostService userPostServiceImpl;
 
 	@RequestMapping("/addCompany.act")
 	public ResponeToWeb addCompany(@RequestBody String json) {
@@ -426,11 +434,25 @@ public class CompanyController {
 		Map<String, Object> map = new HashMap<>();
 		try {
 			String positionid = om.readTree(json).get("id").asText();
+			String userid = om.readTree(json).get("userid").asText();
 			if (null!=positionid&&!"".equals(positionid)) {
 				CompanyPositionVO companyPositionVO = companyPositionService.selectCompanyPositionInfo(positionid);
-				responeToWeb.setSuccess(true);
-				map.put("result", companyPositionVO);
-				responeToWeb.setValue(map);
+				if (null!=userid&&!"".equals(userid)) {
+				//查询该用户是否投递了职位
+					ZyhUserPositionExample zyhUserPositionExample = new ZyhUserPositionExample();
+					com.zyh.entity.user.ZyhUserPositionExample.Criteria criteria =zyhUserPositionExample.createCriteria();
+					criteria.andUseridEqualTo(userid);
+					criteria.andPositionidEqualTo(positionid);
+					List<ZyhUserPosition> list = userPostServiceImpl.queryPostByExm(zyhUserPositionExample);
+					if (null!=list&&list.size()>0) {
+						companyPositionVO.setIfpost("1");
+					}else{
+						companyPositionVO.setIfpost("0");
+					}
+					responeToWeb.setSuccess(true);
+					map.put("result", companyPositionVO);
+					responeToWeb.setValue(map);
+				}
 			}else{
 				responeToWeb.setMsg(UserCom.ERROR_IDNULL);
 				responeToWeb.setSuccess(false);

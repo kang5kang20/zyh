@@ -137,6 +137,17 @@ public class LoginServiceImpl implements ILoginService{
 				throw new Exception(UserCom.ERROR_NOPHONE);
 			}
 		}
+		if ("bd".equals(type)) {
+			smsVO.setModelId(UserCom.SMS_MODEL_BD);
+			//验证手机号是否存在
+			ZyhUserExample zyhUserExample = new ZyhUserExample();
+			Criteria criteria = zyhUserExample.createCriteria();
+			criteria.andPhoneEqualTo(phone);
+			List<ZyhUser> list = zyhUserMapper.selectByExample(zyhUserExample);
+			if (null!=list||list.size()>0) {
+				throw new Exception(UserCom.ERROR_PHONEEXIST);
+			}
+		}
 		String key = phone+type;
 		//调用sms服务
 		SendSmsResponse sendSmsResponse = smsServiceImpl.sendSms(smsVO);
