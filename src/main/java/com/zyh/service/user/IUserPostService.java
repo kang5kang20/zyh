@@ -14,5 +14,10 @@ public interface IUserPostService {
 	
 	public List<ZyhUserPosition> queryPostByExm(ZyhUserPositionExample zyhUserPositionExample)throws Exception;
 	
-	public Map<String, Object> queryPostByPage(ZyhUserPositionExample zyhUserPositionExample,int pageNum,int pageSize)throws Exception;		
+	public Map<String, Object> queryPostByPage(ZyhUserPositionExample zyhUserPositionExample,int pageNum,int pageSize)throws Exception;	
+	
+	public Map<String,Object> queryPostPositionInfoByPage(ZyhUserPositionExample zyhUserPositionExample,int pageNum,int pageSize)throws Exception;
+	
+	public Map<String,Object> queryPostTrainInfoByPage(ZyhUserPositionExample zyhUserPositionExample,int pageNum,int pageSize)throws Exception;
+	         
 }

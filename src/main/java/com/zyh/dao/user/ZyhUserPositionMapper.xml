@@ -313,4 +313,22 @@
 	    </if>
 	    order by optime desc
   </select>
+  
+  <select id="selectUserPostPositionByPage"  resultType="com.zyh.controller.user.vo.UserPostVO">
+	   select t1.*,t2.fixyear fixyear,t2.moneyarea moneyarea,t2.workaddress workaddress
+	    from zyh_user_position t1 left join zyh_company_position t2 ON t1.positionid = t2.id 
+	   <if test="_parameter != null">
+	      <include refid="Update_By_Example_Where_Clause" />
+	    </if>
+	    order by optime desc
+  </select>
+  
+  <select id="selectUserPostTrainByPage"  resultType="com.zyh.controller.user.vo.UserPostVO">
+	   select t1.*,t2.labeltxt labeltxt,t2.classdesc classdesc
+	    from zyh_user_position t1 left join zyh_company_train t2 ON t1.positionid = t2.id 
+	    <if test="_parameter != null">
+	      <include refid="Update_By_Example_Where_Clause" />
+	    </if>
+	    order by optime desc
+  </select>
 </mapper>

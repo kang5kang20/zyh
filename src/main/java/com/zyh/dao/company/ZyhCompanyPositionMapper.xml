@@ -17,6 +17,9 @@
     <result column="maxmoney" jdbcType="OTHER" property="maxmoney" />
     <result column="state" jdbcType="OTHER" property="state" />
     <result column="workaddress" jdbcType="OTHER" property="workaddress" />
+    <result column="workarea" jdbcType="OTHER" property="workarea" />
+    <result column="workprovince" jdbcType="OTHER" property="workprovince" />
+    <result column="education" jdbcType="OTHER" property="education" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -78,7 +81,8 @@
   </sql>
   <sql id="Base_Column_List">
     id, companyid, compnayname, positionname, workcity, fixyear, maxage, moneyarea, desct, 
-    required, optime, minmoney, maxmoney, state, workaddress
+    required, optime, minmoney, maxmoney, state, workaddress, workarea, workprovince, 
+    education
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.company.ZyhCompanyPositionExample" resultMap="BaseResultMap">
     select
@@ -115,13 +119,15 @@
       positionname, workcity, fixyear, 
       maxage, moneyarea, desct, 
       required, optime, minmoney, 
-      maxmoney, state, workaddress
+      maxmoney, state, workaddress, 
+      workarea, workprovince, education
       )
     values (#{id,jdbcType=OTHER}, #{companyid,jdbcType=OTHER}, #{compnayname,jdbcType=OTHER}, 
       #{positionname,jdbcType=OTHER}, #{workcity,jdbcType=OTHER}, #{fixyear,jdbcType=OTHER}, 
       #{maxage,jdbcType=OTHER}, #{moneyarea,jdbcType=OTHER}, #{desct,jdbcType=OTHER}, 
       #{required,jdbcType=OTHER}, #{optime,jdbcType=OTHER}, #{minmoney,jdbcType=OTHER}, 
-      #{maxmoney,jdbcType=OTHER}, #{state,jdbcType=OTHER}, #{workaddress,jdbcType=OTHER}
+      #{maxmoney,jdbcType=OTHER}, #{state,jdbcType=OTHER}, #{workaddress,jdbcType=OTHER}, 
+      #{workarea,jdbcType=OTHER}, #{workprovince,jdbcType=OTHER}, #{education,jdbcType=OTHER}
       )
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.company.ZyhCompanyPosition">
@@ -172,6 +178,15 @@
       <if test="workaddress != null">
         workaddress,
       </if>
+      <if test="workarea != null">
+        workarea,
+      </if>
+      <if test="workprovince != null">
+        workprovince,
+      </if>
+      <if test="education != null">
+        education,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -218,6 +233,15 @@
       </if>
       <if test="workaddress != null">
         #{workaddress,jdbcType=OTHER},
+      </if>
+      <if test="workarea != null">
+        #{workarea,jdbcType=OTHER},
+      </if>
+      <if test="workprovince != null">
+        #{workprovince,jdbcType=OTHER},
+      </if>
+      <if test="education != null">
+        #{education,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -275,6 +299,15 @@
       <if test="record.workaddress != null">
         workaddress = #{record.workaddress,jdbcType=OTHER},
       </if>
+      <if test="record.workarea != null">
+        workarea = #{record.workarea,jdbcType=OTHER},
+      </if>
+      <if test="record.workprovince != null">
+        workprovince = #{record.workprovince,jdbcType=OTHER},
+      </if>
+      <if test="record.education != null">
+        education = #{record.education,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -296,7 +329,10 @@
       minmoney = #{record.minmoney,jdbcType=OTHER},
       maxmoney = #{record.maxmoney,jdbcType=OTHER},
       state = #{record.state,jdbcType=OTHER},
-      workaddress = #{record.workaddress,jdbcType=OTHER}
+      workaddress = #{record.workaddress,jdbcType=OTHER},
+      workarea = #{record.workarea,jdbcType=OTHER},
+      workprovince = #{record.workprovince,jdbcType=OTHER},
+      education = #{record.education,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -346,6 +382,15 @@
       <if test="workaddress != null">
         workaddress = #{workaddress,jdbcType=OTHER},
       </if>
+      <if test="workarea != null">
+        workarea = #{workarea,jdbcType=OTHER},
+      </if>
+      <if test="workprovince != null">
+        workprovince = #{workprovince,jdbcType=OTHER},
+      </if>
+      <if test="education != null">
+        education = #{education,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -364,7 +409,10 @@
       minmoney = #{minmoney,jdbcType=OTHER},
       maxmoney = #{maxmoney,jdbcType=OTHER},
       state = #{state,jdbcType=OTHER},
-      workaddress = #{workaddress,jdbcType=OTHER}
+      workaddress = #{workaddress,jdbcType=OTHER},
+      workarea = #{workarea,jdbcType=OTHER},
+      workprovince = #{workprovince,jdbcType=OTHER},
+      education = #{education,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
   

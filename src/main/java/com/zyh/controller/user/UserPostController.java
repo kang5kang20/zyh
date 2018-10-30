@@ -146,7 +146,14 @@ public class UserPostController {
 			if (null!=userPostQueryVO.getPositionname()&&!"".equals(userPostQueryVO.getPositionname())) {
 				criteria.andPositionnameLike("%"+userPostQueryVO.getPositionname()+"&");
 			}
-			map = userPostService.queryPostByPage(zyhUserPositionExample, userPostQueryVO.getPageNum(), userPostQueryVO.getPageSize());
+			if (null != userPostQueryVO.getPosttype() && !"".equals(userPostQueryVO.getPosttype())&&"0".equals(userPostQueryVO.getPosttype())) {
+				map = userPostService.queryPostPositionInfoByPage(zyhUserPositionExample, userPostQueryVO.getPageNum(), userPostQueryVO.getPageSize());
+						
+			}else if (null != userPostQueryVO.getPosttype() && !"".equals(userPostQueryVO.getPosttype())&&"1".equals(userPostQueryVO.getPosttype())) {
+				map = userPostService.queryPostTrainInfoByPage(zyhUserPositionExample, userPostQueryVO.getPageNum(), userPostQueryVO.getPageSize());
+			}else {
+				map = userPostService.queryPostByPage(zyhUserPositionExample, userPostQueryVO.getPageNum(), userPostQueryVO.getPageSize());
+			}
 			responeToWeb.setSuccess(true);
 			responeToWeb.setMsg("查询成功");
 			responeToWeb.setValue(map);

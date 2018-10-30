@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.zyh.controller.user.common.UserCom;
+import com.zyh.controller.user.vo.UserPostVO;
 import com.zyh.dao.user.ZyhUserPositionMapper;
 import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.common.Page;
@@ -55,6 +56,32 @@ public class UserPostServiceImpl implements IUserPostService{
 			throws Exception {
 		Map<String, Object> map = new HashMap<>();
 		List<ZyhUserPosition> list = zyhUserPositionMapper.selectUserPostByPage(zyhUserPositionExample, pageNum, pageSize);
+		map.put("result", list);
+		Page page = new Page();
+		page.setPageNum(pageNum);
+		page.setTotalRowCount(zyhUserPositionMapper.countByExample(zyhUserPositionExample));
+		map.put("pageResult", page);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> queryPostPositionInfoByPage(ZyhUserPositionExample zyhUserPositionExample, int pageNum,
+			int pageSize) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		List<UserPostVO> list = zyhUserPositionMapper.selectUserPostPositionByPage(zyhUserPositionExample, pageNum, pageSize);
+		map.put("result", list);
+		Page page = new Page();
+		page.setPageNum(pageNum);
+		page.setTotalRowCount(zyhUserPositionMapper.countByExample(zyhUserPositionExample));
+		map.put("pageResult", page);
+		return map;
+	}
+
+	@Override
+	public Map<String, Object> queryPostTrainInfoByPage(ZyhUserPositionExample zyhUserPositionExample, int pageNum,
+			int pageSize) throws Exception {
+		Map<String, Object> map = new HashMap<>();
+		List<UserPostVO> list = zyhUserPositionMapper.selectUserPostTrainByPage(zyhUserPositionExample, pageNum, pageSize);
 		map.put("result", list);
 		Page page = new Page();
 		page.setPageNum(pageNum);

@@ -1,9 +1,11 @@
 package com.zyh.service.area;
 
-import java.util.Map;
+import java.util.List;
+
+import com.zyh.controller.area.vo.ProvinceVO;
 
 public interface IAreaService {
 	
-	public Map<String, Object> findAreaByCity()throws Exception;
+	public List<ProvinceVO> findAllArea()throws Exception;
 	
 }
