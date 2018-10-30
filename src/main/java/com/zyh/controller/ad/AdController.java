@@ -156,13 +156,19 @@ public class AdController {
 			zyhAdExample.setOrderByClause("createtime desc");
 			//上架才允许查
 			Criteria criteria = zyhAdExample.createCriteria();
-			criteria.andIfgroundEqualTo(true);
 			if(null!=queryvo){
 				if(null!=queryvo.getTitle() && "" !=queryvo.getTitle()){
 					criteria.andTitleLike("%"+queryvo.getTitle()+"%");
 				}
 				if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
 					criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
+				}
+				if(null != queryvo.getIfground() && "" !=queryvo.getIfground()){
+					if("1".equals(queryvo.getIfground())){
+						criteria.andIfgroundEqualTo(true);
+					}else if("0".equals(queryvo.getIfground())){
+						criteria.andIfgroundEqualTo(false);
+					}
 				}
 			}
 			List<ZyhAd> Adlist = adService.findAdList(zyhAdExample);
@@ -194,6 +200,13 @@ public class AdController {
 			}
 			if(null!=queryvo.getCreateuser() && "" !=queryvo.getCreateuser()){
 				criteria.andCreateuserLike("%"+queryvo.getCreateuser()+"%");
+			}
+			if(null != queryvo.getIfground() && "" !=queryvo.getIfground()){
+				if("1".equals(queryvo.getIfground())){
+					criteria.andIfgroundEqualTo(true);
+				}else if("0".equals(queryvo.getIfground())){
+					criteria.andIfgroundEqualTo(false);
+				}
 			}
 			Map retmap = 
 					adService.findAdListByPage(zyhAdExample, 

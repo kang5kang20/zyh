@@ -3,6 +3,8 @@ package com.zyh.entity.ad;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ZyhAd implements Serializable {
     private String id;
 
@@ -29,7 +31,8 @@ public class ZyhAd implements Serializable {
     public void setId(String id) {
         this.id = id == null ? null : id.trim();
     }
-
+    
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCreatetime() {
         return createtime;
     }
