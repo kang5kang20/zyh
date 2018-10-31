@@ -1,9 +1,11 @@
 package com.zyh.dao.resume;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
 import com.zyh.entity.resume.ZyhResumeBase;
 import com.zyh.entity.resume.ZyhResumeBaseExample;
-import java.util.List;
-import org.apache.ibatis.annotations.Param;
 
 public interface ZyhResumeBaseMapper {
     long countByExample(ZyhResumeBaseExample example);
@@ -27,4 +29,7 @@ public interface ZyhResumeBaseMapper {
     int updateByPrimaryKeySelective(ZyhResumeBase record);
 
     int updateByPrimaryKey(ZyhResumeBase record);
+    
+    List<ZyhResumeBase> selectResumeBasePage(@Param("example") ZyhResumeBaseExample example,
+			@Param("pageNumKey") int pageNum, @Param("pageSizeKey") int pageSize)throws Exception;
 }

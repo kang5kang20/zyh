@@ -141,10 +141,10 @@ public class UserPostController {
 				criteria.andPosttypeEqualTo(userPostQueryVO.getPosttype());
 			}
 			if (null!=userPostQueryVO.getCompanyname()&&!"".equals(userPostQueryVO.getCompanyname())) {
-				criteria.andCompanynameLike("%"+userPostQueryVO.getCompanyname()+"&");
+				criteria.andCompanynameLike("%"+userPostQueryVO.getCompanyname()+"%");
 			}
 			if (null!=userPostQueryVO.getPositionname()&&!"".equals(userPostQueryVO.getPositionname())) {
-				criteria.andPositionnameLike("%"+userPostQueryVO.getPositionname()+"&");
+				criteria.andPositionnameLike("%"+userPostQueryVO.getPositionname()+"%");
 			}
 			if (null != userPostQueryVO.getPosttype() && !"".equals(userPostQueryVO.getPosttype())&&"0".equals(userPostQueryVO.getPosttype())) {
 				map = userPostService.queryPostPositionInfoByPage(zyhUserPositionExample, userPostQueryVO.getPageNum(), userPostQueryVO.getPageSize());
