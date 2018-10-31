@@ -80,6 +80,7 @@ public class LoginServiceImpl implements ILoginService{
 				zyhUser.setId(id);
 			}
 			Date date = new Date();
+			zyhUser.setUsername(zyhUser.getPhone());
 			zyhUser.setCreatetime(date);
 			zyhUserMapper.insertSelective(zyhUser);
 			zyhUser.setPassword(null);

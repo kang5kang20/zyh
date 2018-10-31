@@ -1,5 +1,6 @@
 package com.zyh.controller.user;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -270,6 +271,43 @@ public class UserLoginController {
 				responeToWeb.setMsg(UserCom.ERROR_USERIDNULL);
 		    	responeToWeb.setSuccess(false);
 			}
+		} catch (Exception e) {
+			log.error(e.getMessage());
+			responeToWeb.setMsg("失败:" + e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/addUser.act")
+	public ResponeToWeb addUser(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
+			if (null==zyhUser.getPhone()||"".equals(zyhUser.getPhone())) {
+				throw new Exception(UserCom.ERROR_PHONEEMPTY);
+			}
+			if (null==zyhUser.getUsername()||"".equals(zyhUser.getUsername())) {
+				throw new Exception(UserCom.ERROR_USERNAMENULL);
+			}
+			if (null==zyhUser.getPassword()||"".equals(zyhUser.getPassword())) {
+				throw new Exception(UserCom.ERROR_PWEMPTY);
+			}
+			if (null==zyhUser.getVericode()||"".equals(zyhUser.getVericode())) {
+				throw new Exception(UserCom.ERROR_VERICODENULL);
+			}
+			zyhUser.setType("zc");
+			if (userService.checkUserBySMS(zyhUser)) {
+				String password = MD5Util.EncoderByMd5(zyhUser.getPassword());
+				zyhUser.setPassword(password);
+				Date date = new Date();
+				zyhUser.setCreatetime(date);
+				userService.addUser(zyhUser);
+				responeToWeb.setMsg("新增成功");
+				responeToWeb.setSuccess(true);
+			}
+			
 		} catch (Exception e) {
 			log.error(e.getMessage());
 			responeToWeb.setMsg("失败:" + e.getMessage());
