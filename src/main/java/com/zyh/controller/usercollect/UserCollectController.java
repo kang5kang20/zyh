@@ -346,7 +346,7 @@ public class UserCollectController {
 				return responeToWeb;
 			}
 			ZyhUserCollectExample zyhUserCollectExample = new ZyhUserCollectExample();
-			zyhUserCollectExample.setOrderByClause("title");
+			zyhUserCollectExample.setOrderByClause("comtype,title");
 			Criteria criteria = zyhUserCollectExample.createCriteria();
 			criteria.andUseridEqualTo(userid);
 			//收藏类似是23是收藏的课程不是文章

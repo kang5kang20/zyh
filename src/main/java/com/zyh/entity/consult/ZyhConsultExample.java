@@ -654,6 +654,146 @@ public class ZyhConsultExample {
             addCriterion("state not between", value1, value2, "state");
             return (Criteria) this;
         }
+
+        public Criteria andUseridIsNull() {
+            addCriterion("userid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridIsNotNull() {
+            addCriterion("userid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridEqualTo(String value) {
+            addCriterion("userid =", value, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridNotEqualTo(String value) {
+            addCriterion("userid <>", value, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridGreaterThan(String value) {
+            addCriterion("userid >", value, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridGreaterThanOrEqualTo(String value) {
+            addCriterion("userid >=", value, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridLessThan(String value) {
+            addCriterion("userid <", value, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridLessThanOrEqualTo(String value) {
+            addCriterion("userid <=", value, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridLike(String value) {
+            addCriterion("userid like", value, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridNotLike(String value) {
+            addCriterion("userid not like", value, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridIn(List<String> values) {
+            addCriterion("userid in", values, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridNotIn(List<String> values) {
+            addCriterion("userid not in", values, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridBetween(String value1, String value2) {
+            addCriterion("userid between", value1, value2, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andUseridNotBetween(String value1, String value2) {
+            addCriterion("userid not between", value1, value2, "userid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridIsNull() {
+            addCriterion("handuserid is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridIsNotNull() {
+            addCriterion("handuserid is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridEqualTo(String value) {
+            addCriterion("handuserid =", value, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridNotEqualTo(String value) {
+            addCriterion("handuserid <>", value, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridGreaterThan(String value) {
+            addCriterion("handuserid >", value, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridGreaterThanOrEqualTo(String value) {
+            addCriterion("handuserid >=", value, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridLessThan(String value) {
+            addCriterion("handuserid <", value, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridLessThanOrEqualTo(String value) {
+            addCriterion("handuserid <=", value, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridLike(String value) {
+            addCriterion("handuserid like", value, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridNotLike(String value) {
+            addCriterion("handuserid not like", value, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridIn(List<String> values) {
+            addCriterion("handuserid in", values, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridNotIn(List<String> values) {
+            addCriterion("handuserid not in", values, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridBetween(String value1, String value2) {
+            addCriterion("handuserid between", value1, value2, "handuserid");
+            return (Criteria) this;
+        }
+
+        public Criteria andHanduseridNotBetween(String value1, String value2) {
+            addCriterion("handuserid not between", value1, value2, "handuserid");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

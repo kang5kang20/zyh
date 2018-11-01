@@ -3,8 +3,6 @@ package com.zyh.entity.usercollect;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class ZyhUserCollect implements Serializable {
     private String id;
 
@@ -19,6 +17,8 @@ public class ZyhUserCollect implements Serializable {
     private String imgurl;
 
     private Date pubtime;
+
+    private String comtype;
 
     private static final long serialVersionUID = 1L;
 
@@ -70,13 +70,20 @@ public class ZyhUserCollect implements Serializable {
         this.imgurl = imgurl == null ? null : imgurl.trim();
     }
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getPubtime() {
         return pubtime;
     }
 
     public void setPubtime(Date pubtime) {
         this.pubtime = pubtime;
+    }
+
+    public String getComtype() {
+        return comtype;
+    }
+
+    public void setComtype(String comtype) {
+        this.comtype = comtype == null ? null : comtype.trim();
     }
 
     @Override
@@ -92,6 +99,7 @@ public class ZyhUserCollect implements Serializable {
         sb.append(", title=").append(title);
         sb.append(", imgurl=").append(imgurl);
         sb.append(", pubtime=").append(pubtime);
+        sb.append(", comtype=").append(comtype);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
