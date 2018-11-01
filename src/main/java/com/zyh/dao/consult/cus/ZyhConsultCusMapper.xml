@@ -10,6 +10,8 @@
     <result column="answer" jdbcType="OTHER" property="answer" />
     <result column="handuser" jdbcType="OTHER" property="handuser" />
     <result column="state" jdbcType="OTHER" property="state" />
+    <result column="userid" jdbcType="OTHER" property="userid" />
+    <result column="handuserid" jdbcType="OTHER" property="handuserid" />
   </resultMap>
   <sql id="Update_By_Example_Where_Clause">
     <where>
@@ -41,9 +43,9 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, phone, createuser, createtime, question, answer, handuser, state
+    id, phone, createuser, createtime, question, answer, handuser, state, userid, handuserid
   </sql>
-    <select id="selectByPageNumSize"  resultMap="BaseResultMap">
+  <select id="selectByPageNumSize"  resultMap="BaseResultMap">
 	   select
 	    <include refid="Base_Column_List" />
 	    from zyh_consult

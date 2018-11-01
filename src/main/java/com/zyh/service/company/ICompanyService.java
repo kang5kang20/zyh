@@ -21,4 +21,6 @@ public interface ICompanyService {
 	public void delCompanyByExample(ZyhCompanyExample zyhCompanyExample)throws Exception;
 	
 	public Map<String, Object> selectCompanyByExamPage(ZyhCompanyExample zyhCompanyExample,int pageNum,int pageSize)throws Exception;
+	
+	public ZyhCompany selectByPrimaryKey(String id) throws Exception;
 }

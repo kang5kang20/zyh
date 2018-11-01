@@ -9,6 +9,7 @@
     <result column="title" jdbcType="OTHER" property="title" />
     <result column="imgurl" jdbcType="OTHER" property="imgurl" />
     <result column="pubtime" jdbcType="OTHER" property="pubtime" />
+    <result column="comtype" jdbcType="OTHER" property="comtype" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -69,7 +70,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userid, articleid, arttype, title, imgurl, pubtime
+    id, userid, articleid, arttype, title, imgurl, pubtime, comtype
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.usercollect.ZyhUserCollectExample" resultMap="BaseResultMap">
     select
@@ -103,11 +104,11 @@
   </delete>
   <insert id="insert" parameterType="com.zyh.entity.usercollect.ZyhUserCollect">
     insert into zyh_user_collect (id, userid, articleid, 
-      arttype, title, imgurl, pubtime
-      )
+      arttype, title, imgurl, pubtime, 
+      comtype)
     values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{articleid,jdbcType=OTHER}, 
-      #{arttype,jdbcType=OTHER}, #{title,jdbcType=OTHER}, #{imgurl,jdbcType=OTHER}, #{pubtime,jdbcType=OTHER}
-      )
+      #{arttype,jdbcType=OTHER}, #{title,jdbcType=OTHER}, #{imgurl,jdbcType=OTHER}, #{pubtime,jdbcType=OTHER}, 
+      #{comtype,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.usercollect.ZyhUserCollect">
     insert into zyh_user_collect
@@ -133,6 +134,9 @@
       <if test="pubtime != null">
         pubtime,
       </if>
+      <if test="comtype != null">
+        comtype,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -155,6 +159,9 @@
       </if>
       <if test="pubtime != null">
         #{pubtime,jdbcType=OTHER},
+      </if>
+      <if test="comtype != null">
+        #{comtype,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -188,6 +195,9 @@
       <if test="record.pubtime != null">
         pubtime = #{record.pubtime,jdbcType=OTHER},
       </if>
+      <if test="record.comtype != null">
+        comtype = #{record.comtype,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -201,7 +211,8 @@
       arttype = #{record.arttype,jdbcType=OTHER},
       title = #{record.title,jdbcType=OTHER},
       imgurl = #{record.imgurl,jdbcType=OTHER},
-      pubtime = #{record.pubtime,jdbcType=OTHER}
+      pubtime = #{record.pubtime,jdbcType=OTHER},
+      comtype = #{record.comtype,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -227,6 +238,9 @@
       <if test="pubtime != null">
         pubtime = #{pubtime,jdbcType=OTHER},
       </if>
+      <if test="comtype != null">
+        comtype = #{comtype,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -237,7 +251,8 @@
       arttype = #{arttype,jdbcType=OTHER},
       title = #{title,jdbcType=OTHER},
       imgurl = #{imgurl,jdbcType=OTHER},
-      pubtime = #{pubtime,jdbcType=OTHER}
+      pubtime = #{pubtime,jdbcType=OTHER},
+      comtype = #{comtype,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>

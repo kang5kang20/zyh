@@ -3,8 +3,6 @@ package com.zyh.entity.consult;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 public class ZyhConsult implements Serializable {
     private String id;
 
@@ -21,6 +19,10 @@ public class ZyhConsult implements Serializable {
     private String handuser;
 
     private String state;
+
+    private String userid;
+
+    private String handuserid;
 
     private static final long serialVersionUID = 1L;
 
@@ -48,7 +50,6 @@ public class ZyhConsult implements Serializable {
         this.createuser = createuser == null ? null : createuser.trim();
     }
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getCreatetime() {
         return createtime;
     }
@@ -89,6 +90,22 @@ public class ZyhConsult implements Serializable {
         this.state = state == null ? null : state.trim();
     }
 
+    public String getUserid() {
+        return userid;
+    }
+
+    public void setUserid(String userid) {
+        this.userid = userid == null ? null : userid.trim();
+    }
+
+    public String getHanduserid() {
+        return handuserid;
+    }
+
+    public void setHanduserid(String handuserid) {
+        this.handuserid = handuserid == null ? null : handuserid.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -103,6 +120,8 @@ public class ZyhConsult implements Serializable {
         sb.append(", answer=").append(answer);
         sb.append(", handuser=").append(handuser);
         sb.append(", state=").append(state);
+        sb.append(", userid=").append(userid);
+        sb.append(", handuserid=").append(handuserid);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

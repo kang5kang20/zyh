@@ -8,6 +8,8 @@ public class ConsultQueryVO  extends PageInfo{
 	private String phone;
 	
 	private String state;
+	
+	private String userid;
 
 	public String getCreateuser() {
 		return createuser;
@@ -32,6 +34,12 @@ public class ConsultQueryVO  extends PageInfo{
 	public void setState(String state) {
 		this.state = state;
 	}
-	
-	
+
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
 }

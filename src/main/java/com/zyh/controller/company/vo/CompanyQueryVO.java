@@ -6,6 +6,7 @@ public class CompanyQueryVO extends PageInfo {
 	private String id;
 	private String name;
 	private String type;
+	private String userid;
 
 	public String getType() {
 		return type;
@@ -31,4 +32,13 @@ public class CompanyQueryVO extends PageInfo {
 		this.name = name;
 	}
 
+	public String getUserid() {
+		return userid;
+	}
+
+	public void setUserid(String userid) {
+		this.userid = userid;
+	}
+
+	
 }

@@ -584,6 +584,76 @@ public class ZyhUserCollectExample {
             addCriterion("pubtime not between", value1, value2, "pubtime");
             return (Criteria) this;
         }
+
+        public Criteria andComtypeIsNull() {
+            addCriterion("comtype is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeIsNotNull() {
+            addCriterion("comtype is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeEqualTo(String value) {
+            addCriterion("comtype =", value, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeNotEqualTo(String value) {
+            addCriterion("comtype <>", value, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeGreaterThan(String value) {
+            addCriterion("comtype >", value, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeGreaterThanOrEqualTo(String value) {
+            addCriterion("comtype >=", value, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeLessThan(String value) {
+            addCriterion("comtype <", value, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeLessThanOrEqualTo(String value) {
+            addCriterion("comtype <=", value, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeLike(String value) {
+            addCriterion("comtype like", value, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeNotLike(String value) {
+            addCriterion("comtype not like", value, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeIn(List<String> values) {
+            addCriterion("comtype in", values, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeNotIn(List<String> values) {
+            addCriterion("comtype not in", values, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeBetween(String value1, String value2) {
+            addCriterion("comtype between", value1, value2, "comtype");
+            return (Criteria) this;
+        }
+
+        public Criteria andComtypeNotBetween(String value1, String value2) {
+            addCriterion("comtype not between", value1, value2, "comtype");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

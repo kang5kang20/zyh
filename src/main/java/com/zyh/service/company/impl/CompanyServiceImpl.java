@@ -67,5 +67,10 @@ public class CompanyServiceImpl implements ICompanyService {
 		map.put("pageResult", page);
 		return map;
 	}
+	
+	@Override
+	public ZyhCompany selectByPrimaryKey(String id) throws Exception{
+		return zyhCompanyMapper.selectByPrimaryKey(id);
+	}
 
 }

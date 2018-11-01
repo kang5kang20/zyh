@@ -14,9 +14,11 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.usercollect.vo.UserCollectSearchVO;
+import com.zyh.dao.company.ZyhCompanyMapper;
 import com.zyh.entity.classcourse.ZyhClassCourse;
 import com.zyh.entity.classteacher.ZyhClassTeacher;
 import com.zyh.entity.common.ResponeToWeb;
+import com.zyh.entity.company.ZyhCompany;
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.policy.ZyhPolicy;
 import com.zyh.entity.usercollect.ZyhUserCollect;
@@ -24,6 +26,7 @@ import com.zyh.entity.usercollect.ZyhUserCollectExample;
 import com.zyh.entity.usercollect.ZyhUserCollectExample.Criteria;
 import com.zyh.service.classcourse.IClassCourseService;
 import com.zyh.service.classteacher.IClassTeacherService;
+import com.zyh.service.company.ICompanyService;
 import com.zyh.service.news.INewsService;
 import com.zyh.service.policy.IPolicyService;
 import com.zyh.service.usercollect.IUserCollectService;
@@ -48,6 +51,12 @@ public class UserCollectController {
 	
 	@Autowired
 	private IClassTeacherService classTeacherService ;
+	
+	@Autowired
+	private ICompanyService companyService;
+	
+	@Autowired
+	private ZyhCompanyMapper zyhCompanyMapper;
 	
 	/**
 	 * 收藏文章
@@ -106,6 +115,16 @@ public class UserCollectController {
 						usercollect.setImgurl((null==course.getImgurl()||"".equals(course.getImgurl()))?"":course.getImgurl());
 						usercollect.setTitle(course.getTitle());
 						usercollect.setPubtime(course.getCreatetime());
+					}else{
+						responeToWeb.setMsg("收藏失败,信息缺失");
+						responeToWeb.setSuccess(false);
+						return responeToWeb;
+					}
+				}else if("4".equals(usercollect.getArttype())){
+					ZyhCompany company = zyhCompanyMapper.selectByPrimaryKey(usercollect.getArticleid());
+					if(null!=company){
+						usercollect.setImgurl((null==company.getLogo()||"".equals(company.getLogo()))?"":company.getLogo());
+						usercollect.setTitle(company.getName());
 					}else{
 						responeToWeb.setMsg("收藏失败,信息缺失");
 						responeToWeb.setSuccess(false);
@@ -235,7 +254,11 @@ public class UserCollectController {
 			Criteria criteria = zyhUserCollectExample.createCriteria();
 			criteria.andUseridEqualTo(userid);
 			//收藏类似是3是收藏的课程不是文章
-			criteria.andArttypeNotEqualTo("1");
+//			criteria.andArttypeNotEqualTo("1");
+			List<String> typelist = new ArrayList<String>();
+			typelist.add("2");
+			typelist.add("3");
+			criteria.andArttypeIn(typelist);
 			List<ZyhUserCollect> collectlist = userCollectService.findUserCollectList(zyhUserCollectExample);
 			map.put("result", collectlist);
 			responeToWeb.setMsg("查询成功");
@@ -294,6 +317,45 @@ public class UserCollectController {
 				responeToWeb.setMsg("查询失败,信息缺失");
 				responeToWeb.setSuccess(false);
 			}
+		} catch (Exception e) {
+			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg("查询失败");
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	
+	/**
+	 * 查询用户收藏的文章
+	 * @param json
+	 * @return
+	 */
+	@RequestMapping("/findCompanyCollectList.do")
+	public ResponeToWeb findCompanyCollectList(@RequestBody String json) {
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			//标题查询
+			JsonNode node = om.readTree(json);
+			String userid =  node.get("userid").asText();
+			if(null==userid || "".equals(userid)){
+				responeToWeb.setMsg("查询失败,信息缺失");
+				responeToWeb.setSuccess(false);
+				return responeToWeb;
+			}
+			ZyhUserCollectExample zyhUserCollectExample = new ZyhUserCollectExample();
+			zyhUserCollectExample.setOrderByClause("comtype,title");
+			Criteria criteria = zyhUserCollectExample.createCriteria();
+			criteria.andUseridEqualTo(userid);
+			//收藏类似是23是收藏的课程不是文章
+			criteria.andArttypeEqualTo("4");
+			List<ZyhUserCollect> collectlist = userCollectService.findUserCollectList(zyhUserCollectExample);
+			map.put("result", collectlist);
+			responeToWeb.setMsg("查询成功");
+			responeToWeb.setSuccess(true);
+			responeToWeb.setValue(map);
 		} catch (Exception e) {
 			log.error("查询失败：" + e.getMessage());
 			responeToWeb.setMsg("查询失败");
