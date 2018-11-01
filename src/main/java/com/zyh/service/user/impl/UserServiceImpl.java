@@ -75,12 +75,14 @@ public class UserServiceImpl implements IUserService{
 			throw new Exception(UserCom.ERROR_VERICODEERROR);
 		}
 		//查询用户是否存在
-		ZyhUserExample zyhUserExample = new ZyhUserExample();
-		Criteria criteria = zyhUserExample.createCriteria();
-		criteria.andUsernameEqualTo(username);
-		List<ZyhUser> list = zyhUserMapper.selectByExample(zyhUserExample);
-		if (null==list||list.size()<=0) {
-			throw new Exception(UserCom.ERROR_USERNAMENON);
+		if ("xg".equals(zyhUser.getType())) {
+			ZyhUserExample zyhUserExample = new ZyhUserExample();
+			Criteria criteria = zyhUserExample.createCriteria();
+			criteria.andUsernameEqualTo(username);
+			List<ZyhUser> list = zyhUserMapper.selectByExample(zyhUserExample);
+			if (null==list||list.size()<=0) {
+				throw new Exception(UserCom.ERROR_USERNAMENON);
+			}
 		}
 		return true;
 	}
