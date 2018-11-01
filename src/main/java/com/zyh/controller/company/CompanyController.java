@@ -405,7 +405,7 @@ public class CompanyController {
 			TrainQueryVO zyhCompanyTrain = om.readValue(json, TrainQueryVO.class);
 			ZyhCompanyTrainExample zyhCompanyTrainExample = new ZyhCompanyTrainExample();
 			com.zyh.entity.company.ZyhCompanyTrainExample.Criteria criteria = zyhCompanyTrainExample.createCriteria();
-			if (null!=zyhCompanyTrain.getId()&&"".equals(zyhCompanyTrain.getId())) {
+			if (null!=zyhCompanyTrain.getId()&&!"".equals(zyhCompanyTrain.getId())) {
 				criteria.andIdEqualTo(zyhCompanyTrain.getId());
 			}
 			if (null!=zyhCompanyTrain.getName()&&!"".equals(zyhCompanyTrain.getName())) {
