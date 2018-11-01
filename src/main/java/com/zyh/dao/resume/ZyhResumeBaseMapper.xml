@@ -523,15 +523,13 @@
     where id = #{id,jdbcType=OTHER}
   </update>
   
-  
-  <select id=" selectResumeBasePage"  resultMap="BaseResultMap">
-	  select
-	    <include refid="Base_Column_List" />
-	    from zyh_resume_base
-	    <if test="_parameter != null">
-	      <include refid="Update_By_Example_Where_Clause" />
-	    </if>
-	    order by name desc
+  <select id="selectResumeBasePage" parameterType="com.zyh.entity.resume.ZyhResumeBaseExample" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from zyh_resume_base
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+      order by name desc
   </select>
- 
 </mapper>
