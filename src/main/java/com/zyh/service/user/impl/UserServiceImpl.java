@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.zyh.controller.user.common.UserCom;
 import com.zyh.controller.user.vo.SmsVO;
 import com.zyh.dao.user.ZyhUserMapper;
+import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.common.Page;
 import com.zyh.entity.user.ZyhUser;
 import com.zyh.entity.user.ZyhUserExample;
@@ -31,6 +32,10 @@ public class UserServiceImpl implements IUserService{
 		if (null!=user.getPassword()&&"".equals(user.getPassword())) {
 			String psMd5 = MD5Util.EncoderByMd5(user.getPassword());
 			user.setPassword(psMd5);
+		}
+		if (null ==user.getId()||"".equals(user.getId())) {
+			String id = UUidUtil.getUUid();
+			user.setId(id);
 		}
 		zyhUserMapper.insertSelective(user);
 	}
