@@ -125,6 +125,11 @@ public class UserCollectController {
 					if(null!=company){
 						usercollect.setImgurl((null==company.getLogo()||"".equals(company.getLogo()))?"":company.getLogo());
 						usercollect.setTitle(company.getName());
+						usercollect.setCity((null==company.getCity()||"".equals(company.getCity()))?"":company.getCity());
+						usercollect.setArea((null==company.getArea()||"".equals(company.getArea()))?"":company.getArea());
+						usercollect.setStreet((null==company.getStreet()||"".equals(company.getStreet()))?"":company.getStreet());
+						usercollect.setLabel((null==company.getLabel()||"".equals(company.getLabel()))?"":company.getLabel());
+						usercollect.setTrainlabel((null==company.getTrainlabel()||"".equals(company.getTrainlabel()))?"":company.getTrainlabel());
 					}else{
 						responeToWeb.setMsg("收藏失败,信息缺失");
 						responeToWeb.setSuccess(false);
