@@ -864,6 +864,146 @@ public class ZyhUserPositionExample {
             addCriterion("posttype not between", value1, value2, "posttype");
             return (Criteria) this;
         }
+
+        public Criteria andWorkprovinceIsNull() {
+            addCriterion("workprovince is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceIsNotNull() {
+            addCriterion("workprovince is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceEqualTo(String value) {
+            addCriterion("workprovince =", value, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceNotEqualTo(String value) {
+            addCriterion("workprovince <>", value, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceGreaterThan(String value) {
+            addCriterion("workprovince >", value, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceGreaterThanOrEqualTo(String value) {
+            addCriterion("workprovince >=", value, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceLessThan(String value) {
+            addCriterion("workprovince <", value, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceLessThanOrEqualTo(String value) {
+            addCriterion("workprovince <=", value, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceLike(String value) {
+            addCriterion("workprovince like", value, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceNotLike(String value) {
+            addCriterion("workprovince not like", value, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceIn(List<String> values) {
+            addCriterion("workprovince in", values, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceNotIn(List<String> values) {
+            addCriterion("workprovince not in", values, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceBetween(String value1, String value2) {
+            addCriterion("workprovince between", value1, value2, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkprovinceNotBetween(String value1, String value2) {
+            addCriterion("workprovince not between", value1, value2, "workprovince");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaIsNull() {
+            addCriterion("workarea is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaIsNotNull() {
+            addCriterion("workarea is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaEqualTo(String value) {
+            addCriterion("workarea =", value, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaNotEqualTo(String value) {
+            addCriterion("workarea <>", value, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaGreaterThan(String value) {
+            addCriterion("workarea >", value, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaGreaterThanOrEqualTo(String value) {
+            addCriterion("workarea >=", value, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaLessThan(String value) {
+            addCriterion("workarea <", value, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaLessThanOrEqualTo(String value) {
+            addCriterion("workarea <=", value, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaLike(String value) {
+            addCriterion("workarea like", value, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaNotLike(String value) {
+            addCriterion("workarea not like", value, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaIn(List<String> values) {
+            addCriterion("workarea in", values, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaNotIn(List<String> values) {
+            addCriterion("workarea not in", values, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaBetween(String value1, String value2) {
+            addCriterion("workarea between", value1, value2, "workarea");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkareaNotBetween(String value1, String value2) {
+            addCriterion("workarea not between", value1, value2, "workarea");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {
