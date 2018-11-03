@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.user.common.UserCom;
 import com.zyh.controller.user.vo.UserPostQueryVO;
-import com.zyh.controller.user.vo.UserQueryVO;
+import com.zyh.dao.company.ZyhCompanyPositionMapper;
 import com.zyh.entity.common.ResponeToWeb;
+import com.zyh.entity.company.ZyhCompanyPosition;
 import com.zyh.entity.user.ZyhUserPosition;
 import com.zyh.entity.user.ZyhUserPositionExample;
 import com.zyh.entity.user.ZyhUserPositionExample.Criteria;
 import com.zyh.service.user.IUserPostService;
-import com.zyh.service.user.impl.UserPostServiceImpl;
 
 @RestController
 @RequestMapping("/post")
@@ -30,6 +30,9 @@ public class UserPostController {
 
 	@Autowired
 	private IUserPostService userPostService;
+	
+	@Autowired
+	private ZyhCompanyPositionMapper zyhCompanyPositionMapper;
 
 	@RequestMapping("/addPost.act")
 	public ResponeToWeb userPost(@RequestBody String json) {
@@ -56,6 +59,17 @@ public class UserPostController {
 			zyhUserPosition.setState("0");
 			Date date = new Date();
 			zyhUserPosition.setOptime(date);
+			//设置工作地址
+			if("0".equals(zyhUserPosition.getPosttype())){
+				ZyhCompanyPosition position = zyhCompanyPositionMapper.selectByPrimaryKey(zyhUserPosition.getPositionid());
+				if(null==position){
+					responeToWeb.setMsg("公司信息缺失");
+					responeToWeb.setSuccess(false);
+					return responeToWeb;
+				}
+				zyhUserPosition.setWorkarea(position.getWorkarea());
+				zyhUserPosition.setWorkprovince(position.getWorkprovince());
+			}
 			userPostService.addUserPost(zyhUserPosition);
 			responeToWeb.setMsg("添加成功");
 			responeToWeb.setSuccess(true);

@@ -35,6 +35,10 @@ public class UserPostVO {
 	    private String labeltxt;
 	    
 	    private String classdesc;
+	    
+	    private String workprovince;
+	    
+	    private String workarea;
 
 	    private static final long serialVersionUID = 1L;
 
@@ -164,6 +168,22 @@ public class UserPostVO {
 
 		public void setClassdesc(String classdesc) {
 			this.classdesc = classdesc;
+		}
+
+		public String getWorkprovince() {
+			return workprovince;
+		}
+
+		public void setWorkprovince(String workprovince) {
+			this.workprovince = workprovince;
+		}
+
+		public String getWorkarea() {
+			return workarea;
+		}
+
+		public void setWorkarea(String workarea) {
+			this.workarea = workarea;
 		}
 	    
 	    

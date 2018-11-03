@@ -40,6 +40,4 @@ public interface ZyhUserPositionMapper {
     
     List<UserPostVO> selectUserPostTrainByPage(@Param("example") ZyhUserPositionExample example,
 			@Param("pageNumKey") int pageNum, @Param("pageSizeKey") int pageSize)throws Exception;
-    
-    
 }

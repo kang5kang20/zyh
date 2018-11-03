@@ -13,6 +13,8 @@
     <result column="username" jdbcType="OTHER" property="username" />
     <result column="state" jdbcType="OTHER" property="state" />
     <result column="posttype" jdbcType="OTHER" property="posttype" />
+    <result column="workprovince" jdbcType="OTHER" property="workprovince" />
+    <result column="workarea" jdbcType="OTHER" property="workarea" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -74,7 +76,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, userid, positionid, type, optime, positionname, companyid, companyname, username, 
-    state, posttype
+    state, posttype, workprovince, workarea
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.user.ZyhUserPositionExample" resultMap="BaseResultMap">
     select
@@ -110,11 +112,13 @@
     insert into zyh_user_position (id, userid, positionid, 
       type, optime, positionname, 
       companyid, companyname, username, 
-      state, posttype)
+      state, posttype, workprovince, 
+      workarea)
     values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{positionid,jdbcType=OTHER}, 
       #{type,jdbcType=OTHER}, #{optime,jdbcType=OTHER}, #{positionname,jdbcType=OTHER}, 
       #{companyid,jdbcType=OTHER}, #{companyname,jdbcType=OTHER}, #{username,jdbcType=OTHER}, 
-      #{state,jdbcType=OTHER}, #{posttype,jdbcType=OTHER})
+      #{state,jdbcType=OTHER}, #{posttype,jdbcType=OTHER}, #{workprovince,jdbcType=OTHER}, 
+      #{workarea,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.user.ZyhUserPosition">
     insert into zyh_user_position
@@ -152,6 +156,12 @@
       <if test="posttype != null">
         posttype,
       </if>
+      <if test="workprovince != null">
+        workprovince,
+      </if>
+      <if test="workarea != null">
+        workarea,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -186,6 +196,12 @@
       </if>
       <if test="posttype != null">
         #{posttype,jdbcType=OTHER},
+      </if>
+      <if test="workprovince != null">
+        #{workprovince,jdbcType=OTHER},
+      </if>
+      <if test="workarea != null">
+        #{workarea,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -231,6 +247,12 @@
       <if test="record.posttype != null">
         posttype = #{record.posttype,jdbcType=OTHER},
       </if>
+      <if test="record.workprovince != null">
+        workprovince = #{record.workprovince,jdbcType=OTHER},
+      </if>
+      <if test="record.workarea != null">
+        workarea = #{record.workarea,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -248,7 +270,9 @@
       companyname = #{record.companyname,jdbcType=OTHER},
       username = #{record.username,jdbcType=OTHER},
       state = #{record.state,jdbcType=OTHER},
-      posttype = #{record.posttype,jdbcType=OTHER}
+      posttype = #{record.posttype,jdbcType=OTHER},
+      workprovince = #{record.workprovince,jdbcType=OTHER},
+      workarea = #{record.workarea,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -286,6 +310,12 @@
       <if test="posttype != null">
         posttype = #{posttype,jdbcType=OTHER},
       </if>
+      <if test="workprovince != null">
+        workprovince = #{workprovince,jdbcType=OTHER},
+      </if>
+      <if test="workarea != null">
+        workarea = #{workarea,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -300,11 +330,12 @@
       companyname = #{companyname,jdbcType=OTHER},
       username = #{username,jdbcType=OTHER},
       state = #{state,jdbcType=OTHER},
-      posttype = #{posttype,jdbcType=OTHER}
+      posttype = #{posttype,jdbcType=OTHER},
+      workprovince = #{workprovince,jdbcType=OTHER},
+      workarea = #{workarea,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
-  
-  <select id="selectUserPostByPage"  resultMap="BaseResultMap">
+ <select id="selectUserPostByPage"  resultMap="BaseResultMap">
 	   select
 	    <include refid="Base_Column_List" />
 	    from zyh_user_position
