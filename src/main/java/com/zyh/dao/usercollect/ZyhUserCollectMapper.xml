@@ -10,6 +10,11 @@
     <result column="imgurl" jdbcType="OTHER" property="imgurl" />
     <result column="pubtime" jdbcType="OTHER" property="pubtime" />
     <result column="comtype" jdbcType="OTHER" property="comtype" />
+    <result column="city" jdbcType="OTHER" property="city" />
+    <result column="area" jdbcType="OTHER" property="area" />
+    <result column="street" jdbcType="OTHER" property="street" />
+    <result column="label" jdbcType="OTHER" property="label" />
+    <result column="trainlabel" jdbcType="OTHER" property="trainlabel" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -70,7 +75,8 @@
     </where>
   </sql>
   <sql id="Base_Column_List">
-    id, userid, articleid, arttype, title, imgurl, pubtime, comtype
+    id, userid, articleid, arttype, title, imgurl, pubtime, comtype, city, area, street, 
+    label, trainlabel
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.usercollect.ZyhUserCollectExample" resultMap="BaseResultMap">
     select
@@ -105,10 +111,12 @@
   <insert id="insert" parameterType="com.zyh.entity.usercollect.ZyhUserCollect">
     insert into zyh_user_collect (id, userid, articleid, 
       arttype, title, imgurl, pubtime, 
-      comtype)
+      comtype, city, area, street, 
+      label, trainlabel)
     values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{articleid,jdbcType=OTHER}, 
       #{arttype,jdbcType=OTHER}, #{title,jdbcType=OTHER}, #{imgurl,jdbcType=OTHER}, #{pubtime,jdbcType=OTHER}, 
-      #{comtype,jdbcType=OTHER})
+      #{comtype,jdbcType=OTHER}, #{city,jdbcType=OTHER}, #{area,jdbcType=OTHER}, #{street,jdbcType=OTHER}, 
+      #{label,jdbcType=OTHER}, #{trainlabel,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.usercollect.ZyhUserCollect">
     insert into zyh_user_collect
@@ -137,6 +145,21 @@
       <if test="comtype != null">
         comtype,
       </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="area != null">
+        area,
+      </if>
+      <if test="street != null">
+        street,
+      </if>
+      <if test="label != null">
+        label,
+      </if>
+      <if test="trainlabel != null">
+        trainlabel,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -162,6 +185,21 @@
       </if>
       <if test="comtype != null">
         #{comtype,jdbcType=OTHER},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=OTHER},
+      </if>
+      <if test="area != null">
+        #{area,jdbcType=OTHER},
+      </if>
+      <if test="street != null">
+        #{street,jdbcType=OTHER},
+      </if>
+      <if test="label != null">
+        #{label,jdbcType=OTHER},
+      </if>
+      <if test="trainlabel != null">
+        #{trainlabel,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -198,6 +236,21 @@
       <if test="record.comtype != null">
         comtype = #{record.comtype,jdbcType=OTHER},
       </if>
+      <if test="record.city != null">
+        city = #{record.city,jdbcType=OTHER},
+      </if>
+      <if test="record.area != null">
+        area = #{record.area,jdbcType=OTHER},
+      </if>
+      <if test="record.street != null">
+        street = #{record.street,jdbcType=OTHER},
+      </if>
+      <if test="record.label != null">
+        label = #{record.label,jdbcType=OTHER},
+      </if>
+      <if test="record.trainlabel != null">
+        trainlabel = #{record.trainlabel,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -212,7 +265,12 @@
       title = #{record.title,jdbcType=OTHER},
       imgurl = #{record.imgurl,jdbcType=OTHER},
       pubtime = #{record.pubtime,jdbcType=OTHER},
-      comtype = #{record.comtype,jdbcType=OTHER}
+      comtype = #{record.comtype,jdbcType=OTHER},
+      city = #{record.city,jdbcType=OTHER},
+      area = #{record.area,jdbcType=OTHER},
+      street = #{record.street,jdbcType=OTHER},
+      label = #{record.label,jdbcType=OTHER},
+      trainlabel = #{record.trainlabel,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -241,6 +299,21 @@
       <if test="comtype != null">
         comtype = #{comtype,jdbcType=OTHER},
       </if>
+      <if test="city != null">
+        city = #{city,jdbcType=OTHER},
+      </if>
+      <if test="area != null">
+        area = #{area,jdbcType=OTHER},
+      </if>
+      <if test="street != null">
+        street = #{street,jdbcType=OTHER},
+      </if>
+      <if test="label != null">
+        label = #{label,jdbcType=OTHER},
+      </if>
+      <if test="trainlabel != null">
+        trainlabel = #{trainlabel,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -252,7 +325,12 @@
       title = #{title,jdbcType=OTHER},
       imgurl = #{imgurl,jdbcType=OTHER},
       pubtime = #{pubtime,jdbcType=OTHER},
-      comtype = #{comtype,jdbcType=OTHER}
+      comtype = #{comtype,jdbcType=OTHER},
+      city = #{city,jdbcType=OTHER},
+      area = #{area,jdbcType=OTHER},
+      street = #{street,jdbcType=OTHER},
+      label = #{label,jdbcType=OTHER},
+      trainlabel = #{trainlabel,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
 </mapper>

@@ -20,6 +20,16 @@ public class ZyhUserCollect implements Serializable {
 
     private String comtype;
 
+    private String city;
+
+    private String area;
+
+    private String street;
+
+    private String label;
+
+    private String trainlabel;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -86,6 +96,46 @@ public class ZyhUserCollect implements Serializable {
         this.comtype = comtype == null ? null : comtype.trim();
     }
 
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
+    }
+
+    public String getArea() {
+        return area;
+    }
+
+    public void setArea(String area) {
+        this.area = area == null ? null : area.trim();
+    }
+
+    public String getStreet() {
+        return street;
+    }
+
+    public void setStreet(String street) {
+        this.street = street == null ? null : street.trim();
+    }
+
+    public String getLabel() {
+        return label;
+    }
+
+    public void setLabel(String label) {
+        this.label = label == null ? null : label.trim();
+    }
+
+    public String getTrainlabel() {
+        return trainlabel;
+    }
+
+    public void setTrainlabel(String trainlabel) {
+        this.trainlabel = trainlabel == null ? null : trainlabel.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -100,6 +150,11 @@ public class ZyhUserCollect implements Serializable {
         sb.append(", imgurl=").append(imgurl);
         sb.append(", pubtime=").append(pubtime);
         sb.append(", comtype=").append(comtype);
+        sb.append(", city=").append(city);
+        sb.append(", area=").append(area);
+        sb.append(", street=").append(street);
+        sb.append(", label=").append(label);
+        sb.append(", trainlabel=").append(trainlabel);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();
