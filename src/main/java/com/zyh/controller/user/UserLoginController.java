@@ -138,7 +138,7 @@ public class UserLoginController {
 		return responeToWeb;
 	}
 
-	@RequestMapping("/checkUBySms.act")
+	@RequestMapping("/checkUserBySms.act")
 	public ResponeToWeb checkUserBySms(@RequestBody String json) {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
