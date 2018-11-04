@@ -64,7 +64,8 @@ public class UserCom {
     public static final String ERROR_USERNOPOSITION = "usernotposition";
   //position不为空
     public static final String ERROR_TRAINNOTNULL = "trainnotnull";
-    
+    //没此用户
+    public static final String ERROR_NOUSER = "nouser";
   //usernotfind
     public static final String ERROR_USERNOTEXIST = "usernitexist";
     
