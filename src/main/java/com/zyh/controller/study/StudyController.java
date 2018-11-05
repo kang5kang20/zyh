@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.study.vo.MenuQueryVO;
+import com.zyh.controller.study.vo.StudyVO;
 import com.zyh.dao.user.ZyhUserMapper;
 import com.zyh.entity.classcourse.ZyhClassCourse;
 import com.zyh.entity.classcourse.ZyhClassCourseExample;
@@ -418,6 +419,51 @@ public class StudyController {
 				responeToWeb.setSuccess(false);
 				return responeToWeb;
 			}
+			responeToWeb.setMsg("查询成功");
+			responeToWeb.setSuccess(true);
+			responeToWeb.setValue(map);
+		} catch (Exception e) {
+			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg("查询失败");
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/findStudyList.act")
+	public ResponeToWeb findStudyList(@RequestBody String json) {
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			ZyhMenuExample example = new ZyhMenuExample();
+			example.setOrderByClause("seq");
+			//上架才允许查
+			Criteria criteria = 
+					example.createCriteria();
+			criteria.andIfgroundEqualTo("1");
+			List<ZyhMenu> menulist = 
+					menuService.findmenuList(example);
+			List retlist = new ArrayList();
+			if(null!=menulist && menulist.size()>0){
+				for (int i = 0; i < menulist.size(); i++) {
+					StudyVO study = new StudyVO();
+					ZyhMenu menu = menulist.get(i);
+					study.setMenu(menu);
+					ZyhLanmuExample example1 = new ZyhLanmuExample();
+					example1.setOrderByClause("pubtime desc");
+					//上架才允许查
+					com.zyh.entity.lanmu.ZyhLanmuExample.Criteria criteria1 = 
+							example1.createCriteria();
+					criteria1.andIfgroundEqualTo("1");
+					criteria1.andMenuidEqualTo(menu.getId());
+					List<ZyhLanmu> lanmulist = 
+							lanmuService.findLanmuList(example1);
+					study.setLanmulist(lanmulist);
+					retlist.add(study);
+				}
+			}
+			map.put("result", retlist);
 			responeToWeb.setMsg("查询成功");
 			responeToWeb.setSuccess(true);
 			responeToWeb.setValue(map);
