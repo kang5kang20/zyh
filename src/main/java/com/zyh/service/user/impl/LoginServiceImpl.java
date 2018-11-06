@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.experimental.theories.Theories;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -75,16 +76,17 @@ public class LoginServiceImpl implements ILoginService{
 			return returnUser;
 		}else{
 			//查询无记录进行注册
-			if (null == zyhUser.getId()||"".equals(zyhUser.getId())) {
-				String id = UUidUtil.getUUid();
-				zyhUser.setId(id);
-			}
-			Date date = new Date();
-			zyhUser.setUsername(zyhUser.getPhone());
-			zyhUser.setCreatetime(date);
-			zyhUserMapper.insertSelective(zyhUser);
-			zyhUser.setPassword(null);
-			return zyhUser;
+//			if (null == zyhUser.getId()||"".equals(zyhUser.getId())) {
+//				String id = UUidUtil.getUUid();
+//				zyhUser.setId(id);
+//			}
+//			Date date = new Date();
+//			zyhUser.setUsername(zyhUser.getPhone());
+//			zyhUser.setCreatetime(date);
+//			zyhUserMapper.insertSelective(zyhUser);
+//			zyhUser.setPassword(null);
+//			return zyhUser;
+			throw new Exception(UserCom.ERROR_NOUSER);
 		}
 	}
 

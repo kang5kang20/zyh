@@ -5,4 +5,16 @@
 		SELECT t1.*,t2.label companylabel FROM zyh_company_position t1 LEFT JOIN
 		zyh_company t2 on t1.companyid = t2.id where t1.id =#{positionid};
 	</select>
+	
+	<select id="getCompanyByFirstPage" resultType="com.zyh.controller.company.vo.FirstQueryVO">
+		select t.id id,t.name name,t.desct desct from zyh_company t where t.name like #{content};
+	</select>
+	
+	<select id="getCompanyPositionByFirstPage" resultType="com.zyh.controller.company.vo.FirstQueryVO">
+		select t.id id,t.positionname name,t.desct desct from zyh_company_position t where t.positionname like #{content};
+	</select>
+	
+	<select id="getCompanyTrainByFirstPage" resultType="com.zyh.controller.company.vo.FirstQueryVO">
+		select t.id id,t.name name,t.classdesc desct from zyh_company_train t where t.name like #{content};
+	</select>
 </mapper>
