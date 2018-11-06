@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.company.vo.CompanyPositionVO;
 import com.zyh.controller.company.vo.CompanyQueryVO;
+import com.zyh.controller.company.vo.FirstQueryVO;
 import com.zyh.controller.company.vo.PositionQueryVO;
 import com.zyh.controller.company.vo.TrainQueryVO;
 import com.zyh.controller.user.common.UserCom;
@@ -499,6 +500,33 @@ public class CompanyController {
 				}
 			} else {
 				responeToWeb.setMsg("查询失败,信息缺失");
+				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg("查询失败");
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/firstPageQuery.act")
+	public ResponeToWeb firstPageQuery(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		List<FirstQueryVO> list = new ArrayList<>();
+		try {
+			String content = om.readTree(json).get("content").asText();
+			if (null!=content&&!"".equals(content)) {
+				list = companyService.selectFirstQuery(content);
+				map.put("result", list);
+				responeToWeb.setMsg("查询成功");
+				responeToWeb.setSuccess(true);
+				responeToWeb.setValue(map);
+			}else{
+				log.error("查询失败：" +UserCom.ERROR_CONTENTNULL);
+				responeToWeb.setMsg(UserCom.ERROR_CONTENTNULL);
 				responeToWeb.setSuccess(false);
 			}
 		} catch (Exception e) {

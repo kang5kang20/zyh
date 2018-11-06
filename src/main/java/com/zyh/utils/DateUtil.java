@@ -21,4 +21,11 @@ public class DateUtil {
 		return result;
 	}
 	
+	public static Date formatDate(String time)throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date =sdf.parse(time);
+		return date;
+	}
+	
+	
 }

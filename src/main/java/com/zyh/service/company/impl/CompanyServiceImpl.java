@@ -1,5 +1,6 @@
 package com.zyh.service.company.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +8,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zyh.controller.company.vo.FirstQueryVO;
 import com.zyh.dao.company.ZyhCompanyMapper;
+import com.zyh.dao.company.cus.ZyhCompanyPositionCusMapper;
 import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.common.Page;
 import com.zyh.entity.company.ZyhCompany;
@@ -19,6 +22,9 @@ public class CompanyServiceImpl implements ICompanyService {
 
 	@Autowired
 	private ZyhCompanyMapper zyhCompanyMapper;
+	
+	@Autowired
+	private ZyhCompanyPositionCusMapper zyhCompanyPositionCusMapper;
 
 	@Override
 	public void addCompany(ZyhCompany zyhCompany) throws Exception {
@@ -73,4 +79,39 @@ public class CompanyServiceImpl implements ICompanyService {
 		return zyhCompanyMapper.selectByPrimaryKey(id);
 	}
 
+	@Override
+	public List<FirstQueryVO> selectFirstQuery(String content) throws Exception {
+		content = "%"+content+"%";
+		List<FirstQueryVO> list = new ArrayList<>();
+		List<FirstQueryVO> companyList = new ArrayList<>();
+		companyList = zyhCompanyPositionCusMapper.getCompanyByFirstPage(content);
+		List<FirstQueryVO> companyPList = new ArrayList<>();
+		companyPList = zyhCompanyPositionCusMapper.getCompanyPositionByFirstPage(content);
+		List<FirstQueryVO> companyTList = new ArrayList<>();
+		companyTList = zyhCompanyPositionCusMapper.getCompanyTrainByFirstPage(content);
+		if (null!=companyList&&companyList.size()>0) {
+			for (int i = 0; i < companyList.size(); i++) {
+				FirstQueryVO firstQueryVO = companyList.get(i);
+				firstQueryVO.setType("0");
+				list.add(firstQueryVO);
+			}
+		}
+		if(null!=companyPList&&companyPList.size()>0){
+			for (int i = 0; i < companyList.size(); i++) {
+				FirstQueryVO firstQueryVO = companyList.get(i);
+				firstQueryVO.setType("1");
+				list.add(firstQueryVO);
+			}
+		}
+		if(null!=companyTList&&companyTList.size()>0){
+			for (int i = 0; i < companyTList.size(); i++) {
+				FirstQueryVO firstQueryVO = companyTList.get(i);
+				firstQueryVO.setType("2");
+				list.add(firstQueryVO);
+			}
+		}
+		return list;
+	}
+
+	
 }
