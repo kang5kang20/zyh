@@ -1,6 +1,5 @@
 package com.zyh.utils;
 
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -22,14 +21,11 @@ public class DateUtil {
 		return result;
 	}
 	
-	public static String subYears(Date date1, Date date2) {
-		long year = date1.getYear() - date2.getYear();
-		return String.valueOf(year);
+	public static Date formatDate(String time)throws Exception{
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date date =sdf.parse(time);
+		return date;
 	}
 	
-	public static Date parseDate(String strDate) throws ParseException {
-		SimpleDateFormat dateFormat = new SimpleDateFormat();
-		dateFormat.applyPattern("yyyy-MM-dd");
-		return dateFormat.parse(strDate);
-	}
+	
 }
