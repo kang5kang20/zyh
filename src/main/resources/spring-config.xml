@@ -122,6 +122,12 @@
 		</mvc:interceptor>
 	</mvc:interceptors>
 	-->
+	<mvc:interceptors>
+		<mvc:interceptor>
+		<mvc:mapping path="/**/*.act" />
+			<bean class="com.zyh.interceptor.HandlerInterceptorCust" />
+	</mvc:interceptor>
+	</mvc:interceptors>
 	<!--定位静态资源 -->
 	<mvc:resources location="/WEB-INF/static/" mapping="/static/**" />
 
