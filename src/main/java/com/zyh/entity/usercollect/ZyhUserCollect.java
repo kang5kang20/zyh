@@ -3,6 +3,8 @@ package com.zyh.entity.usercollect;
 import java.io.Serializable;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 public class ZyhUserCollect implements Serializable {
     private String id;
 
@@ -80,6 +82,7 @@ public class ZyhUserCollect implements Serializable {
         this.imgurl = imgurl == null ? null : imgurl.trim();
     }
 
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     public Date getPubtime() {
         return pubtime;
     }

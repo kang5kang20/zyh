@@ -197,6 +197,9 @@ public class ConsultController {
 			example.setOrderByClause("createtime desc");
 			Criteria criteria = example.createCriteria();
 			if(null!=queryvo){
+				if(null!=queryvo.getUserid() && !"".equals(queryvo.getUserid())){
+					criteria.andUseridEqualTo(queryvo.getUserid());
+				}
 				if(null!=queryvo.getCreateuser() && !"".equals(queryvo.getCreateuser())){
 					criteria.andCreateuserEqualTo(queryvo.getCreateuser());
 				}

@@ -4,14 +4,19 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.pdf.PdfWriter;
 import com.zyh.controller.resume.vo.ResumeBaseQueryVO;
 import com.zyh.controller.resume.vo.ResumeVO;
 import com.zyh.controller.user.common.UserCom;
@@ -33,6 +38,7 @@ import com.zyh.service.resume.IResumeIntentionService;
 import com.zyh.service.resume.IResumeSpecialityService;
 import com.zyh.service.resume.IResumeWorkService;
 import com.zyh.service.resume.impl.ResumeIntentionServiceImpl;
+import com.zyh.utils.PdfUtil;
 
 @RestController
 @RequestMapping("/resume")
@@ -739,5 +745,60 @@ public class ResumeController {
 			responeToWeb.setSuccess(false);
 		}
 		return responeToWeb;
+	}
+	
+	
+	@RequestMapping("/exportResume.act")
+	public void exportResume(HttpServletResponse response,@RequestBody String json)throws Exception{
+		ObjectMapper om = new ObjectMapper();
+		JsonNode node = om.readTree(json);
+		String userid = node.get("userid").asText();
+		if(null==userid || "".equals(userid)){
+			log.error("userid为空");
+			return;
+		}
+		ZyhResumeBaseExample baseexam = new ZyhResumeBaseExample();
+		Criteria basecri = baseexam.createCriteria();
+		basecri.andUseridEqualTo(userid);
+		List<ZyhResumeBase> baselist = resumeBaseService.selectResumeBaseByExample(baseexam);
+		if(null==baselist || baselist.size()<=0){
+			log.error("简历不存在");
+			return;
+		}
+		ZyhResumeWorkExample workexam = new ZyhResumeWorkExample();
+		com.zyh.entity.resume.ZyhResumeWorkExample.Criteria workcri = 
+				workexam.createCriteria();
+		workcri.andUseridEqualTo(userid);
+		List<ZyhResumeWork> worklist = resumeWorkService.selectResumeWorkByExample(workexam);
+		
+		ZyhResumeEducationExample eduexam = new ZyhResumeEducationExample();
+		com.zyh.entity.resume.ZyhResumeEducationExample.Criteria educri = 
+				eduexam.createCriteria();
+		educri.andUseridEqualTo(userid);
+		List<ZyhResumeEducation> edulist = resumeEducationService.selectResumeEducationByExample(eduexam);
+		
+		ZyhResumeIntentionExample intexam = new ZyhResumeIntentionExample();
+		com.zyh.entity.resume.ZyhResumeIntentionExample.Criteria intcri = 
+				intexam.createCriteria();
+		intcri.andUseridEqualTo(userid);
+		List<ZyhResumeIntention> intlist = resumeIntentionService.selectResumeIntentionByExample(intexam);
+		
+		ZyhResumeSpecialityExample speexam = new ZyhResumeSpecialityExample();
+		com.zyh.entity.resume.ZyhResumeSpecialityExample.Criteria specri = 
+				speexam.createCriteria();
+		specri.andUseridEqualTo(userid);
+		List<ZyhResumeSpeciality> spelist = resumeSpecialityService.selectResumeSpecialityByExample(speexam);
+        Document document = new Document();
+		try {
+			response.setContentType("application/pdf");
+			response.setHeader("Content-Disposition", "attachment;fileName=Resume.pdf");
+			PdfWriter.getInstance(document, response.getOutputStream());
+			document.open();
+			document.add(PdfUtil.getTable(baselist.get(0),worklist,edulist,intlist,spelist));
+			document.close();
+		} catch (Exception e) {
+			log.error("导出pdf失败");
+			return;
+		}
 	}
 }
