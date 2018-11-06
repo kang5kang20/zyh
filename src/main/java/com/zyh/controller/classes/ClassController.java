@@ -24,10 +24,13 @@ import com.zyh.entity.classteacher.ZyhClassTeacherExample;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.news.ZyhNews;
 import com.zyh.entity.news.ZyhNewsExample;
+import com.zyh.entity.resume.ZyhResumeBase;
+import com.zyh.entity.resume.ZyhResumeBaseExample;
 import com.zyh.entity.usercollect.ZyhUserCollect;
 import com.zyh.entity.usercollect.ZyhUserCollectExample;
 import com.zyh.service.classcourse.IClassCourseService;
 import com.zyh.service.classteacher.IClassTeacherService;
+import com.zyh.service.resume.IResumeBaseService;
 import com.zyh.service.usercollect.IUserCollectService;
 
 @RestController
@@ -43,6 +46,9 @@ public class ClassController {
 	
 	@Autowired
 	private IUserCollectService userCollectService;
+	
+	@Autowired
+	private IResumeBaseService resumeBaseService;
 	
 	/**
 	 * 
@@ -366,6 +372,19 @@ public class ClassController {
 						}else{
 							map.put("ifcollect", "0");
 						}
+						
+						ZyhResumeBaseExample example1 = new ZyhResumeBaseExample();
+						com.zyh.entity.resume.ZyhResumeBaseExample.Criteria criteria1 = 
+								example1.createCriteria();
+						criteria1.andUseridEqualTo(queryvo.getUserid());
+						List<ZyhResumeBase> base = resumeBaseService.selectResumeBaseByExample(example1);
+						if(null!=base && base.size()>0){
+							map.put("ifplay", "1");
+						}else{
+							map.put("ifplay", "0");
+						}
+					}else{
+						map.put("ifplay", "0");
 					}
 					responeToWeb.setMsg("查询成功");
 					responeToWeb.setSuccess(true);

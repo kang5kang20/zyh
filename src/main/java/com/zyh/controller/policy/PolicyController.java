@@ -19,10 +19,13 @@ import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.policy.ZyhPolicy;
 import com.zyh.entity.policy.ZyhPolicyExample;
 import com.zyh.entity.policy.ZyhPolicyExample.Criteria;
+import com.zyh.entity.resume.ZyhResumeBase;
+import com.zyh.entity.resume.ZyhResumeBaseExample;
 import com.zyh.entity.usercollect.ZyhUserCollect;
 import com.zyh.entity.usercollect.ZyhUserCollectExample;
 import com.zyh.service.classteacher.IClassTeacherService;
 import com.zyh.service.policy.IPolicyService;
+import com.zyh.service.resume.IResumeBaseService;
 import com.zyh.service.usercollect.IUserCollectService;
 
 @RestController
@@ -39,6 +42,9 @@ public class PolicyController {
 	
 	@Autowired
 	private IClassTeacherService classTeacherService;  
+	
+	@Autowired
+	private IResumeBaseService resumeBaseService;
 	
 	/**
 	 * 如果传入userid，返回用户是否收藏
@@ -70,6 +76,18 @@ public class PolicyController {
 						}else{
 							map.put("ifcollect", "0");
 						}
+						ZyhResumeBaseExample example1 = new ZyhResumeBaseExample();
+						com.zyh.entity.resume.ZyhResumeBaseExample.Criteria criteria1 = 
+								example1.createCriteria();
+						criteria1.andUseridEqualTo(queryvo.getUserid());
+						List<ZyhResumeBase> base = resumeBaseService.selectResumeBaseByExample(example1);
+						if(null!=base && base.size()>0){
+							map.put("ifplay", "1");
+						}else{
+							map.put("ifplay", "0");
+						}
+					}else{
+						map.put("ifplay", "0");
 					}
 					//如果有视频，查询老师信息
 					if(null!=policy.getVideourl() && !"".equals(policy.getVideourl()) &&
