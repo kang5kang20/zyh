@@ -9,6 +9,8 @@ public class ResumeBaseQueryVO extends PageInfo{
 	private String idcheckstate;
 	
 	private String soldiercheckstate;
+	
+	private String workstate;
 
 	public String getUserid() {
 		return userid;
@@ -32,6 +34,14 @@ public class ResumeBaseQueryVO extends PageInfo{
 
 	public void setSoldiercheckstate(String soldiercheckstate) {
 		this.soldiercheckstate = soldiercheckstate;
+	}
+
+	public String getWorkstate() {
+		return workstate;
+	}
+
+	public void setWorkstate(String workstate) {
+		this.workstate = workstate;
 	}
 	
 	

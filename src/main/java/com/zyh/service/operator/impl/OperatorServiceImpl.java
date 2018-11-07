@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 import com.zyh.dao.operator.ZyhOperatorRecordMapper;
 import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.operator.ZyhOperatorRecord;
+import com.zyh.entity.operator.ZyhOperatorRecordExample;
 import com.zyh.service.operator.IOperatorService;
 
 @Service("operatorServiceImpl")
@@ -23,4 +24,10 @@ public class OperatorServiceImpl implements IOperatorService{
 		zyhOperatorRecordMapper.insertSelective(zyhOperatorRecord);
 	}
 
+	@Override
+	public long countByExam(ZyhOperatorRecordExample zyhOperatorRecordExample) throws Exception {
+		return zyhOperatorRecordMapper.countByExample(zyhOperatorRecordExample);
+	}
+
+	
 }

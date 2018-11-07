@@ -1,11 +1,12 @@
-package com.zyh.controller.user.vo;
+package com.zyh.controller.statis.vo;
 
-public class UserStatisQueryVO {
-	
+public class StatisQueryVO {
+
 	private String startDate;
-	
+
 	private String endDate;
 	
+	private String type;
 
 	public String getStartDate() {
 		return startDate;
@@ -23,5 +24,13 @@ public class UserStatisQueryVO {
 		this.endDate = endDate;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+	
 	
 }

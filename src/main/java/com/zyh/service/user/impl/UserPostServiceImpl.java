@@ -89,6 +89,11 @@ public class UserPostServiceImpl implements IUserPostService{
 		map.put("pageResult", page);
 		return map;
 	}
+
+	@Override
+	public long countByExam(ZyhUserPositionExample zyhUserPositionExample) throws Exception {
+		return zyhUserPositionMapper.countByExample(zyhUserPositionExample);
+	}
 	
 	
 }

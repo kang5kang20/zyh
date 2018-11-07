@@ -67,6 +67,11 @@ public class ResumeBaseServiceImpl implements IResumeBaseService{
 		map.put("pageResult", page);
 		return map;
 	}
+
+	@Override
+	public long countByExam(ZyhResumeBaseExample zyhResumeBaseExample) throws Exception {
+		return zyhResumeBaseMapper.countByExample(zyhResumeBaseExample);
+	}
 	
 	
 }

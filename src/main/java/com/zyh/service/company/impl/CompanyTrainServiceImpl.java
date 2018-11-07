@@ -74,5 +74,11 @@ public class CompanyTrainServiceImpl implements ICompanyTrainService{
 		return map;
 	}
 
+
+	@Override
+	public long countByExam(ZyhCompanyTrainExample zyhCompanyTrainExample) throws Exception {
+		return zyhCompanyTrainMapper.countByExample(zyhCompanyTrainExample);
+	}
+
 	
 }
