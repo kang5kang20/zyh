@@ -7,6 +7,8 @@ public class StatisQueryVO {
 	private String endDate;
 	
 	private String type;
+	
+	private String posttype;
 
 	public String getStartDate() {
 		return startDate;
@@ -30,6 +32,14 @@ public class StatisQueryVO {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getPosttype() {
+		return posttype;
+	}
+
+	public void setPosttype(String posttype) {
+		this.posttype = posttype;
 	}
 	
 	

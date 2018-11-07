@@ -105,7 +105,7 @@ public class UserStatisController {
 				}
 				count = operatorServiceImpl.countByExam(zyhOperatorRecordExample);
 			}else if ("2".equals(statisQueryVO.getType())) {
-				//新增投递职位
+				//新增投递
 				ZyhUserPositionExample example = new ZyhUserPositionExample();
 				com.zyh.entity.user.ZyhUserPositionExample.Criteria criteria = example.createCriteria();
 				if (null != statisQueryVO.getStartDate() && !"".equals(statisQueryVO.getStartDate())) {
@@ -117,6 +117,9 @@ public class UserStatisController {
 					String endtime = statisQueryVO.getEndDate()+"23:59:59";
 					Date date = DateUtil.formatDate(endtime);
 					criteria.andOptimeLessThanOrEqualTo(date);
+				}
+				if (null!=statisQueryVO.getPosttype()&&!"".equals(statisQueryVO.getPosttype())) {
+					criteria.andPosttypeEqualTo(statisQueryVO.getPosttype());
 				}
 				count = userPostService.countByExam(example);
 			}else if ("3".equals(statisQueryVO.getType())) {
