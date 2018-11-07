@@ -93,12 +93,17 @@ public class CompanyServiceImpl implements ICompanyService {
 			for (int i = 0; i < companyList.size(); i++) {
 				FirstQueryVO firstQueryVO = companyList.get(i);
 				firstQueryVO.setType("0");
+				if (null!=firstQueryVO.getLabel()&&!"".equals(firstQueryVO.getLabel())) {
+					firstQueryVO.setType("3");
+				}else if(null!=firstQueryVO.getTrainlabel()&&!"".equals(firstQueryVO.getTrainlabel())){
+					firstQueryVO.setType("4");
+				}
 				list.add(firstQueryVO);
 			}
 		}
 		if(null!=companyPList&&companyPList.size()>0){
-			for (int i = 0; i < companyList.size(); i++) {
-				FirstQueryVO firstQueryVO = companyList.get(i);
+			for (int i = 0; i < companyPList.size(); i++) {
+				FirstQueryVO firstQueryVO = companyPList.get(i);
 				firstQueryVO.setType("1");
 				list.add(firstQueryVO);
 			}

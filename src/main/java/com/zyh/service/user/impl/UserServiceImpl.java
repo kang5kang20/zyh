@@ -98,6 +98,11 @@ public class UserServiceImpl implements IUserService{
 		zyhUser.setPassword(password);
 		return zyhUserMapper.updateByExampleSelective(zyhUser, zyhUserExample);
 	}
+
+	@Override
+	public long countUserByExam(ZyhUserExample zyhUserExample) throws Exception {
+		return zyhUserMapper.countByExample(zyhUserExample);
+	}
 	
 	
 }
