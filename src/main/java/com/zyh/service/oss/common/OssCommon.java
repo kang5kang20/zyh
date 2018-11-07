@@ -12,6 +12,7 @@ public class OssCommon {
 	public static final String ACCESSKEYID = "LTAIuYFNoWwARpLU";
 //	public static final String  ACCESSKEYSECRET_TEST = "qv7ARack1RZDGWzhC1cIAjBmKMb4Fs";
 	public static final String  ACCESSKEYSECRET = "J1trjrkhmbacOYGtiqtFfAipeouDuu";
-	public static final String  BUCKETNAME = "zhy20181003";
+	public static final String  BUCKETNAME = "zhy20181003";//test
+//	public static final String  BUCKETNAME ="zyh-production-environment";
 	public static final String  FILEDIR = "img";
 }
