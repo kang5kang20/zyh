@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -749,10 +749,11 @@ public class ResumeController {
 	
 	
 	@RequestMapping("/exportResume.act")
-	public void exportResume(HttpServletResponse response,@RequestBody String json)throws Exception{
-		ObjectMapper om = new ObjectMapper();
-		JsonNode node = om.readTree(json);
-		String userid = node.get("userid").asText();
+	public void exportResume(HttpServletResponse response,HttpServletRequest request)throws Exception{
+//		ObjectMapper om = new ObjectMapper();
+//		JsonNode node = om.readTree(json);
+//		String userid = node.get("userid").asText();
+		String userid = request.getParameter("userid");
 		if(null==userid || "".equals(userid)){
 			log.error("userid为空");
 			return;
