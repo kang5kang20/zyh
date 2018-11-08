@@ -79,6 +79,11 @@ public class CompanyPositionServiceImpl implements ICompanyPositionService{
 	public CompanyPositionVO selectCompanyPositionInfo(String positionid) throws Exception {
 		return zyhCompanyPositionCusMapper.getCompnayPositById(positionid);
 	}
+
+	@Override
+	public long countByExam(ZyhCompanyPositionExample zyhCompanyPositionExample) throws Exception {
+		return zyhCompanyPositionMapper.countByExample(zyhCompanyPositionExample);
+	}
 	
 	
 }

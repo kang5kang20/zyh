@@ -20,12 +20,16 @@ public class UserCom {
     public static final String ERROR_VERICODENULL = "vericodenull";
     //手机号不存在
     public static final String ERROR_NOPHONE = "phonenonexist";
-    //手机号不存在
+    //手机号存在
     public static final String ERROR_PHONEEXIST = "phoneexist";
   //用户名为空
     public static final String ERROR_USERNAMEEMPTY = "usernamenull";
     //用户名为空
     public static final String ERROR_USERNAMENON = "usernamenonexist";
+  //用户名已经存在
+    public static final String ERROR_USERNAMEEXIST = "usernameexist";
+  //用户名已经存在
+    public static final String ERROR_NAMEEXIST = "nameexist";
   //密码为空
     public static final String ERROR_PWEMPTY = "passwordnull";
     //用户名或密码不正常
@@ -69,4 +73,6 @@ public class UserCom {
   //usernotfind
     public static final String ERROR_USERNOTEXIST = "usernitexist";
     public static final String ERROR_CONTENTNULL = "contentnull";
+  //openid存在
+    public static final String ERROR_OPENIDEXIST = "openidexist";
 }

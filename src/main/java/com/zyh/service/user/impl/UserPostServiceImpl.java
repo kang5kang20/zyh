@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import com.zyh.controller.user.common.UserCom;
@@ -38,7 +39,13 @@ public class UserPostServiceImpl implements IUserPostService{
 		if (null==zyhUserPosition.getId()||"".equals(zyhUserPosition.getId())) {
 			zyhUserPosition.setId(UUidUtil.getUUid());
 		}
-		zyhUserPositionMapper.insertSelective(zyhUserPosition);
+		try {
+			zyhUserPositionMapper.insertSelective(zyhUserPosition);
+		} catch (DuplicateKeyException e) {
+				throw new Exception(UserCom.ERROR_POSITIONED);
+		} catch (Exception e) {
+			throw new Exception(e);
+		}
 	}
 
 	@Override
@@ -88,6 +95,11 @@ public class UserPostServiceImpl implements IUserPostService{
 		page.setTotalRowCount(zyhUserPositionMapper.countByExample(zyhUserPositionExample));
 		map.put("pageResult", page);
 		return map;
+	}
+
+	@Override
+	public long countByExam(ZyhUserPositionExample zyhUserPositionExample) throws Exception {
+		return zyhUserPositionMapper.countByExample(zyhUserPositionExample);
 	}
 	
 	

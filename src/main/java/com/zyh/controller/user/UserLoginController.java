@@ -2,20 +2,18 @@ package com.zyh.controller.user;
 
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
-import org.omg.CORBA.PUBLIC_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.fasterxml.jackson.core.JsonParser;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.user.common.UserCom;
-import com.zyh.controller.user.vo.SmsVO;
 import com.zyh.controller.user.vo.UserQueryVO;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.user.ZyhUser;
@@ -24,7 +22,6 @@ import com.zyh.entity.user.ZyhUserExample.Criteria;
 import com.zyh.redis.RedisUtil;
 import com.zyh.service.user.ILoginService;
 import com.zyh.service.user.IUserService;
-import com.zyh.service.user.impl.UserServiceImpl;
 import com.zyh.utils.MD5Util;
 
 @RestController
@@ -117,13 +114,13 @@ public class UserLoginController {
 			if (null != userQueryVO.getUsername()) {
 				criteria.andUsernameEqualTo(userQueryVO.getUsername());
 			}
-			if (null!=userQueryVO.getUserid()) {
+			if (null != userQueryVO.getUserid()) {
 				criteria.andIdEqualTo(userQueryVO.getUserid());
 			}
-			if (null!=userQueryVO.getOpenid()) {
+			if (null != userQueryVO.getOpenid()) {
 				criteria.andOpenidEqualTo(userQueryVO.getOpenid());
 			}
-			if (null!=userQueryVO.getPhone()) {
+			if (null != userQueryVO.getPhone()) {
 				criteria.andPhoneEqualTo(userQueryVO.getPhone());
 			}
 			map = userService.findUserByPage(zyhUserExample, userQueryVO.getPageNum(), userQueryVO.getPageSize());
@@ -160,7 +157,7 @@ public class UserLoginController {
 				responeToWeb.setSuccess(false);
 				return responeToWeb;
 			}
-			if (null==zyhUser.getType()||"".equals(zyhUser.getType())) {
+			if (null == zyhUser.getType() || "".equals(zyhUser.getType())) {
 				responeToWeb.setMsg(UserCom.ERROR_TYPEEMPTY);
 				responeToWeb.setSuccess(false);
 				return responeToWeb;
@@ -176,9 +173,9 @@ public class UserLoginController {
 		}
 		return responeToWeb;
 	}
-	
+
 	@RequestMapping("/changep.act")
-	public ResponeToWeb changep(@RequestBody String json){
+	public ResponeToWeb changep(@RequestBody String json) {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
@@ -186,7 +183,7 @@ public class UserLoginController {
 			if (userService.checkUserBySMS(zyhUser)) {
 				responeToWeb.setMsg("验证成功");
 				responeToWeb.setSuccess(true);
-			}else{
+			} else {
 				responeToWeb.setMsg("验证失败");
 				responeToWeb.setSuccess(false);
 			}
@@ -197,25 +194,25 @@ public class UserLoginController {
 		}
 		return responeToWeb;
 	}
-	
+
 	@RequestMapping("/changepassword.act")
-	public ResponeToWeb changepassword(@RequestBody String json){
+	public ResponeToWeb changepassword(@RequestBody String json) {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
 			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
 			ZyhUserExample zyhUserExample = new ZyhUserExample();
-			if (null==zyhUser.getPassword()||"".equals(zyhUser.getPassword())) {
+			if (null == zyhUser.getPassword() || "".equals(zyhUser.getPassword())) {
 				throw new Exception(UserCom.ERROR_PWEMPTY);
 			}
 			String password = MD5Util.EncoderByMd5(zyhUser.getPassword());
-			if (null==zyhUser.getId()||"".equals(zyhUser.getId())) {
+			if (null == zyhUser.getId() || "".equals(zyhUser.getId())) {
 				boolean flag = false;
-				if (null!=zyhUser.getUsername()&&!"".equals(zyhUser.getUsername())) {
+				if (null != zyhUser.getUsername() && !"".equals(zyhUser.getUsername())) {
 					Criteria criteria = zyhUserExample.createCriteria();
 					criteria.andUsernameEqualTo(zyhUser.getUsername());
 					flag = true;
-				}else if (null!=zyhUser.getPhone()&&!"".equals(zyhUser.getPhone())) {
+				} else if (null != zyhUser.getPhone() && !"".equals(zyhUser.getPhone())) {
 					Criteria criteria = zyhUserExample.createCriteria();
 					criteria.andPhoneEqualTo(zyhUser.getPhone());
 					flag = true;
@@ -223,23 +220,23 @@ public class UserLoginController {
 				if (!flag) {
 					throw new Exception(UserCom.ERROR_USERNOTEXIST);
 				}
-				if (userService.changePassword(zyhUserExample,password)>0) {
+				if (userService.changePassword(zyhUserExample, password) > 0) {
 					responeToWeb.setMsg("更新成功!");
-			    	responeToWeb.setSuccess(true);
-				}else{
-			    	responeToWeb.setMsg(UserCom.ERROR_USERNOTEXIST);
-			    	responeToWeb.setSuccess(false);
-			    }
-			}else {
+					responeToWeb.setSuccess(true);
+				} else {
+					responeToWeb.setMsg(UserCom.ERROR_USERNOTEXIST);
+					responeToWeb.setSuccess(false);
+				}
+			} else {
 				Criteria criteria = zyhUserExample.createCriteria();
 				criteria.andIdEqualTo(zyhUser.getId());
-			    if(userService.changePassword(zyhUserExample,password)>0){
-			    	responeToWeb.setMsg("更新成功!");
-			    	responeToWeb.setSuccess(true);
-			    }else{
-			    	responeToWeb.setMsg(UserCom.ERROR_USERNOTEXIST);
-			    	responeToWeb.setSuccess(false);
-			    }
+				if (userService.changePassword(zyhUserExample, password) > 0) {
+					responeToWeb.setMsg("更新成功!");
+					responeToWeb.setSuccess(true);
+				} else {
+					responeToWeb.setMsg(UserCom.ERROR_USERNOTEXIST);
+					responeToWeb.setSuccess(false);
+				}
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -248,28 +245,28 @@ public class UserLoginController {
 		}
 		return responeToWeb;
 	}
-	
+
 	@RequestMapping("/updateUser.act")
-	public ResponeToWeb updateUser(@RequestBody String json){
+	public ResponeToWeb updateUser(@RequestBody String json) {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
 			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
 			zyhUser.setPassword(null);
-			if (null!=zyhUser.getId()&&!"".equals(zyhUser.getId())) {
+			if (null != zyhUser.getId() && !"".equals(zyhUser.getId())) {
 				ZyhUserExample zyhUserExample = new ZyhUserExample();
 				Criteria criteria = zyhUserExample.createCriteria();
 				criteria.andIdEqualTo(zyhUser.getId());
-				if(userService.updateUser(zyhUser, zyhUserExample)>0){
-			    	responeToWeb.setMsg("更新成功!");
-			    	responeToWeb.setSuccess(true);
-			    }else{
-			    	responeToWeb.setMsg(UserCom.ERROR_USERNOTEXIST);
-			    	responeToWeb.setSuccess(false);
-			    }
-			}else{
+				if (userService.updateUser(zyhUser, zyhUserExample) > 0) {
+					responeToWeb.setMsg("更新成功!");
+					responeToWeb.setSuccess(true);
+				} else {
+					responeToWeb.setMsg(UserCom.ERROR_USERNOTEXIST);
+					responeToWeb.setSuccess(false);
+				}
+			} else {
 				responeToWeb.setMsg(UserCom.ERROR_USERIDNULL);
-		    	responeToWeb.setSuccess(false);
+				responeToWeb.setSuccess(false);
 			}
 		} catch (Exception e) {
 			log.error(e.getMessage());
@@ -278,23 +275,23 @@ public class UserLoginController {
 		}
 		return responeToWeb;
 	}
-	
+
 	@RequestMapping("/addUser.act")
-	public ResponeToWeb addUser(@RequestBody String json){
+	public ResponeToWeb addUser(@RequestBody String json) {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		try {
 			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
-			if (null==zyhUser.getPhone()||"".equals(zyhUser.getPhone())) {
+			if (null == zyhUser.getPhone() || "".equals(zyhUser.getPhone())) {
 				throw new Exception(UserCom.ERROR_PHONEEMPTY);
 			}
-			if (null==zyhUser.getUsername()||"".equals(zyhUser.getUsername())) {
+			if (null == zyhUser.getUsername() || "".equals(zyhUser.getUsername())) {
 				throw new Exception(UserCom.ERROR_USERNAMENULL);
 			}
-			if (null==zyhUser.getPassword()||"".equals(zyhUser.getPassword())) {
+			if (null == zyhUser.getPassword() || "".equals(zyhUser.getPassword())) {
 				throw new Exception(UserCom.ERROR_PWEMPTY);
 			}
-			if (null==zyhUser.getVericode()||"".equals(zyhUser.getVericode())) {
+			if (null == zyhUser.getVericode() || "".equals(zyhUser.getVericode())) {
 				throw new Exception(UserCom.ERROR_VERICODENULL);
 			}
 			zyhUser.setType("zc");
@@ -307,8 +304,7 @@ public class UserLoginController {
 				responeToWeb.setMsg("新增成功");
 				responeToWeb.setSuccess(true);
 			}
-			
-		} catch (Exception e) {
+		}catch (Exception e){
 			log.error(e.getMessage());
 			responeToWeb.setMsg("失败:" + e.getMessage());
 			responeToWeb.setSuccess(false);

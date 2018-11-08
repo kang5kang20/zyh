@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import com.zyh.controller.user.common.UserCom;
@@ -37,12 +38,42 @@ public class UserServiceImpl implements IUserService{
 			String id = UUidUtil.getUUid();
 			user.setId(id);
 		}
-		zyhUserMapper.insertSelective(user);
+		try {
+			zyhUserMapper.insertSelective(user);
+		}catch (DuplicateKeyException e) {
+			if (e.getMessage().indexOf("username") > 0) {
+				throw new Exception(UserCom.ERROR_USERNAMEEXIST);
+			} else if (e.getMessage().indexOf("phone") > 0) {
+				throw new Exception(UserCom.ERROR_PHONEEXIST);
+			} else if (e.getMessage().indexOf("openid") > 0) {
+				throw new Exception(UserCom.ERROR_OPENIDEXIST);
+			}else{
+				throw new Exception(e);
+			}
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
 	}
 
 	@Override
 	public int updateUser(ZyhUser user,ZyhUserExample zyhUserExample) throws Exception {
-		return zyhUserMapper.updateByExampleSelective(user, zyhUserExample);
+		int i = 0;
+		try {
+			i = zyhUserMapper.updateByExampleSelective(user, zyhUserExample);
+		}catch (DuplicateKeyException e) {
+			if (e.getMessage().indexOf("username") > 0) {
+				throw new Exception(UserCom.ERROR_USERNAMEEXIST);
+			} else if (e.getMessage().indexOf("phone") > 0) {
+				throw new Exception(UserCom.ERROR_PHONEEXIST);
+			} else if (e.getMessage().indexOf("openid") > 0) {
+				throw new Exception(UserCom.ERROR_OPENIDEXIST);
+			}else{
+				throw new Exception(e);
+			}
+		} catch (Exception e) {
+			throw new Exception(e);
+		}
+		return i;
 	}
 
 	@Override
@@ -97,6 +128,11 @@ public class UserServiceImpl implements IUserService{
 		ZyhUser zyhUser = new ZyhUser();
 		zyhUser.setPassword(password);
 		return zyhUserMapper.updateByExampleSelective(zyhUser, zyhUserExample);
+	}
+
+	@Override
+	public long countUserByExam(ZyhUserExample zyhUserExample) throws Exception {
+		return zyhUserMapper.countByExample(zyhUserExample);
 	}
 	
 	

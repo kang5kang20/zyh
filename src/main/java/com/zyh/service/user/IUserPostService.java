@@ -19,5 +19,7 @@ public interface IUserPostService {
 	public Map<String,Object> queryPostPositionInfoByPage(ZyhUserPositionExample zyhUserPositionExample,int pageNum,int pageSize)throws Exception;
 	
 	public Map<String,Object> queryPostTrainInfoByPage(ZyhUserPositionExample zyhUserPositionExample,int pageNum,int pageSize)throws Exception;
+	
+	public long countByExam(ZyhUserPositionExample zyhUserPositionExample)throws Exception;
 	         
 }

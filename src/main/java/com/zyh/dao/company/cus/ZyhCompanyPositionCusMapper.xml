@@ -7,7 +7,7 @@
 	</select>
 	
 	<select id="getCompanyByFirstPage" resultType="com.zyh.controller.company.vo.FirstQueryVO">
-		select t.id id,t.name name,t.desct desct from zyh_company t where t.name like #{content};
+		select t.id id,t.name name,t.desct desct,t.label label,t.trainlabel trainlabel from zyh_company t where t.name like #{content};
 	</select>
 	
 	<select id="getCompanyPositionByFirstPage" resultType="com.zyh.controller.company.vo.FirstQueryVO">

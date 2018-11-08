@@ -5,6 +5,7 @@ public class UserStatisQueryVO {
 	private String startDate;
 	
 	private String endDate;
+	
 
 	public String getStartDate() {
 		return startDate;
@@ -21,6 +22,6 @@ public class UserStatisQueryVO {
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
-	
+
 	
 }

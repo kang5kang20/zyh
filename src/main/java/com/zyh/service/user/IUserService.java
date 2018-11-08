@@ -20,4 +20,5 @@ public interface IUserService {
 	
 	public int changePassword(ZyhUserExample zyhUserExample,String password)throws Exception;
 	
+	public long countUserByExam(ZyhUserExample zyhUserExample)throws Exception;
 }

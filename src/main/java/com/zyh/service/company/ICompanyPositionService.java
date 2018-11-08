@@ -24,4 +24,6 @@ public interface ICompanyPositionService {
 	public Map<String, Object> selectCompanyPositionByPage(ZyhCompanyPositionExample zyhCompanyPositionExample,int pageNum,int pageSize)throws Exception;
 	
 	public CompanyPositionVO selectCompanyPositionInfo(String position)throws Exception;
+	
+	public long countByExam(ZyhCompanyPositionExample zyhCompanyPositionExample)throws Exception;
 }

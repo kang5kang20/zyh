@@ -22,4 +22,8 @@ public interface ICompanyTrainService {
 	public void delCompanyTrainByExample(ZyhCompanyTrainExample zyhCompanyTrainExample) throws Exception;
 	
 	public Map<String, Object> selectCompanyTrainByPage(ZyhCompanyTrainExample zyhCompanyTrainExample,int pageNum,int pageSize)throws Exception;
+	
+	public long countByExam(ZyhCompanyTrainExample zyhCompanyTrainExample)throws Exception;
+	
+	public ZyhCompanyTrain selectCompanyTrainById(String id)throws Exception;
 }

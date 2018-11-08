@@ -9,7 +9,11 @@ public class FirstQueryVO {
 	private String name;
 	
 	private String desct;
-
+	
+	private String trainlabel;
+	
+	private String label;
+	
 	public String getId() {
 		return id;
 	}
@@ -40,6 +44,22 @@ public class FirstQueryVO {
 
 	public void setDesct(String desct) {
 		this.desct = desct;
+	}
+
+	public String getTrainlabel() {
+		return trainlabel;
+	}
+
+	public void setTrainlabel(String trainlabel) {
+		this.trainlabel = trainlabel;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
 	}
 	
 	
