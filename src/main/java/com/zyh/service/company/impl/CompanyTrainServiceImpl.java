@@ -80,5 +80,11 @@ public class CompanyTrainServiceImpl implements ICompanyTrainService{
 		return zyhCompanyTrainMapper.countByExample(zyhCompanyTrainExample);
 	}
 
+
+	@Override
+	public ZyhCompanyTrain selectCompanyTrainById(String id) throws Exception {
+		return zyhCompanyTrainMapper.selectByPrimaryKey(id);
+	}
+
 	
 }

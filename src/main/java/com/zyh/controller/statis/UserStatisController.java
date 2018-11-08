@@ -84,7 +84,7 @@ public class UserStatisController {
 					criteria.andCreatetimeGreaterThanOrEqualTo(date);
 				}
 				if (null != statisQueryVO.getEndDate() && !"".equals(statisQueryVO.getEndDate())) {
-					String endtime = statisQueryVO.getEndDate()+"23:59:59";
+					String endtime = statisQueryVO.getEndDate()+" 23:59:59";
 					Date date = DateUtil.formatDate(endtime);
 					criteria.andCreatetimeLessThanOrEqualTo(date);
 				}
@@ -99,7 +99,7 @@ public class UserStatisController {
 					criteria.andOptimeGreaterThanOrEqualTo(date);
 				}
 				if (null != statisQueryVO.getEndDate() && !"".equals(statisQueryVO.getEndDate())) {
-					String endtime = statisQueryVO.getEndDate()+"23:59:59";
+					String endtime = statisQueryVO.getEndDate()+" 23:59:59";
 					Date date = DateUtil.formatDate(endtime);
 					criteria.andOptimeLessThanOrEqualTo(date);
 				}
@@ -114,7 +114,7 @@ public class UserStatisController {
 					criteria.andOptimeGreaterThanOrEqualTo(date);
 				}
 				if (null != statisQueryVO.getEndDate() && !"".equals(statisQueryVO.getEndDate())) {
-					String endtime = statisQueryVO.getEndDate()+"23:59:59";
+					String endtime = statisQueryVO.getEndDate()+" 23:59:59";
 					Date date = DateUtil.formatDate(endtime);
 					criteria.andOptimeLessThanOrEqualTo(date);
 				}
@@ -132,7 +132,7 @@ public class UserStatisController {
 					criteria.andOptimeGreaterThanOrEqualTo(date);
 				}
 				if (null != statisQueryVO.getEndDate() && !"".equals(statisQueryVO.getEndDate())) {
-					String endtime = statisQueryVO.getEndDate()+"23:59:59";
+					String endtime = statisQueryVO.getEndDate()+" 23:59:59";
 					Date date = DateUtil.formatDate(endtime);
 					criteria.andOptimeLessThanOrEqualTo(date);
 				}
@@ -148,7 +148,7 @@ public class UserStatisController {
 					criteria.andCreatetimeGreaterThanOrEqualTo(date);
 				}
 				if (null != statisQueryVO.getEndDate() && !"".equals(statisQueryVO.getEndDate())) {
-					String endtime = statisQueryVO.getEndDate()+"23:59:59";
+					String endtime = statisQueryVO.getEndDate()+" 23:59:59";
 					Date date = DateUtil.formatDate(endtime);
 					criteria.andCreatetimeLessThanOrEqualTo(date);
 				}

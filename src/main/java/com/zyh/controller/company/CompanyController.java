@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.company.vo.CompanyPositionVO;
 import com.zyh.controller.company.vo.CompanyQueryVO;
+import com.zyh.controller.company.vo.CompanyTrainVO;
 import com.zyh.controller.company.vo.FirstQueryVO;
 import com.zyh.controller.company.vo.PositionQueryVO;
 import com.zyh.controller.company.vo.TrainQueryVO;
@@ -531,6 +532,46 @@ public class CompanyController {
 				log.error("查询失败：" +UserCom.ERROR_CONTENTNULL);
 				responeToWeb.setMsg(UserCom.ERROR_CONTENTNULL);
 				responeToWeb.setSuccess(false);
+			}
+		} catch (Exception e) {
+			log.error("查询失败：" + e.getMessage());
+			responeToWeb.setMsg("查询失败");
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/queryTrainInfoById.act")
+	public ResponeToWeb queryTrainInfoById(@RequestBody String json ){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		ObjectMapper om = new ObjectMapper();
+		Map<String, Object> map = new HashMap<String, Object>();
+		String userid = null;
+		try {
+			CompanyTrainVO companyTrainVO =null;
+			String trainid = om.readTree(json).get("id").asText();
+			if (null!=om.readTree(json).get("userid")) {
+				 userid = om.readTree(json).get("userid").asText();
+			}
+			if (null!=trainid&&!"".equals(trainid)) {
+				ZyhCompanyTrain zyhCompanyTrain = companyTrainService.selectCompanyTrainById(trainid);
+				companyTrainVO = new CompanyTrainVO(zyhCompanyTrain);
+				if (null!=userid&&!"".equals(userid)) {
+				//查询该用户是否投递了职位
+					ZyhUserPositionExample zyhUserPositionExample = new ZyhUserPositionExample();
+					com.zyh.entity.user.ZyhUserPositionExample.Criteria criteria =zyhUserPositionExample.createCriteria();
+					criteria.andUseridEqualTo(userid);
+					criteria.andPositionidEqualTo(trainid);
+					List<ZyhUserPosition> list = userPostServiceImpl.queryPostByExm(zyhUserPositionExample);
+					if (null!=list&&list.size()>0) {
+						companyTrainVO.setIfpost("1");
+					}else{
+						companyTrainVO.setIfpost("0");
+					}
+				}
+				responeToWeb.setSuccess(true);
+				map.put("result", companyTrainVO);
+				responeToWeb.setValue(map);
 			}
 		} catch (Exception e) {
 			log.error("查询失败：" + e.getMessage());

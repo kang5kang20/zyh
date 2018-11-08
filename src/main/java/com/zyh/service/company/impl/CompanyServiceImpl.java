@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 import com.zyh.controller.company.vo.FirstQueryVO;
+import com.zyh.controller.user.common.UserCom;
 import com.zyh.dao.company.ZyhCompanyMapper;
 import com.zyh.dao.company.cus.ZyhCompanyPositionCusMapper;
 import com.zyh.dao.util.UUidUtil;
@@ -32,18 +34,47 @@ public class CompanyServiceImpl implements ICompanyService {
 			String id = UUidUtil.getUUid();
 			zyhCompany.setId(id);
 		}
-		zyhCompanyMapper.insertSelective(zyhCompany);
+		try {
+			zyhCompanyMapper.insertSelective(zyhCompany);
+		}catch (DuplicateKeyException e) {
+			if (e.getMessage().indexOf("name") > 0) {
+				throw new Exception(UserCom.ERROR_NAMEEXIST);
+			} else{
+				throw new Exception(e);
+			}
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
 	}
 
 	@Override
 	public void updateCompanyById(ZyhCompany zyhCompany) throws Exception {
-		zyhCompanyMapper.updateByPrimaryKeySelective(zyhCompany);
+		try {
+			zyhCompanyMapper.updateByPrimaryKeySelective(zyhCompany);
+		} catch (DuplicateKeyException e) {
+			if (e.getMessage().indexOf("name") > 0) {
+				throw new Exception(UserCom.ERROR_NAMEEXIST);
+			}else{
+				throw new Exception(e);
+			}
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
 	}
 
 	@Override
 	public void updateCompanyByExam(ZyhCompany zyhCompany, ZyhCompanyExample zyhCompanyExample) throws Exception {
-		zyhCompanyMapper.updateByExampleSelective(zyhCompany, zyhCompanyExample);
-
+		try {
+			zyhCompanyMapper.updateByExampleSelective(zyhCompany, zyhCompanyExample);
+		} catch (DuplicateKeyException e) {
+			if (e.getMessage().indexOf("name") > 0) {
+				throw new Exception(UserCom.ERROR_NAMEEXIST);
+			}else{
+				throw new Exception(e);
+			}
+		}catch (Exception e) {
+			throw new Exception(e);
+		}
 	}
 
 	@Override
