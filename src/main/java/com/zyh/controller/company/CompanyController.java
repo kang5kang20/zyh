@@ -435,9 +435,12 @@ public class CompanyController {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		ObjectMapper om = new ObjectMapper();
 		Map<String, Object> map = new HashMap<>();
+		String userid =null ;
 		try {
 			String positionid = om.readTree(json).get("id").asText();
-			String userid = om.readTree(json).get("userid").asText();
+			if (null!=om.readTree(json).get("userid")) {
+				 userid = om.readTree(json).get("userid").asText();
+			}
 			if (null!=positionid&&!"".equals(positionid)) {
 				CompanyPositionVO companyPositionVO = companyPositionService.selectCompanyPositionInfo(positionid);
 				if (null!=userid&&!"".equals(userid)) {
@@ -452,10 +455,10 @@ public class CompanyController {
 					}else{
 						companyPositionVO.setIfpost("0");
 					}
-					responeToWeb.setSuccess(true);
-					map.put("result", companyPositionVO);
-					responeToWeb.setValue(map);
 				}
+				responeToWeb.setSuccess(true);
+				map.put("result", companyPositionVO);
+				responeToWeb.setValue(map);
 			}else{
 				responeToWeb.setMsg(UserCom.ERROR_IDNULL);
 				responeToWeb.setSuccess(false);

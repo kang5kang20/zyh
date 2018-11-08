@@ -37,8 +37,8 @@ public class HandlerInterceptorCust implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object handler) throws Exception {
 		//处理跨域问题
-		response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow -Methods", "GET, POST");
+//		response.setHeader("Access-Control-Allow-Origin", "*");
+//        response.setHeader("Access-Control-Allow -Methods", "GET, POST");
         try {
         	 String path = request.getServletPath();
              ZyhOperatorRecord zyhOperatorRecord = new ZyhOperatorRecord();
