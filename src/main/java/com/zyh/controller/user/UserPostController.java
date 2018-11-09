@@ -18,9 +18,12 @@ import com.zyh.controller.user.vo.UserPostQueryVO;
 import com.zyh.dao.company.ZyhCompanyPositionMapper;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.company.ZyhCompanyPosition;
+import com.zyh.entity.resume.ZyhResumeBaseExample;
 import com.zyh.entity.user.ZyhUserPosition;
 import com.zyh.entity.user.ZyhUserPositionExample;
 import com.zyh.entity.user.ZyhUserPositionExample.Criteria;
+import com.zyh.service.resume.IResumeBaseService;
+import com.zyh.service.resume.impl.ResumeBaseServiceImpl;
 import com.zyh.service.user.IUserPostService;
 
 @RestController
@@ -34,6 +37,9 @@ public class UserPostController {
 	
 	@Autowired
 	private ZyhCompanyPositionMapper zyhCompanyPositionMapper;
+	
+	@Autowired
+	private IResumeBaseService resumeBaseService;
 
 	@RequestMapping("/addPost.act")
 	public ResponeToWeb userPost(@RequestBody String json) {
@@ -62,6 +68,15 @@ public class UserPostController {
 			zyhUserPosition.setOptime(date);
 			//设置工作地址
 			if("0".equals(zyhUserPosition.getPosttype())){
+				//验证简历是否完整
+				ZyhResumeBaseExample zyhResumeBaseExample = new ZyhResumeBaseExample();
+				zyhResumeBaseExample.createCriteria().andUseridEqualTo(zyhUserPosition.getUserid());
+				long count = resumeBaseService.countByExam(zyhResumeBaseExample);
+				if (count<=0) {
+					responeToWeb.setMsg(UserCom.ERROR_NORESUMEBASE);
+					responeToWeb.setSuccess(false);
+					return responeToWeb;
+				}
 				ZyhCompanyPosition position = zyhCompanyPositionMapper.selectByPrimaryKey(zyhUserPosition.getPositionid());
 				if(null==position){
 					responeToWeb.setMsg("公司信息缺失");

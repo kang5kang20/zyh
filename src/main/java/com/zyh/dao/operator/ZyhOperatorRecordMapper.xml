@@ -178,4 +178,10 @@
       requesturl = #{requesturl,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
+  
+  <select id="selectOperatorStatisByDay" resultType="com.zyh.controller.statis.vo.OperatorStatisVO">
+    SELECT DATE_FORMAT(optime,'%Y-%m-%d') date, count(*) total
+     FROM zyh_operator_record where  DATE_FORMAT(optime,'%Y-%m-%d')  BETWEEN 
+     #{startDate} and #{endDate} GROUP BY DAY(optime) order by optime asc
+  </select>
 </mapper>
