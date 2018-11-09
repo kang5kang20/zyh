@@ -386,7 +386,7 @@ public class CompanyController {
 				}
 			}
 			map = companyService.selectCompanyByExamPage(zyhCompanyExample, zyhCompany.getPageNum(),
-					zyhCompany.getPages());
+					zyhCompany.getPageSize());
 			responeToWeb.setMsg("查询成功");
 			responeToWeb.setSuccess(true);
 			responeToWeb.setValue(map);
