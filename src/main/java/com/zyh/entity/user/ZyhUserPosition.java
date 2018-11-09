@@ -30,6 +30,8 @@ public class ZyhUserPosition implements Serializable {
 
     private String workarea;
 
+    private String workcity;
+
     private static final long serialVersionUID = 1L;
 
     public String getId() {
@@ -136,6 +138,14 @@ public class ZyhUserPosition implements Serializable {
         this.workarea = workarea == null ? null : workarea.trim();
     }
 
+    public String getWorkcity() {
+        return workcity;
+    }
+
+    public void setWorkcity(String workcity) {
+        this.workcity = workcity == null ? null : workcity.trim();
+    }
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -155,6 +165,7 @@ public class ZyhUserPosition implements Serializable {
         sb.append(", posttype=").append(posttype);
         sb.append(", workprovince=").append(workprovince);
         sb.append(", workarea=").append(workarea);
+        sb.append(", workcity=").append(workcity);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

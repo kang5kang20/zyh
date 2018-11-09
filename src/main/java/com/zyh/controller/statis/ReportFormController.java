@@ -16,8 +16,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.zyh.controller.statis.util.ExcelUtil;
+import com.zyh.entity.resume.ZyhResumeBase;
+import com.zyh.entity.resume.ZyhResumeBaseExample;
 import com.zyh.entity.user.ZyhUser;
 import com.zyh.entity.user.ZyhUserExample;
+import com.zyh.service.resume.IResumeBaseService;
+import com.zyh.service.resume.impl.ResumeBaseServiceImpl;
 import com.zyh.service.user.IUserService;
 
 @Controller
@@ -29,13 +33,16 @@ public class ReportFormController {
 	@Autowired
 	private IUserService userService;
 	
+	@Autowired
+	private IResumeBaseService resumeBaseService;
+	
 	@RequestMapping(value = "/export")
 	@ResponseBody
 	public void export(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		ZyhUserExample zyhUserExample = new ZyhUserExample();
-		List<ZyhUser> list = new ArrayList<>();
+		ZyhResumeBaseExample zyhResumeBase = new ZyhResumeBaseExample();
+		List<ZyhResumeBase> list = new ArrayList<>();
 		try {
-			list = userService.findUser(zyhUserExample);
+			list = resumeBaseService.selectResumeBaseByExample(zyhResumeBase);
 		} catch (Exception e) {
 			log.error(e.getMessage());
 		}
@@ -50,10 +57,25 @@ public class ReportFormController {
 			String sheetName = "用户统计";
 			for (int i = 0; i < list.size(); i++) {
 				content[i] = new String[title.length];
-				ZyhUser zyhUser = list.get(i);
-				content[i][0] = zyhUser.getId();
-				content[i][0] = zyhUser.getUsername();
-			}
+				ZyhResumeBase resumeBase = list.get(i);
+				content[i][0] = resumeBase.getName();
+				if (null!=resumeBase.getBirthday()) {
+					content[i][1] = resumeBase.getSex();
+				}
+				content[i][2] = resumeBase.getPhone();
+				content[i][3] = resumeBase.getSex();
+				content[i][4] = resumeBase.getSex();
+				content[i][5] = resumeBase.getSex();
+				content[i][6] = resumeBase.getSex();
+				content[i][7] = resumeBase.getSex();
+				content[i][8] = resumeBase.getSex();
+				content[i][9] = resumeBase.getSex();
+				content[i][10] = resumeBase.getSex();
+				content[i][11] = resumeBase.getSex();
+				content[i][12] = resumeBase.getSex();
+				content[i][13] = resumeBase.getSex();
+				content[i][14] = resumeBase.getSex();
+				}
 			// 创建HSSFWorkbook
 			HSSFWorkbook wb = ExcelUtil.getHSSFWorkbook(sheetName, title, content, null);
 			// 响应到客户端
