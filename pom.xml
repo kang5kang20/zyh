@@ -324,7 +324,13 @@
 			<groupId>com.itextpdf</groupId>
 			<artifactId>itext-asian</artifactId>
 			<version>5.2.0</version>
-		</dependency> 
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.poi</groupId>
+			<artifactId>poi</artifactId>
+			<version>3.6</version>
+		</dependency>
 	</dependencies>
 
 </project>

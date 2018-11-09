@@ -257,4 +257,6 @@ public class UserStatisController {
 		}
 		return responeToWeb;
 	}
+	
+	
 }
