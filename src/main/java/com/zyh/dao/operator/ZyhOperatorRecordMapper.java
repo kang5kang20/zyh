@@ -1,5 +1,6 @@
 package com.zyh.dao.operator;
 
+import com.zyh.controller.statis.vo.OperatorStatisVO;
 import com.zyh.entity.operator.ZyhOperatorRecord;
 import com.zyh.entity.operator.ZyhOperatorRecordExample;
 import java.util.List;
@@ -27,4 +28,6 @@ public interface ZyhOperatorRecordMapper {
     int updateByPrimaryKeySelective(ZyhOperatorRecord record);
 
     int updateByPrimaryKey(ZyhOperatorRecord record);
+    
+    List<OperatorStatisVO> selectOperatorStatisByDay(@Param("startDate")String startDate,@Param("endDate")String endDate)throws Exception;
 }

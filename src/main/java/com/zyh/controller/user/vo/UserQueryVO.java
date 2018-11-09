@@ -12,6 +12,8 @@ public class UserQueryVO extends PageInfo{
 	
 	private String phone;
 	
+	private String usertype;
+	
 	public String getUserid() {
 		return userid;
 	}
@@ -42,6 +44,14 @@ public class UserQueryVO extends PageInfo{
 
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+
+	public String getUsertype() {
+		return usertype;
+	}
+
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
 	}
 	
 	

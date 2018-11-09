@@ -2,6 +2,7 @@ package com.zyh.controller.statis;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.log4j.Logger;
@@ -10,17 +11,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zyh.controller.resume.vo.ResumeBaseQueryVO;
+import com.zyh.controller.statis.vo.OperatorStatisVO;
 import com.zyh.controller.statis.vo.StatisQueryVO;
 import com.zyh.controller.user.common.UserCom;
-import com.zyh.controller.user.vo.UserStatisQueryVO;
 import com.zyh.entity.common.ResponeToWeb;
 import com.zyh.entity.company.ZyhCompanyPositionExample;
-import com.zyh.entity.company.ZyhCompanyTrain;
 import com.zyh.entity.company.ZyhCompanyTrainExample;
 import com.zyh.entity.operator.ZyhOperatorRecordExample;
-import com.zyh.entity.resume.ZyhResumeBase;
 import com.zyh.entity.resume.ZyhResumeBaseExample;
 import com.zyh.entity.user.ZyhUserExample;
 import com.zyh.entity.user.ZyhUserExample.Criteria;
@@ -28,16 +28,10 @@ import com.zyh.entity.user.ZyhUserPositionExample;
 import com.zyh.service.company.ICompanyPositionService;
 import com.zyh.service.company.ICompanyTrainService;
 import com.zyh.service.operator.IOperatorService;
-import com.zyh.service.operator.impl.OperatorServiceImpl;
 import com.zyh.service.resume.IResumeBaseService;
-import com.zyh.service.resume.impl.ResumeBaseServiceImpl;
 import com.zyh.service.user.IUserPostService;
 import com.zyh.service.user.IUserService;
-import com.zyh.service.user.impl.UserPostServiceImpl;
-import com.zyh.service.user.impl.UserServiceImpl;
 import com.zyh.utils.DateUtil;
-
-import aj.org.objectweb.asm.Type;
 
 @RestController
 @RequestMapping("/userstatis")
@@ -88,6 +82,7 @@ public class UserStatisController {
 					Date date = DateUtil.formatDate(endtime);
 					criteria.andCreatetimeLessThanOrEqualTo(date);
 				}
+				criteria.andUsertypeNotEqualTo("1");
 				count = userService.countUserByExam(zyhUserExample);
 			}else if ("1".equals(statisQueryVO.getType())) {
 				//新增访问统计
@@ -190,7 +185,75 @@ public class UserStatisController {
 			responeToWeb.setSuccess(true);
 			responeToWeb.setValue(map);
 		} catch (Exception e) {
-			log.error("登录失败：" + e.getMessage());
+			log.error("统计失败：" + e.getMessage());
+			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/userWorkState.act")
+	public ResponeToWeb userWorkState(){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		Map<String, Object> map = new HashMap<>();
+		ZyhUserExample zyhUserExample = new ZyhUserExample();
+		zyhUserExample.createCriteria().andUsertypeNotEqualTo("1");
+		try {
+			long userCount = userService.countUserByExam(zyhUserExample);
+			ZyhResumeBaseExample zyhResumeBaseExample = new ZyhResumeBaseExample();
+			zyhResumeBaseExample.or().andWorkstateEqualTo("0");
+			zyhResumeBaseExample.or().andWorkstateEqualTo("3");
+			long workCount = resumeBaseService.countByExam(zyhResumeBaseExample);
+			ZyhResumeBaseExample zyhResumeBaseExample2 = new ZyhResumeBaseExample();
+			zyhResumeBaseExample2.createCriteria().andWorkstateEqualTo("1");
+			long noworkCount = resumeBaseService.countByExam(zyhResumeBaseExample2);
+			long weizhiCount = userCount-workCount-noworkCount;
+			Map<String, Long> workMap = new HashMap<>();
+			workMap.put("zaizhi", workCount);
+			workMap.put("lizhi", noworkCount);
+			workMap.put("weizhi", weizhiCount);
+			map.put("result", workMap);
+			responeToWeb.setMsg("查询成功");
+			responeToWeb.setSuccess(true);
+			responeToWeb.setValue(map);
+		} catch (Exception e) {
+			log.error("统计失败：" + e.getMessage());
+			responeToWeb.setMsg(e.getMessage());
+			responeToWeb.setSuccess(false);
+		}
+		return responeToWeb;
+	}
+	
+	@RequestMapping("/statisOpeatorByDate.act")
+	public ResponeToWeb statisOperatorByDay(@RequestBody String json){
+		ResponeToWeb responeToWeb = new ResponeToWeb();
+		Map<String, Object> map = new HashMap<>();
+		ObjectMapper om = new ObjectMapper();
+		try {
+			String startDate = null;
+			String endDate = null;
+			JsonNode jsonNode = om.readTree(json);
+			if (null!=jsonNode.get("startDate")) {
+				startDate = jsonNode.get("startDate").asText();
+			}else{
+				responeToWeb.setMsg(UserCom.ERROR_NULLSTARTDATE);
+				responeToWeb.setSuccess(false);
+				return responeToWeb;
+			}
+			if (null!=jsonNode.get("endDate")) {
+				endDate = jsonNode.get("endDate").asText();
+			}else {
+				responeToWeb.setMsg(UserCom.ERROR_NULLENDDATE);
+				responeToWeb.setSuccess(false);
+				return responeToWeb;
+			}
+			List<OperatorStatisVO> list = operatorServiceImpl.selectOperatorStatisByDay(startDate, endDate);
+			map.put("result",list);
+			responeToWeb.setMsg("查询成功");
+			responeToWeb.setSuccess(true);
+			responeToWeb.setValue(map);
+		} catch (Exception e) {
+			log.error("统计失败：" + e.getMessage());
 			responeToWeb.setMsg(e.getMessage());
 			responeToWeb.setSuccess(false);
 		}

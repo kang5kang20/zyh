@@ -1004,6 +1004,76 @@ public class ZyhUserPositionExample {
             addCriterion("workarea not between", value1, value2, "workarea");
             return (Criteria) this;
         }
+
+        public Criteria andWorkcityIsNull() {
+            addCriterion("workcity is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityIsNotNull() {
+            addCriterion("workcity is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityEqualTo(String value) {
+            addCriterion("workcity =", value, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityNotEqualTo(String value) {
+            addCriterion("workcity <>", value, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityGreaterThan(String value) {
+            addCriterion("workcity >", value, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityGreaterThanOrEqualTo(String value) {
+            addCriterion("workcity >=", value, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityLessThan(String value) {
+            addCriterion("workcity <", value, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityLessThanOrEqualTo(String value) {
+            addCriterion("workcity <=", value, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityLike(String value) {
+            addCriterion("workcity like", value, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityNotLike(String value) {
+            addCriterion("workcity not like", value, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityIn(List<String> values) {
+            addCriterion("workcity in", values, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityNotIn(List<String> values) {
+            addCriterion("workcity not in", values, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityBetween(String value1, String value2) {
+            addCriterion("workcity between", value1, value2, "workcity");
+            return (Criteria) this;
+        }
+
+        public Criteria andWorkcityNotBetween(String value1, String value2) {
+            addCriterion("workcity not between", value1, value2, "workcity");
+            return (Criteria) this;
+        }
     }
 
     public static class Criteria extends GeneratedCriteria {

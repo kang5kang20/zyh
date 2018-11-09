@@ -1,8 +1,11 @@
 package com.zyh.service.operator.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.zyh.controller.statis.vo.OperatorStatisVO;
 import com.zyh.dao.operator.ZyhOperatorRecordMapper;
 import com.zyh.dao.util.UUidUtil;
 import com.zyh.entity.operator.ZyhOperatorRecord;
@@ -27,6 +30,11 @@ public class OperatorServiceImpl implements IOperatorService{
 	@Override
 	public long countByExam(ZyhOperatorRecordExample zyhOperatorRecordExample) throws Exception {
 		return zyhOperatorRecordMapper.countByExample(zyhOperatorRecordExample);
+	}
+
+	@Override
+	public List<OperatorStatisVO> selectOperatorStatisByDay(String startDate, String endDate) throws Exception {
+		return zyhOperatorRecordMapper.selectOperatorStatisByDay(startDate, endDate);
 	}
 
 	

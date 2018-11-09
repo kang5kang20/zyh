@@ -75,4 +75,10 @@ public class UserCom {
     public static final String ERROR_CONTENTNULL = "contentnull";
   //openid存在
     public static final String ERROR_OPENIDEXIST = "openidexist";
+  //没有填写简历
+    public static final String ERROR_NORESUMEBASE = "noresumebase";
+    //startdate空
+    public static final String ERROR_NULLSTARTDATE = "nullstartdate";
+  //enddate空
+    public static final String ERROR_NULLENDDATE = "nullenddate";
 }

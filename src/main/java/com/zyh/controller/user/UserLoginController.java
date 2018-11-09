@@ -123,6 +123,9 @@ public class UserLoginController {
 			if (null != userQueryVO.getPhone()) {
 				criteria.andPhoneEqualTo(userQueryVO.getPhone());
 			}
+			if (null != userQueryVO.getUsertype()) {
+				criteria.andUsertypeEqualTo(userQueryVO.getUsertype());
+			}
 			map = userService.findUserByPage(zyhUserExample, userQueryVO.getPageNum(), userQueryVO.getPageSize());
 			responeToWeb.setMsg("查询成功");
 			responeToWeb.setSuccess(true);
@@ -252,6 +255,7 @@ public class UserLoginController {
 		ObjectMapper om = new ObjectMapper();
 		try {
 			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
+			zyhUser.setUsertype("0");
 			zyhUser.setPassword(null);
 			if (null != zyhUser.getId() && !"".equals(zyhUser.getId())) {
 				ZyhUserExample zyhUserExample = new ZyhUserExample();
@@ -282,6 +286,7 @@ public class UserLoginController {
 		ObjectMapper om = new ObjectMapper();
 		try {
 			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
+			zyhUser.setUsertype("0");
 			if (null == zyhUser.getPhone() || "".equals(zyhUser.getPhone())) {
 				throw new Exception(UserCom.ERROR_PHONEEMPTY);
 			}

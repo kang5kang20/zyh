@@ -579,7 +579,7 @@ public class ResumeController {
 			resumeVO.setZyhResumeSpecialities(
 					resumeSpecialityService.selectResumeSpecialityByExample(zyhResumeSpecialityExample));
 			ZyhResumeIntentionExample zyhResumeIntentionExample = new ZyhResumeIntentionExample();
-			zyhResumeBaseExample.createCriteria().andUseridEqualTo(userid);
+			zyhResumeIntentionExample.createCriteria().andUseridEqualTo(userid);
 			resumeVO.setZyhResumeIntentions(
 					resumeIntentionService.selectResumeIntentionByExample(zyhResumeIntentionExample));
 			map.put("result", resumeVO);

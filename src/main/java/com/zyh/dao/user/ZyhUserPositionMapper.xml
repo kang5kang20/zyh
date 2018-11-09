@@ -15,6 +15,7 @@
     <result column="posttype" jdbcType="OTHER" property="posttype" />
     <result column="workprovince" jdbcType="OTHER" property="workprovince" />
     <result column="workarea" jdbcType="OTHER" property="workarea" />
+    <result column="workcity" jdbcType="OTHER" property="workcity" />
   </resultMap>
   <sql id="Example_Where_Clause">
     <where>
@@ -76,7 +77,7 @@
   </sql>
   <sql id="Base_Column_List">
     id, userid, positionid, type, optime, positionname, companyid, companyname, username, 
-    state, posttype, workprovince, workarea
+    state, posttype, workprovince, workarea, workcity
   </sql>
   <select id="selectByExample" parameterType="com.zyh.entity.user.ZyhUserPositionExample" resultMap="BaseResultMap">
     select
@@ -113,12 +114,12 @@
       type, optime, positionname, 
       companyid, companyname, username, 
       state, posttype, workprovince, 
-      workarea)
+      workarea, workcity)
     values (#{id,jdbcType=OTHER}, #{userid,jdbcType=OTHER}, #{positionid,jdbcType=OTHER}, 
       #{type,jdbcType=OTHER}, #{optime,jdbcType=OTHER}, #{positionname,jdbcType=OTHER}, 
       #{companyid,jdbcType=OTHER}, #{companyname,jdbcType=OTHER}, #{username,jdbcType=OTHER}, 
       #{state,jdbcType=OTHER}, #{posttype,jdbcType=OTHER}, #{workprovince,jdbcType=OTHER}, 
-      #{workarea,jdbcType=OTHER})
+      #{workarea,jdbcType=OTHER}, #{workcity,jdbcType=OTHER})
   </insert>
   <insert id="insertSelective" parameterType="com.zyh.entity.user.ZyhUserPosition">
     insert into zyh_user_position
@@ -162,6 +163,9 @@
       <if test="workarea != null">
         workarea,
       </if>
+      <if test="workcity != null">
+        workcity,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="id != null">
@@ -202,6 +206,9 @@
       </if>
       <if test="workarea != null">
         #{workarea,jdbcType=OTHER},
+      </if>
+      <if test="workcity != null">
+        #{workcity,jdbcType=OTHER},
       </if>
     </trim>
   </insert>
@@ -253,6 +260,9 @@
       <if test="record.workarea != null">
         workarea = #{record.workarea,jdbcType=OTHER},
       </if>
+      <if test="record.workcity != null">
+        workcity = #{record.workcity,jdbcType=OTHER},
+      </if>
     </set>
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
@@ -272,7 +282,8 @@
       state = #{record.state,jdbcType=OTHER},
       posttype = #{record.posttype,jdbcType=OTHER},
       workprovince = #{record.workprovince,jdbcType=OTHER},
-      workarea = #{record.workarea,jdbcType=OTHER}
+      workarea = #{record.workarea,jdbcType=OTHER},
+      workcity = #{record.workcity,jdbcType=OTHER}
     <if test="_parameter != null">
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -316,6 +327,9 @@
       <if test="workarea != null">
         workarea = #{workarea,jdbcType=OTHER},
       </if>
+      <if test="workcity != null">
+        workcity = #{workcity,jdbcType=OTHER},
+      </if>
     </set>
     where id = #{id,jdbcType=OTHER}
   </update>
@@ -332,9 +346,11 @@
       state = #{state,jdbcType=OTHER},
       posttype = #{posttype,jdbcType=OTHER},
       workprovince = #{workprovince,jdbcType=OTHER},
-      workarea = #{workarea,jdbcType=OTHER}
+      workarea = #{workarea,jdbcType=OTHER},
+      workcity = #{workcity,jdbcType=OTHER}
     where id = #{id,jdbcType=OTHER}
   </update>
+  
  <select id="selectUserPostByPage"  resultMap="BaseResultMap">
 	   select
 	    <include refid="Base_Column_List" />

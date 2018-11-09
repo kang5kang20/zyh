@@ -30,6 +30,7 @@ public class UserServiceImpl implements IUserService{
 	private RedisUtil redisUtil;
 
 	public void addUser(ZyhUser user) throws Exception {
+		user.setUsertype("0");
 		if (null!=user.getPassword()&&"".equals(user.getPassword())) {
 			String psMd5 = MD5Util.EncoderByMd5(user.getPassword());
 			user.setPassword(psMd5);
@@ -57,6 +58,7 @@ public class UserServiceImpl implements IUserService{
 
 	@Override
 	public int updateUser(ZyhUser user,ZyhUserExample zyhUserExample) throws Exception {
+		user.setUsertype("0");
 		int i = 0;
 		try {
 			i = zyhUserMapper.updateByExampleSelective(user, zyhUserExample);
