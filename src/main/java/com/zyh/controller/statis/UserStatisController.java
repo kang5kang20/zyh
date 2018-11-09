@@ -82,6 +82,7 @@ public class UserStatisController {
 					Date date = DateUtil.formatDate(endtime);
 					criteria.andCreatetimeLessThanOrEqualTo(date);
 				}
+				criteria.andUsertypeNotEqualTo("1");
 				count = userService.countUserByExam(zyhUserExample);
 			}else if ("1".equals(statisQueryVO.getType())) {
 				//新增访问统计
@@ -196,6 +197,7 @@ public class UserStatisController {
 		ResponeToWeb responeToWeb = new ResponeToWeb();
 		Map<String, Object> map = new HashMap<>();
 		ZyhUserExample zyhUserExample = new ZyhUserExample();
+		zyhUserExample.createCriteria().andUsertypeNotEqualTo("1");
 		try {
 			long userCount = userService.countUserByExam(zyhUserExample);
 			ZyhResumeBaseExample zyhResumeBaseExample = new ZyhResumeBaseExample();

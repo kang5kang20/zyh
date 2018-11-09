@@ -344,9 +344,18 @@ public class PdfUtil {
 		baseinfo.setMinimumHeight(23f);
 		table.addCell(baseinfo);
 		
-		
+		String workstate = "";
+		if ("0".equals(base.getWorkstate())) {
+			workstate = "在职";
+		}else if ("1".equals(base.getWorkstate())) {
+			workstate = "离职";
+		}else if ("3".equals(base.getWorkstate())) {
+			workstate = "考虑换工作";
+		}else {
+			workstate = "未知";
+		}
 		PdfPCell base1= new PdfPCell(new Paragraph(base.getName()+" | "+base.getSex()
-				+" | "+DateUtil.subYears(new Date(), base.getBirthday())+"岁 | "+base.getWorkstate(),font));
+				+" | "+DateUtil.subYears(new Date(), base.getBirthday())+"岁 | "+workstate,font));
 		base1.setHorizontalAlignment(Element.ALIGN_LEFT);
 		base1.setVerticalAlignment(Element.ALIGN_CENTER);
 		base1.setMinimumHeight(18f);
