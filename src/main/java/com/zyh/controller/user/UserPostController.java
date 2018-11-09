@@ -85,6 +85,7 @@ public class UserPostController {
 				}
 				zyhUserPosition.setWorkarea(position.getWorkarea());
 				zyhUserPosition.setWorkprovince(position.getWorkprovince());
+				zyhUserPosition.setWorkcity(position.getWorkcity());
 			}
 			userPostService.addUserPost(zyhUserPosition);
 			responeToWeb.setMsg("添加成功");
