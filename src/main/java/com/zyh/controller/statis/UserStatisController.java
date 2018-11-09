@@ -199,7 +199,8 @@ public class UserStatisController {
 		try {
 			long userCount = userService.countUserByExam(zyhUserExample);
 			ZyhResumeBaseExample zyhResumeBaseExample = new ZyhResumeBaseExample();
-			zyhResumeBaseExample.createCriteria().andWorkstateEqualTo("0");
+			zyhResumeBaseExample.or().andWorkstateEqualTo("0");
+			zyhResumeBaseExample.or().andWorkstateEqualTo("3");
 			long workCount = resumeBaseService.countByExam(zyhResumeBaseExample);
 			ZyhResumeBaseExample zyhResumeBaseExample2 = new ZyhResumeBaseExample();
 			zyhResumeBaseExample2.createCriteria().andWorkstateEqualTo("1");
