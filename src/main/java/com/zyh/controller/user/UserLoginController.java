@@ -255,6 +255,7 @@ public class UserLoginController {
 		ObjectMapper om = new ObjectMapper();
 		try {
 			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
+			zyhUser.setUsertype("0");
 			zyhUser.setPassword(null);
 			if (null != zyhUser.getId() && !"".equals(zyhUser.getId())) {
 				ZyhUserExample zyhUserExample = new ZyhUserExample();
@@ -285,6 +286,7 @@ public class UserLoginController {
 		ObjectMapper om = new ObjectMapper();
 		try {
 			ZyhUser zyhUser = om.readValue(json, ZyhUser.class);
+			zyhUser.setUsertype("0");
 			if (null == zyhUser.getPhone() || "".equals(zyhUser.getPhone())) {
 				throw new Exception(UserCom.ERROR_PHONEEMPTY);
 			}
