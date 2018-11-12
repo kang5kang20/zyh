@@ -37,9 +37,9 @@ public class ReportFormController {
 	@Autowired
 	private IResumeBaseService resumeBaseService;
 
-	@RequestMapping(value = "/export")
+	@RequestMapping(value = "/exportUserResume.act")
 	@ResponseBody
-	public void export(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public void exportUserResume(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ZyhResumeBaseExample zyhResumeBase = new ZyhResumeBaseExample();
 		List<ZyhResumeBase> list = new ArrayList<>();
 		try {
@@ -51,7 +51,7 @@ public class ReportFormController {
 				// excel文件名
 				String fileName = "用户统计" + System.currentTimeMillis() + ".xls";
 
-				String[][] content = null;
+				String[][] content = new String[list.size()][];
 				// sheet名
 				String sheetName = "用户统计";
 				for (int i = 0; i < list.size(); i++) {
@@ -130,7 +130,6 @@ public class ReportFormController {
 			try {
 				fileName = new String(fileName.getBytes(), "UTF-8");
 			} catch (UnsupportedEncodingException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 			response.setContentType("application/octet-stream;charset=UTF-8");
