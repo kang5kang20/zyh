@@ -389,6 +389,21 @@ public class PdfUtil {
 		base4.setBorder(0);
 		table.addCell(base4);
 		
+		PdfPCell base6= new PdfPCell(new Paragraph("部队职位："+base.getBdzw(),font));
+		base6.setHorizontalAlignment(Element.ALIGN_LEFT);
+		base6.setVerticalAlignment(Element.ALIGN_CENTER);
+		base6.setMinimumHeight(18f);
+		base6.setBorder(0);
+		table.addCell(base6);
+		
+		PdfPCell base7= new PdfPCell(new Paragraph("政治面貌："+base.getZzmm(),font));
+		base7.setHorizontalAlignment(Element.ALIGN_LEFT);
+		base7.setVerticalAlignment(Element.ALIGN_CENTER);
+		base7.setMinimumHeight(18f);
+		base7.setBorder(0);
+		table.addCell(base7);
+		
+		
 		PdfPCell base5= new PdfPCell(new Paragraph("电话："+base.getPhone(),font));
 		base5.setHorizontalAlignment(Element.ALIGN_LEFT);
 		base5.setVerticalAlignment(Element.ALIGN_CENTER);
