@@ -76,19 +76,8 @@ public class PolicyController {
 						}else{
 							map.put("ifcollect", "0");
 						}
-						ZyhResumeBaseExample example1 = new ZyhResumeBaseExample();
-						com.zyh.entity.resume.ZyhResumeBaseExample.Criteria criteria1 = 
-								example1.createCriteria();
-						criteria1.andUseridEqualTo(queryvo.getUserid());
-						List<ZyhResumeBase> base = resumeBaseService.selectResumeBaseByExample(example1);
-						if(null!=base && base.size()>0){
-							map.put("ifplay", "1");
-						}else{
-							map.put("ifplay", "0");
-						}
-					}else{
-						map.put("ifplay", "0");
 					}
+					map.put("ifplay", "1");
 					//如果有视频，查询老师信息
 					if(null!=policy.getVideourl() && !"".equals(policy.getVideourl()) &&
 							null!=policy.getTeacherid() && !"".equals(policy.getTeacherid())){
