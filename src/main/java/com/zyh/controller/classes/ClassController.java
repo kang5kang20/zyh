@@ -372,20 +372,22 @@ public class ClassController {
 						}else{
 							map.put("ifcollect", "0");
 						}
-						
-						ZyhResumeBaseExample example1 = new ZyhResumeBaseExample();
-						com.zyh.entity.resume.ZyhResumeBaseExample.Criteria criteria1 = 
-								example1.createCriteria();
-						criteria1.andUseridEqualTo(queryvo.getUserid());
-						List<ZyhResumeBase> base = resumeBaseService.selectResumeBaseByExample(example1);
-						if(null!=base && base.size()>0){
-							map.put("ifplay", "1");
-						}else{
-							map.put("ifplay", "0");
-						}
-					}else{
-						map.put("ifplay", "0");
+						//屏蔽根据简历判断是否看视频
+//						ZyhResumeBaseExample example1 = new ZyhResumeBaseExample();
+//						com.zyh.entity.resume.ZyhResumeBaseExample.Criteria criteria1 = 
+//								example1.createCriteria();
+//						criteria1.andUseridEqualTo(queryvo.getUserid());
+//						List<ZyhResumeBase> base = resumeBaseService.selectResumeBaseByExample(example1);
+//						if(null!=base && base.size()>0){
+//							map.put("ifplay", "1");
+//						}else{
+//							map.put("ifplay", "0");
+//						}
 					}
+//					else{
+//						map.put("ifplay", "0");
+//					}
+					map.put("ifplay", "1");
 					responeToWeb.setMsg("查询成功");
 					responeToWeb.setSuccess(true);
 					responeToWeb.setValue(map);
